@@ -25,7 +25,8 @@
 
 ### Add Title Here
 
-- List the sexy features.
+- cool animations
+- dynamic simulations
 
 <br><br>
 
