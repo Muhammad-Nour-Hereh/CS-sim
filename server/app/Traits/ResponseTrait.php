@@ -2,9 +2,6 @@
 
 namespace App\Traits;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-
 trait ResponseTrait {
     public function successResponse($data, $code = 200) {
         return response()->json([
