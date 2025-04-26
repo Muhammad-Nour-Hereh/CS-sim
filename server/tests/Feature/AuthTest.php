@@ -45,7 +45,7 @@ class AuthTest extends TestCase {
 
     public function testMeFailedUnauthenticated() {
         $token = "wrong token";
-        $expected = $this->unauthenticated();
+        $expected = $this->unauthorizedResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $token"
@@ -60,9 +60,7 @@ class AuthTest extends TestCase {
 
         $expected = $this->successResponse($this->data);
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->token"
-        ])->getJson("/api/v1/auth/register");
+        $actual = $this->getJson("/api/v1/auth/register");
 
         $this->assertEqualsResponse($actual, $expected);
     }

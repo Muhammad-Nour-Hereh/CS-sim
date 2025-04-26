@@ -9,35 +9,32 @@ trait ResponseTrait {
     public function successResponse($data, $code = 200) {
         return response()->json([
             "success" => true,
-            "payload" => $data
+            "data" => $data
         ], $code);
+    }
+
+    public function noContentResponse() {
+        return response()->json([], 204);
     }
 
     public function failResponse($error, $code = 400) {
         return response()->json([
             "success" => false,
-            "error" => $error
+            "message" => $error
         ], $code);
     }
 
-    public function unauthenticated() {
+    public function unauthorizedResponse() {
         return response()->json([
             "success" => false,
-            "message" => "Unauthenticated"
+            "message" => "Unauthorized"
         ], 401);
     }
 
-    public function unautherized() {
+    public function forbiddenResponse() {
         return response()->json([
             "success" => false,
-            "message" => "forbiddin"
+            "message" => "Forbidden"
         ], 403);
-    }
-
-    public function failedValidation(Validator $validator) {
-        throw new HttpResponseException(response()->json([
-            "result" => $validator->errors(),
-            "success" => false
-        ]));
     }
 }
