@@ -8,91 +8,94 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Tests\TestCase;
 
-class AuthTest extends TestCase
-{
+class AuthTest extends TestCase {
     use RefreshDatabase, ResponseTrait;
 
-    // ========== me() Tests ==========
+    protected $user;
+    protected $token;
+    protected $data;
 
-    public function testMeSuccess()
-    {
-        $user = User::factory()->create();
-        $token = JWTAuth::fromUser($user);
+    protected function setUp(): void {
+        parent::setUp();
 
-        $data = [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'created_at' => $user->created_at->toJSON(),
-            'updated_at' => $user->updated_at->toJSON(),
+        $this->user = User::factory()->create();
+        $this->token = JWTAuth::fromUser($this->user);
+        $this->data = [
+            'id' => $this->user->id,
+            'name' => $this->user->name,
+            'email' => $this->user->email,
+            'created_at' => $this->user->created_at->toJSON(),
+            'updated_at' => $this->user->updated_at->toJSON(),
             'deleted_at' => null
         ];
+    }
 
-        $expected = $this->successResponse($data);
+
+    // ========== me() Tests ==========
+    public function testMeSuccess() {
+
+        $expected = $this->successResponse($this->data);
 
         $actual = $this->withHeaders([
-            "Authorization" => "Bearer $token"
-        ])->getJson("/api/v0.1/auth/me");
+            "Authorization" => "Bearer $this->token"
+        ])->getJson("/api/v1/auth/me");
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    public function testMeFailedUnauthenticated()
-    {
-        $user = User::factory()->create();
+    public function testMeFailedUnauthenticated() {
         $token = "wrong token";
         $expected = $this->unauthenticated();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $token"
-        ])->getJson("/api/v0.1/auth/me");
+        ])->getJson("/api/v1/auth/me");
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
     // ========== register() Tests ==========
 
-    public function testRegisterSuccess()
-    {
-        // Test successful user registration
+    public function testRegisterSuccess() {
+
+        $expected = $this->successResponse($this->data);
+
+        $actual = $this->withHeaders([
+            "Authorization" => "Bearer $this->token"
+        ])->getJson("/api/v1/auth/register");
+
+        $this->assertEqualsResponse($actual, $expected);
     }
 
-    public function testRegisterFailedValidation()
-    {
+    public function testRegisterFailedValidation() {
         // Test registration fails with invalid data
     }
 
-    public function testRegisterFailedDuplicateEmail()
-    {
+    public function testRegisterFailedDuplicateEmail() {
         // Test registration fails with duplicate email
     }
 
     // ========== login() Tests ==========
 
-    public function testLoginSuccess()
-    {
+    public function testLoginSuccess() {
         // Test successful login with valid credentials
     }
 
-    public function testLoginFailedWrongCredentials()
-    {
+    public function testLoginFailedWrongCredentials() {
         // Test login fails with wrong password
     }
 
-    public function testLoginFailedUserNotFound()
-    {
+    public function testLoginFailedUserNotFound() {
         // Test login fails with non-existent email
     }
 
     // ========== logout() Tests ==========
 
-    public function testLogoutSuccess()
-    {
+    public function testLogoutSuccess() {
         // Test successful logout
     }
 
-    public function testLogoutFailedUnauthenticated()
-    {
+    public function testLogoutFailedUnauthenticated() {
         // Test logout fails when not authenticated
     }
 }
