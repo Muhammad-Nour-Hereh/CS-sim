@@ -20,7 +20,7 @@ class AuthTest extends TestCase
 
         $response = $this->withHeaders([
             "Authorization" => "Bearer $token"
-        ])->getJson("/api/v0.1/auth/me/{$user->id}");
+        ])->getJson("/api/v0.1/auth/me");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -41,7 +41,7 @@ class AuthTest extends TestCase
 
         $response = $this->withHeaders([
             "Authorization" => "Bearer $token"
-        ])->getJson("/api/v0.1/auth/me/{$user->id}");
+        ])->getJson("/api/v0.1/auth/me");
 
         $response->assertStatus(401)
             ->assertJson([
