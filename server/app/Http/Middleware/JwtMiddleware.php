@@ -2,20 +2,21 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\ResponseTrait;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Symfony\Component\HttpFoundation\Response;
 
-class JwtMiddleware
-{
-    public function handle(Request $request, Closure $next): Response
-    {
+class JwtMiddleware {
+    use ResponseTrait;
+
+    public function handle(Request $request, Closure $next): Response {
         try {
             JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return $this->unauthenticated();
         }
 
         return $next($request);

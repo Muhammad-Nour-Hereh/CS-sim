@@ -3,13 +3,14 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Traits\ResponseTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, ResponseTrait;
 
     // ========== me() Tests ==========
 
@@ -18,36 +19,35 @@ class AuthTest extends TestCase
         $user = User::factory()->create();
         $token = JWTAuth::fromUser($user);
 
-        $response = $this->withHeaders([
+        $data = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'created_at' => $user->created_at->toJSON(),
+            'updated_at' => $user->updated_at->toJSON(),
+            'deleted_at' => null
+        ];
+
+        $expected = $this->successResponse($data);
+
+        $actual = $this->withHeaders([
             "Authorization" => "Bearer $token"
         ])->getJson("/api/v0.1/auth/me");
 
-        $response->assertStatus(200)
-            ->assertJson([
-                "success" => true,
-                "message" => "Employee fetched",
-                "data" => [
-                    "id" => $user->id,
-                    "name" => $user->name,
-                    "email" => $user->email,
-                ]
-            ]);
+        $this->assertEqualsResponse($actual, $expected);
     }
 
     public function testMeFailedUnauthenticated()
     {
         $user = User::factory()->create();
         $token = "wrong token";
+        $expected = $this->unauthenticated();
 
-        $response = $this->withHeaders([
+        $actual = $this->withHeaders([
             "Authorization" => "Bearer $token"
         ])->getJson("/api/v0.1/auth/me");
 
-        $response->assertStatus(401)
-            ->assertJson([
-                "success" => false,
-                "message" => "unauthrized",
-            ]);
+        $this->assertEqualsResponse($actual, $expected);
     }
 
     // ========== register() Tests ==========
