@@ -54,46 +54,60 @@ class AuthTest extends TestCase {
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    // ========== register() Tests ==========
+    // ========== login() Tests ==========
 
-    public function testRegisterSuccess() {
-
+    public function testLoginSuccess() {
+        $credentials = [
+            'email' => $this->user->email,
+            'password' => 'password'
+        ];
         $expected = $this->successResponse($this->data);
-
-        $actual = $this->getJson("/api/v1/auth/register");
+        $actual = $this->PostJson("/api/v1/auth/login", $credentials);
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    public function testRegisterFailedValidation() {
-        // Test registration fails with invalid data
-    }
-
-    public function testRegisterFailedDuplicateEmail() {
-        // Test registration fails with duplicate email
-    }
-
-    // ========== login() Tests ==========
-
-    public function testLoginSuccess() {
-        // Test successful login with valid credentials
-    }
-
     public function testLoginFailedWrongCredentials() {
-        // Test login fails with wrong password
+        $credentials = [
+            'email' => $this->user->email,
+            'password' => 'wrong password'
+        ];
+        $expected = $this->unauthorizedResponse();
+        $actual = $this->PostJson("/api/v1/auth/login", $credentials);
+
+        $this->assertEqualsResponse($actual, $expected);
     }
 
-    public function testLoginFailedUserNotFound() {
-        // Test login fails with non-existent email
+    public function testLoginFailedUnprocessableContent() {
+        $credentials = [
+            'email' => $this->user->email,
+        ];
+        $expected = $this->failResponse($message = 'missing password', 422);
+        $actual = $this->PostJson("/api/v1/auth/login", $credentials);
+
+        $this->assertEqualsResponse($actual, $expected);
     }
 
     // ========== logout() Tests ==========
 
     public function testLogoutSuccess() {
-        // Test successful logout
+        $expected = $this->noContentResponse();
+
+        $actual = $this->withHeaders([
+            "Authorization" => "Bearer $this->token"
+        ])->PostJson("/api/v1/auth/logout");
+
+        $this->assertEqualsResponse($actual, $expected);
     }
 
     public function testLogoutFailedUnauthenticated() {
-        // Test logout fails when not authenticated
+        $token = "wrong token";
+        $expected = $this->unauthorizedResponse();
+
+        $actual = $this->withHeaders([
+            "Authorization" => "Bearer $token"
+        ])->PostJson("/api/v1/auth/logout");
+
+        $this->assertEqualsResponse($actual, $expected);
     }
 }
