@@ -20,21 +20,24 @@ trait ResponseTrait {
     public function failResponse($error, $code = 400) {
         return response()->json([
             "success" => false,
-            "message" => $error
+            "message" => $error,
+            "data" => null
         ], $code);
     }
 
     public function unauthorizedResponse() {
         return response()->json([
             "success" => false,
-            "message" => "Unauthorized"
+            "message" => "Unauthorized",
+            "data" => null
         ], 401);
     }
 
     public function forbiddenResponse() {
         return response()->json([
             "success" => false,
-            "message" => "Forbidden"
+            "message" => "Forbidden",
+            "data" => null
         ], 403);
     }
 }
