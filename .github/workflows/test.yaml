@@ -21,15 +21,18 @@ jobs:
           coverage: none
  
       - name: Run composer install
-        run: |
-          cd server
-          composer install -n --prefer-dist
- 
+        working-directory: server
+        run: composer install -n --prefer-dist
+        
+
       - name: Prepare Laravel Application
+        working-directory: server
         run: |
-          cd server
           cp .env.example .env
           php artisan key:generate
-          php 
+        
+
       - name: Run tests
+        working-directory: server 
         run: php artisan test
+        
