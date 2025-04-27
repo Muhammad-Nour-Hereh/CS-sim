@@ -9,9 +9,32 @@ on:
   workflow_dispatch:
     
 jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+ 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+ 
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+ 
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          php 
+      - name: Run tests
+        run: php artisan test
+
   Build-Laravel-And-Push-Dockerhub:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -23,10 +46,10 @@ jobs:
           password: ${{ secrets.DOCKER_KEY }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/dockertest:latest ./server
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/cs-cim:latest ./server
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/dockertest:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/cs-cim:latest
 
   Deploy-Laravel-Docker:
     needs: Build-Laravel-And-Push-Dockerhub
@@ -44,5 +67,5 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             docker-compose down
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/dockertest:latest
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/cs-cim:latest
             docker-compose up -d
