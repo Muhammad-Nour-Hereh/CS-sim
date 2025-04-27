@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\User;
 use App\Traits\ResponseTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Tests\TestCase;
 
 class RegisterUserTest extends TestCase {
