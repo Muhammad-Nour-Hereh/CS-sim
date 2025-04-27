@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
@@ -21,8 +22,14 @@ class AuthController extends Controller {
         return $this->successResponse($token, 201);
     }
 
-    public function login() {
-        
+    public function login(LoginRequest $request) {
+        $credentials = $request->validated();
+
+        if (!$token = JWTAuth::attempt($credentials)) {
+            return $this->unauthorizedResponse();
+        }
+
+        return $this->successResponse($token);
     }
     public function logout() {
         $token = JWTAuth::getToken();
