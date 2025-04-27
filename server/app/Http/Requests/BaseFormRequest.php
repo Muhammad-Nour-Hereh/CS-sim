@@ -11,11 +11,18 @@ class BaseFormRequest extends FormRequest {
     use ResponseTrait;
 
     public function failedValidation(Validator $validator) {
+        $errors = $validator->errors()->toArray();
 
-        throw new HttpResponseException(
-            $this->conflictResponse($validator->errors())
-        );
+        $specificMessage = [
+            "email" => ["this email already used!"]
+        ];
+
+        if ($errors === $specificMessage) 
+            throw new HttpResponseException(
+                $this->conflictResponse($errors)
+            );
         
+
         throw new HttpResponseException(
             $this->unprocessableContentResponse($validator->errors())
         );

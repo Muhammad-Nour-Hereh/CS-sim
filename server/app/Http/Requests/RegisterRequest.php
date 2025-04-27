@@ -20,14 +20,8 @@ class RegisterRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'email.unique' => 'This email is already registered. Please log in instead.',
+            'email.unique' => 'this email already used!',
             'password.min' => 'Your password must be at least 6 characters long for security.',
-        ];
-    }
-    public function attributes(): array
-    {
-        return [
-            'email' => 'email address',
         ];
     }
 }
