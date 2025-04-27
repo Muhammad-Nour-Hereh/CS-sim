@@ -3,7 +3,6 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Testing\TestResponse;
 
 abstract class TestCase extends BaseTestCase {
@@ -17,7 +16,7 @@ abstract class TestCase extends BaseTestCase {
      */
     protected function assertEqualsResponse(
         TestResponse $actual,
-        JsonResponse $expected,
+        $expected,
         bool $compareHeaders = false
     ): void {
         // Compare status codes
@@ -27,12 +26,13 @@ abstract class TestCase extends BaseTestCase {
             'Response status codes do not match'
         );
 
-        // Compare response content
-        $this->assertJsonStringEqualsJsonString(
-            $expected->getContent(),
-            $actual->getContent(),
-            'Response content does not match'
-        );
+        if (!$expected->status() === 204)
+            // Compare response content
+            $this->assertJsonStringEqualsJsonString(
+                $expected->getContent(),
+                $actual->getContent(),
+                'Response content does not match'
+            );
 
         // Optionally compare headers
         if ($compareHeaders) {

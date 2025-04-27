@@ -12,7 +12,7 @@ trait ResponseTrait {
     }
 
     public function noContentResponse() {
-        return response()->json([], 204);
+        return response()->noContent();
     }
 
     public function failResponse($error, $code = 400) {

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+
 
 class AuthController extends Controller {
     public function me() {
@@ -20,9 +20,14 @@ class AuthController extends Controller {
 
         return $this->successResponse($token, 201);
     }
-    
+
     public function login() {
+        
     }
     public function logout() {
+        $token = JWTAuth::getToken();
+        JWTAuth::invalidate($token);
+
+        return $this->noContentResponse();
     }
 }
