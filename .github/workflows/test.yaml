@@ -27,6 +27,7 @@ jobs:
  
       - name: Prepare Laravel Application
         run: |
+          cd server
           cp .env.example .env
           php artisan key:generate
           php 
