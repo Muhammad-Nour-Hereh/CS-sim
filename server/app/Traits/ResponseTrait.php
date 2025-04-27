@@ -3,9 +3,10 @@
 namespace App\Traits;
 
 trait ResponseTrait {
+    
     public function successResponse($data, $code = 200) {
         return response()->json([
-            "success" => true,
+            "success" => "true",
             "data" => $data
         ], $code);
     }
@@ -16,7 +17,7 @@ trait ResponseTrait {
 
     public function failResponse($error, $code = 400) {
         return response()->json([
-            "success" => false,
+            "success" => "false",
             "message" => $error,
             "data" => null
         ], $code);
@@ -24,7 +25,7 @@ trait ResponseTrait {
 
     public function unauthorizedResponse() {
         return response()->json([
-            "success" => false,
+            "success" => "false",
             "message" => "Unauthorized",
             "data" => null
         ], 401);
@@ -32,9 +33,25 @@ trait ResponseTrait {
 
     public function forbiddenResponse() {
         return response()->json([
-            "success" => false,
+            "success" => "false",
             "message" => "Forbidden",
             "data" => null
         ], 403);
+    }
+
+    public function conflictResponse($error) {
+        return response()->json([
+            'success' => 'false',
+            'message' => $error,
+            'data' => null,
+        ], 409);
+    }
+
+    public function unprocessableContentResponse($error) {
+        return response()->json([
+            'success' => 'false',
+            'message' => $error,
+            'data' => null,
+        ], 422);
     }
 }
