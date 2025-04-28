@@ -26,25 +26,21 @@ class SnippetController extends Controller {
     }
 
     public function show(Request $request, $id) {
-        $snippet = Snippet::where('id', $id)
-            ->where('user_id', $request->user()->id)
-            ->first();
+        $snippet = $request->user()->snippets()->find($id);
 
-        if (!$snippet) {
+        if (!$snippet)
             return $this->failResponse('Snippet not found', 404);
-        }
+
 
         return $this->successResponse($snippet);
     }
 
     public function update(SnippetRequest $request, $id) {
-        $snippet = Snippet::where('id', $id)
-            ->where('user_id', $request->user()->id)
-            ->first();
+        $snippet = $request->user()->snippets()->find($id);
 
-        if (!$snippet) {
+        if (!$snippet)
             return $this->failResponse('Snippet not found', 404);
-        }
+
 
         $snippet->update([
             'title' => $request->input('title'),
@@ -56,13 +52,11 @@ class SnippetController extends Controller {
     }
 
     public function destroy(Request $request, $id) {
-        $snippet = Snippet::where('id', $id)
-            ->where('user_id', $request->user()->id)
-            ->first();
+        $snippet = $request->user()->snippets()->whereKey($id)->first();
 
-        if (!$snippet) {
+        if (!$snippet)
             return $this->failResponse('Snippet not found', 404);
-        }
+        
 
         $snippet->delete();
 
