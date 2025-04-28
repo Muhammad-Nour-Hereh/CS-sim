@@ -5,9 +5,10 @@
 <!-- project overview -->
 <img src="./readme/title2.svg"/>
 
-> Description here.
->
-> Description here.
+> A gamified learning platform designed to make studying more fun and interactive.
+> 
+> The platform features a beautiful pixel-art inspired map where users "travel" as they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
+
 
 <br><br>
 
@@ -16,7 +17,10 @@
 
 ### Add Title Here
 
-- To be decided on later on.
+- **web**: React.
+- **mobile**: React native.
+- **Backend**: Laravel.
+- **Database**: mysql, monogdb.
 
 <br><br>
 
@@ -25,8 +29,13 @@
 
 ### Add Title Here
 
-- cool animations
-- dynamic simulations
+- Pixel-art inspired game map navigation
+- Dynamic quizzes with various types (write, choose, match)
+- Embeddable media (images, audio, videos)
+- Cool animations and transitions
+- Track user learning progress like an RPG game
+- Responsive design for mobile and desktop
+- Admin panel for managing quizzes and tracking user data
 
 <br><br>
 
@@ -54,6 +63,9 @@
 
 ### Add Title Here
 
+- using docker for containers
+- github action for ci/cd
+- build in testing in laravel
 
 | Services                            | Validation                       | Testing                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
@@ -67,7 +79,9 @@
 
 ### Add Title Here
 
-- Description here.
+- Project is containerized using Docker for easy deployment.
+- APIs are documented with Postman collections.
+- Live demo and staging environments available.
 
 
 | Postman API 1                            | Postman API 2                       | Postman API 3                        |
