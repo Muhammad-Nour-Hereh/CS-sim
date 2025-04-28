@@ -26,7 +26,7 @@ abstract class TestCase extends BaseTestCase {
             'Response status codes do not match'
         );
 
-        if (!$expected->status() === 204)
+        if ($expected->status() !== 204)
             // Compare response content
             $this->assertJsonStringEqualsJsonString(
                 $expected->getContent(),

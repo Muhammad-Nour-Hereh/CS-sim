@@ -44,7 +44,7 @@ class RegisterUserTest extends TestCase {
             ]
         ];
 
-        $expected = $this->failResponse($message, 422);
+        $expected = $this->unprocessableContentResponse($message);
 
         $actual = $this->postJson("/api/v1/auth/register", []);
 
@@ -52,11 +52,11 @@ class RegisterUserTest extends TestCase {
     }
 
     public function testRegisterFailedDuplicateEmail() {
-        $message = [
-            "email" => ["this email already used!"]
+        $errors = [
+            "email" => ["The email has already been taken."]
         ];
 
-        $expected = $this->failResponse($message, 409);
+        $expected = $this->conflictResponse($errors);
 
         $actual = $this->postJson("/api/v1/auth/register", $this->user);
         $actual = $this->postJson("/api/v1/auth/register", $this->user);

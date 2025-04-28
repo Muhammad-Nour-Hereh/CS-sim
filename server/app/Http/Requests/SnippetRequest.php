@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class SnippetRequest extends FormRequest {
+class SnippetRequest extends BaseFormRequest {
     public function authorize(): bool {
         return true;
     }
@@ -19,15 +18,6 @@ class SnippetRequest extends FormRequest {
                 Rule::in(['python']),
             ],
             'code' => 'required|string',
-        ];
-    }
-
-    public function messages(): array {
-        return [
-            'title.required' => 'The snippet must have a title.',
-            'language.required' => 'The language field is required.',
-            'language.in' => 'Only the Python language is currently supported.',
-            'code.required' => 'The snippet must contain some code.',
         ];
     }
 }

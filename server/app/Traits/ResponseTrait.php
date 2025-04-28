@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 trait ResponseTrait {
-    
+
     public function successResponse($data, $code = 200) {
         return response()->json([
             "success" => "true",
@@ -11,14 +11,23 @@ trait ResponseTrait {
         ], $code);
     }
 
+    public function createdResponse($message = "the has been created successfully") {
+        return response()->json([
+            "success" => "true",
+            "message" => $message,
+            "data" => null
+        ], 201);
+    }
+
     public function noContentResponse() {
         return response()->noContent();
     }
 
-    public function failResponse($error, $code = 400) {
+    public function failResponse($message, $errors, $code = 400) {
         return response()->json([
             "success" => "false",
-            "message" => $error,
+            "message" => $message,
+            "errors" => $errors,
             "data" => null
         ], $code);
     }
@@ -39,10 +48,10 @@ trait ResponseTrait {
         ], 403);
     }
 
-    public function conflictResponse($error) {
+    public function conflictResponse($errors) {
         return response()->json([
             'success' => 'false',
-            'message' => $error,
+            'message' => $errors,
             'data' => null,
         ], 409);
     }

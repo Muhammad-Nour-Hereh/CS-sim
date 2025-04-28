@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class SnippetController extends Controller {
 
     public function index(Request $request) {
-        $snippets = $request->user()->snippets()->latest()->get();
+        $snippets = $request->user()->snippets;
 
         return $this->successResponse($snippets);
     }
@@ -22,7 +22,7 @@ class SnippetController extends Controller {
             'code' => $request->input('code'),
         ]);
 
-        return $this->successResponse($snippet, 201);
+        return $this->createdResponse();
     }
 
     public function show(Request $request, $id) {
@@ -52,7 +52,7 @@ class SnippetController extends Controller {
             'code' => $request->input('code'),
         ]);
 
-        return $this->successResponse($snippet);
+        return $this->noContentResponse();
     }
 
     public function destroy(Request $request, $id) {

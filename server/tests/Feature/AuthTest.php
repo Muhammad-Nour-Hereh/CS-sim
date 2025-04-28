@@ -61,10 +61,13 @@ class AuthTest extends TestCase {
             'email' => $this->user->email,
             'password' => 'password'
         ];
-        $expected = $this->successResponse($this->data);
-        $actual = $this->PostJson("/api/v1/auth/login", $credentials);
+        $response = $this->postJson("/api/v1/auth/login", $credentials);
 
-        $this->assertEqualsResponse($actual, $expected);
+        $actualToken = $response->json('data');
+        $user1 = JWTAuth::setToken($this->token)->authenticate();
+        $user2 = JWTAuth::setToken($actualToken)->authenticate();
+
+        $this->assertEquals($user1->id, $user2->id);
     }
 
     public function testLoginFailedWrongCredentials() {
@@ -82,7 +85,12 @@ class AuthTest extends TestCase {
         $credentials = [
             'email' => $this->user->email,
         ];
-        $expected = $this->failResponse($message = 'missing password', 422);
+        $message = [
+            "password" => [
+                "The password field is required."
+            ]
+        ];
+        $expected = $this->unprocessableContentResponse($message);
         $actual = $this->PostJson("/api/v1/auth/login", $credentials);
 
         $this->assertEqualsResponse($actual, $expected);

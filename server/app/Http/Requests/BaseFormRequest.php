@@ -14,14 +14,14 @@ class BaseFormRequest extends FormRequest {
         $errors = $validator->errors()->toArray();
 
         $specificMessage = [
-            "email" => ["this email already used!"]
+            "email" => ["The email has already been taken."]
         ];
 
-        if ($errors === $specificMessage) 
+        if ($errors === $specificMessage)
             throw new HttpResponseException(
                 $this->conflictResponse($errors)
             );
-        
+
 
         throw new HttpResponseException(
             $this->unprocessableContentResponse($validator->errors())
