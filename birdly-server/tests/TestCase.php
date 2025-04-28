@@ -31,10 +31,9 @@ abstract class TestCase extends BaseTestCase {
             $expectedContent = json_decode($expected->getContent(), true);
             $actualContent = json_decode($actual->getContent(), true);
 
-            // Remove ignored fields from both
-            foreach ($ignoreFields as $field) {
-                data_forget($expectedContent, $field);
-                data_forget($actualContent, $field);
+            foreach ($ignoreFields as $path) {
+                $this->forgetPath($expectedContent, $path);
+                $this->forgetPath($actualContent, $path);
             }
 
             $this->assertJsonStringEqualsJsonString(
@@ -51,6 +50,24 @@ abstract class TestCase extends BaseTestCase {
                 $actual->headers->all(),
                 'Response headers do not match'
             );
+        }
+    }
+
+    private function forgetPath(array &$array, string $path): void {
+        $keys = explode('/', $path);
+        $temp = &$array;
+
+        foreach ($keys as $i => $key) {
+            if (!isset($temp[$key])) {
+                return; // If path doesn't exist, silently skip
+            }
+
+            if ($i === count($keys) - 1) {
+                unset($temp[$key]); // Found, unset
+                return;
+            }
+
+            $temp = &$temp[$key];
         }
     }
 }

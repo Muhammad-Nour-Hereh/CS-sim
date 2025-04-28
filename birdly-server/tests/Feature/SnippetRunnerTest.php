@@ -22,14 +22,14 @@ class SnippetRunnerTest extends TestCase {
         $this->user = User::factory()->create();
         $this->token = JWTAuth::fromUser($this->user);
 
-        Snippet::factory()->create([
+        $this->snippet = Snippet::factory()->create([
             'user_id' => $this->user->id
         ]);
     }
 
 
     public function testRunPythonSnippetSuccess() {
-        $expectedOutput = "Hello, World!\n";
+        $expectedOutput = "Hello, world!\n";
 
         $expected = $this->successResponse([
             'status' => "success",
@@ -38,7 +38,7 @@ class SnippetRunnerTest extends TestCase {
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->token"
-        ])->postJson("/api/v1/playground/run/{$this->snippet->id}");
+        ])->postJson("/api/v1/snippets/run/{$this->snippet->id}");
 
         $this->assertEqualsResponse($actual, $expected);
     }
@@ -50,7 +50,7 @@ class SnippetRunnerTest extends TestCase {
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->token"
-        ])->postJson("/api/v1/playground/run/{$nonExistingId}");
+        ])->postJson("/api/v1/snippets/run/{$nonExistingId}");
 
         $this->assertEqualsResponse($actual, $expected);
     }
@@ -70,8 +70,8 @@ class SnippetRunnerTest extends TestCase {
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->token"
-        ])->postJson("/api/v1/playground/run/{$buggedSnippet->id}");
+        ])->postJson("/api/v1/snippets/run/{$buggedSnippet->id}");
 
-        $this->assertEqualsResponse($actual, $expected,  ignoreFields: ['output']);
+        $this->assertEqualsResponse($actual, $expected, ignoreFields: ['data/output']);
     }
 }
