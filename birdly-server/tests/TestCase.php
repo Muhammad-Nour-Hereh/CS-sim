@@ -17,7 +17,8 @@ abstract class TestCase extends BaseTestCase {
     protected function assertEqualsResponse(
         TestResponse $actual,
         $expected,
-        bool $compareHeaders = false
+        bool $compareHeaders = false,
+        array $ignoreFields = []
     ): void {
         // Compare status codes
         $this->assertEquals(
@@ -26,13 +27,22 @@ abstract class TestCase extends BaseTestCase {
             'Response status codes do not match'
         );
 
-        if ($expected->status() !== 204)
-            // Compare response content
+        if ($expected->status() !== 204) {
+            $expectedContent = json_decode($expected->getContent(), true);
+            $actualContent = json_decode($actual->getContent(), true);
+
+            // Remove ignored fields from both
+            foreach ($ignoreFields as $field) {
+                data_forget($expectedContent, $field);
+                data_forget($actualContent, $field);
+            }
+
             $this->assertJsonStringEqualsJsonString(
-                $expected->getContent(),
-                $actual->getContent(),
+                json_encode($expectedContent),
+                json_encode($actualContent),
                 'Response content does not match'
             );
+        }
 
         // Optionally compare headers
         if ($compareHeaders) {
