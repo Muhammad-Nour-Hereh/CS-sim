@@ -11,8 +11,7 @@ return new class extends Migration {
 
         Schema::create('snippets', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
             $table->string('language');
             $table->text('code');
