@@ -35,24 +35,24 @@ Route::group(["prefix" => "v1"], function () {
 
         Route::prefix('courses')->group(function () {
             Route::get('/', [CourseController::class, 'index']);
+            Route::get('/{id}', [CourseController::class, 'show']);
         });
-        
+
         Route::prefix('guildbooks')->group(function () {
             Route::get('/', [GuildbookController::class, 'index']);
+            Route::get('/{id}', [GuildbookController::class, 'show']);
         });
     });
 
     Route::middleware('admin')->group(function () {
         Route::prefix('courses')->group(function () {
             Route::post('/', [CourseController::class, 'store']);
-            Route::get('/{id}', [CourseController::class, 'show']);
             Route::put('/{id}', [CourseController::class, 'update']);
             Route::delete('/{id}', [CourseController::class, 'destroy']);
         });
 
         Route::prefix('guildbooks')->group(function () {
             Route::post('/', [GuildbookController::class, 'store']);
-            Route::get('/{id}', [GuildbookController::class, 'show']);
             Route::put('/{id}', [GuildbookController::class, 'update']);
             Route::delete('/{id}', [GuildbookController::class, 'destroy']);
         });

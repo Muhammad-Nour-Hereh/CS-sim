@@ -23,7 +23,7 @@ trait ResponseTrait {
         return response()->noContent();
     }
 
-    public function failResponse($message, $errors, $code = 400) {
+    public function failResponse($message, $errors = [], $code = 400) {
         return response()->json([
             "success" => "false",
             "message" => $message,
@@ -46,6 +46,14 @@ trait ResponseTrait {
             "message" => "Forbidden",
             "data" => null
         ], 403);
+    }
+
+    public function notfountResponse() {
+        return response()->json([
+            "success" => "false",
+            "message" => "not found",
+            "data" => null
+        ], 404);
     }
 
     public function conflictResponse($errors) {

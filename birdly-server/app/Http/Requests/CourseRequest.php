@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class CourseRequest extends FormRequest {
+class CourseRequest extends BaseFormRequest {
 
     public function authorize(): bool {
         return true;

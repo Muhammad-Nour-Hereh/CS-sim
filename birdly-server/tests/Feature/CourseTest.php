@@ -28,12 +28,14 @@ class CourseTest extends TestCase {
 
         $this->adminToken = JWTAuth::fromUser($admin);
         $this->userToken = JWTAuth::fromUser($user);
+        
+        Course::factory()->count(3)->create();
     }
 
     // index
 
     public function testIndexCourses() {
-        Course::factory()->count(3)->create();
+        
 
         $expected = $this->successResponse(Course::all());
 
@@ -60,9 +62,9 @@ class CourseTest extends TestCase {
     public function testStoreCourseValidationFails() {
         $payload = ['title' => '']; // invalid
 
-        $expected = $this->failResponse("The title field is required.", [
-            'title' => ['The title field is required.']
-        ], 422);
+        $expected = $this->unprocessableContentResponse(["title" => [
+            "The title field is required."
+        ]]);
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
@@ -74,7 +76,7 @@ class CourseTest extends TestCase {
     // get
 
     public function testShowCourse() {
-        $course = Course::factory()->create();
+        $course = Course::first();
 
         $expected = $this->successResponse($course);
 
@@ -86,7 +88,7 @@ class CourseTest extends TestCase {
     }
 
     public function testShowCourseNotFound() {
-        $expected = $this->failResponse("Course not found", [], 404);
+        $expected = $this->notfountResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
@@ -112,7 +114,7 @@ class CourseTest extends TestCase {
     public function testUpdateCourseNotFound() {
         $payload = ['title' => 'Updated'];
 
-        $expected = $this->failResponse("Course not found", [], 404);
+        $expected = $this->notfountResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
@@ -123,11 +125,11 @@ class CourseTest extends TestCase {
 
     public function testUpdateCourseValidationFails() {
         $course = Course::factory()->create();
-        $payload = ['title' => '']; // invalid
+        $payload = ['title' => ''];
 
-        $expected = $this->failResponse("The title field is required.", [
+        $expected = $this->unprocessableContentResponse([
             'title' => ['The title field is required.']
-        ], 422);
+        ]);
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
@@ -150,7 +152,7 @@ class CourseTest extends TestCase {
     }
 
     public function testDeleteCourseNotFound() {
-        $expected = $this->failResponse("Course not found", [], 404);
+        $expected = $this->notfountResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
