@@ -17,7 +17,8 @@ abstract class TestCase extends BaseTestCase {
     protected function assertEqualsResponse(
         TestResponse $actual,
         $expected,
-        bool $compareHeaders = false
+        bool $compareHeaders = false,
+        array $ignoreFields = []
     ): void {
         // Compare status codes
         $this->assertEquals(
@@ -26,13 +27,21 @@ abstract class TestCase extends BaseTestCase {
             'Response status codes do not match'
         );
 
-        if ($expected->status() !== 204)
-            // Compare response content
+        if ($expected->status() !== 204) {
+            $expectedContent = json_decode($expected->getContent(), true);
+            $actualContent = json_decode($actual->getContent(), true);
+
+            foreach ($ignoreFields as $path) {
+                $this->forgetPath($expectedContent, $path);
+                $this->forgetPath($actualContent, $path);
+            }
+
             $this->assertJsonStringEqualsJsonString(
-                $expected->getContent(),
-                $actual->getContent(),
+                json_encode($expectedContent),
+                json_encode($actualContent),
                 'Response content does not match'
             );
+        }
 
         // Optionally compare headers
         if ($compareHeaders) {
@@ -41,6 +50,24 @@ abstract class TestCase extends BaseTestCase {
                 $actual->headers->all(),
                 'Response headers do not match'
             );
+        }
+    }
+
+    private function forgetPath(array &$array, string $path): void {
+        $keys = explode('/', $path);
+        $temp = &$array;
+
+        foreach ($keys as $i => $key) {
+            if (!isset($temp[$key])) {
+                return; // If path doesn't exist, silently skip
+            }
+
+            if ($i === count($keys) - 1) {
+                unset($temp[$key]); // Found, unset
+                return;
+            }
+
+            $temp = &$temp[$key];
         }
     }
 }
