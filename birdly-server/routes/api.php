@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\SnippetRunnerController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ Route::group(["prefix" => "v1"], function () {
         });
     });
 
-    
+
     Route::middleware('jwt')->group(function () {
 
         Route::prefix('snippets')->group(function () {
@@ -31,4 +32,14 @@ Route::group(["prefix" => "v1"], function () {
             Route::post('/run/{id}', [SnippetRunnerController::class, 'run']);
         });
     });
+
+    Route::prefix('courses')->group(function () {
+        Route::get('/', [CourseController::class, 'index']);
+        Route::post('/', [CourseController::class, 'store']);
+        Route::get('/{id}', [CourseController::class, 'show']);
+        Route::put('/{id}', [CourseController::class, 'update']);
+        Route::delete('/{id}', [CourseController::class, 'destroy']);
+    });
+
+
 });
