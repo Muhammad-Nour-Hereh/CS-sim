@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\GuildbookController;
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\SnippetRunnerController;
 use Illuminate\Support\Facades\Route;
@@ -41,5 +42,11 @@ Route::group(["prefix" => "v1"], function () {
         Route::delete('/{id}', [CourseController::class, 'destroy']);
     });
 
-
+    Route::prefix('guildbooks')->group(function () {
+        Route::get('/', [GuildbookController::class, 'index']);
+        Route::post('/', [GuildbookController::class, 'store']);
+        Route::get('/{id}', [GuildbookController::class, 'show']);
+        Route::put('/{id}', [GuildbookController::class, 'update']);
+        Route::delete('/{id}', [GuildbookController::class, 'destroy']);
+    });
 });
