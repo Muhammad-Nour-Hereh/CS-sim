@@ -3,13 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\Course;
+use App\Models\Guildbook;
 use App\Models\User;
 use App\Traits\ResponseTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Tests\TestCase;
 
-class CourseTest extends TestCase {
+class GuildbookTest extends TestCase {
     use RefreshDatabase, ResponseTrait;
 
     protected $adminToken;
@@ -28,98 +29,91 @@ class CourseTest extends TestCase {
 
         $this->adminToken = JWTAuth::fromUser($admin);
         $this->userToken = JWTAuth::fromUser($user);
-
-        Course::factory()->count(3)->create();
+        Course::factory()->create();
+        Guildbook::factory()->count(3)->create();
     }
 
-    // index
-    public function testIndexCourses() {
-        
-        $expected = $this->successResponse(Course::all());
+    public function testIndexGuildbooks() {
+        $expected = $this->successResponse(Guildbook::all());
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->getJson("/api/v1/courses");
+        ])->getJson("/api/v1/guildbooks");
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    // store
-    public function testStoreCourse() {
-        $payload = ['title' => 'New Course'];
+    public function testStoreGuildbook() {
+        $payload = ['title' => 'New Guildbook'];
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->postJson("/api/v1/courses", $payload);
+        ])->postJson("/api/v1/guildbooks", $payload);
 
         $actual->assertStatus(201);
-        $this->assertDatabaseHas('courses', ['title' => 'New Course']);
+        $this->assertDatabaseHas('guildbooks', ['title' => 'New Guildbook']);
     }
 
-    public function testStoreCourseValidationFails() {
-        $payload = ['title' => '']; // invalid
+    public function testStoreGuildbookValidationFails() {
+        $payload = ['title' => ''];
 
-        $expected = $this->unprocessableContentResponse(["title" => [
-            "The title field is required."
-        ]]);
+        $expected = $this->unprocessableContentResponse(['title' => ["The title field is required."]]);
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->postJson("/api/v1/courses", $payload);
+        ])->postJson("/api/v1/guildbooks", $payload);
 
         $this->assertEqualsResponse($actual, $expected, ignoreFields: ['data']);
     }
 
-    // get
-    public function testShowCourse() {
-        $course = Course::first();
+    public function testShowGuildbook() {
+        $guildbook = Guildbook::first();
 
-        $expected = $this->successResponse($course);
+        $expected = $this->successResponse($guildbook);
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->getJson("/api/v1/courses/{$course->id}");
+        ])->getJson("/api/v1/guildbooks/{$guildbook->id}");
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    public function testShowCourseNotFound() {
+    public function testShowGuildbookNotFound() {
         $expected = $this->notfountResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->getJson("/api/v1/courses/999");
+        ])->getJson("/api/v1/guildbooks/999");
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    // update
-    public function testUpdateCourse() {
-        $course = Course::factory()->create();
-        $payload = ['title' => 'Updated Title'];
+    public function testUpdateGuildbook() {
+        $guildbook = Guildbook::factory()->create();
+        $payload = ['title' => 'Updated Guildbook'];
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->putJson("/api/v1/courses/{$course->id}", $payload);
+        ])->putJson("/api/v1/guildbooks/{$guildbook->id}", $payload);
 
         $actual->assertStatus(200);
-        $this->assertDatabaseHas('courses', ['id' => $course->id, 'title' => 'Updated Title']);
+        $this->assertDatabaseHas('guildbooks', ['id' => $guildbook->id, 'title' => 'Updated Guildbook']);
     }
 
-    public function testUpdateCourseNotFound() {
+    public function testUpdateGuildbookNotFound() {
         $payload = ['title' => 'Updated'];
 
         $expected = $this->notfountResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->putJson("/api/v1/courses/999", $payload);
+        ])->putJson("/api/v1/guildbooks/999", $payload);
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    public function testUpdateCourseValidationFails() {
-        $course = Course::factory()->create();
+    public function testUpdateGuildbookValidationFails() {
+        $guildbook = Guildbook::factory()->create();
         $payload = ['title' => ''];
 
         $expected = $this->unprocessableContentResponse([
@@ -128,39 +122,38 @@ class CourseTest extends TestCase {
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->putJson("/api/v1/courses/{$course->id}", $payload);
+        ])->putJson("/api/v1/guildbooks/{$guildbook->id}", $payload);
 
         $this->assertEqualsResponse($actual, $expected, ignoreFields: ['data']);
     }
 
-    // delete
-    public function testDeleteCourse() {
-        $course = Course::factory()->create();
+    public function testDeleteGuildbook() {
+        $guildbook = Guildbook::factory()->create();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->deleteJson("/api/v1/courses/{$course->id}");
+        ])->deleteJson("/api/v1/guildbooks/{$guildbook->id}");
 
         $actual->assertStatus(204);
-        $this->assertSoftDeleted('courses', ['id' => $course->id]);
+        $this->assertSoftDeleted('guildbooks', ['id' => $guildbook->id]);
     }
 
-    public function testDeleteCourseNotFound() {
+    public function testDeleteGuildbookNotFound() {
         $expected = $this->notfountResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
-        ])->deleteJson("/api/v1/courses/999");
+        ])->deleteJson("/api/v1/guildbooks/999");
 
         $this->assertEqualsResponse($actual, $expected);
     }
 
-    public function testDeleteCourseForbidden() {
-        $course = Course::factory()->create();
+    public function testDeleteGuildbookForbidden() {
+        $guildbook = Guildbook::factory()->create();
 
         $res = $this->withHeaders([
             "Authorization" => "Bearer $this->userToken"
-        ])->deleteJson("/api/v1/courses/{$course->id}");
+        ])->deleteJson("/api/v1/guildbooks/{$guildbook->id}");
 
         $expected = $this->forbiddenResponse();
 
