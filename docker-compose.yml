@@ -4,7 +4,7 @@ services:
     image: muhammadnourhereh/cs-cim:latest
     environment:
       - LARAVEL_DATABASE_HOST=database
-      - LARAVEL_DATABASE_NAME=cs_sim
+      - LARAVEL_DATABASE_NAME=birdly_db
       - LARAVEL_DATABASE_USER=root
       - LARAVEL_DATABASE_PASSWORD=1234
       - LARAVEL_DATABASE_PORT_NUMBER=3306
@@ -18,7 +18,7 @@ services:
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=dockerTest_db
+      - MYSQL_DATABASE=birdly_db
     volumes:
       - db-data:/var/lib/mysql
 
