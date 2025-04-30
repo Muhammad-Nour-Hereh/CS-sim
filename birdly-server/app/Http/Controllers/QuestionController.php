@@ -2,65 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuestionRequest;
-use App\Http\Requests\UpdateQuestionRequest;
+use App\Http\Requests\QuestionRequest;
 use App\Models\Question;
 
-class QuestionController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+class QuestionController extends Controller {
+
+    public function index() {
+        return $this->successResponse(Question::All());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(QuestionRequest $request) {
+        Question::create($request->validated());
+
+        return $this->createdResponse();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreQuestionRequest $request)
-    {
-        //
-    }
+    public function show($id) {
+        $Question = Question::find($id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Question $question)
-    {
-        //
-    }
+        if (!$Question)
+            return $this->notFoundResponse();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Question $question)
-    {
-        //
+        return $this->successResponse($Question);
     }
+    public function update(QuestionRequest $request, $id) {
+        $Question = Question::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateQuestionRequest $request, Question $question)
-    {
-        //
+        if (!$Question)
+            return $this->notFoundResponse();
+
+        $Question->update($request->validated());
+
+        return $this->noContentResponse();
     }
+    public function destroy($id) {
+        $Question = Question::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Question $question)
-    {
-        //
+        if (!$Question)
+            return $this->notFoundResponse();
+
+        $Question->delete($id);
+        return $this->noContentResponse();
     }
 }
