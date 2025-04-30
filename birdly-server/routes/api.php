@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheatController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuildbookController;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\SnippetRunnerController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +47,14 @@ Route::group(["prefix" => "v1"], function () {
         Route::prefix('cheats')->group(function () {
             Route::get('/{id}', [CheatController::class, 'show']);
         });
+
+        Route::prefix('levels')->group(function () {
+            Route::get('/{id}', [LevelController::class, 'show']);
+        });
+
+        Route::prefix('questions')->group(function () {
+            Route::get('/{id}', [QuestionController::class, 'show']);
+        });
     });
 
     Route::middleware('admin')->group(function () {
@@ -67,6 +77,20 @@ Route::group(["prefix" => "v1"], function () {
             Route::post('/', [CheatController::class, 'store']);
             Route::put('/{id}', [CheatController::class, 'update']);
             Route::delete('/{id}', [CheatController::class, 'destroy']);
+        });
+
+        Route::prefix('levels')->group(function () {
+            Route::get('/', [LevelController::class, 'index']);
+            Route::post('/', [LevelController::class, 'store']);
+            Route::put('/{id}', [LevelController::class, 'update']);
+            Route::delete('/{id}', [LevelController::class, 'destroy']);
+        });
+
+        Route::prefix('questions')->group(function () {
+            Route::get('/', [QuestionController::class, 'index']);
+            Route::post('/', [QuestionController::class, 'store']);
+            Route::put('/{id}', [QuestionController::class, 'update']);
+            Route::delete('/{id}', [QuestionController::class, 'destroy']);
         });
     });
 });
