@@ -23,7 +23,7 @@ class CourseController extends Controller {
         $course = Course::find($id);
 
         if (!$course)
-            return $this->notfountResponse();
+            return $this->notFoundResponse();
 
         return $this->successResponse($course);
     }
@@ -32,7 +32,7 @@ class CourseController extends Controller {
         $course = Course::find($id);
 
         if (!$course)
-            return $this->notfountResponse();
+            return $this->notFoundResponse();
 
         $course->update([
             'title' => $request->input('title'),
@@ -45,7 +45,7 @@ class CourseController extends Controller {
         $course = Course::find($id);
 
         if (!$course)
-            return $this->notfountResponse();
+            return $this->notFoundResponse();
 
         $course->delete();
 

@@ -48,7 +48,7 @@ trait ResponseTrait {
         ], 403);
     }
 
-    public function notfountResponse() {
+    public function notFoundResponse() {
         return response()->json([
             "success" => "false",
             "message" => "not found",

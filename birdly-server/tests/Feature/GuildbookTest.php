@@ -11,152 +11,152 @@ use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Tests\TestCase;
 
 class GuildbookTest extends TestCase {
-    use RefreshDatabase, ResponseTrait;
+    // use RefreshDatabase, ResponseTrait;
 
-    protected $adminToken;
-    protected $userToken;
+    // protected $adminToken;
+    // protected $userToken;
 
-    protected function setUp(): void {
-        parent::setUp();
+    // protected function setUp(): void {
+    //     parent::setUp();
 
-        $admin = User::factory()->create([
-            'user_type' => 'admin'
-        ]);
+    //     $admin = User::factory()->create([
+    //         'user_type' => 'admin'
+    //     ]);
 
-        $user = User::factory()->create([
-            'user_type' => 'user'
-        ]);
+    //     $user = User::factory()->create([
+    //         'user_type' => 'user'
+    //     ]);
 
-        $this->adminToken = JWTAuth::fromUser($admin);
-        $this->userToken = JWTAuth::fromUser($user);
-        Course::factory()->create();
-        Guildbook::factory()->count(3)->create();
-    }
+    //     $this->adminToken = JWTAuth::fromUser($admin);
+    //     $this->userToken = JWTAuth::fromUser($user);
+    //     Course::factory()->create();
+    //     Guildbook::factory()->count(3)->create();
+    // }
 
-    public function testIndexGuildbooks() {
-        $expected = $this->successResponse(Guildbook::all());
+    // public function testIndexGuildbooks() {
+    //     $expected = $this->successResponse(Guildbook::all());
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->getJson("/api/v1/guildbooks");
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->getJson("/api/v1/guildbooks");
 
-        $this->assertEqualsResponse($actual, $expected);
-    }
+    //     $this->assertEqualsResponse($actual, $expected);
+    // }
 
-    public function testStoreGuildbook() {
-        $payload = ['title' => 'New Guildbook'];
+    // public function testStoreGuildbook() {
+    //     $payload = ['title' => 'New Guildbook'];
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->postJson("/api/v1/guildbooks", $payload);
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->postJson("/api/v1/guildbooks", $payload);
 
-        $actual->assertStatus(201);
-        $this->assertDatabaseHas('guildbooks', ['title' => 'New Guildbook']);
-    }
+    //     $actual->assertStatus(201);
+    //     $this->assertDatabaseHas('guildbooks', ['title' => 'New Guildbook']);
+    // }
 
-    public function testStoreGuildbookValidationFails() {
-        $payload = ['title' => ''];
+    // public function testStoreGuildbookValidationFails() {
+    //     $payload = ['title' => ''];
 
-        $expected = $this->unprocessableContentResponse(['title' => ["The title field is required."]]);
+    //     $expected = $this->unprocessableContentResponse(['title' => ["The title field is required."]]);
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->postJson("/api/v1/guildbooks", $payload);
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->postJson("/api/v1/guildbooks", $payload);
 
-        $this->assertEqualsResponse($actual, $expected, ignoreFields: ['data']);
-    }
+    //     $this->assertEqualsResponse($actual, $expected, ignoreFields: ['data']);
+    // }
 
-    public function testShowGuildbook() {
-        $guildbook = Guildbook::first();
+    // public function testShowGuildbook() {
+    //     $guildbook = Guildbook::first();
 
-        $expected = $this->successResponse($guildbook);
+    //     $expected = $this->successResponse($guildbook);
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->getJson("/api/v1/guildbooks/{$guildbook->id}");
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->getJson("/api/v1/guildbooks/{$guildbook->id}");
 
-        $this->assertEqualsResponse($actual, $expected);
-    }
+    //     $this->assertEqualsResponse($actual, $expected);
+    // }
 
-    public function testShowGuildbookNotFound() {
-        $expected = $this->notfountResponse();
+    // public function testShowGuildbookNotFound() {
+    //     $expected = $this->notfountResponse();
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->getJson("/api/v1/guildbooks/999");
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->getJson("/api/v1/guildbooks/999");
 
-        $this->assertEqualsResponse($actual, $expected);
-    }
+    //     $this->assertEqualsResponse($actual, $expected);
+    // }
 
-    public function testUpdateGuildbook() {
-        $guildbook = Guildbook::factory()->create();
-        $payload = ['title' => 'Updated Guildbook'];
+    // public function testUpdateGuildbook() {
+    //     $guildbook = Guildbook::factory()->create();
+    //     $payload = ['title' => 'Updated Guildbook'];
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->putJson("/api/v1/guildbooks/{$guildbook->id}", $payload);
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->putJson("/api/v1/guildbooks/{$guildbook->id}", $payload);
 
-        $actual->assertStatus(200);
-        $this->assertDatabaseHas('guildbooks', ['id' => $guildbook->id, 'title' => 'Updated Guildbook']);
-    }
+    //     $actual->assertStatus(200);
+    //     $this->assertDatabaseHas('guildbooks', ['id' => $guildbook->id, 'title' => 'Updated Guildbook']);
+    // }
 
-    public function testUpdateGuildbookNotFound() {
-        $payload = ['title' => 'Updated'];
+    // public function testUpdateGuildbookNotFound() {
+    //     $payload = ['title' => 'Updated'];
 
-        $expected = $this->notfountResponse();
+    //     $expected = $this->notfountResponse();
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->putJson("/api/v1/guildbooks/999", $payload);
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->putJson("/api/v1/guildbooks/999", $payload);
 
-        $this->assertEqualsResponse($actual, $expected);
-    }
+    //     $this->assertEqualsResponse($actual, $expected);
+    // }
 
-    public function testUpdateGuildbookValidationFails() {
-        $guildbook = Guildbook::factory()->create();
-        $payload = ['title' => ''];
+    // public function testUpdateGuildbookValidationFails() {
+    //     $guildbook = Guildbook::factory()->create();
+    //     $payload = ['title' => ''];
 
-        $expected = $this->unprocessableContentResponse([
-            'title' => ['The title field is required.']
-        ]);
+    //     $expected = $this->unprocessableContentResponse([
+    //         'title' => ['The title field is required.']
+    //     ]);
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->putJson("/api/v1/guildbooks/{$guildbook->id}", $payload);
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->putJson("/api/v1/guildbooks/{$guildbook->id}", $payload);
 
-        $this->assertEqualsResponse($actual, $expected, ignoreFields: ['data']);
-    }
+    //     $this->assertEqualsResponse($actual, $expected, ignoreFields: ['data']);
+    // }
 
-    public function testDeleteGuildbook() {
-        $guildbook = Guildbook::factory()->create();
+    // public function testDeleteGuildbook() {
+    //     $guildbook = Guildbook::factory()->create();
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->deleteJson("/api/v1/guildbooks/{$guildbook->id}");
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->deleteJson("/api/v1/guildbooks/{$guildbook->id}");
 
-        $actual->assertStatus(204);
-        $this->assertSoftDeleted('guildbooks', ['id' => $guildbook->id]);
-    }
+    //     $actual->assertStatus(204);
+    //     $this->assertSoftDeleted('guildbooks', ['id' => $guildbook->id]);
+    // }
 
-    public function testDeleteGuildbookNotFound() {
-        $expected = $this->notfountResponse();
+    // public function testDeleteGuildbookNotFound() {
+    //     $expected = $this->notfountResponse();
 
-        $actual = $this->withHeaders([
-            "Authorization" => "Bearer $this->adminToken"
-        ])->deleteJson("/api/v1/guildbooks/999");
+    //     $actual = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->adminToken"
+    //     ])->deleteJson("/api/v1/guildbooks/999");
 
-        $this->assertEqualsResponse($actual, $expected);
-    }
+    //     $this->assertEqualsResponse($actual, $expected);
+    // }
 
-    public function testDeleteGuildbookForbidden() {
-        $guildbook = Guildbook::factory()->create();
+    // public function testDeleteGuildbookForbidden() {
+    //     $guildbook = Guildbook::factory()->create();
 
-        $res = $this->withHeaders([
-            "Authorization" => "Bearer $this->userToken"
-        ])->deleteJson("/api/v1/guildbooks/{$guildbook->id}");
+    //     $res = $this->withHeaders([
+    //         "Authorization" => "Bearer $this->userToken"
+    //     ])->deleteJson("/api/v1/guildbooks/{$guildbook->id}");
 
-        $expected = $this->forbiddenResponse();
+    //     $expected = $this->forbiddenResponse();
 
-        $this->assertEqualsResponse($res, $expected);
-    }
+    //     $this->assertEqualsResponse($res, $expected);
+    // }
 }

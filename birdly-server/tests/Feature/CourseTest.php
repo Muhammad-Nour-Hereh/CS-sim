@@ -84,7 +84,7 @@ class CourseTest extends TestCase {
     }
 
     public function testShowCourseNotFound() {
-        $expected = $this->notfountResponse();
+        $expected = $this->notFoundResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
@@ -109,7 +109,7 @@ class CourseTest extends TestCase {
     public function testUpdateCourseNotFound() {
         $payload = ['title' => 'Updated'];
 
-        $expected = $this->notfountResponse();
+        $expected = $this->notFoundResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
@@ -146,7 +146,7 @@ class CourseTest extends TestCase {
     }
 
     public function testDeleteCourseNotFound() {
-        $expected = $this->notfountResponse();
+        $expected = $this->notFoundResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->adminToken"
