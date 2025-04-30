@@ -5,15 +5,13 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-
     public function up(): void {
-        Schema::create('guildbooks', function (Blueprint $table) {
+        Schema::create('cheats', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('course_id')
                 ->constrained('courses')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+                ->cascadeOnDelete();
 
             $table->string('title');
             $table->string('path');
@@ -23,6 +21,6 @@ return new class extends Migration {
     }
 
     public function down(): void {
-        Schema::dropIfExists('guildbooks');
+        Schema::dropIfExists('cheats');
     }
 };

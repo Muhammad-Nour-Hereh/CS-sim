@@ -13,6 +13,8 @@ return new class extends Migration {
                 ->constrained('courses')
                 ->cascadeOnDelete();
             $table->string('title');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

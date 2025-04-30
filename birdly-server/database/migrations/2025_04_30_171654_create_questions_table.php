@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->string('title');
             $table->enum('question_type', ["select", "match", "write", "order"]);
             $table->json('content');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
