@@ -43,6 +43,10 @@ class CheatController extends Controller {
 
         $content = $this->fileService->read($Cheat->path);
 
+        if (!$content) {
+            return $this->notFoundResponse();
+        }
+        
         return $this->successResponse([
             'id'        => $Cheat->id,
             'title'     => $Cheat->title,

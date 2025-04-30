@@ -43,6 +43,10 @@ class GuildbookController extends Controller {
 
         $content = $this->fileService->read($guildbook->path);
 
+        if (!$content) {
+            return $this->notFoundResponse();
+        }
+
         return $this->successResponse([
             'id'        => $guildbook->id,
             'title'     => $guildbook->title,

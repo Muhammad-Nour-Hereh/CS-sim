@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CheatFileService {
-    public function buildPath(string $courseTitle, string $pageTitle): string {
+    public function buildPath(string $courseTitle, string $pageTitle) {
         $courseSlug = Str::slug($courseTitle);
         $pageSlug = Str::slug($pageTitle);
         return "$courseSlug/cheats/$pageSlug.mdx";
     }
 
-    public function store(int $courseId, string $pageTitle, string $content): ?string {
+    public function store(int $courseId, string $pageTitle, string $content) {
         $course = Course::find($courseId);
         if (!$course) {
             return null;
@@ -24,15 +24,15 @@ class CheatFileService {
         return $path;
     }
 
-    public function read(string $path): string {
+    public function read(string $path) {
         return Storage::get($path);
     }
 
-    public function update(string $path, string $content): void {
+    public function update(string $path, string $content) {
         Storage::put($path, $content);
     }
 
-    public function delete(string $path): void {
+    public function delete(string $path) {
         Storage::delete($path);
     }
 }
