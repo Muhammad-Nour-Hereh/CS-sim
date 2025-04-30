@@ -2,65 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLevelRequest;
-use App\Http\Requests\UpdateLevelRequest;
+use App\Http\Requests\LevelRequest;
 use App\Models\Level;
 
-class LevelController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+class LevelController extends Controller {
+
+    public function index() {
+        return $this->successResponse(Level::All());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function store(LevelRequest $request) {
+        Level::create($request->validated());
+
+        return $this->createdResponse();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreLevelRequest $request)
-    {
-        //
-    }
+    public function show($id) {
+        $level = Level::find($id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Level $level)
-    {
-        //
-    }
+        if (!$level)
+            return $this->notFoundResponse();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Level $level)
-    {
-        //
+        return $this->successResponse($level);
     }
+    public function update(LevelRequest $request, $id) {
+        $level = Level::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateLevelRequest $request, Level $level)
-    {
-        //
+        if (!$level)
+            return $this->notFoundResponse();
+
+        $level->update($request->validated());
+
+        return $this->noContentResponse();
     }
+    public function destroy($id) {
+        $level = Level::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Level $level)
-    {
-        //
+        if (!$level)
+            return $this->notFoundResponse();
+        
+        $level->delete($id);
+        return $this->noContentResponse();
     }
 }
