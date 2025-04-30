@@ -6,7 +6,7 @@ use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class CheatsFileService {
+class CheatFileService {
     public function buildPath(string $courseTitle, string $pageTitle): string {
         $courseSlug = Str::slug($courseTitle);
         $pageSlug = Str::slug($pageTitle);

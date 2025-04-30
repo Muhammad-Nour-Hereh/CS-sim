@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cheats>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cheat>
  */
 class CheatsFactory extends Factory
 {
