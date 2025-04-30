@@ -15,10 +15,8 @@ return new class extends Migration {
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->string('slug');
             $table->string('title');
-            $table->string('mdx_path');
-            $table->integer('order_index')->default(0);
+            $table->string('path');
             $table->timestamps();
             $table->softDeletes();
         });

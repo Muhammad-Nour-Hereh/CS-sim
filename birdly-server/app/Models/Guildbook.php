@@ -11,10 +11,8 @@ class Guildbook extends Model {
 
     protected $fillable = [
         'course_id',
-        'slug',
         'title',
-        'mdx_path',
-        'order_index',
+        'path',
     ];
 
     public function course() {
