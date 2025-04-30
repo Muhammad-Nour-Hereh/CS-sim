@@ -9,11 +9,10 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->foreignId('course_id')
                 ->constrained('courses')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+                ->cascadeOnDelete();
+            $table->string('title');
         });
     }
 
