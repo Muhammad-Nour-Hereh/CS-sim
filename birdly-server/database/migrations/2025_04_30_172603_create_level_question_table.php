@@ -5,19 +5,20 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-
     public function up(): void {
-        Schema::create('levels', function (Blueprint $table) {
+        Schema::create('level_question', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->foreignId('course_id')
-                ->constrained('courses')
+            $table->foreignId('level_id')->constrained('levels')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('question_id')
+                ->constrained('questions')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
     }
 
     public function down(): void {
-        Schema::dropIfExists('levels');
+        Schema::dropIfExists('level_question');
     }
 };
