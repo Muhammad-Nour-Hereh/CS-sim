@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Tests\TestCase;
 
-class AdminMiddlewareTest extends TestCase {
+class AdminTest extends TestCase {
     use RefreshDatabase, ResponseTrait;
 
     protected $admin;
@@ -27,12 +27,12 @@ class AdminMiddlewareTest extends TestCase {
 
         // Register test route protected by admin middleware
         app('router')->get('/admin-only', function () {
-            return response()->json(['message' => 'You are admin']);
+            return response()->json(['success' => 'true', 'data' => 'You are admin']);
         })->middleware(['jwt', 'admin']);
     }
 
     public function testAdminCanAccessRoute() {
-        $expected = $this->successResponse(['message' => 'You are admin']);
+        $expected = $this->successResponse(data: 'You are admin');
 
         $actual = $this->withHeaders([
             'Authorization' => "Bearer $this->adminToken"
@@ -59,4 +59,3 @@ class AdminMiddlewareTest extends TestCase {
         $this->assertEqualsResponse($actual, $expected);
     }
 }
-
