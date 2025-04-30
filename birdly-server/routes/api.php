@@ -35,35 +35,35 @@ Route::group(["prefix" => "v1"], function () {
         });
 
         Route::prefix('courses')->group(function () {
-            Route::get('/', [CourseController::class, 'index']);
             Route::get('/{id}', [CourseController::class, 'show']);
         });
 
         Route::prefix('guildbooks')->group(function () {
-            Route::get('/', [GuildbookController::class, 'index']);
             Route::get('/{id}', [GuildbookController::class, 'show']);
         });
 
         Route::prefix('cheats')->group(function () {
-            Route::get('/', [CheatController::class, 'index']);
             Route::get('/{id}', [CheatController::class, 'show']);
         });
     });
 
     Route::middleware('admin')->group(function () {
         Route::prefix('courses')->group(function () {
+            Route::get('/', [CourseController::class, 'index']);
             Route::post('/', [CourseController::class, 'store']);
             Route::put('/{id}', [CourseController::class, 'update']);
             Route::delete('/{id}', [CourseController::class, 'destroy']);
         });
 
         Route::prefix('guildbooks')->group(function () {
+            Route::get('/', [GuildbookController::class, 'index']);
             Route::post('/', [GuildbookController::class, 'store']);
             Route::put('/{id}', [GuildbookController::class, 'update']);
             Route::delete('/{id}', [GuildbookController::class, 'destroy']);
         });
 
         Route::prefix('cheats')->group(function () {
+            Route::get('/', [CheatController::class, 'index']);
             Route::post('/', [CheatController::class, 'store']);
             Route::put('/{id}', [CheatController::class, 'update']);
             Route::delete('/{id}', [CheatController::class, 'destroy']);
