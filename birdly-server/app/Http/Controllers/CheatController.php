@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GuildbookRequest;
-use App\Models\Guildbook;
-use App\Services\GuildbookFileService;
+use App\Http\Requests\CheatRequest;
+use App\Models\Cheat;
+use App\Services\CheatFileService;
 
-class GuildbookController extends Controller {
-    public function __construct(protected GuildbookFileService $fileService) {
+class CheatController extends Controller {
+    public function __construct(protected CheatFileService $fileService) {
     }
 
     public function index() {
-        return $this->successResponse(Guildbook::all());
+        return $this->successResponse(Cheat::all());
     }
 
-    public function store(GuildbookRequest $request) {
+    public function store(CheatRequest $request) {
         $path = $this->fileService->store(
             $request->input('course_id'),
             $request->input('title'),
@@ -25,7 +25,7 @@ class GuildbookController extends Controller {
             return $this->notFoundResponse();
         }
 
-        Guildbook::create([
+        Cheat::create([
             'course_id' => $request->input('course_id'),
             'title'     => $request->input('title'),
             'path'      => $path,
@@ -35,36 +35,36 @@ class GuildbookController extends Controller {
     }
 
     public function show($id) {
-        $guildbook = Guildbook::find($id);
+        $Cheat = Cheat::find($id);
 
-        if (!$guildbook) {
+        if (!$Cheat) {
             return $this->notFoundResponse();
         }
 
-        $content = $this->fileService->read($guildbook->path);
+        $content = $this->fileService->read($Cheat->path);
 
         if (!$content) {
             return $this->notFoundResponse();
         }
-
+        
         return $this->successResponse([
-            'id'        => $guildbook->id,
-            'title'     => $guildbook->title,
-            'course_id' => $guildbook->course_id,
+            'id'        => $Cheat->id,
+            'title'     => $Cheat->title,
+            'course_id' => $Cheat->course_id,
             'content'   => $content,
         ]);
     }
 
-    public function update(GuildbookRequest $request, $id) {
-        $guildbook = Guildbook::find($id);
+    public function update(CheatRequest $request, $id) {
+        $Cheat = Cheat::find($id);
 
-        if (!$guildbook) {
+        if (!$Cheat) {
             return $this->notFoundResponse();
         }
 
-        $this->fileService->update($guildbook->path, $request->input('content'));
+        $this->fileService->update($Cheat->path, $request->input('content'));
 
-        $guildbook->update([
+        $Cheat->update([
             'course_id' => $request->input('course_id'),
             'title'     => $request->input('title'),
         ]);
@@ -73,14 +73,14 @@ class GuildbookController extends Controller {
     }
 
     public function destroy($id) {
-        $guildbook = Guildbook::find($id);
+        $Cheat = Cheat::find($id);
 
-        if (!$guildbook) {
+        if (!$Cheat) {
             return $this->notFoundResponse();
         }
 
-        $this->fileService->delete($guildbook->path);
-        $guildbook->delete();
+        $this->fileService->delete($Cheat->path);
+        $Cheat->delete();
 
         return $this->noContentResponse();
     }

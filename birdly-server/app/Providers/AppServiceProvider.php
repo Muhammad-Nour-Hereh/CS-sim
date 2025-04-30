@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\CheatFileService;
 use App\Services\GuildbookFileService;
 use App\Services\SnippetRunnerService;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +18,10 @@ class AppServiceProvider extends ServiceProvider {
 
         $this->app->singleton(GuildbookFileService::class, function ($app) {
             return new GuildbookFileService();
+        });
+
+        $this->app->singleton(CheatFileService::class, function ($app) {
+            return new CheatFileService();
         });
     }
 

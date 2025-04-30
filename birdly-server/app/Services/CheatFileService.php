@@ -6,11 +6,11 @@ use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class GuildbookFileService {
+class CheatFileService {
     public function buildPath(string $courseTitle, string $pageTitle) {
         $courseSlug = Str::slug($courseTitle);
         $pageSlug = Str::slug($pageTitle);
-        return "$courseSlug/guildbooks/$pageSlug.mdx";
+        return "$courseSlug/cheats/$pageSlug.mdx";
     }
 
     public function store(int $courseId, string $pageTitle, string $content) {

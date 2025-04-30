@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheatController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuildbookController;
 use App\Http\Controllers\SnippetController;
@@ -42,6 +43,11 @@ Route::group(["prefix" => "v1"], function () {
             Route::get('/', [GuildbookController::class, 'index']);
             Route::get('/{id}', [GuildbookController::class, 'show']);
         });
+
+        Route::prefix('cheats')->group(function () {
+            Route::get('/', [CheatController::class, 'index']);
+            Route::get('/{id}', [CheatController::class, 'show']);
+        });
     });
 
     Route::middleware('admin')->group(function () {
@@ -55,6 +61,12 @@ Route::group(["prefix" => "v1"], function () {
             Route::post('/', [GuildbookController::class, 'store']);
             Route::put('/{id}', [GuildbookController::class, 'update']);
             Route::delete('/{id}', [GuildbookController::class, 'destroy']);
+        });
+
+        Route::prefix('cheats')->group(function () {
+            Route::post('/', [CheatController::class, 'store']);
+            Route::put('/{id}', [CheatController::class, 'update']);
+            Route::delete('/{id}', [CheatController::class, 'destroy']);
         });
     });
 });
