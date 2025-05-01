@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder {
             CourseSeeder::class,
             GuildbookSeeder::class,
             CheatSeeder::class,
+            LevelSeeder::class,
+            QuestionSeeder::class,
             UserSeeder::class,
             SnippetSeeder::class
         ]);

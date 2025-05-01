@@ -2,16 +2,22 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Question;
 use Illuminate\Database\Seeder;
 
-class QuestionSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        //
+class QuestionSeeder extends Seeder {
+
+    public function run(): void {
+        $this->createAndattach(1);
+        $this->createAndattach(2);
+        $this->createAndattach(3);
+    }
+
+    public function createAndattach($levelId) {
+        $questions = Question::factory()->count(10)->create();
+
+        foreach ($questions as $question) {
+            $question->levels()->attach($levelId);
+        }
     }
 }
