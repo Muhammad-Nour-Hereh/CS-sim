@@ -11,8 +11,7 @@ return new class extends Migration {
 
             $table->foreignId('course_id')
                 ->constrained('courses')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+                ->cascadeOnDelete();
 
             $table->string('title');
             $table->string('path');

@@ -7,22 +7,20 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 
     public function up(): void {
-        Schema::create('guildbooks', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-
             $table->foreignId('course_id')
                 ->constrained('courses')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-
+                ->cascadeOnDelete();
             $table->string('title');
-            $table->string('path');
+            $table->enum('question_type', ["select", "match", "write", "order"]);
+            $table->json('content');
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
     public function down(): void {
-        Schema::dropIfExists('guildbooks');
+        Schema::dropIfExists('questions');
     }
 };
