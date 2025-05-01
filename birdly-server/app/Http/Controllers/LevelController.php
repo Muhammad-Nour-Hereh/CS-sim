@@ -49,15 +49,24 @@ class LevelController extends Controller {
     }
 
     public function questions($levelId) {
-        $questions = Level::find($levelId)->questions()->get();
+        $level = Level::find($levelId);
+
+        if (!$level)
+            return $this->notFoundResponse();
+
+        $questions = $level->questions()->get();
+
         return $this->successResponse([
             'questions' => $questions
         ]);
     }
 
     public function attachQuestions($levelId, $questionId) {
-
         $level = Level::find($levelId);
+        $question = Question::find($questionId);
+
+        if (!$level || !$question)
+            return $this->notFoundResponse();
 
         if ($level->questions()->where('question_id', $questionId)->exists()) {
             return $this->conflictResponse(['Question already attached to this level']);
@@ -72,6 +81,9 @@ class LevelController extends Controller {
         $validated = $request->validated();
 
         $level = Level::find($levelId);
+
+        if (!$level)
+            return $this->notFoundResponse();
 
         $newQuestionIds = array_diff(
             $validated['questions_ids'],
@@ -89,6 +101,10 @@ class LevelController extends Controller {
     public function detachQuestion($levelId, $questionId) {
 
         $level = Level::find($levelId);
+        $question = Question::find($questionId);
+
+        if (!$level || !$question)
+            return $this->notFoundResponse();
 
         if (!$level->questions()->where('question_id', $questionId)->exists()) {
             return $this->notFoundResponse();
