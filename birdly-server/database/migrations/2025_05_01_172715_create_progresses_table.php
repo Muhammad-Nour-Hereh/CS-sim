@@ -9,7 +9,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('progress', function (Blueprint $table) {
             $table->id();
-            $table->integer('exp');
+            $table->integer('exp')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
