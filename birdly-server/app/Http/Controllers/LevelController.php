@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BulkAttackQuestionRequest;
 use App\Http\Requests\LevelRequest;
 use App\Models\Level;
 use App\Models\Question;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class LevelController extends Controller {
 
@@ -47,33 +48,33 @@ class LevelController extends Controller {
         return $this->noContentResponse();
     }
 
-    public function questions(Level $level) {
+    public function questions($levelId) {
+        $questions = Level::find($levelId)->questions()->get();
         return $this->successResponse([
-            'questions' => $level->questions()->get()
+            'questions' => $questions
         ]);
     }
 
-    public function attachQuestions(Request $request, Level $level) {
-        $validated = $request->validate([
-            'question_id' => 'required|exists:questions,id'
-        ]);
+    public function attachQuestions($levelId, $questionId) {
 
-        if ($level->questions()->where('question_id', $validated['question_id'])->exists()) {
-            return $this->conflictResponse('Question already attached to this level');
+        $level = Level::find($levelId);
+
+        if ($level->questions()->where('question_id', $questionId)->exists()) {
+            return $this->conflictResponse(['Question already attached to this level']);
         }
 
-        $level->questions()->attach($validated['question_id']);
+        $level->questions()->attach($questionId);
         return $this->createdResponse('Question attached successfully');
     }
 
-    public function bulkAttachQuestions(Request $request, Level $level) {
-        $validated = $request->validate([
-            'question_ids' => 'required|array',
-            'question_ids.*' => 'exists:questions,id'
-        ]);
+    public function bulkAttachQuestions(BulkAttackQuestionRequest $request, $levelId) {
+
+        $validated = $request->validated();
+
+        $level = Level::find($levelId);
 
         $newQuestionIds = array_diff(
-            $validated['question_ids'],
+            $validated['questions_ids'],
             $level->questions()->pluck('questions.id')->toArray()
         );
 
@@ -85,12 +86,15 @@ class LevelController extends Controller {
         return $this->createdResponse('Questions attached successfully');
     }
 
-    public function detachQuestion(Level $level, Question $question) {
-        if (!$level->questions()->where('question_id', $question->id)->exists()) {
+    public function detachQuestion($levelId, $questionId) {
+
+        $level = Level::find($levelId);
+
+        if (!$level->questions()->where('question_id', $questionId)->exists()) {
             return $this->notFoundResponse();
         }
 
-        $level->questions()->detach($question->id);
+        $level->questions()->detach($questionId);
         return $this->noContentResponse();
     }
 }

@@ -52,7 +52,7 @@ Route::group(["prefix" => "v1"], function () {
             Route::get('/{id}', [LevelController::class, 'show']);
 
             // questions relationship
-            Route::get('/{level}/questions', [LevelController::class, 'questions']);
+            Route::get('/{levelId}/questions', [LevelController::class, 'questions']);
         });
 
         Route::prefix('questions')->group(function () {
@@ -89,9 +89,9 @@ Route::group(["prefix" => "v1"], function () {
             Route::delete('/{id}', [LevelController::class, 'destroy']);
 
             // questions relationship
-            Route::post('/{level}/questions', [LevelController::class, 'attachQuestions']);
-            Route::post('/{level}/questions/bulk', [LevelController::class, 'bulkAttachQuestions']);
-            Route::delete('/{level}/questions/{question}', [LevelController::class, 'detachQuestion']);
+            Route::post('/{levelId}/questions/bulk', [LevelController::class, 'bulkAttachQuestions']);
+            Route::post('/{levelId}/questions/{questionId}', [LevelController::class, 'attachQuestions']);
+            Route::delete('/{levelId}/questions/{questionId}', [LevelController::class, 'detachQuestion']);
         });
 
         Route::prefix('questions')->group(function () {
