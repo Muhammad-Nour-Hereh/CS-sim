@@ -1,7 +1,7 @@
 
 services:
   server:
-    image: muhammadnourhereh/cs-cim:latest
+    image: muhammadnourhereh/birdly:latest
     environment:
       - LARAVEL_DATABASE_HOST=database
       - LARAVEL_DATABASE_NAME=birdly_db
