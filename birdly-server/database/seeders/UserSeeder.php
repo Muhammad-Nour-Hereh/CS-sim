@@ -13,8 +13,8 @@ class UserSeeder extends Seeder {
 
 
         User::factory()->create([
-            'name' => 'a',
-            'email' => 'a@a.com',
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
             'password' => '121212',
             'user_type' => 'admin',
         ]);
