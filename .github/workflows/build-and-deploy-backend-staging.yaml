@@ -68,5 +68,7 @@ jobs:
             # docker rmi ${{ secrets.DOCKER_USERNAME }}/birdly:staging
             # docker-compose up -d
 
-            docker pull ${{ secrets.DOCKER_USERNAME }}/birdly:staging
-            docker-compose up -d --no-deps --build server
+            docker-compose pull server
+            docker-compose rm -f server
+            docker-compose up -d server
+
