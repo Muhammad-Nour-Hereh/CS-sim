@@ -44,7 +44,8 @@ jobs:
           password: ${{ secrets.DOCKER_KEY }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly:staging ./birdly-server
+        working-directory: birdly-server
+        run: docker build -f dockerfile.release -t ${{ secrets.DOCKER_USERNAME }}/birdly:staging .
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly:staging
@@ -71,4 +72,3 @@ jobs:
             docker-compose pull server
             docker-compose rm -f server
             docker-compose up -d server
-
