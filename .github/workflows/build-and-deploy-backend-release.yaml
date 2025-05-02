@@ -12,18 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
- 
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: "8.2"
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
           coverage: none
- 
+
       - name: Run composer install
         working-directory: birdly-server
         run: composer install -n --prefer-dist
-        
 
       - name: Prepare Laravel Application
         working-directory: birdly-server
@@ -45,10 +44,10 @@ jobs:
           password: ${{ secrets.DOCKER_KEY }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly:latest ./birdly-server
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly:release -f ./birdly-server/Dockerfile.release ./birdly-server
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly:release
 
   Deploy-Laravel-Docker:
     needs: Build-Laravel-And-Push-Dockerhub
@@ -66,5 +65,5 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             docker-compose down
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/birdly:latest
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/birdly:release
             docker-compose up -d
