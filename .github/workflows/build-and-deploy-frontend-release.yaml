@@ -1,0 +1,80 @@
+name: Build and Deploy Frontend To Staging
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release
+
+jobs:
+  Run-frontend-Tests:
+    name: Run frontend tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23' 
+
+      - name: Install dependencies
+        working-directory: birdly-client
+        run: npm install
+
+      - name: Run frontend tests
+        working-directory: birdly-client
+        run: npm run test -- --run
+
+  Build-React-And-Push-Dockerhub:
+    needs: Run-frontend-Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23'
+
+      - name: Install dependencies
+        working-directory: birdly-client
+        run: npm install
+        
+      - name: Build react
+        working-directory: birdly-client
+        run: npm run build
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_KEY }}
+
+      - name: Build Docker image
+        working-directory: birdly-client
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging .
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging
+
+  Deploy-React-Docker:
+    needs: Build-React-And-Push-Dockerhub
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_release_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker-compose pull client
+            docker-compose rm -f client
+            docker-compose up -d client
