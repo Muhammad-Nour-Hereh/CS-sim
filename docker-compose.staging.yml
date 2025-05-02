@@ -1,5 +1,9 @@
 
 services:
+  client:
+    image: muhammadnourhereh/cs-cim-client:latest
+    ports:
+      - 80:80
   server:
     image: muhammadnourhereh/birdly:staging
     environment:

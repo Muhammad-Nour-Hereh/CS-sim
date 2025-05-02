@@ -60,25 +60,21 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging
 
-  # Deploy-React-Docker:
-  #   needs: Build-React-And-Push-Dockerhub
-  #   runs-on: ubuntu-latest
+  Deploy-React-Docker:
+    needs: Build-React-And-Push-Dockerhub
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  #     - name: Deploy on EC2
-  #       uses: appleboy/ssh-action@v0.1.10
-  #       with:
-  #         host: ${{ secrets.EC2_staging_HOST }}
-  #         username: ${{ secrets.EC2_USER }}
-  #         key: ${{ secrets.EC2_KEY }}
-  #         script: |
-  #           # docker-compose down
-  #           # docker rmi ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging
-  #           # docker-compose up -d
-
-  #           docker-compose pull server
-  #           docker-compose rm -f server
-  #           docker-compose up -d server
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_staging_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker-compose pull cleint
+            docker-compose rm -f cleint
+            docker-compose up -d cleint
