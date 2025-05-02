@@ -1,4 +1,4 @@
-name: Push and Run
+name: Build and Deploy Backend To Release
 
 on:
   workflow_dispatch:
