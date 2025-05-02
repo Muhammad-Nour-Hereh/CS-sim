@@ -57,7 +57,8 @@ jobs:
           password: ${{ secrets.DOCKER_KEY }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging ./birdly-client
+        working-directory: birdly-client
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging .
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging
