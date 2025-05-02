@@ -7,31 +7,28 @@ on:
       - staging
 
 jobs:
-  #   Run-frontend-Tests:
-  #     name: Run tests
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - uses: actions/checkout@v3
+  Run-frontend-Tests:
+    name: Run frontend tests
+    runs-on: ubuntu-latest
 
-  #       - name: Setup PHP
-  #         uses: shivammathur/setup-php@v2
-  #         with:
-  #           php-version: "8.2"
-  #           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
-  #           coverage: none
+    steps:
+      - uses: actions/checkout@v3
 
-  #       - name: Run composer install
-  #         working-directory: birdly-server
-  #         run: composer install -n --prefer-dist
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23' 
 
-  #       - name: Prepare Laravel Application
-  #         working-directory: birdly-server
-  #         run: |
-  #           cp .env.staging .env
-  #           php artisan key:generate
+      - name: Install dependencies
+        working-directory: birdly-client
+        run: npm install
+
+      - name: Run frontend tests
+        working-directory: birdly-client
+        run: npm run test -- --run
 
   Build-React-And-Push-Dockerhub:
-    # needs: Run-frontend-Tests
+    needs: Run-frontend-Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
