@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\GuildbookRequest;
+use App\Models\Guildbook;
+use App\Services\GuildbookFileService;
+
+class GuildbookController extends Controller {
+    public function __construct(protected GuildbookFileService $fileService) {
+    }
+
+    public function index() {
+        return $this->successResponse(Guildbook::all());
+    }
+
+    public function store(GuildbookRequest $request) {
+        $path = $this->fileService->store(
+            $request->input('course_id'),
+            $request->input('title'),
+            $request->input('content')
+        );
+
+        if (!$path) {
+            return $this->notFoundResponse();
+        }
+
+        Guildbook::create([
+            'course_id' => $request->input('course_id'),
+            'title'     => $request->input('title'),
+            'path'      => $path,
+        ]);
+
+        return $this->createdResponse();
+    }
+
+    public function show($id) {
+        $guildbook = Guildbook::find($id);
+
+        if (!$guildbook) {
+            return $this->notFoundResponse();
+        }
+
+        $content = $this->fileService->read($guildbook->path);
+
+        if (!$content) {
+            return $this->notFoundResponse();
+        }
+
+        return $this->successResponse([
+            'id'        => $guildbook->id,
+            'title'     => $guildbook->title,
+            'course_id' => $guildbook->course_id,
+            'content'   => $content,
+        ]);
+    }
+
+    public function update(GuildbookRequest $request, $id) {
+        $guildbook = Guildbook::find($id);
+
+        if (!$guildbook) {
+            return $this->notFoundResponse();
+        }
+
+        $this->fileService->update($guildbook->path, $request->input('content'));
+
+        $guildbook->update([
+            'course_id' => $request->input('course_id'),
+            'title'     => $request->input('title'),
+        ]);
+
+        return $this->noContentResponse();
+    }
+
+    public function destroy($id) {
+        $guildbook = Guildbook::find($id);
+
+        if (!$guildbook) {
+            return $this->notFoundResponse();
+        }
+
+        $this->fileService->delete($guildbook->path);
+        $guildbook->delete();
+
+        return $this->noContentResponse();
+    }
+}

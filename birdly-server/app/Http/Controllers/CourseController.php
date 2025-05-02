@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\CourseRequest;
+use App\Models\Course;
+
+class CourseController extends Controller {
+
+    public function index() {
+        return $this->successResponse(Course::all());
+    }
+
+    public function store(CourseRequest $request) {
+        Course::create([
+            'title' => $request->input('title'),
+        ]);
+
+        return $this->createdResponse();
+    }
+
+    public function show($id) {
+        $course = Course::find($id);
+
+        if (!$course)
+            return $this->notFoundResponse();
+
+        return $this->successResponse($course);
+    }
+
+    public function update(CourseRequest $request, $id) {
+        $course = Course::find($id);
+
+        if (!$course)
+            return $this->notFoundResponse();
+
+        $course->update([
+            'title' => $request->input('title'),
+        ]);
+
+        return $this->successResponse($course);
+    }
+
+    public function destroy($id) {
+        $course = Course::find($id);
+
+        if (!$course)
+            return $this->notFoundResponse();
+
+        $course->delete();
+
+        return $this->noContentResponse();
+    }
+}

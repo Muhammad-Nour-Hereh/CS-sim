@@ -1,0 +1,30 @@
+
+services:
+  client:
+    image: muhammadnourhereh/cs-cim-client:latest
+    ports:
+      - 80:80
+  server:
+    image: muhammadnourhereh/birdly:release
+    environment:
+      - LARAVEL_DATABASE_HOST=database
+      - LARAVEL_DATABASE_NAME=birdly_db
+      - LARAVEL_DATABASE_USER=root
+      - LARAVEL_DATABASE_PASSWORD=1234
+      - LARAVEL_DATABASE_PORT_NUMBER=3306
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=birdly_db
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

@@ -1,0 +1,13 @@
+FROM bitnami/laravel:12
+
+WORKDIR /app
+
+COPY . /app/
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN cp .env.staging .env
+
+RUN composer install --no-dev --optimize-autoloader
+
+RUN composer require fakerphp/faker --dev

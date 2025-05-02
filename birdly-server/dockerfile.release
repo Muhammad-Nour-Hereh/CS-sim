@@ -1,0 +1,11 @@
+FROM bitnami/laravel:12
+
+WORKDIR /app
+
+COPY . /app/
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN cp .env.release .env
+
+RUN composer install --no-dev --optimize-autoloader
