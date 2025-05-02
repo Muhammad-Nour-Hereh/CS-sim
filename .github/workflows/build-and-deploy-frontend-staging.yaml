@@ -75,6 +75,6 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            docker-compose pull cleint
-            docker-compose rm -f cleint
-            docker-compose up -d cleint
+            docker-compose pull client
+            docker-compose rm -f client
+            docker-compose up -d client

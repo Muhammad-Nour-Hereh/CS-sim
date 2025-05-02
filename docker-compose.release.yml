@@ -1,7 +1,7 @@
 
 services:
   client:
-    image: muhammadnourhereh/cs-cim-client:latest
+    image: muhammadnourhereh/birdly-client:release
     ports:
       - 80:80
   server:
