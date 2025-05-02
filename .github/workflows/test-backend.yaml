@@ -5,6 +5,8 @@ on:
   pull_request:
     branches:
       - main
+      - stage
+      - release
     
 jobs:
   Run-Backend-Tests:
@@ -23,14 +25,12 @@ jobs:
       - name: Run composer install
         working-directory: birdly-server
         run: composer install -n --prefer-dist
-        
 
       - name: Prepare Laravel Application
         working-directory: birdly-server
         run: |
-          cp .env.example .env
+          cp .env.staging .env
           php artisan key:generate
-        
 
       - name: Run tests
         working-directory: birdly-server 
