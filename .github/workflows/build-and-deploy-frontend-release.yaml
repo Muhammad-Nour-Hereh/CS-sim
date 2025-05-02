@@ -1,4 +1,4 @@
-name: Build and Deploy Frontend To Staging
+name: Build and Deploy Frontend To Release
 
 on:
   workflow_dispatch:
@@ -55,10 +55,10 @@ jobs:
 
       - name: Build Docker image
         working-directory: birdly-client
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly-client:release .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly-client:release
 
   Deploy-React-Docker:
     needs: Build-React-And-Push-Dockerhub
