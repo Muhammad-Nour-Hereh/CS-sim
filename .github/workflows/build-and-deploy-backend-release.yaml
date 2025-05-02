@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.DOCKER_KEY }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly:release -f ./birdly-server/Dockerfile.release ./birdly-server
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly:release -f ./birdly-server/dockerfile.release ./birdly-server
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly:release
