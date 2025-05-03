@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Models\Progress;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ class ProgressController extends Controller {
             $progress->mistakes()->updateExistingPivot($questionId, [
                 'count' => $mistake->pivot->count + 1
             ]);
+
             return $this->noContentResponse();
         }
 
@@ -87,11 +89,32 @@ class ProgressController extends Controller {
     }
 
     public function getCompletedLevels($progressId) {
-        // TODO: Implement logic to get completed levels for the given progress
+        $progress = Progress::find($progressId);
+
+        if (!$progress)
+            return $this->notFoundResponse();
+
+        $data = $progress->completedLevels()->get();
+
+        return $this->successResponse($data);
     }
 
     public function completeLevel($progressId, $levelId) {
-        // TODO: Implement logic to mark level as completed
+        $progress = Progress::find($progressId);
+        $level = Level::find($levelId);
+
+        if (!$progress || !$level)
+            return $this->notFoundResponse();
+
+        $completed = $progress->completedLevels()->where('level_id', $levelId)->first();
+
+        if ($completed) {
+            return $this->conflictResponse('this level already completed');
+        }
+
+        $progress->completedLevels()->attach($levelId);
+
+        return $this->createdResponse();
     }
 
     public function uncompleteLevel($progressId, $levelId) {
