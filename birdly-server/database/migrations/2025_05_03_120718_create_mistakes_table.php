@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->primary(['progress_id', 'questions_id']);
             $table->foreignId('progress_id')->constrained('progresses')->cascadeOnDelete();
             $table->foreignId('questions_id')->constrained('questions')->cascadeOnDelete();
-            $table->integer('count');
+            $table->integer('count')->default(0);
         });
     }
 

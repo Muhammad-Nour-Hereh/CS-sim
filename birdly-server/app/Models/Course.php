@@ -16,4 +16,11 @@ class Course extends Model {
     public function guildbookPages() {
         return $this->hasMany(Guildbook::class);
     }
+
+    public function courses() {
+        return $this->belongsToMany(User::class)
+            ->using(UserCourse::class)
+            ->withPivot('progress_id')
+            ->withTimestamps();
+    }
 }
