@@ -118,6 +118,20 @@ class ProgressController extends Controller {
     }
 
     public function uncompleteLevel($progressId, $levelId) {
-        // TODO: Implement logic to unmark level as completed
+        $progress = Progress::find($progressId);
+        $level = Level::find($levelId);
+
+        if (!$progress || !$level)
+            return $this->notFoundResponse();
+
+        $completed = $progress->completedLevels()->where('level_id', $levelId)->first();
+
+        if (!$completed) {
+            return $this->notFoundResponse();
+        }
+
+        $progress->completedLevels()->detach($levelId);
+
+        return $this->noContentResponse();
     }
 }
