@@ -7,18 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 
     public function up(): void {
-        Schema::create('questions', function (Blueprint $table) {
-            $table->id();
+
+        Schema::create('course_user', function (Blueprint $table) {
+            $table->primary(['user_id', 'course_id']);
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
-            $table->string('title');
-            $table->enum('question_type', ["select", "match", "write", "order"]);
-            $table->json('content');
+            $table->foreignId('progress_id')->constrained('progresses')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
     public function down(): void {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('course_user');
     }
 };

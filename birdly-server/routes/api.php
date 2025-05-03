@@ -5,9 +5,11 @@ use App\Http\Controllers\CheatController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuildbookController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\SnippetRunnerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(["prefix" => "v1"], function () {
@@ -57,6 +59,23 @@ Route::group(["prefix" => "v1"], function () {
 
         Route::prefix('questions')->group(function () {
             Route::get('/{id}', [QuestionController::class, 'show']);
+        });
+
+        Route::prefix('users')->group(function () {
+            Route::get('/courses', [UserController::class, 'getSubscribtions']);
+            Route::post('/courses/{course}/subscribe', [UserController::class, 'subscribe']);
+            Route::delete('/courses/{course}/subscribe', [UserController::class, 'unsubscribe']);
+        });
+
+        Route::prefix('progress')->group(function () {
+            Route::get('{progressId}/mistakes', [ProgressController::class, 'getMistakes']);
+            Route::post('{progressId}/questions/{questionId}/mistakes', [ProgressController::class, 'addMistake']);
+            Route::patch('{progressId}/questions/{questionId}/mistakes', [ProgressController::class, 'setMistakeCount']);
+            Route::delete('{progressId}/questions/{questionId}/mistakes', [ProgressController::class, 'removeMistake']);
+
+            Route::get('{progressId}/completed', [ProgressController::class, 'getCompletedLevels']);
+            Route::post('{progressId}/levels/{levelId}/complete', [ProgressController::class, 'completeLevel']);
+            Route::delete('{progressId}/levels/{levelId}/complete', [ProgressController::class, 'uncompleteLevel']);
         });
     });
 
