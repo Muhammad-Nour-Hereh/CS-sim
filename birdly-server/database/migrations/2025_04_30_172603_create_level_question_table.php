@@ -7,13 +7,9 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('level_question', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('level_id')
-                ->constrained('levels')
-                ->cascadeOnDelete();
-            $table->foreignId('question_id')
-                ->constrained('questions')
-                ->cascadeOnDelete();
+            $table->primary((['level_id', 'question_id']));
+            $table->foreignId('level_id')->constrained('levels')->cascadeOnDelete();
+            $table->foreignId('question_id')->constrained('questions')->cascadeOnDelete();
         });
     }
 

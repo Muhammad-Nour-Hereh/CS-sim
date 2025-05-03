@@ -9,9 +9,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')
-                ->constrained('courses')
-                ->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->string('title');
             $table->timestamps();
             $table->softDeletes();

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 
     public function up(): void {
-        Schema::create('progress', function (Blueprint $table) {
+        Schema::create('progresses', function (Blueprint $table) {
             $table->id();
             $table->integer('exp')->default(0);
             $table->timestamps();
@@ -16,6 +16,6 @@ return new class extends Migration {
     }
 
     public function down(): void {
-        Schema::dropIfExists('progress');
+        Schema::dropIfExists('progresses');
     }
 };
