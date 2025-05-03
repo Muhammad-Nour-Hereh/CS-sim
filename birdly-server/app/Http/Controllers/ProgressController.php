@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Progress;
+use App\Models\Question;
 
 class ProgressController extends Controller {
 
@@ -18,7 +19,24 @@ class ProgressController extends Controller {
     }
 
     public function addMistake($progressId, $questionId) {
-        // TODO: Implement logic to add a mistake for the given question
+        $progress = Progress::find($progressId);
+        $question = Question::find($questionId);
+
+        if (!$progress || !$question)
+            return $this->notFoundResponse();
+
+        $mistake = $progress->mistakes()->where('question_id', $questionId)->first();
+
+        if ($mistake) {
+            $progress->mistakes()->updateExistingPivot($questionId, [
+                'count' => $mistake->pivot->count + 1
+            ]);
+            return $this->noContentResponse();
+        }
+
+        $progress->mistakes()->attach($question);
+
+        return $this->createdResponse();
     }
 
     public function setMistakeCount($progressId, $questionId) {
