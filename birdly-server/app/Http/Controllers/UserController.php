@@ -32,6 +32,19 @@ class UserController extends Controller {
         return $this->createdResponse('the course have been subscribed');
     }
 
-    public function unsubscribe() {
+    public function unsubscribe(Request $request, $courseId) {
+        $user = $request->user();
+
+        $course = Course::find($courseId);
+
+        if (!$course)
+            return $this->notFoundResponse();
+
+        if (!$user->courses()->where('course_id', $courseId)->exists()) {
+            return $this->conflictResponse(['you are not subscribed to this course']);
+        }
+
+        $user->courses()->detach($courseId);
+        return $this->createdResponse('the course have been unsubscribed');
     }
 }
