@@ -9,10 +9,11 @@ return new class extends Migration {
     public function up(): void {
 
         Schema::create('mistakes', function (Blueprint $table) {
-            $table->primary(['progress_id', 'questions_id']);
+            $table->primary(['progress_id', 'question_id']);
             $table->foreignId('progress_id')->constrained('progresses')->cascadeOnDelete();
-            $table->foreignId('questions_id')->constrained('questions')->cascadeOnDelete();
+            $table->foreignId('question_id')->constrained('questions')->cascadeOnDelete();
             $table->integer('count')->default(0);
+            $table->timestamps();
         });
     }
 

@@ -2,65 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreprogressRequest;
-use App\Http\Requests\UpdateprogressRequest;
-use App\Models\progress;
+use App\Models\Progress;
 
-class ProgressController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+class ProgressController extends Controller {
+
+    public function getMistakes($progressId) {
+        $progress = Progress::find($progressId);
+
+        if (!$progress)
+            return $this->notFoundResponse();
+
+        $data = $progress->mistakes()->get();
+
+        return $this->successResponse($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function addMistake($progressId, $questionId) {
+        // TODO: Implement logic to add a mistake for the given question
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreprogressRequest $request)
-    {
-        //
+    public function setMistakeCount($progressId, $questionId) {
+        // TODO: Implement logic to update mistake count (if applicable)
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(progress $progress)
-    {
-        //
+    public function removeMistake($progressId, $questionId) {
+        // TODO: Implement logic to remove a mistake for the given question
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(progress $progress)
-    {
-        //
+    public function getCompletedLevels($progressId) {
+        // TODO: Implement logic to get completed levels for the given progress
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateprogressRequest $request, progress $progress)
-    {
-        //
+    public function completeLevel($progressId, $levelId) {
+        // TODO: Implement logic to mark level as completed
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(progress $progress)
-    {
-        //
+    public function uncompleteLevel($progressId, $levelId) {
+        // TODO: Implement logic to unmark level as completed
     }
 }

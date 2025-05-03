@@ -25,6 +25,7 @@ class Progress extends Model {
 
     public function mistakes() {
         return $this->belongsToMany(Question::class, 'mistakes')
-            ->withPivot('count');
+            ->withPivot('count')
+            ->withTimestamps();
     }
 }

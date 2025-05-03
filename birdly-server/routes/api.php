@@ -68,14 +68,14 @@ Route::group(["prefix" => "v1"], function () {
         });
 
         Route::prefix('progress')->group(function () {
-            Route::get('/mistakes', [ProgressController::class, 'getMistakes']);
-            Route::post('/questions/{questionId}/mistakes', [ProgressController::class, 'addMistake']);
-            Route::patch('/questions/{questionId}/mistakes', [ProgressController::class, 'setMistakeCount']);
-            Route::delete('/questions/{questionId}/mistakes', [ProgressController::class, 'removeMistake']);
+            Route::get('{progressId}/mistakes', [ProgressController::class, 'getMistakes']);
+            Route::post('{progressId}/questions/{questionId}/mistakes', [ProgressController::class, 'addMistake']);
+            Route::patch('{progressId}/questions/{questionId}/mistakes', [ProgressController::class, 'setMistakeCount']);
+            Route::delete('{progressId}/questions/{questionId}/mistakes', [ProgressController::class, 'removeMistake']);
 
-            Route::get('/completed', [ProgressController::class, 'getCompletedLevels']);
-            Route::post('/levels/{levelId}/complete', [ProgressController::class, 'completeLevel']);
-            Route::delete('/levels/{levelId}/complete', [ProgressController::class, 'uncompleteLevel']);
+            Route::get('{progressId}/completed', [ProgressController::class, 'getCompletedLevels']);
+            Route::post('{progressId}/levels/{levelId}/complete', [ProgressController::class, 'completeLevel']);
+            Route::delete('{progressId}/levels/{levelId}/complete', [ProgressController::class, 'uncompleteLevel']);
         });
     });
 
