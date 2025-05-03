@@ -1,0 +1,70 @@
+name: Build and Deploy Backend To Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release
+
+jobs:
+  Run-Backend-Tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+
+      - name: Run composer install
+        working-directory: birdly-server
+        run: composer install -n --prefer-dist
+
+      - name: Prepare Laravel Application
+        working-directory: birdly-server
+        run: |
+          cp .env.release .env
+          php artisan key:generate
+
+  Build-Laravel-And-Push-Dockerhub:
+    needs: Run-Backend-Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_KEY }}
+
+      - name: Build Docker image
+        working-directory: birdly-server
+        run: docker build -f ./dockerfile.release -t ${{ secrets.DOCKER_USERNAME }}/birdly:release .
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly:release
+
+  Deploy-Laravel-Docker:
+    needs: Build-Laravel-And-Push-Dockerhub
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_release_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker-compose pull server
+            docker-compose rm -f server
+            docker-compose up -d server

@@ -1,7 +1,11 @@
 
 services:
+  client:
+    image: muhammadnourhereh/birdly-client:release
+    ports:
+      - 80:80
   server:
-    image: muhammadnourhereh/cs-cim:latest
+    image: muhammadnourhereh/birdly:release
     environment:
       - LARAVEL_DATABASE_HOST=database
       - LARAVEL_DATABASE_NAME=birdly_db
