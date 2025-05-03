@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Progress;
 use App\Models\Question;
+use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isNumeric;
 
 class ProgressController extends Controller {
 
@@ -39,8 +42,30 @@ class ProgressController extends Controller {
         return $this->createdResponse();
     }
 
-    public function setMistakeCount($progressId, $questionId) {
-        // TODO: Implement logic to update mistake count (if applicable)
+    public function setMistakeCount(Request $request, $progressId, $questionId) {
+        $progress = Progress::find($progressId);
+        $question = Question::find($questionId);
+        $count = $request->input('count');
+
+        if (!$progress || !$question) {
+            return $this->notFoundResponse();
+        }
+
+        if (!is_numeric($count)) {
+            return $this->unprocessableContentResponse(["count" => 'Count must be numeric']);
+        }
+
+        $mistake = $progress->mistakes()->where('question_id', $questionId)->first();
+
+        if (!$mistake) {
+            return $this->notFoundResponse();
+        }
+
+        $progress->mistakes()->updateExistingPivot($questionId, [
+            'count' => $count
+        ]);
+
+        return $this->noContentResponse();
     }
 
     public function removeMistake($progressId, $questionId) {
