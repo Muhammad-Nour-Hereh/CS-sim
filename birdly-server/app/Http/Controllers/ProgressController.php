@@ -69,7 +69,21 @@ class ProgressController extends Controller {
     }
 
     public function removeMistake($progressId, $questionId) {
-        // TODO: Implement logic to remove a mistake for the given question
+        $progress = Progress::find($progressId);
+        $question = Question::find($questionId);
+
+        if (!$progress || !$question)
+            return $this->notFoundResponse();
+
+        $mistake = $progress->mistakes()->where('question_id', $questionId)->first();
+
+        if (!$mistake) {
+            return $this->notFoundResponse();
+        }
+
+        $progress->mistakes()->detach($question);
+
+        return $this->noContentResponse();
     }
 
     public function getCompletedLevels($progressId) {
