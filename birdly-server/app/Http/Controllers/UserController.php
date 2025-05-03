@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Progress;
 use Illuminate\Http\Request;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller {
 
-    public function getSubscribtions() {
+    public function getSubscribtions(Request $request) {
+        $data = $request->user()->courses()->get();
+
+        return $this->successResponse($data);
     }
 
     public function subscribe(Request $request, $courseId) {
