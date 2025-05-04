@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider {
         });
         
         $this->app->singleton(OpenAIService::class, function ($app) {
-            return new OpenAIService(config('openai.api_key'));
+            return new OpenAIService(config('services.openai.api_key'));
         });
     }
 

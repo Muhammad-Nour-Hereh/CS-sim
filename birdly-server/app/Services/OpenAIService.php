@@ -10,6 +10,7 @@ class OpenAIService {
 
 
     public function __construct(string $apiKey) {
+
         $this->client = OpenAI::client($apiKey);
         $this->system = [
             "role" => "system",
@@ -20,9 +21,10 @@ class OpenAIService {
     public function generateText(string $prompt): string {
         $response = $this->client->chat()->create([
             'model' => 'gpt-4o',
-            'messages' => array_merge($this->system, [
-                ['role' => 'user', 'content' => $prompt],
-            ]),
+            'messages' => [
+                ['role' => 'system', 'content' => $this->system['content']],
+                ['role' => 'user', 'content' => $prompt]
+            ],
         ]);
 
         return $response->choices[0]->message->content;

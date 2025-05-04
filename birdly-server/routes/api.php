@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChatBotController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CheatController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuildbookController;
@@ -80,7 +80,7 @@ Route::group(["prefix" => "v1"], function () {
         });
 
         Route::prefix('chat')->group(function () {
-            Route::post('/chat', [ChatbotController::class, 'chat']);
+            Route::post('/', [ChatbotController::class, 'chat']);
         });
     });
 
