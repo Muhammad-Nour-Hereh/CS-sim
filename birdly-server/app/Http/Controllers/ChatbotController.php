@@ -12,7 +12,7 @@ class ChatbotController extends Controller {
 
     public function chat(Request $request) {
         $request->validate([
-            'prompt' => 'required|string',
+            'prompt' => 'string',
         ]);
 
         $response = $this->openai->generateText($request->prompt);
