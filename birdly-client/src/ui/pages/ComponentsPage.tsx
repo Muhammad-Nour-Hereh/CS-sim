@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Circle } from "@/components/ui/circle"
 import AnswerList from "@/components/ui/list"
+import Snippet from "@/components/ui/snippet"
 
 const ComponentsPage = () => {
     return (
@@ -22,8 +23,10 @@ const ComponentsPage = () => {
             <Separator />
             <Circle>A</Circle>
             <AnswerList
-                items={["First important task to complete", "Second important task to complete"]}
+                items={["First", "Second", "Theird"]}
             />
+            <Snippet />
+            
         </div>
     )
 }
