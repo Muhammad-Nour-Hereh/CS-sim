@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import MyComponent from "../components/MyComponent"
+import { Progress } from "@/components/ui/progress"
 
 const ComponentsPage = () => {
     return (
@@ -12,6 +13,7 @@ const ComponentsPage = () => {
             <Button variant="ghost">Button</Button>
             <Button variant="link">Button</Button>
             <Button variant="muted">Button</Button>
+            <Progress value={30} />
         </div>
     )
 }
