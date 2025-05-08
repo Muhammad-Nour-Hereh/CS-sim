@@ -1,13 +1,10 @@
-import { Route, Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 
-const AdminRoutes = ({ element, ...rest }: any) => {
-    const isAuthenticated = !!localStorage.getItem('authToken')
+const AdminRoutes = () => {
+    const isAutherized = true
 
     return (
-        <Route
-            {...rest}
-            element={isAuthenticated ? element : <Navigate to="/login" replace />}
-        />
+        isAutherized ? <Outlet /> : <Navigate to='/login' />
     )
 }
 

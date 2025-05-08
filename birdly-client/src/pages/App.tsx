@@ -11,12 +11,12 @@ const App = () => {
   return (
     <Routes>
 
-      <GuestRoutes>
+      <Route element={<GuestRoutes />}>
         <Route path={ROUTES.LOGIN} element={<h1>login</h1>} />
         <Route path={ROUTES.REGISTER} element={<h1>registration</h1>} />
-      </GuestRoutes>
+      </Route>
 
-      <UserRoutes>
+      <Route element={<UserRoutes />}>
         <Route path={ROUTES.ROOT} element={<Navigate to={ROUTES.HOME} replace />} />
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route path={ROUTES.QUIZ} element={<h1>quiz</h1>} />
@@ -27,11 +27,11 @@ const App = () => {
         <Route path={ROUTES.SETTINGS} element={<h1>settings</h1>} />
         <Route path={ROUTES.PROFILE} element={<h1>profile</h1>} />
         <Route path={ROUTES.LOGOUT} element={<h1>logout</h1>} />
-      </UserRoutes>
+      </Route>
 
-      <DevRoutes>
+      <Route element={<DevRoutes />}>
         <Route path={ROUTES.COMPONENTS} element={<Components />} />
-      </DevRoutes>
+      </Route>
     </Routes>
   )
 }
