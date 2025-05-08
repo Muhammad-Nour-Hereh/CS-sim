@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios from "axios"
+import { baseURL } from "./axios_defaults"
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = baseURL
 
 export const request = async ({
   method,
@@ -12,15 +13,15 @@ export const request = async ({
 }) => {
   const headers = {
     "Content-Type": "application/json",
-  };
+  }
 
   if (auth) {
-    headers.Authorization = `Bearer ${localStorage.access_token}`;
+    headers.Authorization = `Bearer ${localStorage.access_token}`
   }
 
   try {
     if (optimistic) {
-      optimistic(body);
+      optimistic(body)
     }
 
     const response = await axios.request({
@@ -28,17 +29,17 @@ export const request = async ({
       headers,
       url: route,
       data: body,
-    });
+    })
 
-    return response.data;
+    return response.data
   } catch (error) {
     if (rollback) {
-      rollback();
+      rollback()
     }
 
     return {
       error: true,
       message: error.message,
-    };
+    }
   }
-};
+}
