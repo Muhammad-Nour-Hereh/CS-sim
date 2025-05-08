@@ -6,6 +6,7 @@ import { Separator } from "@/ui/components/Separator"
 import { Circle } from "@/ui/components/Circle"
 import AnswerList from "@/ui/components/AnswerList"
 import Snippet from "@/ui/components/Snippet"
+import Card from "../components/Card"
 
 const ComponentsPage = () => {
     return (
@@ -26,7 +27,7 @@ const ComponentsPage = () => {
                 items={["First", "Second", "Theird"]}
             />
             <Snippet />
-
+            <Card variant="highlighted" />
         </div>
     )
 }
