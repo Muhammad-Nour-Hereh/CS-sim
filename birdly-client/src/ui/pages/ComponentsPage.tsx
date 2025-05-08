@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import MyComponent from "../components/MyComponent"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 
 const ComponentsPage = () => {
     return (
@@ -15,7 +16,8 @@ const ComponentsPage = () => {
             <Button variant="link">Button</Button>
             <Button variant="muted">Button</Button>
             <Progress value={30} />
-            <Input placeholder="edit"/>
+            <Input placeholder="edit" />
+            <Separator />
         </div>
     )
 }
