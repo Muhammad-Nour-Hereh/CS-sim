@@ -3,6 +3,7 @@ import MyComponent from "../components/MyComponent"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
+import { Circle } from "@/components/ui/circle"
 
 const ComponentsPage = () => {
     return (
@@ -18,6 +19,7 @@ const ComponentsPage = () => {
             <Progress value={30} />
             <Input placeholder="edit" />
             <Separator />
+            <Circle>A</Circle>
         </div>
     )
 }
