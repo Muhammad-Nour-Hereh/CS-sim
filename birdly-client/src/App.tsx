@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { ROUTES } from "./lib/routes"
-import { HomePage } from "./pages/HomePage"
+import { ROUTES } from "./objects/routes"
+import { HomePage } from "./ui/pages/HomePage"
 import UserRoutes from "./protected-routes/UserRoutes"
 import DevRoutes from "./protected-routes/DevRoutes"
 import GuestRoutes from "./protected-routes/GuestRoutes"
-import ComponentsPage from "./pages/ComponentsPage"
+import ComponentsPage from "./ui/pages/ComponentsPage"
 
 const App = () => {
 
