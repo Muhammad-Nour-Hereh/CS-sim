@@ -1,31 +1,49 @@
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import { baseURL } from "./axios_defaults"
 
 axios.defaults.baseURL = baseURL
 
-export type RequestMethods = {
-  POST: "POST",
-  GET: "GET",
-  PUT: "PUT",
-  PATACH: "PATACH",
-  DELETE: "DELETE",
-};
+export enum RequestMethods {
+  POST = "POST",
+  GET = "GET",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+}
 
-export const request = async (
-  method: string,
-  route: string,
-  body?: any,
+interface RequestParams {
+  method: keyof typeof RequestMethods;
+  route: string;
+  body?: any;
+  auth?: boolean;
+  optimistic?: (body: any) => void;
+  rollback?: () => void;
+}
+
+interface ResponseData {
+  error?: boolean;
+  message?: string;
+}
+
+interface ResponseData {
+  error?: boolean;
+  message?: string;
+}
+
+export const request = async ({
+  method,
+  route,
+  body,
   auth = false,
-  optimistic?: (body: any) => void,
-  rollback?: () => void
-) => {
-  const headers = {
+  optimistic,
+  rollback,
+}: RequestParams): Promise<any | ResponseData> => {
+  const headers: { [key: string]: string } = {
     "Content-Type": "application/json",
-    "Authorization": ""
   }
 
   if (auth) {
-    headers.Authorization = `Bearer ${localStorage.access_token}`
+    headers.Authorization = `Bearer ${localStorage.getItem("access_token")}`;  // Assuming access_token is stored in localStorage
   }
 
   try {
@@ -33,7 +51,7 @@ export const request = async (
       optimistic(body)
     }
 
-    const response = await axios.request({
+    const response: AxiosResponse = await axios.request({
       method,
       headers,
       url: route,
@@ -48,7 +66,7 @@ export const request = async (
 
     return {
       error: true,
-      message: error.message,
+      message: error.message || "An error occurred",
     }
   }
 }
