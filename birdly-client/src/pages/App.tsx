@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { ROUTES } from "../lib/routes"
 import { HomePage } from "./HomePage"
+import Components from "./Components"
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
         <Route path={ROUTES.SETTINGS} element={<h1>settings</h1>} />
         <Route path={ROUTES.PROFILE} element={<h1>profile</h1>} />
         <Route path={ROUTES.LOGOUT} element={<h1>logout</h1>} />
+        <Route path={ROUTES.COMPONENTS} element={<Components />} />
       </Routes>
     </>
   )

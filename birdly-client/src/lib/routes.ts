@@ -11,4 +11,7 @@ export const ROUTES = {
     SETTINGS: '/settings',
     PROFILE: '/profile',
     LOGOUT: '/logout',
+
+    // dev only
+    COMPONENTS: '/components'
 }
