@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { ROUTES } from "../lib/routes"
 import { HomePage } from "./HomePage"
-import Components from "./Components"
 import UserRoutes from "../protected-routes/UserRoutes"
 import DevRoutes from "../protected-routes/DevRoutes"
 import GuestRoutes from "../protected-routes/GuestRoutes"
+import ComponentsPage from "./ComponentsPage"
 
 const App = () => {
 
@@ -30,7 +30,7 @@ const App = () => {
       </Route>
 
       <Route element={<DevRoutes />}>
-        <Route path={ROUTES.COMPONENTS} element={<Components />} />
+        <Route path={ROUTES.COMPONENTS} element={<ComponentsPage />} />
       </Route>
     </Routes>
   )

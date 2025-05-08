@@ -1,6 +1,6 @@
 import MyComponent from "../components/MyComponent"
 
-const Components = () => {
+const ComponentsPage = () => {
     return (
         <div>
             Components:
@@ -9,4 +9,4 @@ const Components = () => {
     )
 }
 
-export default Components
+export default ComponentsPage
