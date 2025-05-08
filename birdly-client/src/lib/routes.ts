@@ -14,4 +14,4 @@ export const ROUTES = {
 
     // dev only
     COMPONENTS: '/components'
-}
+} as const

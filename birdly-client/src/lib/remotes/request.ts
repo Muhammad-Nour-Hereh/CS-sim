@@ -3,16 +3,25 @@ import { baseURL } from "./axios_defaults"
 
 axios.defaults.baseURL = baseURL
 
-export const request = async ({
-  method,
-  route,
-  body,
+export type RequestMethods = {
+  POST: "POST",
+  GET: "GET",
+  PUT: "PUT",
+  PATACH: "PATACH",
+  DELETE: "DELETE",
+};
+
+export const request = async (
+  method: string,
+  route: string,
+  body?: any,
   auth = false,
-  optimistic,
-  rollback,
-}) => {
+  optimistic?: (body: any) => void,
+  rollback?: () => void
+) => {
   const headers = {
     "Content-Type": "application/json",
+    "Authorization": ""
   }
 
   if (auth) {
@@ -25,14 +34,14 @@ export const request = async ({
     }
 
     const response = await axios.request({
-      method, // => method: method,
+      method,
       headers,
       url: route,
       data: body,
     })
 
     return response.data
-  } catch (error) {
+  } catch (error: any) {
     if (rollback) {
       rollback()
     }
