@@ -4,6 +4,7 @@ import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Circle } from "@/components/ui/circle"
+import AnswerList from "@/components/ui/list"
 
 const ComponentsPage = () => {
     return (
@@ -20,6 +21,9 @@ const ComponentsPage = () => {
             <Input placeholder="edit" />
             <Separator />
             <Circle>A</Circle>
+            <AnswerList
+                items={["First important task to complete", "Second important task to complete"]}
+            />
         </div>
     )
 }
