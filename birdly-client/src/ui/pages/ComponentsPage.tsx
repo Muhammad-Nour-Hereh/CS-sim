@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/ui/components/Button"
 import MyComponent from "../components/MyComponent"
-import { Progress } from "@/components/ui/progress"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
-import { Circle } from "@/components/ui/circle"
-import AnswerList from "@/components/ui/list"
-import Snippet from "@/components/ui/snippet"
+import { Progress } from "@/ui/components/Progress"
+import { Input } from "@/ui/components/Input"
+import { Separator } from "@/ui/components/Separator"
+import { Circle } from "@/ui/components/Circle"
+import AnswerList from "@/ui/components/AnswerList"
+import Snippet from "@/ui/components/Snippet"
 
 const ComponentsPage = () => {
     return (
@@ -26,7 +26,7 @@ const ComponentsPage = () => {
                 items={["First", "Second", "Theird"]}
             />
             <Snippet />
-            
+
         </div>
     )
 }
