@@ -1,6 +1,6 @@
 :root {
     --background: #141F23;
-    --foreground: oklch(0.145 0 0);
+    --foreground: white;
     --primary: #79B933;
     --primary-foreground: #37464F;
     --primary-shade: #6aa32d;

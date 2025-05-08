@@ -3,7 +3,7 @@ import MyComponent from "../components/MyComponent"
 
 const ComponentsPage = () => {
     return (
-        <div className="flex flex-col gap-2 bg-amber-200 p-4 center items-center">
+        <div className="flex flex-col gap-2 bg p-4 center items-center">
             <MyComponent />
             <Button>Button</Button>
             <Button variant="outline">Button</Button>
