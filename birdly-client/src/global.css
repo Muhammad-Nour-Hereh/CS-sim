@@ -1,0 +1,21 @@
+:root {
+    --background: #141F23;
+    --foreground: white;
+    --primary: #79B933;
+    --primary-foreground: #37464F;
+    --primary-shade: #6aa32d;
+    --destructive: #EE5555;
+    --destructive-shade: #D84848;
+    --selected: #202F36;
+    --selected-border: #3F85A7;
+    --selected-foreground: #3F85A7;
+    --border: #37464F;
+
+    --font-sans: 'Nunito', sans-serif;
+}
+
+
+body {
+    font-weight: 800;
+    font-family: var(--font-sans);
+}
