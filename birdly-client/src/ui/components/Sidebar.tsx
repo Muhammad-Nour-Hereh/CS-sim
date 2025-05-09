@@ -34,7 +34,7 @@ const Sidebar = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="h-screen w-56 bg-[#0f1419] flex flex-col">
+    <div className="h-screen w-56 bg-[#0f1419] flex flex-col fixed top-0 left-0 z-50">
 
       {/* Logo */}
       <div className="px-4 py-4 text-2xl font-bold text-white">Birdly</div>

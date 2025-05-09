@@ -13,7 +13,7 @@ const ComponentsPage = () => {
     return (
         <div className="flex ">
             <Sidebar />
-            <div className="flex flex-col gap-2 bg p-4 center items-center flex-1">
+            <div className="flex flex-col gap-2 bg p-4 center items-center flex-1 lg:ml-56">
                 <MyComponent />
 
                 <Button>Button</Button>
