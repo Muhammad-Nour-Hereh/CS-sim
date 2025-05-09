@@ -5,6 +5,7 @@ import UserRoutes from "./protected-routes/UserRoutes"
 import DevRoutes from "./protected-routes/DevRoutes"
 import GuestRoutes from "./protected-routes/GuestRoutes"
 import ComponentsPage from "./ui/pages/ComponentsPage"
+import QuizPage from "./ui/pages/QuizPage"
 
 const App = () => {
 
@@ -19,7 +20,7 @@ const App = () => {
       <Route element={<UserRoutes />}>
         <Route path={ROUTES.ROOT} element={<Navigate to={ROUTES.HOME} replace />} />
         <Route path={ROUTES.HOME} element={<HomePage />} />
-        <Route path={ROUTES.QUIZ} element={<h1>quiz</h1>} />
+        <Route path={ROUTES.QUIZ} element={<QuizPage />} />
         <Route path={ROUTES.PRACTICE} element={<h1>practice</h1>} />
         <Route path={ROUTES.GUIDEBOOKS} element={<h1>guidebooks</h1>} />
         <Route path={ROUTES.CHEATS} element={<h1>cheats</h1>} />
