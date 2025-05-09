@@ -11,7 +11,9 @@ export const ROUTES = {
     SETTINGS: '/settings',
     PROFILE: '/profile',
     LOGOUT: '/logout',
-
+    HELP: '/help',
+    ABOUT: '/about',
+    
     // dev only
     COMPONENTS: '/components'
 } as const

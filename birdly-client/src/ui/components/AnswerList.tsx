@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 
@@ -27,9 +25,9 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
             key={index}
             className={cn(
               "flex items-stretch border-2 rounded-lg p-4",
-              "transition-all duration-200 ease-in-out",
+              // "transition-all duration-200 ease-in-out",
               "cursor-pointer",
-              "hover:border hover:bg",
+              // "hover:border hover:bg",
               isSelected ? "border-slate-500 bg shadow-sm" : "border bg",
             )}
             onClick={() => handleItemClick(index, item)}
@@ -47,7 +45,7 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
             <div
               className={cn(
                 "flex items-center justify-center w-8 h-8 rounded-sm border-2",
-                "transition-colors duration-200",
+                // "transition-colors duration-200",
                 isSelected ? "border bg" : "border bg",
               )}
             >
