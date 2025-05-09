@@ -6,7 +6,6 @@ import {
   Headphones,
   BookOpen,
   FileText,
-  Medal,
   Code,
   CircleEllipsis,
   ChevronDown,
