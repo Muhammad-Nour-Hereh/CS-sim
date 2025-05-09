@@ -16,13 +16,15 @@ const ComponentsPage = () => {
             <div className="flex flex-col gap-2 bg p-4 center items-center flex-1 lg:ml-56">
                 <MyComponent />
 
-                <Button>Button</Button>
+                <Button onClick={() => console.log('clicked')}>Button</Button>
                 <Button variant="outline">Button</Button>
                 <Button variant="destructive">Button</Button>
                 <Button variant="secondary">Button</Button>
                 <Button variant="ghost">Button</Button>
                 <Button variant="link">Button</Button>
                 <Button variant="muted">Button</Button>
+
+                
                 <Progress value={30} />
                 <Input placeholder="edit" />
                 <Separator />
