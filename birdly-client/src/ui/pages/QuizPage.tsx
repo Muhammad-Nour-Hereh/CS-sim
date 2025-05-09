@@ -12,7 +12,7 @@ const QuizPage = () => {
 
             {/* Middle: Question and Answers */}
             <main className="flex-1 flex flex-col justify-center items-center space-y-6">
-                <Quiz />
+                <Quiz quiz={{type:"match"}}/>
             </main>
 
             {/* Bottom: Buttons */}
