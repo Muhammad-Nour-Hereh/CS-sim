@@ -1,5 +1,6 @@
 import { Button } from "../components/Button"
 import { Progress } from "../components/Progress"
+import Quiz from "../components/Quiz"
 
 const QuizPage = () => {
     return (
@@ -11,7 +12,7 @@ const QuizPage = () => {
 
             {/* Middle: Question and Answers */}
             <main className="flex-1 flex flex-col justify-center items-center space-y-6">
-                quiz content
+                <Quiz />
             </main>
 
             {/* Bottom: Buttons */}
