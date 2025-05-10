@@ -1,6 +1,6 @@
 import usePlayground from '@/hooks/usePlayground'
 import { CodeEditor } from '../components/CodeEditor'
-import { ArrowLeft, Menu, Play } from 'lucide-react'
+import { ArrowLeft, House, Menu, Play } from 'lucide-react'
 import IconButton from '../components/IconButton'
 
 const Playground = () => {
@@ -17,6 +17,7 @@ const Playground = () => {
     runHandle,
     menuHandle,
     minmizeMenuHandle,
+    navigateHomeHandle,
     isSideMenuOpen,
   } = usePlayground()
 
@@ -32,6 +33,9 @@ const Playground = () => {
             </IconButton>
             <IconButton className="text-gray-500" onClick={runHandle}>
               <Play />
+            </IconButton>
+            <IconButton className="text-gray-500" onClick={navigateHomeHandle}>
+              <House />
             </IconButton>
           </aside>
           <div className="w-6" />

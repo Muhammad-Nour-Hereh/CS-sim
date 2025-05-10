@@ -1,6 +1,9 @@
+import { ROUTES } from '@/objects/routes'
 import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const usePlayground = () => {
+  const navigate = useNavigate()
   // temp states
   const [code, setCode] = useState(
     'print("hello, world!")\n\n\n\n\n\n\n\n\n\n\n\n\n',
@@ -80,6 +83,10 @@ const usePlayground = () => {
     setIsSideMenuOpen(false)
   }
 
+  const navigateHomeHandle = () => {
+    navigate(ROUTES.HOME)
+  }
+
   return {
     code,
     setCode,
@@ -92,10 +99,11 @@ const usePlayground = () => {
     split2,
     splitV,
     onMouseDown,
+    isSideMenuOpen,
     runHandle,
     menuHandle,
     minmizeMenuHandle,
-    isSideMenuOpen,
+    navigateHomeHandle,
   }
 }
 
