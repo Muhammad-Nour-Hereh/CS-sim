@@ -29,7 +29,7 @@ const OrderQuiz = ({ title, content }: OrderQuizProps) => {
 
   return (
     <>
-      <p className="text-2xl font-extrabold mb-4">{title}</p>
+      <p className="mb-4 self-start text-3xl font-extrabold">{title}</p>
 
       <div className="flex h-16 w-[600px] flex-wrap items-center gap-2 border-y-2 p-2">
         <AnimatePresence>
@@ -50,7 +50,7 @@ const OrderQuiz = ({ title, content }: OrderQuizProps) => {
         </AnimatePresence>
       </div>
 
-      <div className="flex flex-wrap gap-2 mt-4 w-[600px]">
+      <div className="mt-4 flex w-[600px] flex-wrap gap-2">
         <AnimatePresence>
           {bottomButtons.map((label) => (
             <motion.div
@@ -61,7 +61,9 @@ const OrderQuiz = ({ title, content }: OrderQuizProps) => {
               exit="exit"
               variants={buttonVariants}
               transition={{ duration: 0.2 }}>
-              <Button className="w-fit" onClick={() => moveButton(label, false)}>
+              <Button
+                className="w-fit"
+                onClick={() => moveButton(label, false)}>
                 {label}
               </Button>
             </motion.div>
