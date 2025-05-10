@@ -24,13 +24,11 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
           <li
             key={index}
             className={cn(
-              'flex h-14 w-150 items-center rounded-lg border-1 border-b-4 pl-4',
-              'transition-all duration-100 ease-in-out',
+              'flex h-14 w-150 items-center rounded-lg border-2 border-b-4 pl-4',
+              'transition-all duration-100',
               'cursor-pointer',
-              // "hover:border hover:bg",
-              isSelected
-                ? 'bg border-1 border-slate-500 shadow-sm'
-                : 'bg border-1 border-b-4',
+              'hover:brightness-120',
+              isSelected ? 'border-b-2 border-slate-500' : 'border-b-4',
             )}
             onClick={() => handleItemClick(index, item)}
             role="button"
@@ -46,15 +44,19 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
             <div
               className={cn(
                 'flex size-7.5 items-center justify-center rounded-sm border-2',
-                // "transition-colors duration-200",
-                isSelected ? 'bg border' : 'bg border',
+                'transition duration-200',
+                isSelected ? 'border-slate-500' : '',
               )}>
-              <span className={cn('text-md font-bold', isSelected ? '' : '')}>
+              <span
+                className={cn(
+                  'text-md font-bold',
+                  isSelected ? '' : 'text-border',
+                )}>
                 {index + 1}
               </span>
             </div>
 
-            <div className={cn('ml-4 flex-1 self-center')}>{item}</div>
+            <div className={cn('flex-1 text-center')}>{item}</div>
           </li>
         )
       })}
