@@ -23,10 +23,10 @@ const Playground = () => {
       ref={containerRef}
       className="flex h-screen w-screen flex-row gap-6 bg-[#1a2b30] py-6">
       <aside className="flex h-fit w-fit flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
-        <IconButton  className="text-gray-500" >
+        <IconButton className="text-gray-500" onClick={menuHandle}>
           <Menu />
         </IconButton>
-        <IconButton className="text-gray-500">
+        <IconButton className="text-gray-500" onClick={runHandle}>
           <Play />
         </IconButton>
       </aside>
