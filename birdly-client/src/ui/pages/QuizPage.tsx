@@ -1,12 +1,23 @@
+import { Settings, X } from "lucide-react"
 import { Button } from "../components/Button"
 import { Progress } from "../components/Progress"
 import Quiz from "../components/Quiz"
+import IconButton from "../components/IconButton"
 
 const QuizPage = () => {
     return (
         <div className="h-screen w-screen flex flex-col bg-[#0d1117] text-white">
             {/* Top */}
-            <header className="h-12 flex items-center justify-center pt-10">
+            <header className="h-12 flex items-center justify-center pt-10 gap-6">
+                <IconButton>
+                    <X />
+                </IconButton>
+
+                <IconButton>
+                    <Settings />
+                </IconButton>
+
+
                 <Progress value={30} />
             </header>
 
