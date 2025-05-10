@@ -24,11 +24,13 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
           <li
             key={index}
             className={cn(
-              'flex items-stretch rounded-lg border-2 p-4',
-              // "transition-all duration-200 ease-in-out",
+              'flex h-14 w-150 items-center rounded-lg border-1 border-b-4 pl-4',
+              'transition-all duration-100 ease-in-out',
               'cursor-pointer',
               // "hover:border hover:bg",
-              isSelected ? 'bg border-slate-500 shadow-sm' : 'bg border',
+              isSelected
+                ? 'bg border-1 border-slate-500 shadow-sm'
+                : 'bg border-1 border-b-4',
             )}
             onClick={() => handleItemClick(index, item)}
             role="button"
@@ -43,7 +45,7 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
             {/* ring for number */}
             <div
               className={cn(
-                'flex h-8 w-8 items-center justify-center rounded-sm border-2',
+                'flex size-7.5 items-center justify-center rounded-sm border-2',
                 // "transition-colors duration-200",
                 isSelected ? 'bg border' : 'bg border',
               )}>

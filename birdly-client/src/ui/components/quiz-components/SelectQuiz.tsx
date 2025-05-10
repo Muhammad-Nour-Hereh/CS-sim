@@ -1,3 +1,4 @@
+import AnswerList from '../AnswerList'
 import { Input } from '../Input'
 
 interface SelectQuizProps {
@@ -6,13 +7,13 @@ interface SelectQuizProps {
 }
 
 const SelectQuiz = ({ title, content }: SelectQuizProps) => {
-  console.log(content)
+  const { answers } = content
 
   return (
     <>
       <p className="text-2xl font-extrabold">{title}</p>
 
-      <Input className="w-150" placeholder="write your solution" />
+      <AnswerList items={answers} />
     </>
   )
 }
