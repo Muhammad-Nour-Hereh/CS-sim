@@ -48,6 +48,19 @@ const usePlayground = () => {
     document.removeEventListener('mouseup', onMouseUp)
   }
 
+  // handles
+  const runHandle = () => {
+    console.log('run clicked')
+  }
+
+  const menuHandle = () => {
+    console.log('menu clicked')
+  }
+
+  const minmizeMenuHandle = () => {
+    console.log('minmize menu clicked')
+  }
+
   return {
     code,
     setCode,
@@ -59,6 +72,9 @@ const usePlayground = () => {
     split1,
     split2,
     onMouseDown,
+    runHandle,
+    menuHandle,
+    minmizeMenuHandle,
   }
 }
 
