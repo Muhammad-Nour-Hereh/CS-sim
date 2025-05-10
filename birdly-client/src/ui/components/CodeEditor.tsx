@@ -40,7 +40,7 @@ export function CodeEditor({ code, setCode }: CodeEditorProps) {
   return (
     <CodeMirror
       value={code}
-      height="100%"
+      minHeight="100%"
       width="100%"
       extensions={[python(), myTheme]}
       onChange={(value) => setCode(value)}
