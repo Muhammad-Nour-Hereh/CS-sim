@@ -8,18 +8,20 @@ const QuizPage = () => {
   return (
     <div className="flex h-screen w-screen flex-col bg-[#0d1117]">
       {/* Top */}
-      <header className="flex h-12 items-center justify-center gap-6 pt-10">
-        <IconButton>
-          <X />
-        </IconButton>
-        <IconButton>
-          <Settings />
-        </IconButton>
-        <Progress value={30} />
+      <header className="flex h-18 items-end justify-center gap-6">
+        <div className="flex items-center justify-center gap-6">
+          <IconButton>
+            <X />
+          </IconButton>
+          <IconButton>
+            <Settings />
+          </IconButton>
+          <Progress value={30} />
+        </div>
       </header>
 
       {/* Middle */}
-      <main className="flex flex-1 flex-col items-center justify-center space-y-6 bg-blue-400">
+      <main className="flex flex-1 flex-col items-center justify-center space-y-6 bg-blue-900">
         <Quiz title="question 1" content="abc" type="select" />
       </main>
 

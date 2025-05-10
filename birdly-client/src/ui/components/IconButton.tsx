@@ -13,7 +13,7 @@ const IconButton = ({ children }: IconButtonProps) => {
 
   return (
     <button
-      className="text-border flex size-8 items-center justify-center rounded-md filter transition hover:brightness-140 active:brightness-90"
+      className="text-border flex size-8 items-center justify-center rounded-full filter transition hover:brightness-140 active:brightness-90"
       aria-label={iconName}>
       {children}
     </button>
