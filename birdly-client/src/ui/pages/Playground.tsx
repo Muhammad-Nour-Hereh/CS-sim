@@ -18,9 +18,14 @@ const Playground = () => {
       ref={containerRef}
       className="flex h-screen w-screen flex-col bg-[#1a2b30] p-6">
       <section
-        className="flex min-h-25 w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
+        className="relative flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
         style={{ height: `${split1}%` }}>
-        <CodeEditor code={code} setCode={setCode} />
+        <div className="flex-1 overflow-auto">
+          <CodeEditor code={code} setCode={setCode} />
+        </div>
+        <div className="sticky bottom-0 left-0 flex h-6 w-full items-center bg-[#1f2f34] px-8">
+          footer
+        </div>
       </section>
 
       <div
