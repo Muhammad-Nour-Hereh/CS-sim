@@ -22,7 +22,7 @@ const QuizPage = () => {
 
       {/* Middle */}
       <main className="flex flex-1 flex-col items-center justify-around space-y-6">
-        <Quiz title="question 1" content="abc" type="select" />
+        <Quiz title="question ?" content="abc" type="select" />
       </main>
 
       {/* Bottom */}
