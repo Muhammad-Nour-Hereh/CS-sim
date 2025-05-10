@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Button } from '../Button'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface OrderQuizProps {
   title: string
@@ -7,43 +8,65 @@ interface OrderQuizProps {
 }
 
 const OrderQuiz = ({ title, content }: OrderQuizProps) => {
-  console.log(content)
-
   const [topButtons, setTopButtons] = useState(['a', 'b', 'c'])
   const [bottomButtons, setBottomButtons] = useState(['d', 'e', 'f'])
 
   const moveButton = (label: string, fromTop: boolean) => {
     if (fromTop) {
-      setTopButtons(topButtons.filter((b) => b !== label))
-      setBottomButtons([...bottomButtons, label])
+      setTopButtons((prev) => prev.filter((l) => l !== label))
+      setBottomButtons((prev) => [...prev, label])
     } else {
-      setBottomButtons(bottomButtons.filter((b) => b !== label))
-      setTopButtons([...topButtons, label])
+      setBottomButtons((prev) => prev.filter((l) => l !== label))
+      setTopButtons((prev) => [...prev, label])
     }
+  }
+
+  const buttonVariants = {
+    initial: { opacity: 0, y: -10 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 10 },
   }
 
   return (
     <>
-      <p className="text-2xl font-extrabold">{title}</p>
-      <div className="flex h-16 w-150 items-center gap-2 border-y-2 p-2">
-        {topButtons.map((label) => (
-          <Button
-            key={label}
-            className="w-fit"
-            onClick={() => moveButton(label, true)}>
-            {label}
-          </Button>
-        ))}
+      <p className="text-2xl font-extrabold mb-4">{title}</p>
+
+      <div className="flex h-16 w-[600px] flex-wrap items-center gap-2 border-y-2 p-2">
+        <AnimatePresence>
+          {topButtons.map((label) => (
+            <motion.div
+              key={label}
+              layout
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={buttonVariants}
+              transition={{ duration: 0.2 }}>
+              <Button className="w-fit" onClick={() => moveButton(label, true)}>
+                {label}
+              </Button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
-      <div className="flex gap-2">
-        {bottomButtons.map((label) => (
-          <Button
-            key={label}
-            className="w-fit"
-            onClick={() => moveButton(label, false)}>
-            {label}
-          </Button>
-        ))}
+
+      <div className="flex flex-wrap gap-2 mt-4 w-[600px]">
+        <AnimatePresence>
+          {bottomButtons.map((label) => (
+            <motion.div
+              key={label}
+              layout
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={buttonVariants}
+              transition={{ duration: 0.2 }}>
+              <Button className="w-fit" onClick={() => moveButton(label, false)}>
+                {label}
+              </Button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </>
   )
