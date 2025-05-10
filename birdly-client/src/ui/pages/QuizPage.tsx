@@ -4,18 +4,18 @@ import Quiz from "../components/Quiz"
 
 const QuizPage = () => {
     return (
-        <div className="h-screen w-screen flex flex-col bg-[#0d1117] text-white p-4 ">
-            {/* Top: Progress Bar */}
-            <header className="h-12 flex items-center justify-center">
+        <div className="h-screen w-screen flex flex-col bg-[#0d1117] text-white">
+            {/* Top */}
+            <header className="h-12 flex items-center justify-center pt-10">
                 <Progress value={30} />
             </header>
 
-            {/* Middle: Question and Answers */}
+            {/* Middle */}
             <main className="flex-1 flex flex-col justify-center items-center space-y-6">
                 <Quiz title="question 1" content="abc" type="select" />
             </main>
 
-            {/* Bottom: Buttons */}
+            {/* Bottom */}
             <footer className="h-33 flex justify-evenly items-center border-t-2">
                 <Button variant="ghost">Skip</Button>
                 <Button >Check</Button>
