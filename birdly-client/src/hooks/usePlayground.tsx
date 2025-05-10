@@ -1,23 +1,24 @@
 import { useRef, useState } from 'react'
 
 const usePlayground = () => {
+  // temp states
   const [code, setCode] = useState(
     'print("hello, world!")\n\n\n\n\n\n\n\n\n\n\n\n\n',
   )
-
   const [output, setOutput] = useState('hello, world!')
   const [feedback, setFeedback] = useState('your code is awesome')
 
+  // resizing states
   const containerRef: any = useRef(null)
 
-  // Split positions in percent
-  const [split1, setSplit1] = useState(50) // top splitter Y%
-  const [split2, setSplit2] = useState(75) // bottom splitter Y%
+  const [split1, setSplit1] = useState(50)
+  const [split2, setSplit2] = useState(75)
 
   const isDragging: any = useRef(false)
   const draggingTarget: any = useRef(null)
 
-  const onMouseDown = (target: any) => (e: any) => {
+  // resizing logic
+  const onMouseDown = (target: any) => () => {
     isDragging.current = true
     draggingTarget.current = target
     document.addEventListener('mousemove', onMouseMove)
