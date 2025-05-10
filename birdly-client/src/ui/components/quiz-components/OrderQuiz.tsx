@@ -4,12 +4,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 interface OrderQuizProps {
   title: string
-  content: any
+  content: {
+    answers: string[]
+  }
 }
 
 const OrderQuiz = ({ title, content }: OrderQuizProps) => {
-  const [topButtons, setTopButtons] = useState(['a', 'b', 'c'])
-  const [bottomButtons, setBottomButtons] = useState(['d', 'e', 'f'])
+  const { answers } = content
+
+  const [topButtons, setTopButtons] = useState<string[]>([])
+  const [bottomButtons, setBottomButtons] = useState(answers)
 
   const moveButton = (label: string, fromTop: boolean) => {
     if (fromTop) {
