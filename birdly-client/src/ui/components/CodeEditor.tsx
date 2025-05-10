@@ -1,13 +1,13 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { python } from '@codemirror/lang-python'
 import { EditorView } from 'codemirror'
+import { dracula } from '@uiw/codemirror-theme-dracula'
 
 export const myTheme = EditorView.theme({
   '&': {
     backgroundColor: 'transparent !important',
-    color: '#e0f2f1',
-    borderRadius: '12px',
-    padding: '8px',
+    // borderRadius: '12px',
+    paddingTop: '8px',
   },
   '.cm-scroller': {
     fontFamily: 'nunito, monospace',
@@ -17,15 +17,10 @@ export const myTheme = EditorView.theme({
   },
   '.cm-gutters': {
     backgroundColor: 'transparent !important',
-    color: '#8ca0a0',
-    // border: 'green 4px solid',
+    borderRight: 'green 4px solid !important',
   },
-  '.cm-lineNumbers .cm-gutterElement': {
-    paddingLeft: '4px',
-    paddingRight: '4px',
-  },
-  '.cm-activeLine': {
-    // backgroundColor: '#37415144', // subtle active line
+  '.cm-editor:focus': {
+    outline: 'none !important',
   },
 })
 
@@ -43,7 +38,7 @@ export function CodeEditor({ code, setCode }: CodeEditorProps) {
       width="100%"
       extensions={[python(), myTheme]}
       onChange={(value) => setCode(value)}
-      theme={myTheme}
+      theme={dracula}
       basicSetup={{
         lineNumbers: true,
         highlightActiveLine: true,
