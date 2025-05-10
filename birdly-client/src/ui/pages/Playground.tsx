@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { CodeEditor } from '../components/CodeEditor'
 
 const Playground = () => {
-  const [code, SetCode] = useState(
-    'print("hello, world!")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',
-  )
+  const code = 'print("hello, world!")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
   const [output, SetOutput] = useState('hello, world!')
   const [feedback, SetFeedback] = useState('your code is awesome')
 
