@@ -9,15 +9,8 @@ const QuizPage = () => {
         <div className="h-screen w-screen flex flex-col bg-[#0d1117] text-white">
             {/* Top */}
             <header className="h-12 flex items-center justify-center pt-10 gap-6">
-                <IconButton>
-                    <X />
-                </IconButton>
-
-                <IconButton>
-                    <Settings />
-                </IconButton>
-
-
+                <IconButton><X /></IconButton>
+                <IconButton><Settings /></IconButton>
                 <Progress value={30} />
             </header>
 
