@@ -15,7 +15,7 @@ const QuizPage = () => {
             </header>
 
             {/* Middle */}
-            <main className="flex-1 flex flex-col justify-center items-center space-y-6">
+            <main className="flex-1 flex flex-col justify-center items-center space-y-6 bg-blue-400">
                 <Quiz title="question 1" content="abc" type="select" />
             </main>
 
