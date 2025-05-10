@@ -6,6 +6,7 @@ import DevRoutes from './protected-routes/DevRoutes'
 import GuestRoutes from './protected-routes/GuestRoutes'
 import ComponentsPage from './ui/pages/ComponentsPage'
 import QuizPage from './ui/pages/QuizPage'
+import Playground from './ui/pages/Playground'
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
         <Route path={ROUTES.PRACTICE} element={<h1>practice</h1>} />
         <Route path={ROUTES.GUIDEBOOKS} element={<h1>guidebooks</h1>} />
         <Route path={ROUTES.CHEATS} element={<h1>cheats</h1>} />
-        <Route path={ROUTES.PLAYGROUND} element={<h1>playground</h1>} />
+        <Route path={ROUTES.PLAYGROUND} element={<Playground />} />
         <Route path={ROUTES.SETTINGS} element={<h1>settings</h1>} />
         <Route path={ROUTES.PROFILE} element={<h1>profile</h1>} />
         <Route path={ROUTES.LOGOUT} element={<h1>logout</h1>} />
