@@ -53,7 +53,7 @@ const Playground = () => {
       ref={containerRef}
       className="flex h-screen w-screen flex-col bg-[#1a2b30] p-6">
       <section
-        className="flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
+        className="flex min-h-25 w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
         style={{ height: `${split1}%` }}>
         <CodeEditor code={code} setCode={setCode} />
       </section>
@@ -65,7 +65,7 @@ const Playground = () => {
 
       <section
         style={{ height: `${split2 - split1}%` }}
-        className="flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42] p-4">
+        className="flex min-h-25 w-full flex-col overflow-auto rounded-2xl bg-[#273B42] p-4">
         <span className="font-semibold">output:</span>
         <p>{output}</p>
       </section>
@@ -76,7 +76,7 @@ const Playground = () => {
       />
       <section
         style={{ height: `${100 - split2}%` }}
-        className="flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42] p-4">
+        className="flex min-h-25 w-full flex-col overflow-auto rounded-2xl bg-[#273B42] p-4">
         <span className="font-semibold">birdly feedback:</span>
         <p>{feedback}</p>
       </section>
