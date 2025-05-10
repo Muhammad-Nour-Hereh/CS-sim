@@ -1,24 +1,25 @@
-import { Navigate, Route, Routes } from "react-router-dom"
-import { ROUTES } from "./objects/routes"
-import { HomePage } from "./ui/pages/HomePage"
-import UserRoutes from "./protected-routes/UserRoutes"
-import DevRoutes from "./protected-routes/DevRoutes"
-import GuestRoutes from "./protected-routes/GuestRoutes"
-import ComponentsPage from "./ui/pages/ComponentsPage"
-import QuizPage from "./ui/pages/QuizPage"
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { ROUTES } from './objects/routes'
+import { HomePage } from './ui/pages/HomePage'
+import UserRoutes from './protected-routes/UserRoutes'
+import DevRoutes from './protected-routes/DevRoutes'
+import GuestRoutes from './protected-routes/GuestRoutes'
+import ComponentsPage from './ui/pages/ComponentsPage'
+import QuizPage from './ui/pages/QuizPage'
 
 const App = () => {
-
   return (
     <Routes>
-
       <Route element={<GuestRoutes />}>
         <Route path={ROUTES.LOGIN} element={<h1>login</h1>} />
         <Route path={ROUTES.REGISTER} element={<h1>registration</h1>} />
       </Route>
 
       <Route element={<UserRoutes />}>
-        <Route path={ROUTES.ROOT} element={<Navigate to={ROUTES.HOME} replace />} />
+        <Route
+          path={ROUTES.ROOT}
+          element={<Navigate to={ROUTES.HOME} replace />}
+        />
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route path={ROUTES.QUIZ} element={<QuizPage />} />
         <Route path={ROUTES.PRACTICE} element={<h1>practice</h1>} />
