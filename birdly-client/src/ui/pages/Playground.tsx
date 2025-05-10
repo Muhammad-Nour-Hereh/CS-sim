@@ -54,35 +54,38 @@ const Playground = () => {
   const bottomHeight = 100 - topHeight - middleHeight
 
   return (
-    <div
+    <main
       ref={containerRef}
-      className="flex h-screen w-screen flex-col gap-1 bg-[#1a2b30] p-6">
-      <div
-        style={{ height: `${topHeight}%` }}
-        className="overflow-auto rounded-2xl bg-[#273B42]">
+      className="flex h-screen w-screen flex-col bg-[#1a2b30] p-6">
+      <section
+        className="flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
+        style={{ height: `${topHeight}%` }}>
         <CodeEditor code={code} setCode={setCode} />
-      </div>
+      </section>
+
       <div
         onMouseDown={startDragging('top')}
-        className="h-1 cursor-row-resize bg-[#444]"
+        className="h-6 cursor-row-resize"
       />
-      <div
+
+      <section
         style={{ height: `${middleHeight}%` }}
-        className="overflow-auto rounded-2xl bg-[#273B42] p-4">
+        className="flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42] p-4">
         <span className="font-semibold">output:</span>
         <p>{output}</p>
-      </div>
+      </section>
+
       <div
         onMouseDown={startDragging('middle')}
-        className="h-1 cursor-row-resize bg-[#444]"
+        className="h-6 cursor-row-resize"
       />
-      <div
+      <section
         style={{ height: `${bottomHeight}%` }}
-        className="overflow-auto rounded-2xl bg-[#273B42] p-4">
+        className="flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42] p-4">
         <span className="font-semibold">birdly feedback:</span>
         <p>{feedback}</p>
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
 
