@@ -2,6 +2,7 @@ import usePlayground from '@/hooks/usePlayground'
 import { CodeEditor } from '../components/CodeEditor'
 import { ArrowLeft, House, Menu, Play } from 'lucide-react'
 import IconButton from '../components/IconButton'
+import ListItem from '../components/ListItem'
 
 const Playground = () => {
   const {
@@ -50,10 +51,11 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
               <ArrowLeft />
             </IconButton>
-            <span>a</span>
-            <span>a</span>
-            <span>a</span>
-            <span>a</span>
+            <ul>
+              <ListItem>a</ListItem>
+              <ListItem>b</ListItem>
+              <ListItem>c</ListItem>
+            </ul>
           </aside>
           <div
             onMouseDown={onMouseDown('splitV')}
