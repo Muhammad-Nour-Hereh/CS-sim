@@ -15,15 +15,13 @@ const Playground = () => {
     onMouseDown,
     runHandle,
     menuHandle,
-    isSideMenuOpen
+    isSideMenuOpen,
   } = usePlayground()
 
-
-
   return (
-    <main
+    <div
       ref={containerRef}
-      className="flex h-screen w-screen flex-row gap-6 bg-[#1a2b30] py-6">
+      className="flex h-screen w-screen flex-row bg-[#1a2b30] py-6">
       {isSideMenuOpen || (
         <aside className="flex h-fit w-fit flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
           <IconButton className="text-gray-500" onClick={menuHandle}>
@@ -34,7 +32,7 @@ const Playground = () => {
           </IconButton>
         </aside>
       )}
-      <div className="flex flex-1 flex-col">
+      <main className="flex flex-1 flex-col px-6">
         <section
           className="relative flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
           style={{ height: `${split1}%` }}>
@@ -68,8 +66,8 @@ const Playground = () => {
           <span className="font-semibold">birdly feedback:</span>
           <p>{feedback}</p>
         </section>
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }
 
