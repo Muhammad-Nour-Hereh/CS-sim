@@ -12,6 +12,7 @@ const Playground = () => {
     containerRef,
     split1,
     split2,
+    splitV,
     onMouseDown,
     runHandle,
     menuHandle,
@@ -24,29 +25,44 @@ const Playground = () => {
       ref={containerRef}
       className="flex h-screen w-screen flex-row bg-[#1a2b30] py-6">
       {isSideMenuOpen || (
-        <aside className="flex h-fit w-fit flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
-          <IconButton className="text-gray-500" onClick={menuHandle}>
-            <Menu />
-          </IconButton>
-          <IconButton className="text-gray-500" onClick={runHandle}>
-            <Play />
-          </IconButton>
-        </aside>
+        <>
+          <aside className="flex h-fit w-fit flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
+            <IconButton className="text-gray-500" onClick={menuHandle}>
+              <Menu />
+            </IconButton>
+            <IconButton className="text-gray-500" onClick={runHandle}>
+              <Play />
+            </IconButton>
+          </aside>
+          <div className="w-6" />
+        </>
       )}
 
       {isSideMenuOpen && (
-        <aside className="flex h-full w-100 flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
-          <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
-            <ArrowLeft />
-          </IconButton>
-          <span>a</span>
-          <span>a</span>
-          <span>a</span>
-          <span>a</span>
-        </aside>
+        <>
+          <aside
+            style={{ width: `${splitV}%` }}
+            className="flex h-full flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
+            <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
+              <ArrowLeft />
+            </IconButton>
+            <span>a</span>
+            <span>a</span>
+            <span>a</span>
+            <span>a</span>
+          </aside>
+          <div
+            onMouseDown={onMouseDown('splitV')}
+            className="w-6 cursor-col-resize"
+          />
+        </>
       )}
 
-      <main className="flex flex-1 flex-col px-6">
+      <main
+        style={{
+          width: isSideMenuOpen ? `${100 - splitV}%` : '100%',
+        }}
+        className="flex w-full flex-col pr-6">
         <section
           className="relative flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
           style={{ height: `${split1}%` }}>
