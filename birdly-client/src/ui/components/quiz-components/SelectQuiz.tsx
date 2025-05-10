@@ -1,5 +1,4 @@
 import AnswerList from '../AnswerList'
-import { Input } from '../Input'
 
 interface SelectQuizProps {
   title: string
