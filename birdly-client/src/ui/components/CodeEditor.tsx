@@ -19,8 +19,8 @@ export const myTheme = EditorView.theme({
     backgroundColor: 'transparent !important',
     borderRight: 'green 4px solid !important',
   },
-  '.cm-editor:focus': {
-    outline: 'none !important',
+  '&.cm-editor.cm-focused': {
+    outline: 'none',
   },
 })
 
