@@ -11,7 +11,7 @@ const Playground = () => {
 
   return (
     <div className="flex h-screen w-screen flex-col gap-6 p-6">
-      <section className="flex w-full flex-4 flex-col overflow-hidden rounded-2xl bg-[#273B42]">
+      <section className="flex w-full flex-4 flex-col overflow-auto rounded-2xl bg-[#273B42]">
         <CodeEditor code={code} setCode={setCode} />
       </section>
       <section className="flex w-full flex-1 flex-col rounded-2xl bg-[#273B42] p-4">

@@ -14,7 +14,6 @@ export const myTheme = EditorView.theme({
     fontSize: '16px',
     fontWeight: 'bold',
     lineHeight: '1.6',
-    overflow: 'auto',
   },
   '.cm-gutters': {
     backgroundColor: 'transparent !important',
