@@ -1,6 +1,6 @@
 import usePlayground from '@/hooks/usePlayground'
 import { CodeEditor } from '../components/CodeEditor'
-import { Menu, Play } from 'lucide-react'
+import { ArrowBigLeft, ArrowLeft, Menu, Play } from 'lucide-react'
 import IconButton from '../components/IconButton'
 
 const Playground = () => {
@@ -15,6 +15,7 @@ const Playground = () => {
     onMouseDown,
     runHandle,
     menuHandle,
+    minmizeMenuHandle,
     isSideMenuOpen,
   } = usePlayground()
 
@@ -32,6 +33,19 @@ const Playground = () => {
           </IconButton>
         </aside>
       )}
+
+      {isSideMenuOpen && (
+        <aside className="flex h-full w-100 flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
+          <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
+            <ArrowLeft />
+          </IconButton>
+          <span>a</span>
+          <span>a</span>
+          <span>a</span>
+          <span>a</span>
+        </aside>
+      )}
+
       <main className="flex flex-1 flex-col px-6">
         <section
           className="relative flex w-full flex-col overflow-auto rounded-2xl bg-[#273B42]"
