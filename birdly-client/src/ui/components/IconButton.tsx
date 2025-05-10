@@ -4,9 +4,10 @@ import { isValidElement, ReactElement } from 'react'
 interface IconButtonProps {
   children: ReactElement
   className?: string
+  onClick?: Function
 }
 
-const IconButton = ({ children, className }: IconButtonProps) => {
+const IconButton = ({ children, className, onClick }: IconButtonProps) => {
   let iconName = 'icon'
 
   if (isValidElement(children) && typeof children.type === 'function') {
@@ -19,6 +20,7 @@ const IconButton = ({ children, className }: IconButtonProps) => {
         'text-border flex size-8 items-center justify-center rounded-full filter transition hover:brightness-140 active:brightness-90',
         className,
       )}
+      onClick={() => onClick?.()}
       aria-label={iconName}>
       {children}
     </button>
