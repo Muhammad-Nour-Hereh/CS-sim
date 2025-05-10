@@ -1,6 +1,6 @@
 import usePlayground from '@/hooks/usePlayground'
 import { CodeEditor } from '../components/CodeEditor'
-import { ArrowBigLeft, ArrowLeft, Menu, Play } from 'lucide-react'
+import { ArrowLeft, Menu, Play } from 'lucide-react'
 import IconButton from '../components/IconButton'
 
 const Playground = () => {

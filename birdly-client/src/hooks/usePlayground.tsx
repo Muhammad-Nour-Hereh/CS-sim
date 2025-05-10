@@ -24,6 +24,9 @@ const usePlayground = () => {
     draggingTarget.current = target
     document.addEventListener('mousemove', onMouseMove)
     document.addEventListener('mouseup', onMouseUp)
+
+    // Prevent text selection during drag
+    document.body.classList.add('no-select')
   }
 
   const onMouseMove = (e: any) => {
@@ -55,6 +58,9 @@ const usePlayground = () => {
     draggingTarget.current = null
     document.removeEventListener('mousemove', onMouseMove)
     document.removeEventListener('mouseup', onMouseUp)
+
+    // Re-enable text selection
+    document.body.classList.remove('no-select')
   }
 
   // side menu

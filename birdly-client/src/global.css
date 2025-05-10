@@ -1,20 +1,24 @@
 :root {
-    --background: #141F23;
-    --foreground: white;
-    --primary: #79B933;
-    --primary-foreground: #507725;
-    --primary-shade: #6aa32d;
-    --destructive: #EE5555;
-    --destructive-shade: #D84848;
-    --selected: #202F36;
-    --selected-border: #3F85A7;
-    --selected-foreground: #3F85A7;
-    --border: #37464F;
+  --background: #141f23;
+  --foreground: white;
+  --primary: #79b933;
+  --primary-foreground: #507725;
+  --primary-shade: #6aa32d;
+  --destructive: #ee5555;
+  --destructive-shade: #d84848;
+  --selected: #202f36;
+  --selected-border: #3f85a7;
+  --selected-foreground: #3f85a7;
+  --border: #37464f;
 
-    --font-sans: 'Nunito', sans-serif;
+  --font-sans: 'Nunito', sans-serif;
 }
 
-
 body {
-    font-family: var(--font-sans);
+  font-family: var(--font-sans);
+}
+
+.no-select {
+  user-select: none !important;
+  cursor: default !important;
 }
