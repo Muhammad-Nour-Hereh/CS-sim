@@ -25,7 +25,7 @@ const QuizPage = () => {
         <Quiz
           title="question ?"
           content={{ answers: ['a', 'b', 'c'] }}
-          type="select"
+          type="order"
         />
       </main>
 
