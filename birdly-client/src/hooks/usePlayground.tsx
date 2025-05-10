@@ -47,7 +47,8 @@ const usePlayground = () => {
     document.removeEventListener('mousemove', onMouseMove)
     document.removeEventListener('mouseup', onMouseUp)
   }
-
+  // side menu
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false)
   // handles
   const runHandle = () => {
     console.log('run clicked')
@@ -55,10 +56,12 @@ const usePlayground = () => {
 
   const menuHandle = () => {
     console.log('menu clicked')
+    setIsSideMenuOpen(true)
   }
 
   const minmizeMenuHandle = () => {
     console.log('minmize menu clicked')
+    setIsSideMenuOpen(false)
   }
 
   return {
@@ -75,6 +78,7 @@ const usePlayground = () => {
     runHandle,
     menuHandle,
     minmizeMenuHandle,
+    isSideMenuOpen,
   }
 }
 
