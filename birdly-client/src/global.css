@@ -22,3 +22,9 @@ body {
   user-select: none !important;
   cursor: default !important;
 }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #1e293b inset !important; /* your dark bg */
+  -webkit-text-fill-color: #f1f5f9 !important; /* your text color */
+  transition: background-color 9999s ease-in-out 0s;
+}
