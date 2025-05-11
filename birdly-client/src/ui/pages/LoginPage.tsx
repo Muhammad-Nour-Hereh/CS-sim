@@ -45,7 +45,6 @@ const LoginPage = () => {
           variant="borderless">
           Login
         </Button>
-        <Separator className="bg-white" />
         <span className="self-start text-lg font-semibold">
           Don't have an accound yet!
           <span

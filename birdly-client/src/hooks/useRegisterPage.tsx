@@ -8,6 +8,9 @@ type FieldErrors = Record<string, string>
 const useRegisterPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [repassword, setRepassword] = useState('')
+
   const [errors, setErrors] = useState<FieldErrors>({})
   const navigate = useNavigate()
 
@@ -22,7 +25,7 @@ const useRegisterPage = () => {
   }
 
   // handles
-  const LoginHandle = async () => {
+  const RegisterHandle = async () => {
     if (!validateForm()) return
 
     // try {
@@ -44,22 +47,24 @@ const useRegisterPage = () => {
     navigate(ROUTES.HOME)
   }
 
-  const navigateRegisterHandle = () => navigate(ROUTES.REGISTER)
-  const navigateForgetPasswordHandle = () => navigate(ROUTES.FORGETPASSWORD)
+  const navigateLoginHandle = () => navigate(ROUTES.LOGIN)
 
   useEffect(() => {
-    console.log('login page is loaded')
+    console.log('register page is loaded')
   }, [])
 
   return {
     email,
     setEmail,
+    name,
+    setName,
     password,
     setPassword,
+    repassword,
+    setRepassword,
     errors,
-    LoginHandle,
-    navigateRegisterHandle,
-    navigateForgetPasswordHandle,
+    RegisterHandle,
+    navigateLoginHandle,
   }
 }
 

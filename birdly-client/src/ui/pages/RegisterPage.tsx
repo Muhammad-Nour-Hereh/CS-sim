@@ -3,27 +3,29 @@ import { Button } from '../components/Button'
 import { Input } from '../components/Input'
 import useRegisterPage from '@/hooks/useRegisterPage'
 
-
 const RegisterPage = () => {
   const {
     email,
     setEmail,
+    name,
+    setName,
     password,
     setPassword,
+    repassword,
+    setRepassword,
     errors,
-    LoginHandle,
-    navigateRegisterHandle,
-    navigateForgetPasswordHandle,
+    RegisterHandle,
+    navigateLoginHandle,
   } = useRegisterPage()
 
   return (
     <div className="pg-background flex h-screen w-screen items-center justify-center">
       <div className="bg-border flex w-150 flex-col items-center justify-center gap-4 rounded-2xl border-2 border-white p-9">
-        <h1 className="self-start text-3xl font-bold">Login</h1>
+        <h1 className="self-start text-3xl font-bold mb-4">Register</h1>
         <Input
-          value={email}
-          setter={setEmail}
-          errorMsg={errors.email}
+          value={name}
+          setter={setName}
+          errorMsg={errors.name}
           placeholder="name"
           className="h-13 border-2 text-2xl font-bold"
         />
@@ -43,29 +45,24 @@ const RegisterPage = () => {
           className="h-13 border-2 text-2xl font-bold"
         />
         <Input
-          value={email}
-          setter={setEmail}
-          errorMsg={errors.email}
-          placeholder="repeat password"
+          value={repassword}
+          setter={setRepassword}
+          errorMsg={errors.repassword}
+          placeholder="password"
+          variant="password"
           className="h-13 border-2 text-2xl font-bold"
         />
-        <span
-          className="cursor-pointer self-start text-lg font-semibold"
-          onClick={navigateForgetPasswordHandle}>
-          forget password?
-        </span>
         <Button
-          onClick={LoginHandle}
-          className="w-full text-xl font-bold text-white"
+          onClick={RegisterHandle}
+          className="w-full my-4 text-xl font-bold text-white"
           variant="borderless">
           Register
         </Button>
-        <Separator className="bg-white" />
         <span className="self-start text-lg font-semibold">
           already have an account!
           <span
             className="text-primary cursor-pointer font-semibold"
-            onClick={navigateRegisterHandle}>
+            onClick={navigateLoginHandle}>
             {' '}
             Login
           </span>
