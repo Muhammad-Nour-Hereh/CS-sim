@@ -8,8 +8,8 @@ const usePlayground = () => {
   const [code, setCode] = useState(
     'print("hello, world!")\n\n\n\n\n\n\n\n\n\n\n\n\n',
   )
-  const [output, setOutput] = useState('hello, world!')
-  const [feedback, setFeedback] = useState('your code is awesome')
+  const [output] = useState('hello, world!')
+  const [feedback] = useState('your code is awesome')
 
   const [snippets] = useState([
     { title: 'a', content: 'print("a")' },
@@ -97,15 +97,14 @@ const usePlayground = () => {
 
   const snippetSelectHandle = (index: number) => {
     setSelectedIndex(index)
+    setCode(snippets[index].content)
   }
 
   return {
     code,
     setCode,
     output,
-    setOutput,
     feedback,
-    setFeedback,
     snippets,
     containerRef,
     split1,
