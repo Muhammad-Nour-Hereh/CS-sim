@@ -51,7 +51,7 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
               <ArrowLeft />
             </IconButton>
-            <ul>
+            <ul className="flex flex-col gap-3">
               <ListItem>a</ListItem>
               <ListItem>b</ListItem>
               <ListItem>c</ListItem>
