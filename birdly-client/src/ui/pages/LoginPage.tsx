@@ -13,7 +13,7 @@ const LoginPage = () => {
         <h1 className="self-start text-3xl font-bold">Login</h1>
         <Input
           value={email}
-          // onChange={setEmail}
+          setter={setEmail}
           placeholder="name"
           errorMsg="invalid"
           className="h-13 border-2 text-2xl font-bold"

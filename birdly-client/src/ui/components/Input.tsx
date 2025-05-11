@@ -34,6 +34,7 @@ interface InputProps
   extends React.ComponentProps<'input'>,
     VariantProps<typeof inputVariants> {
   errorMsg?: string
+  setter?: Function
 }
 
 const Input = ({
@@ -41,6 +42,7 @@ const Input = ({
   type,
   variant,
   validation,
+  setter = () => {},
   errorMsg = '',
   ...props
 }: InputProps) => {
@@ -53,6 +55,7 @@ const Input = ({
     <>
       <div className="relative w-full">
         <input
+          onChange={(e) => setter(e.target.value)}
           type={inputType}
           className={cn(
             inputVariants({

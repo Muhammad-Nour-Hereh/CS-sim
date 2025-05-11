@@ -3,10 +3,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const useLoginPage = () => {
-  useEffect(() => {
-    console.log('login page is loaded')
-  }, [])
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
@@ -41,6 +37,10 @@ const useLoginPage = () => {
       setErrors({ general: 'Login failed. Please try again.' })
     }
   }
+
+  useEffect(() => {
+    console.log('login page is loaded')
+  }, [])
 
   return {
     email,
