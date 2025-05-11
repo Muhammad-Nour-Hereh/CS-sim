@@ -1,11 +1,19 @@
-export const theme = {
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
     extend: {
-        colors: {
-            primary: '#1e40af', // your custom primary color
-            'primary-foreground': '#ffffff',
-            secondary: '#f59e0b',
-            'secondary-foreground': '#000000',
-        },
+      colors: {
+        primary: '#1e40af',
+        'primary-foreground': '#ffffff',
+        secondary: '#f59e0b',
+        'secondary-foreground': '#000000',
+        selected: '#FFAAFF',
+      },
     },
-};
-export const plugins = [];
+  },
+  plugins: [],
+}
+
+export default config

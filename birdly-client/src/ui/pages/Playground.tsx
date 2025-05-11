@@ -52,7 +52,7 @@ const Playground = () => {
               <ArrowLeft />
             </IconButton>
             <ul className="flex flex-col gap-3">
-              <ListItem>a</ListItem>
+              <ListItem isSelected={true}>a</ListItem>
               <ListItem>b</ListItem>
               <ListItem>c</ListItem>
             </ul>
