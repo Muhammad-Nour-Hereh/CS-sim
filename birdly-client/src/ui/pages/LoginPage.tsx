@@ -1,4 +1,3 @@
-import { Eye } from 'lucide-react'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
 import { Separator } from '../components/Separator'
@@ -19,9 +18,7 @@ const LoginPage = () => {
           placeholder="password"
           variant="password"
           className="h-13 border-2 text-2xl font-bold"></Input>
-        <span className="text-destructive -mt-4 self-start pl-4 text-lg font-semibold">
-          error
-        </span>
+
         <span className="self-start text-lg font-semibold">
           forget password?
         </span>

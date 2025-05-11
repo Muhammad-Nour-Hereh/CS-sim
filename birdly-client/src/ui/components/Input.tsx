@@ -16,9 +16,15 @@ const inputVariants = cva(
         default: '',
         password: 'pr-10',
       },
+      validation: {
+        none: '',
+        error: 'border-red-500',
+        success: 'border-green-500',
+      },
     },
     defaultVariants: {
       variant: 'default',
+      validation: 'none',
     },
   },
 )
@@ -27,28 +33,42 @@ interface InputProps
   extends React.ComponentProps<'input'>,
     VariantProps<typeof inputVariants> {}
 
-const Input = ({ className, type, variant, ...props }: InputProps) => {
+const Input = ({
+  className,
+  type,
+  variant,
+  errorMsg,
+  ...props
+}: InputProps) => {
   const [show, setShow] = React.useState(false)
   const isPassword = variant === 'password'
+  const isError = errorMsg !== ''
   const inputType = isPassword ? (show ? 'text' : 'password') : type
 
   return (
-    <div className={'relative w-full'}>
-      <input
-        type={inputType}
-        className={cn(inputVariants({ variant }), className)}
-        {...props}
-      />
-      {isPassword && (
-        <button
-          type="button"
-          onClick={() => setShow((prev) => !prev)}
-          aria-label={show ? 'Hide password' : 'Show password'}
-          className="absolute top-1/2 right-3 -translate-y-1/2 transform p-1">
-          {show ? <EyeOff size={20} /> : <Eye size={20} />}
-        </button>
+    <>
+      <div className={'relative w-full'}>
+        <input
+          type={inputType}
+          className={cn(inputVariants({ variant }), className)}
+          {...props}
+        />
+        {isPassword && (
+          <button
+            type="button"
+            onClick={() => setShow((prev) => !prev)}
+            aria-label={show ? 'Hide password' : 'Show password'}
+            className="absolute top-1/2 right-3 -translate-y-1/2 transform p-1">
+            {show ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
+        )}
+      </div>
+      {isError && (
+        <span className="text-destructive -mt-4 self-start pl-4 text-lg font-semibold">
+          error
+        </span>
       )}
-    </div>
+    </>
   )
 }
 
