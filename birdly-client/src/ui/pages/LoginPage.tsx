@@ -7,12 +7,24 @@ const LoginPage = () => {
     <div className="pg-background flex h-screen w-screen items-center justify-center">
       <div className="bg-border flex w-150 flex-col items-center justify-center gap-4 rounded-2xl border-2 border-white p-9">
         <h1 className="self-start text-3xl font-bold">Login</h1>
-        <Input placeholder="name" />
-        <Input placeholder="password" />
+        <Input
+          placeholder="name"
+          className="h-13 border-2 text-2xl font-bold"
+        />
+        <span className="text-destructive -mt-4 self-start pl-4 text-lg font-semibold">
+          error
+        </span>
+        <Input
+          placeholder="password"
+          className="h-13 border-2 text-2xl font-bold"
+        />
+        <span className="text-destructive -mt-4 self-start pl-4 text-lg font-semibold">
+          error
+        </span>
         <span className="self-start text-lg font-semibold">
           forget password
         </span>
-        <Button>Login</Button>
+        <Button className="text-xl font-bold text-white">Login</Button>
         <Separator className="bg-white" />
         <span className="self-start text-lg font-semibold">
           Don't have an accound yet!
