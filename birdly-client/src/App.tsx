@@ -7,12 +7,13 @@ import GuestRoutes from './protected-routes/GuestRoutes'
 import ComponentsPage from './ui/pages/ComponentsPage'
 import QuizPage from './ui/pages/QuizPage'
 import Playground from './ui/pages/Playground'
+import LoginPage from './ui/pages/LoginPage'
 
 const App = () => {
   return (
     <Routes>
       <Route element={<GuestRoutes />}>
-        <Route path={ROUTES.LOGIN} element={<h1>login</h1>} />
+        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER} element={<h1>registration</h1>} />
       </Route>
 
