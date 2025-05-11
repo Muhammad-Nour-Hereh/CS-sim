@@ -4,8 +4,7 @@ import { Input } from '../components/Input'
 import { Separator } from '../components/Separator'
 
 const LoginPage = () => {
-  const { email, setEmail, password, setPassword, errors, handleLogin } =
-    useLoginPage()
+  const { email, setEmail, password, setPassword, handleLogin } = useLoginPage()
 
   return (
     <div className="pg-background flex h-screen w-screen items-center justify-center">
@@ -14,20 +13,21 @@ const LoginPage = () => {
         <Input
           value={email}
           setter={setEmail}
-          placeholder="name"
-          errorMsg="invalid"
+          placeholder="email"
           className="h-13 border-2 text-2xl font-bold"
         />
         <Input
+          value={password}
+          setter={setPassword}
           placeholder="password"
           variant="password"
           className="h-13 border-2 text-2xl font-bold"
         />
-
         <span className="self-start text-lg font-semibold">
           forget password?
         </span>
         <Button
+          onClick={handleLogin}
           className="w-full text-xl font-bold text-white"
           variant="borderless">
           Login
