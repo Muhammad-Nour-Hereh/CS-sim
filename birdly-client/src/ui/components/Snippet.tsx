@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { cn } from "@/lib/utils"
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 interface SnippetProps {
   title?: string
@@ -12,7 +12,7 @@ interface SnippetProps {
 }
 
 const Snippet = ({
-  title = "Example",
+  title = 'Example',
   defaultCode = 'x = 5\ny = "John"\nprint(x)\nprint(y)',
   onRun,
   className,
@@ -24,33 +24,38 @@ const Snippet = ({
     if (onRun) {
       onRun(code)
     } else {
-      console.log("Code executed:", code)
-      alert("Code execution is simulated. Check the console for details.")
+      console.log('Code executed:', code)
+      alert('Code execution is simulated. Check the console for details.')
     }
   }
 
   return (
-    <div className={cn("rounded-lg border border-gray-700 overflow-hidden w-full max-w-lg", className)}>
+    <div
+      className={cn(
+        'w-full max-w-lg overflow-hidden rounded-lg border border-gray-700',
+        className,
+      )}>
       {/* Header */}
-      <div className="px-4 py-2 bg-gray-800 text-white border-b border-gray-700">{title}</div>
+      <div className="border-b border-gray-700 bg-gray-800 px-4 py-2 text-white">
+        {title}
+      </div>
 
       {/* Code area */}
-      <div className="bg-[#1e2a31] text-gray-200 p-4">
+      <div className="bg-[#1e2a31] p-4 text-gray-200">
         <textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          className="w-full bg-transparent border-none outline-none font-mono text-sm resize-none min-h-[100px]"
+          className="min-h-[100px] w-full resize-none border-none bg-transparent font-mono text-sm outline-none"
           spellCheck="false"
           readOnly={readOnly}
         />
       </div>
 
       {/* Button area */}
-      <div className="bg-[#1e2a31] p-2 border-t border-gray-700/30">
+      <div className="border-t border-gray-700/30 bg-[#1e2a31] p-2">
         <button
           onClick={handleRunCode}
-          className="bg-[#8bc34a] hover:bg-[#7cb342] text-black font-medium py-1 px-3 rounded-md text-sm transition-colors"
-        >
+          className="rounded-md bg-[#8bc34a] px-3 py-1 text-sm font-medium text-black transition-colors hover:bg-[#7cb342]">
           Try it your self &gt;
         </button>
       </div>

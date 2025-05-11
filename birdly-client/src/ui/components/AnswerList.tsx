@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { cn } from "@/lib/utils"
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 interface AnswerListProps {
   items: string[]
@@ -16,7 +16,7 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
   }
 
   return (
-    <ol className={cn("space-y-4", className)}>
+    <ol className={cn('flex flex-col gap-2', className)}>
       {items.map((item, index) => {
         const isSelected = selectedIndex === index
 
@@ -24,37 +24,39 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
           <li
             key={index}
             className={cn(
-              "flex items-stretch border-2 rounded-lg p-4",
-              // "transition-all duration-200 ease-in-out",
-              "cursor-pointer",
-              // "hover:border hover:bg",
-              isSelected ? "border-slate-500 bg shadow-sm" : "border bg",
+              'flex h-14 w-150 items-center rounded-lg border-2 border-b-4 pl-4',
+              'transition-all duration-100',
+              'cursor-pointer',
+              'hover:brightness-120',
+              isSelected ? 'border-b-2 border-slate-500' : 'border-b-4',
             )}
             onClick={() => handleItemClick(index, item)}
             role="button"
             aria-pressed={isSelected}
             tabIndex={0}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
+              if (e.key === 'Enter' || e.key === ' ') {
                 handleItemClick(index, item)
                 e.preventDefault()
               }
-            }}
-          >
+            }}>
             {/* ring for number */}
             <div
               className={cn(
-                "flex items-center justify-center w-8 h-8 rounded-sm border-2",
-                // "transition-colors duration-200",
-                isSelected ? "border bg" : "border bg",
-              )}
-            >
-              <span className={cn("text-md font-bold", isSelected ? "" : "")}>
+                'flex size-7.5 items-center justify-center rounded-sm border-2',
+                'transition duration-200',
+                isSelected ? 'border-slate-500' : '',
+              )}>
+              <span
+                className={cn(
+                  'text-md font-bold',
+                  isSelected ? '' : 'text-border',
+                )}>
                 {index + 1}
               </span>
             </div>
 
-            <div className={cn("ml-4 flex-1 self-center")}>{item}</div>
+            <div className={cn('flex-1 text-center')}>{item}</div>
           </li>
         )
       })}
