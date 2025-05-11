@@ -21,6 +21,7 @@ const Playground = () => {
     menuHandle,
     minmizeMenuHandle,
     navigateHomeHandle,
+    snippetSelectHandle,
     isSideMenuOpen,
   } = usePlayground()
 
@@ -54,10 +55,13 @@ const Playground = () => {
               <ArrowLeft />
             </IconButton>
             <ul className="flex flex-col gap-3">
-              {snippets.map((snippet: any, index): any => {
+              {snippets.map((snippet: any, index: number) => {
                 const isSelected = selectedIndex === index
                 return (
-                  <ListItem key={index} isSelected={isSelected}>
+                  <ListItem
+                    key={index}
+                    isSelected={isSelected}
+                    onClick={() => snippetSelectHandle(index)}>
                     {snippet.title}
                   </ListItem>
                 )

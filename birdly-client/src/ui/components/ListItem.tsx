@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-interface props {
+interface props extends React.HTMLAttributes<HTMLLIElement>{
   children: string
   isSelected?: boolean
 }

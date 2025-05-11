@@ -95,6 +95,10 @@ const usePlayground = () => {
     navigate(ROUTES.HOME)
   }
 
+  const snippetSelectHandle = (index: number) => {
+    setSelectedIndex(index)
+  }
+
   return {
     code,
     setCode,
@@ -114,6 +118,7 @@ const usePlayground = () => {
     menuHandle,
     minmizeMenuHandle,
     navigateHomeHandle,
+    snippetSelectHandle,
   }
 }
 
