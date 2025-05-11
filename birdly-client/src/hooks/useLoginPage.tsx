@@ -1,4 +1,5 @@
 import { ROUTES } from '@/objects/routes'
+import { validateEmail, validatePassword } from '@/utils/validators'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,8 +13,10 @@ const useLoginPage = () => {
 
   const validateForm = () => {
     const newErrors: FieldErrors = {}
-    if (!email) newErrors.email = 'Email is required'
-    if (!password) newErrors.password = 'Password is required'
+
+    newErrors.email = validateEmail(email)
+    newErrors.password = validatePassword(password)
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
