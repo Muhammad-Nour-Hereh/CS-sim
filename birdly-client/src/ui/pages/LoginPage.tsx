@@ -1,8 +1,11 @@
+import useLoginPage from '@/hooks/useLoginPage'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
 import { Separator } from '../components/Separator'
 
 const LoginPage = () => {
+  useLoginPage()
+  
   return (
     <div className="pg-background flex h-screen w-screen items-center justify-center">
       <div className="bg-border flex w-150 flex-col items-center justify-center gap-4 rounded-2xl border-2 border-white p-9">
@@ -15,7 +18,8 @@ const LoginPage = () => {
         <Input
           placeholder="password"
           variant="password"
-          className="h-13 border-2 text-2xl font-bold"></Input>
+          className="h-13 border-2 text-2xl font-bold"
+        />
 
         <span className="self-start text-lg font-semibold">
           forget password?
