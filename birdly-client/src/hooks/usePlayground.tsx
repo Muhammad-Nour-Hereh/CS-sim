@@ -11,6 +11,14 @@ const usePlayground = () => {
   const [output, setOutput] = useState('hello, world!')
   const [feedback, setFeedback] = useState('your code is awesome')
 
+  const [snippets] = useState([
+    { title: 'a', content: 'print("a")' },
+    { title: 'b', content: 'print("b")' },
+    { title: 'c', content: 'print("c")' },
+  ])
+
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+
   // resizing states
   const containerRef: any = useRef(null)
 
@@ -94,12 +102,14 @@ const usePlayground = () => {
     setOutput,
     feedback,
     setFeedback,
+    snippets,
     containerRef,
     split1,
     split2,
     splitV,
     onMouseDown,
     isSideMenuOpen,
+    selectedIndex,
     runHandle,
     menuHandle,
     minmizeMenuHandle,

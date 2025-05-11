@@ -10,11 +10,13 @@ const Playground = () => {
     setCode,
     output,
     feedback,
+    snippets,
     containerRef,
     split1,
     split2,
     splitV,
     onMouseDown,
+    selectedIndex,
     runHandle,
     menuHandle,
     minmizeMenuHandle,
@@ -52,9 +54,14 @@ const Playground = () => {
               <ArrowLeft />
             </IconButton>
             <ul className="flex flex-col gap-3">
-              <ListItem isSelected={true}>a</ListItem>
-              <ListItem>b</ListItem>
-              <ListItem>c</ListItem>
+              {snippets.map((snippet: any, index): any => {
+                const isSelected = selectedIndex === index
+                return (
+                  <ListItem key={index} isSelected={isSelected}>
+                    {snippet.title}
+                  </ListItem>
+                )
+              })}
             </ul>
           </aside>
           <div
