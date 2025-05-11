@@ -4,7 +4,15 @@ import { Input } from '../components/Input'
 import { Separator } from '../components/Separator'
 
 const LoginPage = () => {
-  const { email, setEmail, password, setPassword, handleLogin } = useLoginPage()
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    LoginHandle,
+    navigateRegisterHandle,
+    navigateForgetPasswordHandle,
+  } = useLoginPage()
 
   return (
     <div className="pg-background flex h-screen w-screen items-center justify-center">
@@ -23,11 +31,13 @@ const LoginPage = () => {
           variant="password"
           className="h-13 border-2 text-2xl font-bold"
         />
-        <span className="self-start text-lg font-semibold">
+        <span
+          className="self-start text-lg font-semibold"
+          onClick={navigateForgetPasswordHandle}>
           forget password?
         </span>
         <Button
-          onClick={handleLogin}
+          onClick={LoginHandle}
           className="w-full text-xl font-bold text-white"
           variant="borderless">
           Login
@@ -35,7 +45,9 @@ const LoginPage = () => {
         <Separator className="bg-white" />
         <span className="self-start text-lg font-semibold">
           Don't have an accound yet!
-          <span className="text-primary cursor-pointer font-semibold">
+          <span
+            className="text-primary cursor-pointer font-semibold"
+            onClick={navigateRegisterHandle}>
             {' '}
             Register
           </span>
