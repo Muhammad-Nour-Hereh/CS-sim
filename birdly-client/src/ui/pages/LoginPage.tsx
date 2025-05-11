@@ -24,7 +24,9 @@ const LoginPage = () => {
         <span className="self-start text-lg font-semibold">
           forget password
         </span>
-        <Button className="text-xl font-bold text-white">Login</Button>
+        <Button className="text-xl font-bold text-white" variant="borderless">
+          Login
+        </Button>
         <Separator className="bg-white" />
         <span className="self-start text-lg font-semibold">
           Don't have an accound yet!
