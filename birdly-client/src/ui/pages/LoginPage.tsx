@@ -1,5 +1,29 @@
+import { Button } from '../components/Button'
+import { Input } from '../components/Input'
+import { Separator } from '../components/Separator'
+
 const LoginPage = () => {
-  return <div>LoginPage</div>
+  return (
+    <div className="pg-background flex h-screen w-screen items-center justify-center">
+      <div className="bg-border flex w-150 flex-col items-center justify-center gap-4 rounded-2xl border-2 border-white p-9">
+        <h1 className="self-start text-3xl font-bold">Login</h1>
+        <Input placeholder="name" />
+        <Input placeholder="password" />
+        <span className="self-start text-lg font-semibold">
+          forget password
+        </span>
+        <Button>Login</Button>
+        <Separator className="bg-white" />
+        <span className="self-start text-lg font-semibold">
+          Don't have an accound yet!
+          <span className="text-primary cursor-pointer font-semibold">
+            {' '}
+            Register
+          </span>
+        </span>
+      </div>
+    </div>
+  )
 }
 
 export default LoginPage
