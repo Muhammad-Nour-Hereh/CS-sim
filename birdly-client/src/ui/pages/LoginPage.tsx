@@ -35,7 +35,7 @@ const LoginPage = () => {
           className="h-13 border-2 text-2xl font-bold"
         />
         <span
-          className="self-start text-lg font-semibold"
+          className="cursor-pointer self-start text-lg font-semibold"
           onClick={navigateForgetPasswordHandle}>
           forget password?
         </span>
