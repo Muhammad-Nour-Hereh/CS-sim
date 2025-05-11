@@ -1,13 +1,11 @@
 import { ROUTES } from '@/objects/routes'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const usePlayground = () => {
   const navigate = useNavigate()
   // temp states
-  const [code, setCode] = useState(
-    'print("hello, world!")\n\n\n\n\n\n\n\n\n\n\n\n\n',
-  )
+  const [code, setCode] = useState('')
   const [output] = useState('hello, world!')
   const [feedback] = useState('your code is awesome')
 
@@ -99,6 +97,13 @@ const usePlayground = () => {
     setSelectedIndex(index)
     setCode(snippets[index].content)
   }
+
+  // useEffect
+  useEffect(() => {
+    const index = 0
+    setSelectedIndex(index)
+    setCode(snippets[index].content)
+  }, [])
 
   return {
     code,
