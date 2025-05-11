@@ -1,14 +1,19 @@
 import { ROUTES } from '@/objects/routes'
-import { validateEmail, validatePassword } from '@/utils/validators'
+import {
+  validateConfirmPassword,
+  validateEmail,
+  validateName,
+  validatePassword,
+} from '@/utils/validators'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 type FieldErrors = Record<string, string>
 
 const useRegisterPage = () => {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
   const [repassword, setRepassword] = useState('')
 
   const [errors, setErrors] = useState<FieldErrors>({})
@@ -17,8 +22,10 @@ const useRegisterPage = () => {
   const validateForm = () => {
     const newErrors: FieldErrors = {}
 
+    newErrors.name = validateName(name)
     newErrors.email = validateEmail(email)
     newErrors.password = validatePassword(password)
+    newErrors.repassword = validateConfirmPassword(password, repassword)
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0

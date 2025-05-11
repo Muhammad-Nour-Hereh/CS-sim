@@ -1,4 +1,3 @@
-import { Separator } from '@radix-ui/react-separator'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
 import useRegisterPage from '@/hooks/useRegisterPage'
@@ -48,7 +47,7 @@ const RegisterPage = () => {
           value={repassword}
           setter={setRepassword}
           errorMsg={errors.repassword}
-          placeholder="password"
+          placeholder="confirm the password"
           variant="password"
           className="h-13 border-2 text-2xl font-bold"
         />
