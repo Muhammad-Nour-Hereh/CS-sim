@@ -9,6 +9,7 @@ const LoginPage = () => {
     setEmail,
     password,
     setPassword,
+    errors,
     LoginHandle,
     navigateRegisterHandle,
     navigateForgetPasswordHandle,
@@ -21,12 +22,14 @@ const LoginPage = () => {
         <Input
           value={email}
           setter={setEmail}
+          errorMsg={errors.email}
           placeholder="email"
           className="h-13 border-2 text-2xl font-bold"
         />
         <Input
           value={password}
           setter={setPassword}
+          errorMsg={errors.password}
           placeholder="password"
           variant="password"
           className="h-13 border-2 text-2xl font-bold"

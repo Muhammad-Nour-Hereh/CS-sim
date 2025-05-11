@@ -1,20 +1,19 @@
 import { ROUTES } from '@/objects/routes'
-import { remote } from '@/remotes/remotes'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+type FieldErrors = Record<string, string>
 
 const useLoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<FieldErrors>({})
   const navigate = useNavigate()
 
   const validateForm = () => {
-    const newErrors = {}
-
-    // if (!email) newErrors.email = 'Email is required'
-    // if (!password) newErrors.password = 'Password is required'
-
+    const newErrors: FieldErrors = {}
+    if (!email) newErrors.email = 'Email is required'
+    if (!password) newErrors.password = 'Password is required'
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
