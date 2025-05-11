@@ -15,7 +15,7 @@ const App = () => {
       <Route element={<GuestRoutes />}>
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER} element={<h1>registration</h1>} />
-        <Route path={ROUTES.FORGETPASSWORD} element={<h1 className='flex items-center justify-center font-extrabold p-50 text-3xl'>dont forget it next time 🙃</h1>} />
+        <Route path={ROUTES.FORGETPASSWORD} element={<h1 className='flex items-center justify-center font-extrabold p-50 text-3xl'>don't forget it next time 🙃</h1>} />
       </Route>
 
       <Route element={<UserRoutes />}>
