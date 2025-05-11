@@ -9,11 +9,9 @@ const LoginPage = () => {
         <h1 className="self-start text-3xl font-bold">Login</h1>
         <Input
           placeholder="name"
+          errorMsg="invalid"
           className="h-13 border-2 text-2xl font-bold"
         />
-        <span className="text-destructive -mt-4 self-start pl-4 text-lg font-semibold">
-          error
-        </span>
         <Input
           placeholder="password"
           variant="password"

@@ -18,7 +18,8 @@ const inputVariants = cva(
       },
       validation: {
         none: '',
-        error: 'border-red-500',
+        error:
+          'border-destructive focus:border-destructive focus:ring-destructive',
         success: 'border-green-500',
       },
     },
@@ -31,26 +32,35 @@ const inputVariants = cva(
 
 interface InputProps
   extends React.ComponentProps<'input'>,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  errorMsg?: string
+}
 
 const Input = ({
   className,
   type,
   variant,
-  errorMsg,
+  validation,
+  errorMsg = '',
   ...props
 }: InputProps) => {
   const [show, setShow] = React.useState(false)
   const isPassword = variant === 'password'
-  const isError = errorMsg !== ''
+  const showError = !!errorMsg
   const inputType = isPassword ? (show ? 'text' : 'password') : type
 
   return (
     <>
-      <div className={'relative w-full'}>
+      <div className="relative w-full">
         <input
           type={inputType}
-          className={cn(inputVariants({ variant }), className)}
+          className={cn(
+            inputVariants({
+              variant,
+              validation: showError ? 'error' : validation,
+            }),
+            className,
+          )}
           {...props}
         />
         {isPassword && (
@@ -63,9 +73,9 @@ const Input = ({
           </button>
         )}
       </div>
-      {isError && (
-        <span className="text-destructive -mt-4 self-start pl-4 text-lg font-semibold">
-          error
+      {showError && (
+        <span className="text-destructive -mt-2 self-start pl-4 text-lg font-semibold">
+          {errorMsg}
         </span>
       )}
     </>
