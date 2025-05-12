@@ -1,12 +1,21 @@
-import { Question, WriteQuestion } from '@/interfaces/question'
+import {
+  MatchQuestion,
+  OrderQuestion,
+  Question,
+  SelectQuestion,
+  WriteQuestion,
+} from '@/interfaces/question'
 import { createContext, useContext, useState } from 'react'
 
 export type QuizContext = {
   curQuestion: Question
   progressPercent: number
   nextQuestion: () => void
-  setWrite: Function
-  check: Function
+  setWriteAnswer: Function
+  setSelectedAnswer: Function
+  setSelectedOrder: Function
+  setUserPairs: Function
+  checkAnswer: Function
 }
 
 const quizContext = createContext<QuizContext | undefined>(undefined)
@@ -69,15 +78,50 @@ const QuizProvider = ({ children }: any) => {
   }
 
   // answers states
-  const [write, setWrite] = useState('')
+  const [writeAnswer, setWriteAnswer] = useState('')
+  const [selectedAnswer, setSelectedAnswer] = useState('')
+  const [selectedOrder, setSelectedOrder] = useState<string[]>([])
+  const [userPairs, setUserPairs] = useState<[string, string][]>([])
 
-  const check = () => {
-    return write === (curQuestion as WriteQuestion).content.correctAnswer
+  const checkAnswer = () => {
+    switch (curQuestion.type) {
+      case 'write': {
+        const { correctAnswer } = (curQuestion as WriteQuestion).content
+        return writeAnswer.trim() === correctAnswer
+      }
+
+      case 'select': {
+        const { correctAnswer } = (curQuestion as SelectQuestion).content
+        return selectedAnswer === correctAnswer
+      }
+
+      case 'order': {
+        const { correctOrder } = (curQuestion as OrderQuestion).content
+        return selectedOrder.join('') === correctOrder.join('')
+      }
+
+      case 'match': {
+        const { pairs } = (curQuestion as MatchQuestion).content
+        return JSON.stringify(userPairs) === JSON.stringify(pairs)
+      }
+
+      default:
+        return false
+    }
   }
 
   return (
     <quizContext.Provider
-      value={{ curQuestion, progressPercent, nextQuestion, setWrite, check }}>
+      value={{
+        curQuestion,
+        progressPercent,
+        nextQuestion,
+        setWriteAnswer,
+        setSelectedAnswer,
+        setSelectedOrder,
+        setUserPairs,
+        checkAnswer,
+      }}>
       {children}
     </quizContext.Provider>
   )
