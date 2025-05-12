@@ -6,14 +6,14 @@ import IconButton from '../components/IconButton'
 import useQuizPage from '@/hooks/useQuizPage'
 
 const QuizPage = () => {
-  const { questions } = useQuizPage()
+  const { questions, naivgateHomeHandle } = useQuizPage()
 
   return (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
       {/* Top */}
       <header className="flex h-18 items-end justify-center gap-6">
         <div className="flex items-center justify-center gap-6">
-          <IconButton>
+          <IconButton onClick={naivgateHomeHandle}>
             <X />
           </IconButton>
           <IconButton>

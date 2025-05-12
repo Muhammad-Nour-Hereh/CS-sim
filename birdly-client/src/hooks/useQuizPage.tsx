@@ -1,6 +1,10 @@
 import { Question } from '@/interfaces/question'
+import { ROUTES } from '@/objects/routes'
+import { useNavigate } from 'react-router-dom'
 
 const useQuizPage = () => {
+  const navigate = useNavigate()
+
   const questions: Question[] = [
     // Select Question
     {
@@ -48,7 +52,10 @@ const useQuizPage = () => {
     },
   ]
 
-  return { questions }
+  const naivgateHomeHandle = () => {
+    navigate(ROUTES.HOME)
+  }
+  return { questions, naivgateHomeHandle }
 }
 
 export default useQuizPage
