@@ -27,10 +27,16 @@ const useQuizPage = () => {
     setShowFeedback(false)
   }
 
+  const skipAnswer = () => {
+    setResult('wrong')
+    setShowFeedback(true)
+  }
+
   return {
     progressPercent,
     showFeedback,
     result,
+    skipAnswer,
     naivgateHomeHandle,
     checkHandle,
     FeedbackHandle,

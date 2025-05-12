@@ -11,6 +11,7 @@ const QuizPage = () => {
     progressPercent,
     showFeedback,
     result,
+    skipAnswer,
     naivgateHomeHandle,
     checkHandle,
     FeedbackHandle,
@@ -38,14 +39,14 @@ const QuizPage = () => {
 
       {/* Bottom */}
       <footer className="flex h-33 w-full items-center justify-evenly border-t-2">
-        <Button variant="ghost">Skip</Button>
+        <Button variant="ghost" onClick={skipAnswer}>Skip</Button>
         <Button onClick={checkHandle}>Check</Button>
       </footer>
 
       {showFeedback && (
         <AnswerFeedback variant={result} onContinue={FeedbackHandle} />
       )}
-      
+
     </div>
   )
 }

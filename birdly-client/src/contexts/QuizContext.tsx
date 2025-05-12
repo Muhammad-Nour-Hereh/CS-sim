@@ -88,6 +88,7 @@ const QuizProvider = ({ children }: any) => {
     if (matchAnswer.left !== '' && matchAnswer.right !== '')
       console.log(checkAnswer())
   }, [matchAnswer])
+  
   const checkAnswer = () => {
     switch (curQuestion.type) {
       case 'write': {
