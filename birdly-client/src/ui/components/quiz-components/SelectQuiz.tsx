@@ -3,14 +3,12 @@ import AnswerList from '../AnswerList'
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const SelectQuiz = () => {
-  const { curQuestion, setSelectAnswer: setSelectedAnswer }: QuizContext = useQuiz()
+  const { curQuestion, setSelectAnswer }: QuizContext = useQuiz()
 
   const {
     title,
-    content: { answers, correctAnswer },
+    content: { answers },
   } = curQuestion as SelectQuestion
-
-  console.log(correctAnswer)
 
   return (
     <>
@@ -19,7 +17,7 @@ const SelectQuiz = () => {
       <AnswerList
         items={answers}
         onItemClick={(_, item) => {
-          setSelectedAnswer(item)
+          setSelectAnswer(item)
         }}
       />
     </>

@@ -14,7 +14,7 @@ export type QuizContext = {
   setWriteAnswer: Function
   setSelectAnswer: Function
   setOrderAnswer: Function
-  setUserPairs: Function
+  setMatchAnswer: Function
   checkAnswer: Function
 }
 
@@ -79,9 +79,9 @@ const QuizProvider = ({ children }: any) => {
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
-  const [selectedAnswer, setSelectAnswer] = useState('')
-  const [selectedOrder, setOrderAnswer] = useState<string[]>([])
-  const [userPairs, setUserPairs] = useState<[string, string][]>([])
+  const [selectAnswer, setSelectAnswer] = useState('')
+  const [orderAnswer, setOrderAnswer] = useState<string[]>([])
+  const [userPairs, setMatchAnswer] = useState<[string, string][]>([])
 
   const checkAnswer = () => {
     switch (curQuestion.type) {
@@ -92,12 +92,12 @@ const QuizProvider = ({ children }: any) => {
 
       case 'select': {
         const { correctAnswer } = (curQuestion as SelectQuestion).content
-        return selectedAnswer === correctAnswer
+        return selectAnswer === correctAnswer
       }
 
       case 'order': {
         const { correctOrder } = (curQuestion as OrderQuestion).content
-        return selectedOrder.join('') === correctOrder.join('')
+        return orderAnswer.join('') === correctOrder.join('')
       }
 
       case 'match': {
@@ -119,7 +119,7 @@ const QuizProvider = ({ children }: any) => {
         setWriteAnswer,
         setSelectAnswer,
         setOrderAnswer,
-        setUserPairs,
+        setMatchAnswer,
         checkAnswer,
       }}>
       {children}

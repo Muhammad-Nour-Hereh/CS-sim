@@ -3,7 +3,7 @@ import { Input } from '../Input'
 import { useQuiz } from '@/contexts/QuizContext'
 
 const WriteQuiz = () => {
-  const { curQuestion, setWriteAnswer: setWrite } = useQuiz()
+  const { curQuestion, setWriteAnswer } = useQuiz()
 
   const { title } = curQuestion as WriteQuestion
 
@@ -14,7 +14,7 @@ const WriteQuiz = () => {
       <Input
         className="w-150"
         placeholder="write your solution"
-        setter={setWrite}
+        setter={setWriteAnswer}
       />
     </>
   )

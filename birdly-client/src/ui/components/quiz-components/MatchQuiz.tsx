@@ -3,7 +3,7 @@ import AnswerList from '../AnswerList'
 import { useQuiz } from '@/contexts/QuizContext'
 
 const MatchQuiz = () => {
-  const { curQuestion } = useQuiz()
+  const { curQuestion, setMatchAnswer } = useQuiz()
 
   const {
     title,
@@ -16,10 +16,22 @@ const MatchQuiz = () => {
       <h1 className="self-start text-2xl font-bold">{title}</h1>
       <div className="flex w-150 gap-4 py-4">
         <div className="flex flex-1 flex-col gap-4">
-          <AnswerList items={['a', 'b', 'c']} className="h-50 w-full" />
+          <AnswerList
+            items={['a', 'b', 'c']}
+            className="h-50 w-full"
+            onItemClick={(_, item) => {
+              setMatchAnswer(item)
+            }}
+          />
         </div>
         <div className="flex flex-1 flex-col gap-4">
-          <AnswerList items={['1', '2', '3']} className="h-50 w-full" />
+          <AnswerList
+            items={['1', '2', '3']}
+            className="h-50 w-full"
+            onItemClick={(_, item) => {
+              setMatchAnswer(item)
+            }}
+          />
         </div>
       </div>
 

@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 const useQuizPage = () => {
   const navigate = useNavigate()
 
-  const { progressPercent, nextQuestion, checkAnswer: check }: QuizContext = useQuiz()
+  const { progressPercent, nextQuestion, checkAnswer }: QuizContext = useQuiz()
 
   const naivgateHomeHandle = () => {
     navigate(ROUTES.HOME)
   }
 
   const checkHandle = () => {
-    console.log(check())
+    console.log(checkAnswer())
     nextQuestion()
   }
   return { progressPercent, naivgateHomeHandle, checkHandle }
