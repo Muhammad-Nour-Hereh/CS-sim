@@ -1,10 +1,12 @@
-import { Question } from '@/interfaces/question'
+import { Question, WriteQuestion } from '@/interfaces/question'
 import { createContext, useContext, useState } from 'react'
 
 export type QuizContext = {
   curQuestion: Question
   progressPercent: number
   nextQuestion: () => void
+  setWrite: Function
+  check: Function
 }
 
 const quizContext = createContext<QuizContext | undefined>(undefined)
@@ -66,9 +68,16 @@ const QuizProvider = ({ children }: any) => {
     setIndex(() => (index + 1) % questionCount)
   }
 
+  // answers states
+  const [write, setWrite] = useState('')
+
+  const check = () => {
+    return write === (curQuestion as WriteQuestion).content.correctAnswer
+  }
+
   return (
     <quizContext.Provider
-      value={{ curQuestion, progressPercent, nextQuestion }}>
+      value={{ curQuestion, progressPercent, nextQuestion, setWrite, check }}>
       {children}
     </quizContext.Provider>
   )

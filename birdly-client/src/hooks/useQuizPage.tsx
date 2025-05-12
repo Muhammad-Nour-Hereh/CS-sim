@@ -5,12 +5,17 @@ import { useNavigate } from 'react-router-dom'
 const useQuizPage = () => {
   const navigate = useNavigate()
 
-  const { progressPercent, nextQuestion }: QuizContext = useQuiz()
+  const { progressPercent, nextQuestion, check }: QuizContext = useQuiz()
 
   const naivgateHomeHandle = () => {
     navigate(ROUTES.HOME)
   }
-  return { progressPercent, nextQuestion, naivgateHomeHandle }
+
+  const checkHandle = () => {
+    console.log(check())
+    nextQuestion()
+  }
+  return { progressPercent, naivgateHomeHandle, checkHandle }
 }
 
 export default useQuizPage
