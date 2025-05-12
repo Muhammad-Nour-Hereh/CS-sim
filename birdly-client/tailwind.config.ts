@@ -10,6 +10,7 @@ const config: Config = {
         secondary: '#f59e0b',
         'secondary-foreground': '#000000',
         selected: '#FFAAFF',
+        'destructive-background': '#D84848',
       },
     },
   },

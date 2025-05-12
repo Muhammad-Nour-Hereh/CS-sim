@@ -4,12 +4,12 @@ import { CheckCircle, XCircle } from 'lucide-react'
 import { Button } from './Button'
 
 const feedbackVariants = cva(
-  'animate-slide-up fixed bottom-0 left-0 z-50 flex h-33 w-full items-center justify-around p-6 font-bold transition-all',
+  'fixed bottom-0 left-0 z-50 flex h-33 w-full items-center justify-around p-6 font-bold border-t-2 bg-[#202F36]',
   {
     variants: {
       variant: {
-        correct: 'bg-slate-800 text-primary',
-        wrong: 'bg-slate-800 text-destructive',
+        correct: 'text-primary',
+        wrong: 'text-destructive',
       },
     },
     defaultVariants: {
