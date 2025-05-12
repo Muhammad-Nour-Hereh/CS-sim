@@ -52,16 +52,16 @@ const QuizProvider = ({ children }: any) => {
   ]
 
   const questionCount = questions.length
-  const [curQuestion, setCurQuestion] = useState(0)
-
-  const progressPercent = curQuestion / questionCount
+  const [index, setIndex] = useState(0)
+  const curQuestion = questions[index]
+  const progressPercent = (index / questionCount) * 100
 
   const nextQuestion = () => {
-    setCurQuestion(() => (curQuestion + 1) % questionCount)
+    setIndex(() => (index + 1) % questionCount)
   }
 
   return (
-    <quizContext.Provider value={{ questions, progressPercent, nextQuestion }}>
+    <quizContext.Provider value={{ curQuestion, progressPercent, nextQuestion }}>
       {children}
     </quizContext.Provider>
   )

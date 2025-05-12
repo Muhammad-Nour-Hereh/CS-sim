@@ -6,7 +6,8 @@ import IconButton from '../components/IconButton'
 import useQuizPage from '@/hooks/useQuizPage'
 
 const QuizPage = () => {
-  const { questions, naivgateHomeHandle } = useQuizPage()
+  const { curQuestion, progressPercent, nextQuestion, naivgateHomeHandle } =
+    useQuizPage()
 
   return (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
@@ -19,19 +20,19 @@ const QuizPage = () => {
           <IconButton>
             <Settings />
           </IconButton>
-          <Progress value={30} />
+          <Progress value={progressPercent} />
         </div>
       </header>
 
       {/* Middle */}
       <main className="flex w-150 flex-1 flex-col items-center justify-around space-y-6">
-        <Quiz question={questions[3]} />
+        <Quiz question={curQuestion} />
       </main>
 
       {/* Bottom */}
       <footer className="flex h-33 w-full items-center justify-evenly border-t-2">
         <Button variant="ghost">Skip</Button>
-        <Button>Check</Button>
+        <Button onClick={nextQuestion}>Check</Button>
       </footer>
     </div>
   )
