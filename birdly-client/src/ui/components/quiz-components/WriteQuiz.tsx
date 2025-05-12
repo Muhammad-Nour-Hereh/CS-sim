@@ -1,12 +1,9 @@
+import { WriteQuestion } from "@/interfaces/question"
 import { Input } from "../Input"
 
-interface WriteQuizProps {
-  title: string
-  content: any
-}
-
-const WriteQuiz = ({ title, content }: WriteQuizProps) => {
-  console.log(content)
+const WriteQuiz = ({ question }: { question: WriteQuestion }) => {
+  const { title, content: { correctAnswer } } = question
+  console.log(correctAnswer)
 
   return (
     <>

@@ -1,24 +1,18 @@
-import React, { JSX } from 'react'
+import React from 'react'
 
 import MatchQuiz from './quiz-components/MatchQuiz'
 import OrderQuiz from './quiz-components/OrderQuiz'
 import SelectQuiz from './quiz-components/SelectQuiz'
 import WriteQuiz from './quiz-components/WriteQuiz'
+import { MatchQuestion, OrderQuestion, Question, SelectQuestion, WriteQuestion } from '@/interfaces/question'
 
-type QuizType = 'select' | 'match' | 'order' | 'write'
-
-interface QuizProps {
-  title: string
-  content: any
-  type?: QuizType
-}
-
-const Quiz: React.FC<QuizProps> = ({ title, content, type = 'select' }) => {
-  const quizComponents: Record<QuizType, JSX.Element> = {
-    select: <SelectQuiz title={title} content={content} />,
-    match: <MatchQuiz title={title} content={content} />,
-    order: <OrderQuiz title={title} content={content} />,
-    write: <WriteQuiz title={title} content={content} />,
+const Quiz: React.FC<Question> = (question: Question) => {
+  const { type } = question
+  const quizComponents = {
+    select: <SelectQuiz question={question as SelectQuestion} />,
+    match: <MatchQuiz question={question as MatchQuestion} />,
+    order: <OrderQuiz question={question as OrderQuestion} />,
+    write: <WriteQuiz question={question as WriteQuestion} />,
   }
 
   return quizComponents[type] || <p>Invalid quiz type: {type}</p>

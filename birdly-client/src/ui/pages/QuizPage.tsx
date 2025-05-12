@@ -3,8 +3,19 @@ import { Button } from '../components/Button'
 import { Progress } from '../components/Progress'
 import Quiz from '../components/Quiz'
 import IconButton from '../components/IconButton'
+import { SelectQuestion } from '@/interfaces/question'
 
 const QuizPage = () => {
+
+  const question: SelectQuestion = {
+    title: "question ?",
+    content: {
+      answers: ['a', 'b', 'c'],
+      correctAnswer: 'a'
+    },
+    type: 'select'
+  }
+
   return (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
       {/* Top */}
@@ -22,10 +33,7 @@ const QuizPage = () => {
 
       {/* Middle */}
       <main className="flex w-150 flex-1 flex-col items-center justify-around space-y-6">
-        <Quiz
-          title="question ?"
-          content={{ answers: ['a', 'b', 'c'] }}
-          type="order"
+        <Quiz question={question}
         />
       </main>
 

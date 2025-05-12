@@ -1,30 +1,41 @@
-export interface Question {
+export interface AbstractQuestion<TContent> {
   title: string
-  content: object
+  type: 'select' | 'write' | 'order' | 'match'
+  content: TContent
 }
 
-export interface SelectQuestion extends Question {
-  content: {
+export interface SelectQuestion
+  extends AbstractQuestion<{
     answers: string[]
     correctAnswer: string
-  }
+  }> {
+  type: 'select'
 }
 
-export interface WriteQuestion extends Question {
-  content: {
+export interface WriteQuestion
+  extends AbstractQuestion<{
     correctAnswer: string
-  }
+  }> {
+  type: 'write'
 }
 
-export interface OrderQuestion extends Question {
-  content: {
+export interface OrderQuestion
+  extends AbstractQuestion<{
     correctOrder: string[]
     pieces: string[]
-  }
+  }> {
+  type: 'order'
 }
 
-export interface MatchQuestion extends Question {
-  content: {
+export interface MatchQuestion
+  extends AbstractQuestion<{
     pairs: [string, string][]
-  }
+  }> {
+  type: 'match'
 }
+
+export type Question =
+  | SelectQuestion
+  | WriteQuestion
+  | OrderQuestion
+  | MatchQuestion

@@ -1,13 +1,10 @@
+import { SelectQuestion } from '@/interfaces/question'
 import AnswerList from '../AnswerList'
 
-interface SelectQuizProps {
-  title: string
-  content: any
-}
-
-const SelectQuiz = ({ title, content }: SelectQuizProps) => {
-  const { answers } = content
-
+const SelectQuiz = ({ question }: { question: SelectQuestion }) => {
+  const { title, content: { answers, correctAnswer } } = question
+  console.log(correctAnswer)
+  
   return (
     <>
       <p className="text-2xl font-extrabold">{title}</p>

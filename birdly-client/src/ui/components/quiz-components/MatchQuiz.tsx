@@ -1,14 +1,13 @@
-interface MatchQuizProps {
-  title: string
-  content: any
-}
+import { MatchQuestion } from "@/interfaces/question"
 
-const MatchQuiz = ({ title, content }: MatchQuizProps) => {
+const MatchQuiz = ({ question }: { question: MatchQuestion }) => {
+  const { title, content: { pairs } } = question
+  console.log(pairs)
   return (
     <>
       <h1>{title}</h1>
       <div>MatchQuiz </div>
-      <div>{content} </div>
+      {/* <div>{content[0][0]} </div> */}
     </>
   )
 }
