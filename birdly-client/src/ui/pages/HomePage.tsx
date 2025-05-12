@@ -1,8 +1,28 @@
 import useHomePage from '@/hooks/useHomePage'
 import Sidebar from '../components/Sidebar'
+import { useEffect, useRef, useState } from 'react'
 
 export const HomePage = () => {
   const { naivgateQuizHandle } = useHomePage()
+
+  const pathRef = useRef<SVGPathElement | null>(null)
+  const [positions, setPositions] = useState<{ x: number; y: number }[]>([])
+  const nodes = ['A', 'B', 'C', 'D', 'E']
+
+  useEffect(() => {
+    const path = pathRef.current
+    if (!path) return
+
+    const length = path.getTotalLength()
+    const segment = length / (nodes.length + 1)
+
+    const points = nodes.map((_, index) => {
+      const point = path.getPointAtLength(segment * (index + 1))
+      return { x: point.x, y: point.y }
+    })
+
+    setPositions(points)
+  }, [])
   return (
     <div className="flex h-screen w-screen">
       <aside className="w-56 bg-gray-900 text-white">
@@ -12,7 +32,46 @@ export const HomePage = () => {
       <main
         className="flex flex-1 flex-col items-center bg-blue-400"
         onClick={naivgateQuizHandle}>
-        map
+          
+        <div className="relative h-[600px] w-full bg-blue-400 text-white">
+          <h1 className="py-2 text-center">map</h1>
+
+          <svg
+            viewBox="0 0 600 600"
+            className="absolute top-0 left-1/2 h-[600px] w-[600px] -translate-x-1/2">
+            <path
+              ref={pathRef}
+              d="M 300 50 C 250 150, 250 250, 300 350 S 350 500, 300 600"
+              stroke="#fff"
+              strokeDasharray="10,10"
+              fill="none"
+            />
+
+            {positions.map((pos, idx) => (
+              <circle
+                key={idx}
+                cx={pos.x}
+                cy={pos.y}
+                r="20"
+                fill="#84cc16"
+                stroke="#000"
+              />
+            ))}
+
+            {positions.map((pos, idx) => (
+              <text
+                key={`label-${idx}`}
+                x={pos.x}
+                y={pos.y + 5}
+                textAnchor="middle"
+                fill="black"
+                fontSize="12"
+                fontWeight="bold">
+                {nodes[idx]}
+              </text>
+            ))}
+          </svg>
+        </div>
       </main>
 
       <section className="w-[240px] bg-gray-200">right section</section>
