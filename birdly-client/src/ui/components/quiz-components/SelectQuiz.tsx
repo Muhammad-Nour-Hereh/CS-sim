@@ -3,7 +3,7 @@ import AnswerList from '../AnswerList'
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const SelectQuiz = () => {
-  const { curQuestion }: QuizContext = useQuiz()
+  const { curQuestion, setSelectedAnswer }: QuizContext = useQuiz()
 
   const {
     title,
@@ -16,7 +16,12 @@ const SelectQuiz = () => {
     <>
       <p className="text-2xl font-extrabold">{title}</p>
 
-      <AnswerList items={answers} />
+      <AnswerList
+        items={answers}
+        onItemClick={(_, item) => {
+          setSelectedAnswer(item)
+        }}
+      />
     </>
   )
 }
