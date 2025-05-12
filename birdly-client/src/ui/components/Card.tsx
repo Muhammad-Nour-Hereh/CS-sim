@@ -37,7 +37,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        'relative flex h-32 w-full items-center justify-center rounded-lg transition-all duration-200',
+        'relative flex h-32 w-32 items-center justify-center rounded-lg transition-all duration-200',
         // Default variant
         currentVariant === 'default' &&
           'border border-dashed border-purple-500 bg-[#1a1f24] text-gray-500',
