@@ -25,7 +25,7 @@ const QuizPage = () => {
 
       {/* Middle */}
       <main className="flex w-150 flex-1 flex-col items-center justify-around space-y-6">
-        <Quiz question={questions[3]} />
+        <Quiz question={questions[2]} />
       </main>
 
       {/* Bottom */}
