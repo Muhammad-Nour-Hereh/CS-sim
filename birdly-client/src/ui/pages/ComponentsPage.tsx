@@ -36,7 +36,6 @@ const ComponentsPage = () => {
         variant="wrong"
         subtitle="5 words"
         onContinue={() => console.log('Continue clicked')}
-        onReport={() => console.log('Report clicked')}
       />
     </div>
     // </div>
