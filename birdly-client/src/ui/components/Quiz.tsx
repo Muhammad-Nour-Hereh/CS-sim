@@ -6,7 +6,11 @@ import SelectQuiz from './quiz-components/SelectQuiz'
 import WriteQuiz from './quiz-components/WriteQuiz'
 import { MatchQuestion, OrderQuestion, Question, SelectQuestion, WriteQuestion } from '@/interfaces/question'
 
-const Quiz: React.FC<Question> = (question: Question) => {
+interface QuizProps {
+  question: Question
+}
+
+const Quiz: React.FC<QuizProps> = ({ question }) => {
   const { type } = question
   const quizComponents = {
     select: <SelectQuiz question={question as SelectQuestion} />,

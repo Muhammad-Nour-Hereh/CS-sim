@@ -2,6 +2,7 @@ import { WriteQuestion } from "@/interfaces/question"
 import { Input } from "../Input"
 
 const WriteQuiz = ({ question }: { question: WriteQuestion }) => {
+  // prettier-ignore
   const { title, content: { correctAnswer } } = question
   console.log(correctAnswer)
 

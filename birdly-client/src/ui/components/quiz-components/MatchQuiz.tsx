@@ -1,6 +1,7 @@
 import { MatchQuestion } from "@/interfaces/question"
 
 const MatchQuiz = ({ question }: { question: MatchQuestion }) => {
+  // prettier-ignore
   const { title, content: { pairs } } = question
   console.log(pairs)
   return (

@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { Button } from '../Button'
-import { motion, AnimatePresence } from 'framer-motion'
+// import { useState } from 'react'
+// import { Button } from '../Button'
+// import { motion, AnimatePresence } from 'framer-motion'
 import { OrderQuestion } from '@/interfaces/question'
 
-
-
 const OrderQuiz = ({ question }: { question: OrderQuestion }) => {
+  // prettier-ignore
   const { title, content: { correctOrder, pieces } } = question
   console.log(title, correctOrder, pieces)
   return <></>

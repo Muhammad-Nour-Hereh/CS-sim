@@ -6,14 +6,13 @@ import IconButton from '../components/IconButton'
 import { SelectQuestion } from '@/interfaces/question'
 
 const QuizPage = () => {
-
   const question: SelectQuestion = {
-    title: "question ?",
+    title: 'question ?',
     content: {
       answers: ['a', 'b', 'c'],
-      correctAnswer: 'a'
+      correctAnswer: 'a',
     },
-    type: 'select'
+    type: 'select',
   }
 
   return (
@@ -33,8 +32,7 @@ const QuizPage = () => {
 
       {/* Middle */}
       <main className="flex w-150 flex-1 flex-col items-center justify-around space-y-6">
-        <Quiz question={question}
-        />
+        <Quiz question={question} />
       </main>
 
       {/* Bottom */}
