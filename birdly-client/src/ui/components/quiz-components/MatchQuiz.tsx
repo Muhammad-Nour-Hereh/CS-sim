@@ -10,8 +10,8 @@ const MatchQuiz = () => {
     content: { pairs },
   } = curQuestion as MatchQuestion
 
-  const left = pairs.map(pair => pair.left)
-  const right = pairs.map(pair => pair.right)
+  const left = pairs.map((pair) => pair.left)
+  const right = pairs.map((pair) => pair.right)
 
   return (
     <>
@@ -22,7 +22,7 @@ const MatchQuiz = () => {
             items={right}
             className="h-50 w-full"
             onItemClick={(_, item) => {
-              setMatchAnswer(([first] = ['', '']) => [first, item])
+              setMatchAnswer((prev: any) => ({ ...prev, right: item }))
             }}
           />
         </div>
@@ -31,7 +31,7 @@ const MatchQuiz = () => {
             items={left}
             className="h-50 w-full"
             onItemClick={(_, item) => {
-              setMatchAnswer(([_, second] = ['', '']) => [item, second])
+              setMatchAnswer((prev: any) => ({ ...prev, left: item }))
             }}
           />
         </div>
