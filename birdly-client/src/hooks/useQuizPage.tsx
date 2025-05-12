@@ -10,15 +10,31 @@ const useQuizPage = () => {
 
   const [showFeedback, setShowFeedback] = useState(false)
 
+  const [result, setResult] = useState<'correct' | 'wrong'>('correct')
+
   const naivgateHomeHandle = () => {
     navigate(ROUTES.HOME)
   }
 
   const checkHandle = () => {
-    console.log(checkAnswer())
-    nextQuestion()
+    const isCorrect = checkAnswer()
+    setResult(isCorrect ? 'correct' : 'wrong')
+    setShowFeedback(true)
   }
-  return { progressPercent, naivgateHomeHandle, checkHandle, showFeedback }
+
+  const FeedbackHandle = () => {
+    nextQuestion()
+    setShowFeedback(false)
+  }
+
+  return {
+    progressPercent,
+    showFeedback,
+    result,
+    naivgateHomeHandle,
+    checkHandle,
+    FeedbackHandle,
+  }
 }
 
 export default useQuizPage

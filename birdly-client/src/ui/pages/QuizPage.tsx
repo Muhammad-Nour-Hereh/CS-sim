@@ -7,8 +7,14 @@ import useQuizPage from '@/hooks/useQuizPage'
 import AnswerFeedback from '../components/AnswerFeedback'
 
 const QuizPage = () => {
-  const { progressPercent, checkHandle, naivgateHomeHandle, showFeedback } =
-    useQuizPage()
+  const {
+    progressPercent,
+    showFeedback,
+    result,
+    naivgateHomeHandle,
+    checkHandle,
+    FeedbackHandle,
+  } = useQuizPage()
 
   return (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
@@ -35,9 +41,11 @@ const QuizPage = () => {
         <Button variant="ghost">Skip</Button>
         <Button onClick={checkHandle}>Check</Button>
       </footer>
+
       {showFeedback && (
-        <AnswerFeedback variant="wrong" onContinue={checkHandle} />
+        <AnswerFeedback variant={result} onContinue={FeedbackHandle} />
       )}
+      
     </div>
   )
 }
