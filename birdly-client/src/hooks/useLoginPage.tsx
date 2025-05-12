@@ -18,7 +18,7 @@ const useLoginPage = () => {
     newErrors.password = validatePassword(password)
 
     setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+    return !Object.values(newErrors).some(error => error !== '')
   }
 
   // handles
