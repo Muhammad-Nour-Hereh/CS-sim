@@ -7,7 +7,7 @@ import { Circle } from '@/ui/components/Circle'
 import AnswerList from '@/ui/components/AnswerList'
 import Snippet from '@/ui/components/Snippet'
 import Card from '../components/Card'
-import Sidebar from '../components/Sidebar'
+// import Sidebar from '../components/Sidebar'
 import AnswerFeedback from '../components/AnswerFeedback'
 
 const ComponentsPage = () => {
@@ -33,7 +33,7 @@ const ComponentsPage = () => {
       <Snippet />
       <Card variant="highlighted" />
       <AnswerFeedback
-        variant="wrong"
+        variant="correct"
         subtitle="5 words"
         onContinue={() => console.log('Continue clicked')}
       />

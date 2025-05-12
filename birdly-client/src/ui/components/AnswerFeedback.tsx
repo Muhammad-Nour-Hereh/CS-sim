@@ -4,7 +4,7 @@ import { CheckCircle, XCircle } from 'lucide-react'
 import { Button } from './Button'
 
 const feedbackVariants = cva(
-  'flex w-full items-center justify-around p-6 font-bold animate-slide-up animate-slide-down transition-all',
+  'animate-slide-up fixed bottom-0 left-0 z-50 flex h-33 w-full items-center justify-around p-6 font-bold transition-all',
   {
     variants: {
       variant: {
@@ -35,27 +35,17 @@ function AnswerFeedback({
   const buttonVariant = variant === 'correct' ? 'default' : 'destructive'
 
   return (
-    <div
-      className={cn(
-        'fixed bottom-0 left-0 z-50 w-full',
-        feedbackVariants({ variant }),
-        className,
-      )}>
+    <div className={cn(feedbackVariants({ variant }), className)}>
       <div className="flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full">
-          <Icon className={'size-16'} />
-        </div>
+        <Icon className="flex size-16 h-10 w-10 items-center justify-center" />
         <div>
-          <h3 className="font-bold text-lg">{title}</h3>
-          {subtitle && <p className="text-sm text-slate-400">{subtitle}</p>}
+          <h3 className="text-2xl font-extrabold">{title}</h3>
+          {subtitle && <p className="text-sm text-slate-300">{subtitle}</p>}
         </div>
       </div>
-
-      {onContinue && (
-        <Button onClick={onContinue} variant={buttonVariant}>
-          CONTINUE
-        </Button>
-      )}
+      <Button onClick={onContinue} variant={buttonVariant}>
+        CONTINUE
+      </Button>
     </div>
   )
 }
