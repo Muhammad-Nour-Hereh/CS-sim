@@ -10,32 +10,32 @@ const MatchQuiz = () => {
     content: { pairs },
   } = curQuestion as MatchQuestion
 
-  console.log(pairs)
+  const left = pairs.map(pair => pair.left)
+  const right = pairs.map(pair => pair.right)
+
   return (
     <>
       <h1 className="self-start text-2xl font-bold">{title}</h1>
       <div className="flex w-150 gap-4 py-4">
         <div className="flex flex-1 flex-col gap-4">
           <AnswerList
-            items={['a', 'b', 'c']}
+            items={right}
             className="h-50 w-full"
             onItemClick={(_, item) => {
-              setMatchAnswer(item)
+              setMatchAnswer(([first] = ['', '']) => [first, item])
             }}
           />
         </div>
         <div className="flex flex-1 flex-col gap-4">
           <AnswerList
-            items={['1', '2', '3']}
+            items={left}
             className="h-50 w-full"
             onItemClick={(_, item) => {
-              setMatchAnswer(item)
+              setMatchAnswer(([_, second] = ['', '']) => [item, second])
             }}
           />
         </div>
       </div>
-
-      {/* <div>{content[0][0]} </div> */}
     </>
   )
 }

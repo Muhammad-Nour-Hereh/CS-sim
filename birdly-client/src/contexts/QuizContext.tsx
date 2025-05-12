@@ -5,7 +5,7 @@ import {
   SelectQuestion,
   WriteQuestion,
 } from '@/interfaces/question'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 export type QuizContext = {
   curQuestion: Question
@@ -57,11 +57,11 @@ const QuizProvider = ({ children }: any) => {
       title: 'Match each Python variable type with its corresponding example.',
       content: {
         pairs: [
-          ['int', '42'],
-          ['float', '3.14'],
-          ['str', "'hello'"],
-          ['list', '[1, 2, 3]'],
-          ['dict', "{'key': 'value'}"],
+          { left: 'int', right: '42', selected: false },
+          { left: 'float', right: '3.14', selected: false },
+          { left: 'str', right: "'hello'", selected: false },
+          { left: 'list', right: '[1, 2, 3]', selected: false },
+          { left: 'dict', right: "{'key': 'value'}", selected: false },
         ],
       },
       type: 'match',
@@ -81,8 +81,13 @@ const QuizProvider = ({ children }: any) => {
   const [writeAnswer, setWriteAnswer] = useState('')
   const [selectAnswer, setSelectAnswer] = useState('')
   const [orderAnswer, setOrderAnswer] = useState<string[]>([])
-  const [userPairs, setMatchAnswer] = useState<[string, string][]>([])
+  const [matchAnswer, setMatchAnswer] = useState<[string, string]>(['', ''])
 
+  useEffect(() => {
+    console.log(matchAnswer)
+    if (matchAnswer[0] !== '' && matchAnswer[1] !== '')
+      console.log(checkAnswer())
+  }, [matchAnswer])
   const checkAnswer = () => {
     switch (curQuestion.type) {
       case 'write': {
@@ -102,7 +107,12 @@ const QuizProvider = ({ children }: any) => {
 
       case 'match': {
         const { pairs } = (curQuestion as MatchQuestion).content
-        return JSON.stringify(userPairs) === JSON.stringify(pairs)
+        const match = pairs.some(
+          ({ left, right }) =>
+            left === matchAnswer?.[0] && right === matchAnswer?.[1],
+        )
+        setMatchAnswer(['', ''])
+        return match
       }
 
       default:
