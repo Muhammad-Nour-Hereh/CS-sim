@@ -113,6 +113,11 @@ const Sidebar = () => {
               className="block py-2 text-sm text-white hover:text-gray-300">
               About
             </a>
+            <a
+              onClick={() => navigate(ROUTES.LOGIN)}
+              className="block py-2 text-sm text-white hover:text-gray-300">
+              Logout
+            </a>
           </div>
         )}
       </nav>
