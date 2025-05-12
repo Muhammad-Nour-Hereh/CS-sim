@@ -1,13 +1,14 @@
+import { MatchQuestion } from '@/interfaces/question'
 import AnswerList from '../AnswerList'
 import { useQuiz } from '@/contexts/QuizContext'
 
 const MatchQuiz = () => {
+  const { curQuestion } = useQuiz()
+
   const {
-    curQuestion: {
-      title,
-      content: { pairs },
-    },
-  }: any = useQuiz()
+    title,
+    content: { pairs },
+  } = curQuestion as MatchQuestion
 
   console.log(pairs)
   return (

@@ -1,14 +1,15 @@
+import { SelectQuestion } from '@/interfaces/question'
 import AnswerList from '../AnswerList'
-import { useQuiz } from '@/contexts/QuizContext'
+import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const SelectQuiz = () => {
+  const { curQuestion }: QuizContext = useQuiz()
+
   const {
-    curQuestion: {
-      title,
-      content: { answers, correctAnswer },
-    },
-  }: any = useQuiz()
-  
+    title,
+    content: { answers, correctAnswer },
+  } = curQuestion as SelectQuestion
+
   console.log(correctAnswer)
 
   return (

@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { Button } from '../Button'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useQuiz } from '@/contexts/QuizContext'
+import { OrderQuestion } from '@/interfaces/question'
 
 const OrderQuiz = () => {
+  const { curQuestion } = useQuiz()
+
   const {
-    curQuestion: {
-      title,
-      content: { correctOrder, pieces },
-    },
-  }: any = useQuiz()
+    title,
+    content: { correctOrder, pieces },
+  } = curQuestion as OrderQuestion
 
   console.log(title, correctOrder, pieces)
 
