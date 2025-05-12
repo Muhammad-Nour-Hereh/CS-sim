@@ -33,10 +33,8 @@ const ComponentsPage = () => {
       <Snippet />
       <Card variant="highlighted" />
       <AnswerFeedback
-        variant="error"
-        title="Correct solution:"
+        variant="wrong"
         subtitle="5 words"
-        rating="★★☆"
         onContinue={() => console.log('Continue clicked')}
         onReport={() => console.log('Report clicked')}
       />
