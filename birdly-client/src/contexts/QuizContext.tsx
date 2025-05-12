@@ -81,11 +81,11 @@ const QuizProvider = ({ children }: any) => {
   const [writeAnswer, setWriteAnswer] = useState('')
   const [selectAnswer, setSelectAnswer] = useState('')
   const [orderAnswer, setOrderAnswer] = useState<string[]>([])
-  const [matchAnswer, setMatchAnswer] = useState<[string, string]>(['', ''])
+  const [matchAnswer, setMatchAnswer] = useState({ left: '', right: '' })
 
   useEffect(() => {
     console.log(matchAnswer)
-    if (matchAnswer[0] !== '' && matchAnswer[1] !== '')
+    if (matchAnswer.left !== '' && matchAnswer.right !== '')
       console.log(checkAnswer())
   }, [matchAnswer])
   const checkAnswer = () => {
@@ -110,7 +110,7 @@ const QuizProvider = ({ children }: any) => {
 
         const matchIndex = pairs.findIndex(
           ({ left, right }) =>
-            left === matchAnswer?.[0] && right === matchAnswer?.[1],
+            left === matchAnswer.left && right === matchAnswer.right,
         )
 
         if (matchIndex !== -1) {
@@ -119,7 +119,7 @@ const QuizProvider = ({ children }: any) => {
         }
 
         const match = matchIndex !== -1
-        setMatchAnswer(['', '']) // Reset selection
+        setMatchAnswer({ left: '', right: '' }) // Reset selection
         return match
       }
 
