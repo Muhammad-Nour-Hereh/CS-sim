@@ -12,8 +12,8 @@ export type QuizContext = {
   progressPercent: number
   nextQuestion: () => void
   setWriteAnswer: Function
-  setSelectedAnswer: Function
-  setSelectedOrder: Function
+  setSelectAnswer: Function
+  setOrderAnswer: Function
   setUserPairs: Function
   checkAnswer: Function
 }
@@ -79,8 +79,8 @@ const QuizProvider = ({ children }: any) => {
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
-  const [selectedAnswer, setSelectedAnswer] = useState('')
-  const [selectedOrder, setSelectedOrder] = useState<string[]>([])
+  const [selectedAnswer, setSelectAnswer] = useState('')
+  const [selectedOrder, setOrderAnswer] = useState<string[]>([])
   const [userPairs, setUserPairs] = useState<[string, string][]>([])
 
   const checkAnswer = () => {
@@ -117,8 +117,8 @@ const QuizProvider = ({ children }: any) => {
         progressPercent,
         nextQuestion,
         setWriteAnswer,
-        setSelectedAnswer,
-        setSelectedOrder,
+        setSelectAnswer,
+        setOrderAnswer,
         setUserPairs,
         checkAnswer,
       }}>

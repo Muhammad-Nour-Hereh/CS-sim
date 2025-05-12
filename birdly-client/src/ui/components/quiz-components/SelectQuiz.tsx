@@ -3,7 +3,7 @@ import AnswerList from '../AnswerList'
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const SelectQuiz = () => {
-  const { curQuestion, setSelectedAnswer }: QuizContext = useQuiz()
+  const { curQuestion, setSelectAnswer: setSelectedAnswer }: QuizContext = useQuiz()
 
   const {
     title,

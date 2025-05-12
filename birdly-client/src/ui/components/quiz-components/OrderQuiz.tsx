@@ -1,21 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../Button'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useQuiz } from '@/contexts/QuizContext'
 import { OrderQuestion } from '@/interfaces/question'
 
 const OrderQuiz = () => {
-  const { curQuestion } = useQuiz()
+  const { curQuestion, setOrderAnswer } = useQuiz()
 
   const {
     title,
-    content: { correctOrder, pieces },
+    content: { pieces },
   } = curQuestion as OrderQuestion
-
-  console.log(title, correctOrder, pieces)
 
   const [topButtons, setTopButtons] = useState<string[]>([])
   const [bottomButtons, setBottomButtons] = useState(pieces)
+
+  useEffect(() => {
+    setOrderAnswer(topButtons)
+    console.log(topButtons)
+  }, [topButtons])
 
   const moveButton = (label: string, fromTop: boolean) => {
     if (fromTop) {
