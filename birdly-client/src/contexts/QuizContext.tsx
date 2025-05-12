@@ -71,7 +71,7 @@ export const useQuiz = () => {
   const context = useContext(quizContext)
 
   if (!context) {
-    throw Error('IsQuiz hook can only be used in an QuizProvider context')
+    throw Error('useQuiz hook can only be used in an QuizProvider context')
   }
 
   return context
