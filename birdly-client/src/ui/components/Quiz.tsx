@@ -1,22 +1,19 @@
-import React from 'react'
-
 import MatchQuiz from './quiz-components/MatchQuiz'
 import OrderQuiz from './quiz-components/OrderQuiz'
 import SelectQuiz from './quiz-components/SelectQuiz'
 import WriteQuiz from './quiz-components/WriteQuiz'
-import { MatchQuestion, OrderQuestion, Question, SelectQuestion, WriteQuestion } from '@/interfaces/question'
+import { useQuiz } from '@/contexts/QuizContext'
 
-interface QuizProps {
-  question: Question
-}
-
-const Quiz: React.FC<QuizProps> = ({ question }) => {
-  const { type } = question
+const Quiz = () => {
+  const {
+    curQuestion: { type },
+  }: any = useQuiz()
+  
   const quizComponents = {
-    select: <SelectQuiz question={question as SelectQuestion} />,
-    match: <MatchQuiz question={question as MatchQuestion} />,
-    order: <OrderQuiz question={question as OrderQuestion} />,
-    write: <WriteQuiz question={question as WriteQuestion} />,
+    select: <SelectQuiz />,
+    match: <MatchQuiz />,
+    order: <OrderQuiz />,
+    write: <WriteQuiz />,
   }
 
   return quizComponents[type] || <p>Invalid quiz type: {type}</p>

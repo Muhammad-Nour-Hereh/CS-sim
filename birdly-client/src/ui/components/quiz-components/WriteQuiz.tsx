@@ -1,9 +1,13 @@
-import { WriteQuestion } from "@/interfaces/question"
-import { Input } from "../Input"
+import { Input } from '../Input'
+import { useQuiz } from '@/contexts/QuizContext'
 
-const WriteQuiz = ({ question }: { question: WriteQuestion }) => {
-  // prettier-ignore
-  const { title, content: { correctAnswer } } = question
+const WriteQuiz = () => {
+  const {
+    curQuestion: {
+      title,
+      content: { correctAnswer },
+    },
+  }: any = useQuiz()
   console.log(correctAnswer)
 
   return (
