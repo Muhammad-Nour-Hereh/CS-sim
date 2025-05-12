@@ -107,11 +107,19 @@ const QuizProvider = ({ children }: any) => {
 
       case 'match': {
         const { pairs } = (curQuestion as MatchQuestion).content
-        const match = pairs.some(
+
+        const matchIndex = pairs.findIndex(
           ({ left, right }) =>
             left === matchAnswer?.[0] && right === matchAnswer?.[1],
         )
-        setMatchAnswer(['', ''])
+
+        if (matchIndex !== -1) {
+          // Mark as selected
+          pairs[matchIndex].selected = true
+        }
+
+        const match = matchIndex !== -1
+        setMatchAnswer(['', '']) // Reset selection
         return match
       }
 
