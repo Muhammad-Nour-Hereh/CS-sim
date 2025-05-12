@@ -1,7 +1,13 @@
 import { Question } from '@/interfaces/question'
 import { createContext, useContext, useState } from 'react'
 
-const quizContext = createContext({})
+export type QuizContext = {
+  curQuestion: Question
+  progressPercent: number
+  nextQuestion: () => void
+}
+
+const quizContext = createContext<QuizContext | undefined>(undefined)
 
 const QuizProvider = ({ children }: any) => {
   const questions: Question[] = [
@@ -61,13 +67,14 @@ const QuizProvider = ({ children }: any) => {
   }
 
   return (
-    <quizContext.Provider value={{ curQuestion, progressPercent, nextQuestion }}>
+    <quizContext.Provider
+      value={{ curQuestion, progressPercent, nextQuestion }}>
       {children}
     </quizContext.Provider>
   )
 }
 
-export const useQuiz = () => {
+export const useQuiz = (): QuizContext => {
   const context = useContext(quizContext)
 
   if (!context) {

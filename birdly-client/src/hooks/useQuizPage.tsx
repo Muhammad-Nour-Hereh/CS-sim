@@ -1,11 +1,11 @@
-import { useQuiz } from '@/contexts/QuizContext'
+import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 import { ROUTES } from '@/objects/routes'
 import { useNavigate } from 'react-router-dom'
 
 const useQuizPage = () => {
   const navigate = useNavigate()
 
-  const { progressPercent, nextQuestion }: any = useQuiz()
+  const { progressPercent, nextQuestion }: QuizContext = useQuiz()
 
   const naivgateHomeHandle = () => {
     navigate(ROUTES.HOME)

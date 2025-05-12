@@ -2,12 +2,12 @@ import MatchQuiz from './quiz-components/MatchQuiz'
 import OrderQuiz from './quiz-components/OrderQuiz'
 import SelectQuiz from './quiz-components/SelectQuiz'
 import WriteQuiz from './quiz-components/WriteQuiz'
-import { useQuiz } from '@/contexts/QuizContext'
+import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const Quiz = () => {
   const {
     curQuestion: { type },
-  }: any = useQuiz()
+  }: QuizContext = useQuiz()
   
   const quizComponents = {
     select: <SelectQuiz />,
