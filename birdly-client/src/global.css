@@ -5,11 +5,11 @@
   --primary-foreground: #507725;
   --primary-shade: #6aa32d;
   --destructive: #ee5555;
-  --destructive-shade: #d84848;
+  --destructive-background: #D84848;
   --selected: #202f36;
   --selected-border: #3f85a7;
   --selected-foreground: #3f85a7;
-  --border: #37464f;
+  --border: #1a2024;
 
   --font-sans: 'Nunito', sans-serif;
 }
@@ -27,4 +27,34 @@ input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px #1e293b inset !important; /* your dark bg */
   -webkit-text-fill-color: #f1f5f9 !important; /* your text color */
   transition: background-color 9999s ease-in-out 0s;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
 }

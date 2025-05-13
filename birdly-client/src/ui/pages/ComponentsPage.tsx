@@ -7,32 +7,38 @@ import { Circle } from '@/ui/components/Circle'
 import AnswerList from '@/ui/components/AnswerList'
 import Snippet from '@/ui/components/Snippet'
 import Card from '../components/Card'
-import Sidebar from '../components/Sidebar'
+// import Sidebar from '../components/Sidebar'
+import AnswerFeedback from '../components/AnswerFeedback'
 
 const ComponentsPage = () => {
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="bg center flex flex-1 flex-col items-center gap-2 p-4 lg:ml-56">
-        <MyComponent />
+    // <div className="flex">
+    //  <Sidebar />
+    <div className="bg center flex flex-1 flex-col items-center gap-2 p-4">
+      <MyComponent />
 
-        <Button onClick={() => console.log('clicked')}>Button</Button>
-        <Button variant="outline">Button</Button>
-        <Button variant="destructive">Button</Button>
-        <Button variant="secondary">Button</Button>
-        <Button variant="ghost">Button</Button>
-        <Button variant="link">Button</Button>
-        <Button variant="muted">Button</Button>
+      <Button onClick={() => console.log('clicked')}>Button</Button>
+      <Button variant="outline">Button</Button>
+      <Button variant="destructive">Button</Button>
+      <Button variant="secondary">Button</Button>
+      <Button variant="ghost">Button</Button>
+      <Button variant="link">Button</Button>
+      <Button variant="muted">Button</Button>
 
-        <Progress value={30} />
-        <Input placeholder="edit" />
-        <Separator />
-        <Circle>A</Circle>
-        <AnswerList items={['First', 'Second', 'Theird']} />
-        <Snippet />
-        <Card variant="highlighted" />
-      </div>
+      <Progress value={30} />
+      <Input placeholder="edit" />
+      <Separator />
+      <Circle>A</Circle>
+      <AnswerList items={['First', 'Second', 'Theird']} />
+      <Snippet />
+      <Card variant="highlighted" />
+      <AnswerFeedback
+        variant="correct"
+        subtitle="5 words"
+        onContinue={() => console.log('Continue clicked')}
+      />
     </div>
+    // </div>
   )
 }
 

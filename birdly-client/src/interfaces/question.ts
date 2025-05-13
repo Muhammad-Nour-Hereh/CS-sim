@@ -29,7 +29,7 @@ export interface OrderQuestion
 
 export interface MatchQuestion
   extends AbstractQuestion<{
-    pairs: [string, string][]
+    pairs: { left: string; right: string; selected: boolean }[]
   }> {
   type: 'match'
 }

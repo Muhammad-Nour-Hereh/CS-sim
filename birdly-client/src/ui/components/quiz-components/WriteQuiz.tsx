@@ -1,16 +1,21 @@
-import { WriteQuestion } from "@/interfaces/question"
-import { Input } from "../Input"
+import { WriteQuestion } from '@/interfaces/question'
+import { Input } from '../Input'
+import { useQuiz } from '@/contexts/QuizContext'
 
-const WriteQuiz = ({ question }: { question: WriteQuestion }) => {
-  // prettier-ignore
-  const { title, content: { correctAnswer } } = question
-  console.log(correctAnswer)
+const WriteQuiz = () => {
+  const { curQuestion, setWriteAnswer } = useQuiz()
+
+  const { title } = curQuestion as WriteQuestion
 
   return (
     <>
       <p className="text-2xl font-extrabold">{title}</p>
 
-      <Input className="w-150" placeholder="write your solution" />
+      <Input
+        className="w-150"
+        placeholder="write your solution"
+        setter={setWriteAnswer}
+      />
     </>
   )
 }

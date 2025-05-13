@@ -1,22 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../Button'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useQuiz } from '@/contexts/QuizContext'
 import { OrderQuestion } from '@/interfaces/question'
 
-const OrderQuiz = ({ question }: { question: OrderQuestion }) => {
-  // prettier-ignore
-  const { title, content: { correctOrder, pieces } } = question
-  console.log(title, correctOrder, pieces)
+const OrderQuiz = () => {
+  const { curQuestion, setOrderAnswer } = useQuiz()
+
+  const {
+    title,
+    content: { pieces },
+  } = curQuestion as OrderQuestion
 
   const [topButtons, setTopButtons] = useState<string[]>([])
   const [bottomButtons, setBottomButtons] = useState(pieces)
 
+  useEffect(() => {
+    setOrderAnswer(topButtons)
+    console.log(topButtons)
+  }, [topButtons])
+
   const moveButton = (label: string, fromTop: boolean) => {
     if (fromTop) {
       setTopButtons((prev) => prev.filter((l) => l !== label))
-      setBottomButtons((prev) => [...prev, label])
+      setBottomButtons((prev: any) => [...prev, label])
     } else {
-      setBottomButtons((prev) => prev.filter((l) => l !== label))
+      setBottomButtons((prev: any[]) => prev.filter((l) => l !== label))
       setTopButtons((prev) => [...prev, label])
     }
   }
@@ -52,7 +61,7 @@ const OrderQuiz = ({ question }: { question: OrderQuestion }) => {
 
       <div className="mt-4 flex w-[600px] flex-wrap gap-2">
         <AnimatePresence>
-          {bottomButtons.map((label) => (
+          {bottomButtons.map((label: any) => (
             <motion.div
               key={label}
               layout
