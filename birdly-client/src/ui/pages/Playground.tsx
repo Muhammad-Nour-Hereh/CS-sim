@@ -60,6 +60,7 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
               <ArrowLeft />
             </IconButton>
+
             <div
               className="bg-selected flex items-center text-gray-500 hover:brightness-140 active:brightness-90"
               onClick={createSnippetHandle}>
@@ -69,7 +70,7 @@ const Playground = () => {
               <span className="font-bold">create new</span>
             </div>
 
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-1 flex-col gap-3 overflow-y-auto">
               {snippets.map((snippet: any, index: number) => {
                 const isSelected = selectedIndex === index
                 return (
@@ -84,6 +85,7 @@ const Playground = () => {
               })}
             </ul>
           </aside>
+
           <div
             onMouseDown={onMouseDown('splitV')}
             className="w-6 cursor-col-resize"
