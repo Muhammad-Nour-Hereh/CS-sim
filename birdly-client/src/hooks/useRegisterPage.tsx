@@ -1,4 +1,5 @@
 import { ROUTES } from '@/objects/routes'
+import { remote } from '@/remotes/remotes'
 import {
   validateConfirmPassword,
   validateEmail,
@@ -28,28 +29,28 @@ const useRegisterPage = () => {
     newErrors.repassword = validateConfirmPassword(password, repassword)
 
     setErrors(newErrors)
-    return !Object.values(newErrors).some(error => error !== '')
+    return !Object.values(newErrors).some((error) => error !== '')
   }
 
   // handles
   const RegisterHandle = async () => {
     if (!validateForm()) return
 
-    // try {
-    //   const res = await remote.login(email, password)
-    //   if (!res.success) {
-    //     setErrors({ general: res.message || 'Invalid login credentials' })
-    //     return
-    //   }
+    try {
+      const res = await remote.register(name, email, password)
+      if (!res.success) {
+        setErrors({ general: res.message || 'Invalid login credentials' })
+        return
+      }
 
-    //   if (!res.payload.access_token) return
+      if (!res.data) return
 
-    //   localStorage.setItem('access_token', res.payload.access_token)
+      localStorage.setItem('access_token', res.data)
 
-    //   navigate('/home')
-    // } catch (error) {
-    //   setErrors({ general: 'Login failed. Please try again.' })
-    // }
+      navigate('/home')
+    } catch (error) {
+      setErrors({ general: 'Login failed. Please try again.' })
+    }
 
     navigate(ROUTES.HOME)
   }
