@@ -25,6 +25,7 @@ const Playground = () => {
     snippetSelectHandle,
     ChangeNameHandle,
     saveHandle,
+    createSnippetHandle,
   } = usePlayground()
 
   return (
@@ -59,7 +60,9 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
               <ArrowLeft />
             </IconButton>
-            <div className="bg-selected flex items-center text-gray-500 hover:brightness-140 active:brightness-90">
+            <div
+              className="bg-selected flex items-center text-gray-500 hover:brightness-140 active:brightness-90"
+              onClick={createSnippetHandle}>
               <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
                 <Plus />
               </IconButton>

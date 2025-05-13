@@ -122,6 +122,9 @@ const usePlayground = () => {
   const saveHandle = () => {
     updateSnippet(title, code)
   }
+  const createSnippetHandle = () => {
+    console.log('createSnippetHandle')
+  }
 
   // useEffect
   useEffect(() => {
@@ -162,7 +165,8 @@ const usePlayground = () => {
     navigateHomeHandle,
     snippetSelectHandle,
     ChangeNameHandle,
-    saveHandle
+    saveHandle,
+    createSnippetHandle,
   }
 }
 
