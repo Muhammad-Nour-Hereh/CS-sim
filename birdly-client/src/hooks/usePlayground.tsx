@@ -124,7 +124,7 @@ const usePlayground = () => {
   }
   const createSnippetHandle = () => {
     console.log('createSnippetHandle')
-    remote.snippet.create('titl', 'code', 'lang')
+    remote.snippet.create('snippet', 'python', '# try print("hello, birdly")')
   }
 
   // useEffect
