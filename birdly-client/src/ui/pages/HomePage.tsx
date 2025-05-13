@@ -3,9 +3,9 @@ import Sidebar from '../components/Sidebar'
 import { useEffect, useRef, useState } from 'react'
 import { Circle } from '../components/Circle'
 
-const MAP_WIDTH = 1000
-const MAP_HEIGHT = 1000
-const CIRCLE_SIZE = 40
+const MAP_WIDTH = 800 // Can be any size
+const MAP_HEIGHT = 1500
+const CIRCLE_SIZE = 64
 
 export const HomePage = () => {
   const { naivgateQuizHandle } = useHomePage()
@@ -21,23 +21,16 @@ export const HomePage = () => {
     const svg = svgRef.current
     if (!path || !svg) return
 
-    const bbox = svg.getBoundingClientRect()
-
     const length = path.getTotalLength()
     const segment = length / (nodes.length + 1)
 
     const points = nodes.map((_, index) => {
-      const point = path.getPointAtLength(segment * (index + 1))
-      return {
-        x: (point.x / MAP_WIDTH) * bbox.width,
-        y: (point.y / MAP_HEIGHT) * bbox.height,
-      }
+      const p = path.getPointAtLength(segment * (index + 1))
+      return { x: p.x, y: p.y }
     })
 
     setPositions(points)
   }, [])
-
-  const offset = CIRCLE_SIZE / 2
 
   return (
     <div className="flex h-screen w-screen">
@@ -45,46 +38,48 @@ export const HomePage = () => {
         <Sidebar />
       </aside>
 
-      <main className="flex flex-1 flex-col items-center bg-blue-400">
-        <div className="relative w-full aspect-square max-w-[90vmin]">
-          <h1 className="py-2 text-center">map</h1>
-
+      <main className="flex flex-1 flex-col items-center overflow-hidden bg">
+        <h1 className="bg-primary m-10 rounded-full p-10 px-30 py-2 text-center text-4xl font-bold">
+          Section 1
+        </h1>
+        <div
+          className={`relative h-fit w-full max-w-[90vmin]`}
+          style={{
+            aspectRatio: `${MAP_WIDTH} / ${MAP_HEIGHT}`,
+          }}>
           {/* SVG */}
           <svg
             ref={svgRef}
             viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
             preserveAspectRatio="xMidYMid meet"
-            className="absolute top-0 left-0 h-full w-full z-0"
-          >
+            className="absolute top-0 left-0 z-0 h-full w-full">
             <path
               ref={pathRef}
-              d="M 300 50 C 250 150, 250 250, 300 350 S 350 500, 300 600"
+              d="M 400 50 C 300 150, 300 250, 400 350 S 500 500, 400 600"
               stroke="#fff"
               strokeDasharray="10,10"
               fill="none"
             />
           </svg>
-
-          {/* Overlay buttons */}
+          {/* Circles */}
           {positions.map((pos, idx) => (
             <Circle
               key={idx}
               style={{
                 position: 'absolute',
-                left: `${pos.x - offset}px`,
-                top: `${pos.y - offset}px`,
+                left: `calc(${(pos.x / MAP_WIDTH) * 100}% - ${CIRCLE_SIZE / 2}px)`,
+                top: `calc(${(pos.y / MAP_HEIGHT) * 100}% - ${CIRCLE_SIZE / 2}px)`,
                 width: `${CIRCLE_SIZE}px`,
                 height: `${CIRCLE_SIZE}px`,
               }}
-              onClick={() => console.log(`Clicked node ${nodes[idx]}`)}
-            >
+              onClick={naivgateQuizHandle}>
               {nodes[idx]}
             </Circle>
           ))}
         </div>
       </main>
 
-      <section className="w-[240px] bg-gray-200">right section</section>
+      {/* <section className="w-[240px] bg-gray-200">right section</section> */}
     </div>
   )
 }
