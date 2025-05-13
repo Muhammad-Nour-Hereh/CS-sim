@@ -127,6 +127,10 @@ const usePlayground = () => {
     remote.snippet.create('snippet', 'python', '# try print("hello, birdly")')
   }
 
+  const deleteSnippetHandle = (id: number) => {
+    remote.snippet.delete(id)
+  }
+
   // useEffect
   useEffect(() => {
     if (snippets.length === 0) return
@@ -168,6 +172,7 @@ const usePlayground = () => {
     ChangeNameHandle,
     saveHandle,
     createSnippetHandle,
+    deleteSnippetHandle,
   }
 }
 
