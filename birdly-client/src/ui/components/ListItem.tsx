@@ -1,13 +1,39 @@
 import { cn } from '@/lib/utils'
+import { useState, useRef, useEffect } from 'react'
 
-interface props extends React.HTMLAttributes<HTMLLIElement>{
+interface Props extends React.HTMLAttributes<HTMLLIElement> {
   children: string
   isSelected?: boolean
+  onValueChange?: (newValue: string) => void
 }
 
-const ListItem = ({ children, isSelected, ...props }: props) => {
+const ListItem = ({ children, isSelected, onValueChange, ...props }: Props) => {
+  const [isEditing, setIsEditing] = useState(false)
+  const [value, setValue] = useState(children)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [isEditing])
+
+  const handleDoubleClick = () => setIsEditing(true)
+
+  const handleBlur = () => {
+    setIsEditing(false)
+    onValueChange?.(value)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      inputRef.current?.blur()
+    }
+  }
+
   return (
     <li
+      onDoubleClick={handleDoubleClick}
       className={cn(
         'bg-selected flex h-14 items-center rounded-2xl border-2 p-4',
         'cursor-pointer text-xl font-semibold',
@@ -15,7 +41,18 @@ const ListItem = ({ children, isSelected, ...props }: props) => {
         isSelected ? 'border-slate-500' : '',
       )}
       {...props}>
-      {children}
+      {isEditing ? (
+        <input
+          ref={inputRef}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          className="w-full bg-transparent outline-none"
+        />
+      ) : (
+        value
+      )}
     </li>
   )
 }
