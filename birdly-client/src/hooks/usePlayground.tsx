@@ -119,6 +119,10 @@ const usePlayground = () => {
     updateSnippet(value, code)
   }
 
+  const saveHandle = () => {
+    updateSnippet(title, code)
+  }
+
   // useEffect
   useEffect(() => {
     if (snippets.length === 0) return
@@ -158,6 +162,7 @@ const usePlayground = () => {
     navigateHomeHandle,
     snippetSelectHandle,
     ChangeNameHandle,
+    saveHandle
   }
 }
 

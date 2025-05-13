@@ -24,6 +24,7 @@ const Playground = () => {
     navigateHomeHandle,
     snippetSelectHandle,
     ChangeNameHandle,
+    saveHandle,
   } = usePlayground()
 
   return (
@@ -39,7 +40,7 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={runHandle}>
               <Play />
             </IconButton>
-            <IconButton className="text-gray-500" onClick={navigateHomeHandle}>
+            <IconButton className="text-gray-500" onClick={saveHandle}>
               <Save />
             </IconButton>
             <IconButton className="text-gray-500" onClick={navigateHomeHandle}>
