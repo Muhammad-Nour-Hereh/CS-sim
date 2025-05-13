@@ -21,10 +21,10 @@ const SnippetProvider = ({ children }: any) => {
     return _output ?? ''
   }
 
-  const updateSnippet = async (code: string) => {
+  const updateSnippet = async (title: string, code: string) => {
     if (curSnippetId == -1) return
     await remote.snippet.update(curSnippetId, {
-      title: 'title',
+      title: title,
       language: 'python',
       code: code,
     })

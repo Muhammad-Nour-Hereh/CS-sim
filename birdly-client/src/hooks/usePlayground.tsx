@@ -5,18 +5,18 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const usePlayground = () => {
-  const navigate = useNavigate()
-  // temp states
-  const [code, setCode] = useState('')
-  const [output, setOutput] = useState('')
-  const [feedback, setFeedback] = useState('')
-
   const {
     snippets,
     setCurSnippetId,
     runSnippet,
     updateSnippet,
   }: SnippetContext = useSnippet()
+
+  const navigate = useNavigate()
+  // temp states
+  const [code, setCode] = useState('')
+  const [output, setOutput] = useState('')
+  const [feedback, setFeedback] = useState('')
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -112,8 +112,8 @@ const usePlayground = () => {
     }
   }
 
-  const ChangeNameHandle = () => {
-    console.log('change name')
+  const ChangeNameHandle = (value: string) => {
+    console.log(value)
   }
 
   // useEffect
@@ -153,7 +153,7 @@ const usePlayground = () => {
     minmizeMenuHandle,
     navigateHomeHandle,
     snippetSelectHandle,
-    ChangeNameHandle
+    ChangeNameHandle,
   }
 }
 
