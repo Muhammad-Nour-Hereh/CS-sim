@@ -4,7 +4,7 @@ import {
   Question,
   SelectQuestion,
   WriteQuestion,
-} from '@/interfaces/question'
+} from '@/interfaces/Question'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 export type QuizContext = {

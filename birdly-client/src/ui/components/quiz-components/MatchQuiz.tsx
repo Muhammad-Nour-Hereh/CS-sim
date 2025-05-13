@@ -1,4 +1,4 @@
-import { MatchQuestion } from '@/interfaces/question'
+import { MatchQuestion } from '@/interfaces/Question'
 import AnswerList from '../AnswerList'
 import { useQuiz } from '@/contexts/QuizContext'
 

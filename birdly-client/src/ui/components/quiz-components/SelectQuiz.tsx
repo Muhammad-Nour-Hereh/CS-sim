@@ -1,4 +1,4 @@
-import { SelectQuestion } from '@/interfaces/question'
+import { SelectQuestion } from '@/interfaces/Question'
 import AnswerList from '../AnswerList'
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 

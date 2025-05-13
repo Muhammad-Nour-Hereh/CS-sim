@@ -1,6 +1,7 @@
 import { request } from './request'
 
 export const remote = {
+  // Auth APIs:
   auth: {
     register: (name: string, email: string, password: string) =>
       request({
@@ -30,6 +31,8 @@ export const remote = {
         auth: true,
       }),
   },
+
+  // snippets APIs:
   snippet: {
     getAll: () =>
       request({
