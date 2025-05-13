@@ -38,7 +38,7 @@ export const HomePage = () => {
         <Sidebar />
       </aside>
 
-      <main className="flex flex-1 flex-col items-center overflow-hidden bg">
+      <main className="bg flex flex-1 flex-col items-center overflow-hidden">
         <h1 className="bg-primary m-10 rounded-full p-10 px-30 py-2 text-center text-4xl font-bold">
           Section 1
         </h1>
@@ -58,6 +58,7 @@ export const HomePage = () => {
               d="M 400 50 C 300 150, 300 250, 400 350 S 500 500, 400 600"
               stroke="#fff"
               strokeDasharray="10,10"
+              strokeWidth="4"
               fill="none"
             />
           </svg>
