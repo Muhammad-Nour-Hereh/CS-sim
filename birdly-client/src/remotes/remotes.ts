@@ -1,4 +1,5 @@
-import { request } from './request'
+import { Snippet } from '@/interfaces/Snippet'
+import { request, ResponseData } from './request'
 
 export const remote = {
   // Auth APIs:
@@ -41,8 +42,8 @@ export const remote = {
         auth: true,
       }),
 
-    getById: (id: string) =>
-      request({
+    getById: (id: number) =>
+      request<Snippet>({
         method: 'GET',
         route: `/api/v1/snippets/${id}`,
         auth: true,

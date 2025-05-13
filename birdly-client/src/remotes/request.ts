@@ -20,21 +20,21 @@ interface RequestParams {
   rollback?: () => void
 }
 
-interface ResponseData {
+export interface ResponseData<T = any> {
   success?: 'true' | 'false'
   error?: boolean
   message?: string
-  data?: string
+  data?: T
 }
 
-export const request = async ({
+export const request = async <T = any>({
   method,
   route,
   body,
   auth = false,
   optimistic,
   rollback,
-}: RequestParams): Promise<ResponseData> => {
+}: RequestParams): Promise<ResponseData<T>> => {
   const headers: { [key: string]: string } = {
     'Content-Type': 'application/json',
   }
