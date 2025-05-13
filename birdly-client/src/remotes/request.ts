@@ -1,33 +1,29 @@
-import axios, { AxiosResponse } from "axios"
-import { baseURL } from "./axios_defaults"
+import axios, { AxiosResponse } from 'axios'
+import { baseURL } from './axios_defaults'
 
 axios.defaults.baseURL = baseURL
 
 export enum RequestMethods {
-  POST = "POST",
-  GET = "GET",
-  PUT = "PUT",
-  PATCH = "PATCH",
-  DELETE = "DELETE",
+  POST = 'POST',
+  GET = 'GET',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
 }
 
 interface RequestParams {
-  method: keyof typeof RequestMethods;
-  route: string;
-  body?: any;
-  auth?: boolean;
-  optimistic?: (body: any) => void;
-  rollback?: () => void;
+  method: keyof typeof RequestMethods
+  route: string
+  body?: any
+  auth?: boolean
+  optimistic?: (body: any) => void
+  rollback?: () => void
 }
 
 interface ResponseData {
-  error?: boolean;
-  message?: string;
-}
-
-interface ResponseData {
-  error?: boolean;
-  message?: string;
+  success?: string
+  error?: boolean
+  message?: string
 }
 
 export const request = async ({
@@ -37,13 +33,13 @@ export const request = async ({
   auth = false,
   optimistic,
   rollback,
-}: RequestParams): Promise<any | ResponseData> => {
+}: RequestParams): Promise<ResponseData> => {
   const headers: { [key: string]: string } = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   }
 
   if (auth) {
-    headers.Authorization = `Bearer ${localStorage.getItem("access_token")}`;  // Assuming access_token is stored in localStorage
+    headers.Authorization = `Bearer ${localStorage.getItem('access_token')}` // Assuming access_token is stored in localStorage
   }
 
   try {
@@ -66,7 +62,7 @@ export const request = async ({
 
     return {
       error: true,
-      message: error.message || "An error occurred",
+      message: error.message || 'An error occurred',
     }
   }
 }

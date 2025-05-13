@@ -29,10 +29,16 @@ const useLoginPage = () => {
     try {
       const res = await remote.login(email, password)
       if (!res.success) {
+
+          res.status
+
         setErrors({ general: res.message || 'Invalid login credentials' })
+              console.log(errors)
+              console.log(res)
         return
       }
       console.log(res.data)
+
       if (!res.data) return
 
       localStorage.setItem('access_token', res.data)
