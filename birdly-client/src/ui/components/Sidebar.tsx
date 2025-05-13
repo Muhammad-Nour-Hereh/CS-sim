@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/objects/routes'
+import { remote } from '@/remotes/remotes'
 
 interface SidebarItemProps {
   icon: React.ReactNode
@@ -115,6 +116,7 @@ const Sidebar = () => {
             </a>
             <a
               onClick={() => {
+                remote.auth.logout()
                 localStorage.removeItem('access_token')
                 navigate(ROUTES.LOGIN)
               }}
