@@ -1,6 +1,6 @@
 import usePlayground from '@/hooks/usePlayground'
 import { CodeEditor } from '../components/CodeEditor'
-import { ArrowLeft, House, Menu, Play, Plus } from 'lucide-react'
+import { ArrowLeft, House, Menu, Play, Plus, Save } from 'lucide-react'
 import IconButton from '../components/IconButton'
 import ListItem from '../components/ListItem'
 
@@ -38,6 +38,9 @@ const Playground = () => {
             </IconButton>
             <IconButton className="text-gray-500" onClick={runHandle}>
               <Play />
+            </IconButton>
+            <IconButton className="text-gray-500" onClick={navigateHomeHandle}>
+              <Save />
             </IconButton>
             <IconButton className="text-gray-500" onClick={navigateHomeHandle}>
               <House />
