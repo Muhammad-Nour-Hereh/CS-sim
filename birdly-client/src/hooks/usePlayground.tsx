@@ -11,7 +11,12 @@ const usePlayground = () => {
   const [output, setOutput] = useState('')
   const [feedback] = useState('your code is awesome')
 
-  const { snippets, setCurSnippetId, runSnippet }: SnippetContext = useSnippet()
+  const {
+    snippets,
+    setCurSnippetId,
+    runSnippet,
+    updateSnippet,
+  }: SnippetContext = useSnippet()
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -106,7 +111,11 @@ const usePlayground = () => {
     const index = 0
     setSelectedIndex(index)
     setCode(snippets[index].code)
-  }, [])
+  }, [snippets])
+
+  useEffect(() => {
+    updateSnippet(code)
+  }, [code])
 
   return {
     code,

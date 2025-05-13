@@ -6,6 +6,7 @@ export type SnippetContext = {
   snippets: Snippet[]
   setCurSnippetId: Function
   runSnippet: Function
+  updateSnippet: Function
 }
 
 const snippetContext = createContext<SnippetContext | undefined>(undefined)
@@ -20,6 +21,15 @@ const SnippetProvider = ({ children }: any) => {
     return _output ?? ''
   }
 
+  const updateSnippet = async (code: string) => {
+    if (curSnippetId == -1) return
+    await remote.snippet.update(curSnippetId, {
+      title: 'title',
+      language: 'python',
+      code: code,
+    })
+  }
+
   useEffect(() => {
     const fetchSnippets = async () => {
       const res = await remote.snippet.getAll()
@@ -32,7 +42,8 @@ const SnippetProvider = ({ children }: any) => {
   }, [])
 
   return (
-    <snippetContext.Provider value={{ snippets, setCurSnippetId, runSnippet }}>
+    <snippetContext.Provider
+      value={{ snippets, setCurSnippetId, runSnippet, updateSnippet }}>
       {children}
     </snippetContext.Provider>
   )
