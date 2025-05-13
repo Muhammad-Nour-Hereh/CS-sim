@@ -3,32 +3,41 @@ import Sidebar from '../components/Sidebar'
 import { useEffect, useRef, useState } from 'react'
 import { Circle } from '../components/Circle'
 
+const MAP_WIDTH = 1000
+const MAP_HEIGHT = 1000
+const CIRCLE_SIZE = 40
+
 export const HomePage = () => {
   const { naivgateQuizHandle } = useHomePage()
 
   const pathRef = useRef<SVGPathElement | null>(null)
+  const svgRef = useRef<SVGSVGElement | null>(null)
+
   const [positions, setPositions] = useState<{ x: number; y: number }[]>([])
   const nodes = ['A', 'B', 'C', 'D', 'E']
 
   useEffect(() => {
     const path = pathRef.current
-    if (!path) return
+    const svg = svgRef.current
+    if (!path || !svg) return
+
+    const bbox = svg.getBoundingClientRect()
 
     const length = path.getTotalLength()
     const segment = length / (nodes.length + 1)
 
     const points = nodes.map((_, index) => {
       const point = path.getPointAtLength(segment * (index + 1))
-      return { x: point.x, y: point.y }
+      return {
+        x: (point.x / MAP_WIDTH) * bbox.width,
+        y: (point.y / MAP_HEIGHT) * bbox.height,
+      }
     })
 
     setPositions(points)
   }, [])
 
-  // to center the circle
-  const size = 64
-  const offset = size / 2
-  const svgCenterOffset = 300
+  const offset = CIRCLE_SIZE / 2
 
   return (
     <div className="flex h-screen w-screen">
@@ -36,17 +45,17 @@ export const HomePage = () => {
         <Sidebar />
       </aside>
 
-      <main
-        className="flex flex-1 flex-col items-center bg-blue-400"
-        // onClick={naivgateQuizHandle}
-      >
-        <div className="relative h-[600px] w-full">
+      <main className="flex flex-1 flex-col items-center bg-blue-400">
+        <div className="relative w-full aspect-square max-w-[90vmin]">
           <h1 className="py-2 text-center">map</h1>
 
-          {/* SVG with path and circles */}
+          {/* SVG */}
           <svg
-            viewBox="0 0 600 600"
-            className="absolute top-0 left-1/2 z-0 h-[600px] w-[600px] -translate-x-1/2">
+            ref={svgRef}
+            viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+            preserveAspectRatio="xMidYMid meet"
+            className="absolute top-0 left-0 h-full w-full z-0"
+          >
             <path
               ref={pathRef}
               d="M 300 50 C 250 150, 250 250, 300 350 S 350 500, 300 600"
@@ -56,21 +65,21 @@ export const HomePage = () => {
             />
           </svg>
 
-          {/* Overlay HTML buttons */}
+          {/* Overlay buttons */}
           {positions.map((pos, idx) => (
-            <>
-              <Circle
-                style={{
-                  position: 'absolute',
-                  left: `calc(50% + ${pos.x - svgCenterOffset - offset}px)`,
-                  top: `${pos.y - offset}px`,
-                  width: `${size}px`,
-                  height: `${size}px`,
-                }}
-                onClick={() => console.log(`Clicked node ${nodes[idx]}`)}>
-                {nodes[idx]}
-              </Circle>
-            </>
+            <Circle
+              key={idx}
+              style={{
+                position: 'absolute',
+                left: `${pos.x - offset}px`,
+                top: `${pos.y - offset}px`,
+                width: `${CIRCLE_SIZE}px`,
+                height: `${CIRCLE_SIZE}px`,
+              }}
+              onClick={() => console.log(`Clicked node ${nodes[idx]}`)}
+            >
+              {nodes[idx]}
+            </Circle>
           ))}
         </div>
       </main>
