@@ -27,7 +27,7 @@ const useLoginPage = () => {
     if (!validateForm()) return
 
     try {
-      const res = await remote.login(email, password)
+      const res = await remote.auth.login(email, password)
       if (!res.success) {
         setErrors({ general: res.message || 'something went wrong'})
         console.log(errors)

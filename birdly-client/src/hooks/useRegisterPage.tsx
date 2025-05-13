@@ -37,7 +37,7 @@ const useRegisterPage = () => {
     if (!validateForm()) return
 
     try {
-      const res = await remote.register(name, email, password)
+      const res = await remote.auth.register(name, email, password)
       if (!res.success) {
         setErrors({ general: res.message || 'something went wrong' })
         return

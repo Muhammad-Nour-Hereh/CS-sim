@@ -8,7 +8,7 @@ const GuestRoutes = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const res = await remote.me()
+      const res = await remote.auth.me()
       const success = res.success === 'true'
 
       if (!success) {
