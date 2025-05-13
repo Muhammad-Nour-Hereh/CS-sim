@@ -26,6 +26,7 @@ const Playground = () => {
     ChangeNameHandle,
     saveHandle,
     createSnippetHandle,
+    deleteSnippetHandle,
   } = usePlayground()
 
   return (
@@ -78,7 +79,8 @@ const Playground = () => {
                     key={index}
                     isSelected={isSelected}
                     onClick={() => snippetSelectHandle(index)}
-                    onValueChange={ChangeNameHandle}>
+                    onValueChange={ChangeNameHandle}
+                    onDelete={deleteSnippetHandle}>
                     {snippet.title}
                   </ListItem>
                 )
