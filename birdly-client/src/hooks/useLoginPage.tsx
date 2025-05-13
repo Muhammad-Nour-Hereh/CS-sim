@@ -29,7 +29,7 @@ const useLoginPage = () => {
     try {
       const res = await remote.login(email, password)
       if (!res.success) {
-        setErrors({ general: res.message || 'Invalid login credentials' })
+        setErrors({ general: res.message || 'something went wrong'})
         console.log(errors)
         console.log(res)
         return
@@ -41,7 +41,7 @@ const useLoginPage = () => {
 
       navigate(ROUTES.HOME)
     } catch (error) {
-      setErrors({ general: 'Login failed. Please try again.' })
+      setErrors({ general: 'error' })
     }
   }
 

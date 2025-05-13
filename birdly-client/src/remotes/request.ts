@@ -40,7 +40,7 @@ export const request = async ({
   }
 
   if (auth) {
-    headers.Authorization = `Bearer ${localStorage.getItem('access_token')}` // Assuming access_token is stored in localStorage
+    headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`
   }
 
   try {
@@ -57,13 +57,31 @@ export const request = async ({
 
     return response.data
   } catch (error: any) {
-    if (rollback) {
-      rollback()
+    if (rollback) rollback()
+
+    let message = 'An error occurred'
+
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status
+
+      switch (status) {
+        case 401:
+          message = 'invalid credentials'
+          break
+        case 404:
+          message = 'The requested resource was not found.'
+          break
+        case 409:
+          message = 'email already registered.'
+          break
+        default:
+          message = error.response?.data?.message || 'Something went wrong.'
+      }
     }
 
     return {
       error: true,
-      message: error.message || 'An error occurred',
+      message,
     }
   }
 }
