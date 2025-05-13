@@ -11,7 +11,6 @@ export const ROUTES = {
   PLAYGROUND: '/playground',
   SETTINGS: '/settings',
   PROFILE: '/profile',
-  LOGOUT: '/logout',
   HELP: '/help',
   ABOUT: '/about',
 

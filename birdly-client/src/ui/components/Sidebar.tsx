@@ -31,7 +31,7 @@ const SidebarItem = ({
   return (
     <a
       onClick={() => navigate(route)}
-      className="flex items-center gap-3 px-4 py-2.5 text-white transition-colors hover:bg-[#1a2530]">
+      className="flex cursor-pointer items-center gap-3 px-4 py-2.5 text-white transition-colors select-none hover:bg-[#1a2530]">
       <div className="flex h-5 w-5 items-center justify-center">{icon}</div>
       <span
         className={cn(
@@ -100,22 +100,25 @@ const Sidebar = () => {
           <div className="bg-[#131a21] py-2 pl-12">
             <a
               onClick={() => navigate(ROUTES.SETTINGS)}
-              className="block py-2 text-sm text-white hover:text-gray-300">
+              className="block cursor-pointer py-2 text-sm text-white select-none hover:text-gray-300">
               Settings
             </a>
             <a
               onClick={() => navigate(ROUTES.HELP)}
-              className="block py-2 text-sm text-white hover:text-gray-300">
+              className="block cursor-pointer py-2 text-sm text-white select-none hover:text-gray-300">
               Help
             </a>
             <a
               onClick={() => navigate(ROUTES.ABOUT)}
-              className="block py-2 text-sm text-white hover:text-gray-300">
+              className="block cursor-pointer py-2 text-sm text-white select-none hover:text-gray-300">
               About
             </a>
             <a
-              onClick={() => navigate(ROUTES.LOGIN)}
-              className="block py-2 text-sm text-white hover:text-gray-300">
+              onClick={() => {
+                localStorage.removeItem('access_token')
+                navigate(ROUTES.LOGIN)
+              }}
+              className="block cursor-pointer py-2 text-sm text-white select-none hover:text-gray-300">
               Logout
             </a>
           </div>
