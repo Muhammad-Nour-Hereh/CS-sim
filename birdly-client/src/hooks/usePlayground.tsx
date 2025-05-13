@@ -112,6 +112,10 @@ const usePlayground = () => {
     }
   }
 
+  const ChangeNameHandle = () => {
+    console.log('change name')
+  }
+
   // useEffect
   useEffect(() => {
     if (snippets.length === 0) return
@@ -149,6 +153,7 @@ const usePlayground = () => {
     minmizeMenuHandle,
     navigateHomeHandle,
     snippetSelectHandle,
+    ChangeNameHandle
   }
 }
 

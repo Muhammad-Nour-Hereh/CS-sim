@@ -17,12 +17,13 @@ const Playground = () => {
     splitV,
     onMouseDown,
     selectedIndex,
+    isSideMenuOpen,
     runHandle,
     menuHandle,
     minmizeMenuHandle,
     navigateHomeHandle,
     snippetSelectHandle,
-    isSideMenuOpen,
+    ChangeNameHandle,
   } = usePlayground()
 
   return (
@@ -68,7 +69,8 @@ const Playground = () => {
                   <ListItem
                     key={index}
                     isSelected={isSelected}
-                    onClick={() => snippetSelectHandle(index)}>
+                    onClick={() => snippetSelectHandle(index)}
+                    onValueChange={ChangeNameHandle}>
                     {snippet.title}
                   </ListItem>
                 )
