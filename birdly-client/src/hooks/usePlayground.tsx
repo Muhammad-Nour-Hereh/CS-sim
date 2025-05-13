@@ -1,4 +1,6 @@
+import { SnippetContext, useSnippet } from '@/contexts/SnippetContext'
 import { ROUTES } from '@/objects/routes'
+import { remote } from '@/remotes/remotes'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -6,14 +8,15 @@ const usePlayground = () => {
   const navigate = useNavigate()
   // temp states
   const [code, setCode] = useState('')
-  const [output] = useState('hello, world!')
+  const [output, setOutput] = useState('')
   const [feedback] = useState('your code is awesome')
 
-  const [snippets] = useState([
-    { title: 'a', content: 'print("a")' },
-    { title: 'b', content: 'print("b")' },
-    { title: 'c', content: 'print("c")' },
-  ])
+  const {
+    snippets,
+    setCurSnippetId,
+    runSnippet,
+    updateSnippet,
+  }: SnippetContext = useSnippet()
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -74,9 +77,11 @@ const usePlayground = () => {
 
   // side menu
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false)
+
   // handles
-  const runHandle = () => {
-    console.log('run clicked')
+  const runHandle = async () => {
+    const _output = await runSnippet()
+    if (_output) setOutput(_output)
   }
 
   const menuHandle = () => {
@@ -94,16 +99,24 @@ const usePlayground = () => {
   }
 
   const snippetSelectHandle = (index: number) => {
+    if (snippets.length === 0) return
+    setCurSnippetId(snippets[index].id)
     setSelectedIndex(index)
-    setCode(snippets[index].content)
+    setCode(snippets[index].code)
   }
 
   // useEffect
   useEffect(() => {
+    if (snippets.length === 0) return
     const index = 0
     setSelectedIndex(index)
-    setCode(snippets[index].content)
-  }, [])
+    setCurSnippetId(snippets[index].id)
+    setCode(snippets[index].code)
+  }, [snippets])
+
+  useEffect(() => {
+    updateSnippet(code)
+  }, [code])
 
   return {
     code,

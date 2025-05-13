@@ -32,7 +32,6 @@ const App = () => {
         <Route path={ROUTES.PLAYGROUND} element={<Playground />} />
         <Route path={ROUTES.SETTINGS} element={<h1>settings</h1>} />
         <Route path={ROUTES.PROFILE} element={<h1>profile</h1>} />
-        <Route path={ROUTES.LOGOUT} element={<h1>logout</h1>} />
       </Route>
 
       <Route element={<DevRoutes />}>

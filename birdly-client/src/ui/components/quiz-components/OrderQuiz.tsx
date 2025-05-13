@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '../Button'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useQuiz } from '@/contexts/QuizContext'
-import { OrderQuestion } from '@/interfaces/question'
+import { OrderQuestion } from '@/interfaces/Question'
 
 const OrderQuiz = () => {
   const { curQuestion, setOrderAnswer } = useQuiz()

@@ -44,6 +44,11 @@ const LoginPage = () => {
           variant="borderless">
           Login
         </Button>
+        {errors.general != '' && (
+          <span className="text-destructive -mt-2 self-start pl-4 text-lg font-semibold">
+            {errors.general}
+          </span>
+        )}
         <span className="self-start text-lg font-semibold">
           Don't have an accound yet!
           <span

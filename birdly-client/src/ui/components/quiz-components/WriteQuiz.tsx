@@ -1,4 +1,4 @@
-import { WriteQuestion } from '@/interfaces/question'
+import { WriteQuestion } from '@/interfaces/Question'
 import { Input } from '../Input'
 import { useQuiz } from '@/contexts/QuizContext'
 

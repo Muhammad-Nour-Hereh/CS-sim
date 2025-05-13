@@ -20,7 +20,7 @@ const RegisterPage = () => {
   return (
     <div className="pg-background flex h-screen w-screen items-center justify-center">
       <div className="bg-border flex w-150 flex-col items-center justify-center gap-4 rounded-2xl border-2 border-white p-9">
-        <h1 className="self-start text-3xl font-bold mb-4">Register</h1>
+        <h1 className="mb-4 self-start text-3xl font-bold">Register</h1>
         <Input
           value={name}
           setter={setName}
@@ -53,10 +53,15 @@ const RegisterPage = () => {
         />
         <Button
           onClick={RegisterHandle}
-          className="w-full my-4 text-xl font-bold text-white"
+          className="my-4 w-full text-xl font-bold text-white"
           variant="borderless">
           Register
         </Button>
+        {errors.general != '' && (
+          <span className="text-destructive -mt-2 self-start pl-4 text-lg font-semibold">
+            {errors.general}
+          </span>
+        )}
         <span className="self-start text-lg font-semibold">
           already have an account!
           <span

@@ -1,4 +1,5 @@
 import { ROUTES } from '@/objects/routes'
+import { remote } from '@/remotes/remotes'
 import { validateEmail, validatePassword } from '@/utils/validators'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -18,30 +19,30 @@ const useLoginPage = () => {
     newErrors.password = validatePassword(password)
 
     setErrors(newErrors)
-    return !Object.values(newErrors).some(error => error !== '')
+    return !Object.values(newErrors).some((error) => error !== '')
   }
 
   // handles
   const LoginHandle = async () => {
     if (!validateForm()) return
 
-    // try {
-    //   const res = await remote.login(email, password)
-    //   if (!res.success) {
-    //     setErrors({ general: res.message || 'Invalid login credentials' })
-    //     return
-    //   }
+    try {
+      const res = await remote.auth.login(email, password)
+      if (!res.success) {
+        setErrors({ general: res.message || 'something went wrong'})
+        console.log(errors)
+        console.log(res)
+        return
+      }
 
-    //   if (!res.payload.access_token) return
+      if (!res.data) return
+      console.log(res.data)
+      localStorage.setItem('access_token', res.data)
 
-    //   localStorage.setItem('access_token', res.payload.access_token)
-
-    //   navigate('/home')
-    // } catch (error) {
-    //   setErrors({ general: 'Login failed. Please try again.' })
-    // }
-
-    navigate(ROUTES.HOME)
+      navigate(ROUTES.HOME)
+    } catch (error) {
+      setErrors({ general: 'error' })
+    }
   }
 
   const navigateRegisterHandle = () => navigate(ROUTES.REGISTER)
