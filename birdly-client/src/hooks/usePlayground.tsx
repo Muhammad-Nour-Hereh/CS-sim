@@ -122,8 +122,8 @@ const usePlayground = () => {
   const saveHandle = () => {
     updateSnippet(title, code)
   }
+
   const createSnippetHandle = () => {
-    console.log('createSnippetHandle')
     remote.snippet.create('snippet', 'python', '# try print("hello, birdly")')
   }
 
@@ -135,7 +135,7 @@ const usePlayground = () => {
     setCurSnippetId(snippets[index].id)
     setCode(snippets[index].code)
     setTitle(snippets[index].title)
-  }, [snippets, title])
+  }, [snippets])
 
   useEffect(() => {
     // stop debouncing
