@@ -91,4 +91,12 @@ export const remote = {
         auth: true,
       }),
   },
+  chat: (prompt: string) => {
+    request<CodeOutput>({
+      method: 'POST',
+      route: `/api/v1/chat`,
+      auth: true,
+      body: { prompt: prompt },
+    })
+  },
 }
