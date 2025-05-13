@@ -49,16 +49,11 @@ export const remote = {
         auth: true,
       }),
 
-    create: (data: {
-      user_id: number
-      title: string
-      language: string
-      code: string
-    }) =>
+    create: (title: string, language: string, code: string) =>
       request<null>({
         method: 'POST',
         route: '/api/v1/snippets',
-        body: data,
+        body: { title, language, code },
         auth: true,
       }),
 
