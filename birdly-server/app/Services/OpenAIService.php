@@ -10,7 +10,7 @@ class OpenAIService {
 
     protected $client;
 
-    public function __construct(string $apiKey, string $language = 'python', string $task = 'q_and_a') {
+    public function __construct(string $apiKey, string $language = 'python', string $task = 'playground') {
         $this->client = OpenAI::client($apiKey);
         $this->setLanguage($language);
         $this->addTaskContext($task)->addLanguageContext();
