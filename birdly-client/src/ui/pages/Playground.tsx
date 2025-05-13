@@ -1,6 +1,6 @@
 import usePlayground from '@/hooks/usePlayground'
 import { CodeEditor } from '../components/CodeEditor'
-import { ArrowLeft, House, Menu, Play } from 'lucide-react'
+import { ArrowLeft, House, Menu, Play, Plus } from 'lucide-react'
 import IconButton from '../components/IconButton'
 import ListItem from '../components/ListItem'
 
@@ -54,6 +54,13 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
               <ArrowLeft />
             </IconButton>
+            <div className="bg-selected flex items-center text-gray-500 hover:brightness-140 active:brightness-90">
+              <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
+                <Plus />
+              </IconButton>
+              <span className="font-bold">create new</span>
+            </div>
+
             <ul className="flex flex-col gap-3">
               {snippets.map((snippet: any, index: number) => {
                 const isSelected = selectedIndex === index
