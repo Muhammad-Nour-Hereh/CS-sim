@@ -25,6 +25,11 @@ export const HomePage = () => {
     setPositions(points)
   }, [])
 
+  // to center the circle
+  const size = 64
+  const offset = size / 2
+  const svgCenterOffset = 300
+
   return (
     <div className="flex h-screen w-screen">
       <aside className="w-56 bg-gray-900 text-white">
@@ -35,7 +40,7 @@ export const HomePage = () => {
         className="flex flex-1 flex-col items-center bg-blue-400"
         // onClick={naivgateQuizHandle}
       >
-        <div className="relative h-[600px] w-full bg-blue-400 text-white">
+        <div className="relative h-[600px] w-full">
           <h1 className="py-2 text-center">map</h1>
 
           {/* SVG with path and circles */}
@@ -56,16 +61,14 @@ export const HomePage = () => {
             <>
               <Circle
                 style={{
-                  position: `absolute`,
-                  left: `calc(50% + ${pos.x - 300 - 20}px)`,
-                  top: `${pos.y - 20}px`,
-                  width: '40px',
-                  height: '40px',
-                  color: '#000',
-                  cursor: 'pointer',
+                  position: 'absolute',
+                  left: `calc(50% + ${pos.x - svgCenterOffset - offset}px)`,
+                  top: `${pos.y - offset}px`,
+                  width: `${size}px`,
+                  height: `${size}px`,
                 }}
                 onClick={() => console.log(`Clicked node ${nodes[idx]}`)}>
-                Go
+                {nodes[idx]}
               </Circle>
             </>
           ))}
