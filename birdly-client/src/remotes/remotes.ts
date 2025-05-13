@@ -1,25 +1,25 @@
 import { Snippet } from '@/interfaces/Snippet'
-import { request, ResponseData } from './request'
+import { request } from './request'
 
 export const remote = {
   // Auth APIs:
   auth: {
     register: (name: string, email: string, password: string) =>
-      request({
+      request<string>({
         method: 'POST',
         route: '/api/v1/auth/register',
         body: { name, email, password },
       }),
 
     login: (email: string, password: string) =>
-      request({
+      request<string>({
         method: 'POST',
         route: '/api/v1/auth/login',
         body: { email, password },
       }),
 
     me: () =>
-      request({
+      request<string>({
         method: 'GET',
         route: '/api/v1/auth/me',
         auth: true,
