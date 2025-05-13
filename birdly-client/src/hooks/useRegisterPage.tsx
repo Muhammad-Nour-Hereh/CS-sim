@@ -39,7 +39,7 @@ const useRegisterPage = () => {
     try {
       const res = await remote.register(name, email, password)
       if (!res.success) {
-        setErrors({ general: res.message || 'Invalid login credentials' })
+        setErrors({ general: res.message || 'something went wrong' })
         return
       }
 
@@ -47,12 +47,10 @@ const useRegisterPage = () => {
 
       localStorage.setItem('access_token', res.data)
 
-      navigate('/home')
+      navigate(ROUTES.HOME)
     } catch (error) {
-      setErrors({ general: 'Login failed. Please try again.' })
+      setErrors({ general: 'something went wrong' })
     }
-
-    navigate(ROUTES.HOME)
   }
 
   const navigateLoginHandle = () => navigate(ROUTES.LOGIN)
