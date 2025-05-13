@@ -9,7 +9,9 @@ const usePlayground = () => {
     snippets,
     setCurSnippetId,
     runSnippet,
+    createSnippet,
     updateSnippet,
+    deleteSnippet,
   }: SnippetContext = useSnippet()
 
   const navigate = useNavigate()
@@ -124,11 +126,11 @@ const usePlayground = () => {
   }
 
   const createSnippetHandle = () => {
-    remote.snippet.create('snippet', 'python', '# try print("hello, birdly")')
+    createSnippet()
   }
 
   const deleteSnippetHandle = (id: number) => {
-    remote.snippet.delete(id)
+    deleteSnippet(id)
   }
 
   // useEffect

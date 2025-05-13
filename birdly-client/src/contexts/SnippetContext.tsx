@@ -7,6 +7,8 @@ export type SnippetContext = {
   setCurSnippetId: Function
   runSnippet: Function
   updateSnippet: Function
+  createSnippet: Function
+  deleteSnippet: Function
 }
 
 const snippetContext = createContext<SnippetContext | undefined>(undefined)
@@ -28,22 +30,40 @@ const SnippetProvider = ({ children }: any) => {
       language: 'python',
       code: code,
     })
+    fetchSnippets()
+  }
+
+  const createSnippet = () => {
+    remote.snippet.create('snippet', 'python', '# try print("hello, birdly")')
+    fetchSnippets()
+  }
+
+  const deleteSnippet = (id: number) => {
+    remote.snippet.delete(id)
+    fetchSnippets()
+  }
+
+  const fetchSnippets = async () => {
+    const res = await remote.snippet.getAll()
+    if (res.success === 'true' && res.data) {
+      setSnippets(res.data)
+    }
   }
 
   useEffect(() => {
-    const fetchSnippets = async () => {
-      const res = await remote.snippet.getAll()
-      if (res.success === 'true' && res.data) {
-        setSnippets(res.data)
-      }
-    }
-
     fetchSnippets()
   }, [])
 
   return (
     <snippetContext.Provider
-      value={{ snippets, setCurSnippetId, runSnippet, updateSnippet }}>
+      value={{
+        snippets,
+        setCurSnippetId,
+        runSnippet,
+        createSnippet,
+        updateSnippet,
+        deleteSnippet,
+      }}>
       {children}
     </snippetContext.Provider>
   )
