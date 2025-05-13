@@ -9,12 +9,10 @@ const UserRoutes = () => {
   useEffect(() => {
     const checkAuth = async () => {
       const res = await remote.me()
-
-      // Convert "success" to actual boolean
       const success = res.success === 'true'
 
       if (!success) {
-        localStorage.removeItem('access_token') // force logout on failure
+        localStorage.removeItem('access_token')
       }
 
       setIsAuthorized(success)

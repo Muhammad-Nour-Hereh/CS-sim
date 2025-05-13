@@ -21,9 +21,10 @@ interface RequestParams {
 }
 
 interface ResponseData {
-  success?: string
+  success?: 'true' | 'false'
   error?: boolean
   message?: string
+  data?: string
 }
 
 export const request = async ({
