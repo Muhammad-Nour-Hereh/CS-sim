@@ -9,7 +9,7 @@ const usePlayground = () => {
   // temp states
   const [code, setCode] = useState('')
   const [output, setOutput] = useState('')
-  const [feedback] = useState('your code is awesome')
+  const [feedback, setFeedback] = useState('')
 
   const {
     snippets,
@@ -105,6 +105,13 @@ const usePlayground = () => {
     setCode(snippets[index].code)
   }
 
+  const handleUpdateAndChat = async () => {
+    const res: any = await remote.chat(code)
+    if (res.response) {
+      setFeedback(res.response)
+    }
+  }
+
   // useEffect
   useEffect(() => {
     if (snippets.length === 0) return
@@ -116,6 +123,8 @@ const usePlayground = () => {
 
   useEffect(() => {
     updateSnippet(code)
+
+    handleUpdateAndChat()
   }, [code])
 
   return {
