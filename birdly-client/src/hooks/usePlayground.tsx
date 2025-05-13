@@ -122,9 +122,13 @@ const usePlayground = () => {
   }, [snippets])
 
   useEffect(() => {
-    updateSnippet(code)
+    // stop debouncing
+    const timeout = setTimeout(() => {
+      updateSnippet(code)
+      handleUpdateAndChat()
+    }, 2000)
 
-    handleUpdateAndChat()
+    return () => clearTimeout(timeout)
   }, [code])
 
   return {
