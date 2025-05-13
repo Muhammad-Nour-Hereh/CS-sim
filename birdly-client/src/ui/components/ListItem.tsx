@@ -62,7 +62,13 @@ const ListItem = ({
       ) : (
         <>
           {value}
-          <IconButton className="text-destructive" onClick={onDelete}>
+
+          <IconButton
+            className="text-destructive"
+            onClick={(e: any) => {
+              e.stopPropagation()
+              if (onDelete) onDelete()
+            }}>
             <Trash2 />
           </IconButton>
         </>

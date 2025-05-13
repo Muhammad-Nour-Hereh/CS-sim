@@ -72,7 +72,7 @@ const Playground = () => {
             </div>
 
             <ul className="flex flex-1 flex-col gap-3 overflow-y-auto">
-              {snippets.map((snippet: any, index: number) => {
+              {snippets.map((snippet, index: number) => {
                 const isSelected = selectedIndex === index
                 return (
                   <ListItem
@@ -80,7 +80,7 @@ const Playground = () => {
                     isSelected={isSelected}
                     onClick={() => snippetSelectHandle(index)}
                     onValueChange={ChangeNameHandle}
-                    onDelete={deleteSnippetHandle}>
+                    onDelete={() => deleteSnippetHandle(snippet.id)}>
                     {snippet.title}
                   </ListItem>
                 )
