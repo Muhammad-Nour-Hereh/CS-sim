@@ -1,4 +1,4 @@
-import { Snippet } from '@/interfaces/Snippet'
+import { CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
 
 export const remote = {
@@ -36,7 +36,7 @@ export const remote = {
   // snippets APIs:
   snippet: {
     getAll: () =>
-      request({
+      request<Snippet[]>({
         method: 'GET',
         route: '/api/v1/snippets',
         auth: true,
@@ -55,7 +55,7 @@ export const remote = {
       language: string
       code: string
     }) =>
-      request({
+      request<null>({
         method: 'POST',
         route: '/api/v1/snippets',
         body: data,
@@ -66,11 +66,11 @@ export const remote = {
       id: string,
       data: {
         title?: string
-        lang?: string
+        language?: string
         code?: string
       },
     ) =>
-      request({
+      request<undefined>({
         method: 'PUT',
         route: `/api/v1/snippets/${id}`,
         body: data,
@@ -78,14 +78,14 @@ export const remote = {
       }),
 
     delete: (id: string) =>
-      request({
+      request<undefined>({
         method: 'DELETE',
         route: `/api/v1/snippets/${id}`,
         auth: true,
       }),
 
     run: (id: string) =>
-      request({
+      request<CodeOutput>({
         method: 'POST',
         route: `/api/v1/snippets/run/${id}`,
         auth: true,

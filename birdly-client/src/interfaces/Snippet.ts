@@ -6,3 +6,8 @@ export interface Snippet {
   created_at: string
   updated_at: string
 }
+
+export interface CodeOutput {
+  status: string
+  output: string
+}
