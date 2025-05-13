@@ -14,6 +14,7 @@ const usePlayground = () => {
 
   const navigate = useNavigate()
   // temp states
+  const [title, setTitle] = useState('')
   const [code, setCode] = useState('')
   const [output, setOutput] = useState('')
   const [feedback, setFeedback] = useState('')
@@ -103,6 +104,7 @@ const usePlayground = () => {
     setCurSnippetId(snippets[index].id)
     setSelectedIndex(index)
     setCode(snippets[index].code)
+    setTitle(snippets[index].title)
   }
 
   const handleUpdateAndChat = async () => {
@@ -113,7 +115,8 @@ const usePlayground = () => {
   }
 
   const ChangeNameHandle = (value: string) => {
-    console.log(value)
+    setTitle(value)
+    updateSnippet(value, code)
   }
 
   // useEffect
@@ -123,12 +126,13 @@ const usePlayground = () => {
     setSelectedIndex(index)
     setCurSnippetId(snippets[index].id)
     setCode(snippets[index].code)
-  }, [snippets])
+    setTitle(snippets[index].title)
+  }, [snippets, title])
 
   useEffect(() => {
     // stop debouncing
     const timeout = setTimeout(() => {
-      updateSnippet(code)
+      updateSnippet(title, code)
       handleUpdateAndChat()
     }, 2000)
 
