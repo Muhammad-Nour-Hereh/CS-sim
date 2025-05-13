@@ -2,10 +2,14 @@ import { Snippet } from '@/interfaces/Snippet'
 import { remote } from '@/remotes/remotes'
 import { createContext, useContext, useEffect, useState } from 'react'
 
-const snippetContext = createContext({})
+export type SnippetContext = {
+  snippets: Snippet[]
+}
+
+const snippetContext = createContext<SnippetContext | undefined>(undefined)
 
 const SnippetProvider = ({ children }: any) => {
-  const [snippets, setSnippets] = useState<Snippet[]>()
+  const [snippets, setSnippets] = useState<Snippet[]>([])
 
   useEffect(() => {
     const fetchSnippets = async () => {

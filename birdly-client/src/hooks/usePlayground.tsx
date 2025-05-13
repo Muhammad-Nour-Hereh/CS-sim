@@ -1,3 +1,4 @@
+import { SnippetContext, useSnippet } from '@/contexts/SnippetContext'
 import { ROUTES } from '@/objects/routes'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -9,11 +10,7 @@ const usePlayground = () => {
   const [output] = useState('hello, world!')
   const [feedback] = useState('your code is awesome')
 
-  const [snippets] = useState([
-    { title: 'a', content: 'print("a")' },
-    { title: 'b', content: 'print("b")' },
-    { title: 'c', content: 'print("c")' },
-  ])
+  const { snippets }: SnippetContext = useSnippet()
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -94,15 +91,17 @@ const usePlayground = () => {
   }
 
   const snippetSelectHandle = (index: number) => {
+    if (snippets.length === 0) return
     setSelectedIndex(index)
-    setCode(snippets[index].content)
+    setCode(snippets[index].code)
   }
 
   // useEffect
   useEffect(() => {
+    if (snippets.length === 0) return
     const index = 0
     setSelectedIndex(index)
-    setCode(snippets[index].content)
+    setCode(snippets[index].code)
   }, [])
 
   return {
