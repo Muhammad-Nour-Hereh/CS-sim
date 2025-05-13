@@ -110,6 +110,7 @@ const usePlayground = () => {
     if (snippets.length === 0) return
     const index = 0
     setSelectedIndex(index)
+    setCurSnippetId(snippets[index].id)
     setCode(snippets[index].code)
   }, [snippets])
 
