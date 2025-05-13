@@ -1,6 +1,7 @@
 import useHomePage from '@/hooks/useHomePage'
 import Sidebar from '../components/Sidebar'
 import { useEffect, useRef, useState } from 'react'
+import { Circle } from '../components/Circle'
 
 export const HomePage = () => {
   const { naivgateQuizHandle } = useHomePage()
@@ -23,6 +24,7 @@ export const HomePage = () => {
 
     setPositions(points)
   }, [])
+
   return (
     <div className="flex h-screen w-screen">
       <aside className="w-56 bg-gray-900 text-white">
@@ -31,14 +33,15 @@ export const HomePage = () => {
 
       <main
         className="flex flex-1 flex-col items-center bg-blue-400"
-        onClick={naivgateQuizHandle}>
-          
+        // onClick={naivgateQuizHandle}
+      >
         <div className="relative h-[600px] w-full bg-blue-400 text-white">
           <h1 className="py-2 text-center">map</h1>
 
+          {/* SVG with path and circles */}
           <svg
             viewBox="0 0 600 600"
-            className="absolute top-0 left-1/2 h-[600px] w-[600px] -translate-x-1/2">
+            className="absolute top-0 left-1/2 z-0 h-[600px] w-[600px] -translate-x-1/2">
             <path
               ref={pathRef}
               d="M 300 50 C 250 150, 250 250, 300 350 S 350 500, 300 600"
@@ -46,31 +49,26 @@ export const HomePage = () => {
               strokeDasharray="10,10"
               fill="none"
             />
-
-            {positions.map((pos, idx) => (
-              <circle
-                key={idx}
-                cx={pos.x}
-                cy={pos.y}
-                r="20"
-                fill="#84cc16"
-                stroke="#000"
-              />
-            ))}
-
-            {positions.map((pos, idx) => (
-              <text
-                key={`label-${idx}`}
-                x={pos.x}
-                y={pos.y + 5}
-                textAnchor="middle"
-                fill="black"
-                fontSize="12"
-                fontWeight="bold">
-                {nodes[idx]}
-              </text>
-            ))}
           </svg>
+
+          {/* Overlay HTML buttons */}
+          {positions.map((pos, idx) => (
+            <>
+              <Circle
+                style={{
+                  position: `absolute`,
+                  left: `calc(50% + ${pos.x - 300 - 20}px)`,
+                  top: `${pos.y - 20}px`,
+                  width: '40px',
+                  height: '40px',
+                  color: '#000',
+                  cursor: 'pointer',
+                }}
+                onClick={() => console.log(`Clicked node ${nodes[idx]}`)}>
+                Go
+              </Circle>
+            </>
+          ))}
         </div>
       </main>
 
