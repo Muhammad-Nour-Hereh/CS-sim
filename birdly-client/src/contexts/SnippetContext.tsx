@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 export type SnippetContext = {
   snippets: Snippet[]
   setCurSnippetId: Function
+  runSnippet: Function
 }
 
 const snippetContext = createContext<SnippetContext | undefined>(undefined)
@@ -12,6 +13,12 @@ const snippetContext = createContext<SnippetContext | undefined>(undefined)
 const SnippetProvider = ({ children }: any) => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
   const [curSnippetId, setCurSnippetId] = useState<number>(-1)
+
+  const runSnippet = async (): Promise<string> => {
+    const res = await remote.snippet.run(curSnippetId)
+    const _output = res.data?.output
+    return _output ?? ''
+  }
 
   useEffect(() => {
     const fetchSnippets = async () => {
@@ -25,7 +32,7 @@ const SnippetProvider = ({ children }: any) => {
   }, [])
 
   return (
-    <snippetContext.Provider value={{ snippets, setCurSnippetId }}>
+    <snippetContext.Provider value={{ snippets, setCurSnippetId, runSnippet }}>
       {children}
     </snippetContext.Provider>
   )

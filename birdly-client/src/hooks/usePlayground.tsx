@@ -11,7 +11,7 @@ const usePlayground = () => {
   const [output, setOutput] = useState('')
   const [feedback] = useState('your code is awesome')
 
-  const { snippets, setCurSnippetId }: SnippetContext = useSnippet()
+  const { snippets, setCurSnippetId, runSnippet }: SnippetContext = useSnippet()
 
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
@@ -72,10 +72,10 @@ const usePlayground = () => {
 
   // side menu
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false)
+
   // handles
   const runHandle = async () => {
-    const res = await remote.snippet.run(1)
-    const _output = res.data?.output
+    const _output = await runSnippet()
     if (_output) setOutput(_output)
   }
 
