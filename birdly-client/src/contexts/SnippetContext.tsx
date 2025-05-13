@@ -4,12 +4,14 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 export type SnippetContext = {
   snippets: Snippet[]
+  setCurSnippetId: Function
 }
 
 const snippetContext = createContext<SnippetContext | undefined>(undefined)
 
 const SnippetProvider = ({ children }: any) => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
+  const [curSnippetId, setCurSnippetId] = useState<number>(-1)
 
   useEffect(() => {
     const fetchSnippets = async () => {
@@ -23,7 +25,7 @@ const SnippetProvider = ({ children }: any) => {
   }, [])
 
   return (
-    <snippetContext.Provider value={{ snippets }}>
+    <snippetContext.Provider value={{ snippets, setCurSnippetId }}>
       {children}
     </snippetContext.Provider>
   )

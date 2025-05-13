@@ -63,7 +63,7 @@ export const remote = {
       }),
 
     update: (
-      id: string,
+      id: number,
       data: {
         title?: string
         language?: string
@@ -77,14 +77,14 @@ export const remote = {
         auth: true,
       }),
 
-    delete: (id: string) =>
+    delete: (id: number) =>
       request<undefined>({
         method: 'DELETE',
         route: `/api/v1/snippets/${id}`,
         auth: true,
       }),
 
-    run: (id: string) =>
+    run: (id: number) =>
       request<CodeOutput>({
         method: 'POST',
         route: `/api/v1/snippets/run/${id}`,
