@@ -152,8 +152,8 @@ const usePlayground = () => {
     // stop debouncing
     const timeout = setTimeout(() => {
       updateSnippet(title, code)
-      feedbackUpdate()
-    }, 2000)
+      if (chatbotOn) feedbackUpdate()
+    }, 1000)
 
     return () => clearTimeout(timeout)
   }, [code])
