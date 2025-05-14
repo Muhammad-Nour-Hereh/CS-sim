@@ -96,6 +96,7 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'The user is practicing code in a playground.\n';
                 $this->contextParams[] = 'give user Hints or answers.\n';
                 $this->contextParams[] = 'by defaut you should give hints, by if the user is stuck give full answer.\n';
+                // $this->contextParams[] = 'by defaut you should give hints, by if the user is stuck give full answer.\n';
 
                 // format
                 $this->contextParams[] = 'If there more than one mistake, focus on the one that has the most impact one the code, for example, declaring a variable has more impact than the structure\n';
@@ -107,8 +108,10 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'hints:Your code is almost complete but missing something specific...\n';
                 $this->contextParams[] = 'hints:Your code is "almost" complete\n';
 
-                $this->contextParams[] = 'Do **not** give full answers unless asked.\n';
+                // don'ts
+                $this->contextParams[] = 'Do **not** give full answers in hints.\n';
                 $this->contextParams[] = 'Never mention languages or concepts not present in the code.\n';
+                $this->contextParams[] = 'DO NOT add encourgement after each prompt. keep it to when user succuceeded or seems frustrated.\n';
                 break;
             case 'mean':
                 $this->contextParams[] = 'The user is practicing code in a playground, while you\'re the mean instructor\n';
