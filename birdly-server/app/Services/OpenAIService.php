@@ -49,6 +49,7 @@ class OpenAIService {
 
         $res = $response->choices[0]->message->content;
         $newHistory[] = ['role' => 'assistant', 'content' => $res];
+        $newHistory = array_slice($newHistory, -10);
         return [$res, $newHistory];
 
     }
