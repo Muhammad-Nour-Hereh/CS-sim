@@ -30,7 +30,6 @@ const SnippetProvider = ({ children }: any) => {
       language: 'python',
       code: code,
     })
-    fetchSnippets()
   }
 
   const createSnippet = () => {
