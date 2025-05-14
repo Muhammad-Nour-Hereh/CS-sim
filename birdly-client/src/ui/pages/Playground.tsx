@@ -131,9 +131,13 @@ const Playground = () => {
             <span className="min-w-[80px] text-right text-gray-500">
               {saveStatus}
             </span>
+
+            <div className="mx-2 h-4 w-0.5 bg-gray-600" />
             <span className="min-w-[80px] text-right text-gray-500">
               {feedbackStatus}
             </span>
+
+            <div className="mx-2 h-4 w-0.5 bg-gray-600" />
             <span className="min-w-[80px] text-right text-gray-500">
               {runStatus}
             </span>
