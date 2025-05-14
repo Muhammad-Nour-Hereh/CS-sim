@@ -115,8 +115,10 @@ const usePlayground = () => {
     updateSnippet(value, code)
   }
 
-  const saveHandle = () => {
-    updateSnippet(title, code)
+  const saveHandle = async () => {
+    setSaveStatus('saving')
+    await updateSnippet(title, code)
+    setSaveStatus('saved')
   }
 
   const createSnippetHandle = () => {
@@ -151,8 +153,10 @@ const usePlayground = () => {
 
   useEffect(() => {
     // stop debouncing
-    const timeout = setTimeout(() => {
-      updateSnippet(title, code)
+    const timeout = setTimeout(async () => {
+      setSaveStatus('saving')
+      await updateSnippet(title, code)
+      setSaveStatus('saved')
       if (chatbotOn) feedbackUpdate()
     }, 1000)
 
