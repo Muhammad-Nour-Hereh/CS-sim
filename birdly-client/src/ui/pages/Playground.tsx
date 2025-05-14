@@ -23,6 +23,7 @@ const Playground = () => {
     snippets,
     saveStatus,
     runStatus,
+    feedbackStatus,
     containerRef,
     split1,
     split2,
@@ -132,6 +133,9 @@ const Playground = () => {
             </span>
             <span className="min-w-[80px] text-right text-gray-500">
               {runStatus}
+            </span>
+            <span className="min-w-[80px] text-right text-gray-500">
+              {feedbackStatus}
             </span>
           </div>
         </section>

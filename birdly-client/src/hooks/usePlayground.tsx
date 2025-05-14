@@ -183,6 +183,7 @@ const usePlayground = () => {
     chatbotOn,
     saveStatus,
     runStatus,
+    feedbackStatus,
     snippets,
     containerRef,
     split1,
