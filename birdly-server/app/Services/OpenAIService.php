@@ -29,4 +29,18 @@ class OpenAIService {
 
         return $response->choices[0]->message->content;
     }
+
+    public function historyPrompt(string $prompt, string $history): string {
+        $context = $this->buildContext();
+        $response = $this->client->chat()->create([
+            // 'model' => 'gpt-4o',
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'system', 'content' => $context],
+                ['role' => 'user', 'content' => $prompt]
+            ],
+        ]);
+
+        return $response->choices[0]->message->content;
+    }
 }
