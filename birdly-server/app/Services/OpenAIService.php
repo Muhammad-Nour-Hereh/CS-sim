@@ -30,20 +30,26 @@ class OpenAIService {
         return $response->choices[0]->message->content;
     }
 
-    public function historyPrompt(string $prompt, string $history): string {
+    public function historyPrompt(string $prompt, array $history): array {
         $context = $this->buildContext();
+        $newHistory = array_merge(
+            [['role' => 'system', 'content' => $context]],
+            $history,
+            ['role' => 'user', 'content' => $prompt]
+        );
+
         $response = $this->client->chat()->create([
             // 'model' => 'gpt-4o',
             'model' => 'gpt-3.5-turbo',
             'messages' => [
                 array_merge(
                     [['role' => 'system', 'content' => $context]],
-                    $history,
-                    ['role' => 'user', 'content' => $prompt]
+                    $newHistory
                 ),
             ],
         ]);
 
-        return $response->choices[0]->message->content;
+        $res = $response->choices[0]->message->content;
+        return ["res" => $res, "history" => $newHistory];
     }
 }

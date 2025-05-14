@@ -21,9 +21,9 @@ class ChatbotController extends Controller {
 
     public function snippet(int $id) {
         $code = '';
-        $history = '';
+        $history = [];
 
-        $response = $this->openai->generateText($code);
+        $response = $this->openai->historyPrompt($code, $history);
         return response()->json(['response' => $response]);
     }
 
