@@ -20,7 +20,7 @@ const IconButton = ({ children, className, onClick }: IconButtonProps) => {
         'text-border flex size-8 items-center justify-center rounded-full filter transition hover:brightness-140 active:brightness-90',
         className,
       )}
-      onClick={() => onClick?.()}
+      onClick={(e) => onClick?.(e)}
       aria-label={iconName}>
       {children}
     </button>

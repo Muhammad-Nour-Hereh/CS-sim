@@ -11,15 +11,24 @@ class Snippet extends Model {
 
     protected $fillable = [
         'user_id',
+        'history',
         'title',
         'language',
         'code',
     ];
 
+    protected $attributes = [
+        'history' => '[]'
+    ];
+
+    protected $casts = [
+        'history' => 'array',
+    ];
+
     public function course() {
         return $this->belongsTo(Course::class);
     }
-    
+
     public function user() {
         return $this->belongsTo(User::class);
     }

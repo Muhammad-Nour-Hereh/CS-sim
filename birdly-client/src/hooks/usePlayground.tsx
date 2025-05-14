@@ -1,24 +1,32 @@
 import { SnippetContext, useSnippet } from '@/contexts/SnippetContext'
 import { ROUTES } from '@/objects/routes'
-import { remote } from '@/remotes/remotes'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const usePlayground = () => {
-  const navigate = useNavigate()
-  // temp states
-  const [code, setCode] = useState('')
-  const [output, setOutput] = useState('')
-  const [feedback, setFeedback] = useState('')
-
   const {
     snippets,
     setCurSnippetId,
     runSnippet,
+    sendChat,
+    createSnippet,
     updateSnippet,
+    deleteSnippet,
   }: SnippetContext = useSnippet()
 
+  const navigate = useNavigate()
+  //  states
+  const [title, setTitle] = useState('')
+  const [code, setCode] = useState('')
+  const [output, setOutput] = useState('')
+  const [feedback, setFeedback] = useState('')
+  const [chatbotOn, setChatbotOn] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const [saveStatus, setSaveStatus] = useState<'' | 'saving ...' | 'saved'>('')
+  const [runStatus, setRunStatus] = useState<'' | 'running ...' | 'done'>('')
+  const [feedbackStatus, setFeedbackStatus] = useState<
+    'listening...' | 'thinking ...' | ''
+  >('')
 
   // resizing states
   const containerRef: any = useRef(null)
@@ -80,7 +88,9 @@ const usePlayground = () => {
 
   // handles
   const runHandle = async () => {
+    setRunStatus('running ...')
     const _output = await runSnippet()
+    setRunStatus('done')
     if (_output) setOutput(_output)
   }
 
@@ -103,12 +113,37 @@ const usePlayground = () => {
     setCurSnippetId(snippets[index].id)
     setSelectedIndex(index)
     setCode(snippets[index].code)
+    setTitle(snippets[index].title)
   }
 
-  const handleUpdateAndChat = async () => {
-    const res: any = await remote.chat(code)
-    if (res.response) {
-      setFeedback(res.response)
+  const ChangeNameHandle = (value: string) => {
+    setTitle(value)
+    updateSnippet(value, code)
+  }
+
+  const saveHandle = async () => {
+    setSaveStatus('saving ...')
+    await updateSnippet(title, code)
+    setSaveStatus('saved')
+  }
+
+  const createSnippetHandle = () => {
+    createSnippet()
+  }
+
+  const deleteSnippetHandle = (id: number) => {
+    deleteSnippet(id)
+  }
+
+  const toggleChatbotHandle = () => {
+    setChatbotOn((prev) => !prev)
+  }
+
+  // useEffect methods
+  const feedbackUpdate = async () => {
+    const res = await sendChat()
+    if (res) {
+      setFeedback(res)
     }
   }
 
@@ -119,14 +154,28 @@ const usePlayground = () => {
     setSelectedIndex(index)
     setCurSnippetId(snippets[index].id)
     setCode(snippets[index].code)
+    setTitle(snippets[index].title)
   }, [snippets])
 
   useEffect(() => {
     // stop debouncing
-    const timeout = setTimeout(() => {
-      updateSnippet(code)
-      handleUpdateAndChat()
-    }, 2000)
+    setSaveStatus('')
+    setFeedbackStatus('listening...')
+    const timeout = setTimeout(async () => {
+      setSaveStatus('saving ...')
+      await updateSnippet(title, code)
+      setSaveStatus('saved')
+    }, 1000)
+
+    return () => clearTimeout(timeout)
+  }, [code])
+
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      setFeedbackStatus('thinking ...')
+      if (chatbotOn) await feedbackUpdate()
+      setFeedbackStatus('')
+    }, 3000)
 
     return () => clearTimeout(timeout)
   }, [code])
@@ -136,6 +185,10 @@ const usePlayground = () => {
     setCode,
     output,
     feedback,
+    chatbotOn,
+    saveStatus,
+    runStatus,
+    feedbackStatus,
     snippets,
     containerRef,
     split1,
@@ -149,6 +202,11 @@ const usePlayground = () => {
     minmizeMenuHandle,
     navigateHomeHandle,
     snippetSelectHandle,
+    ChangeNameHandle,
+    saveHandle,
+    createSnippetHandle,
+    deleteSnippetHandle,
+    toggleChatbotHandle,
   }
 }
 

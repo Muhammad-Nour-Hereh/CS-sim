@@ -37,6 +37,8 @@ Route::group(["prefix" => "v1"], function () {
             Route::delete('/{id}', [SnippetController::class, 'destroy']);
 
             Route::post('/run/{id}', [SnippetRunnerController::class, 'run']);
+            Route::post('/chat/{id}', [ChatbotController::class, 'snippet']);
+
         });
 
         Route::prefix('courses')->group(function () {
@@ -77,6 +79,10 @@ Route::group(["prefix" => "v1"], function () {
             Route::get('{progressId}/completed', [ProgressController::class, 'getCompletedLevels']);
             Route::post('{progressId}/levels/{levelId}/complete', [ProgressController::class, 'completeLevel']);
             Route::delete('{progressId}/levels/{levelId}/complete', [ProgressController::class, 'uncompleteLevel']);
+        });
+
+        Route::prefix('chat')->group(function () {
+            Route::post('/', [ChatbotController::class, 'chat']);
         });
 
         Route::prefix('chat')->group(function () {

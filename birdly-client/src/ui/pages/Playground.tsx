@@ -1,6 +1,15 @@
 import usePlayground from '@/hooks/usePlayground'
 import { CodeEditor } from '../components/CodeEditor'
-import { ArrowLeft, House, Menu, Play } from 'lucide-react'
+import {
+  ArrowLeft,
+  Bot,
+  BotOff,
+  House,
+  Menu,
+  Play,
+  Plus,
+  Save,
+} from 'lucide-react'
 import IconButton from '../components/IconButton'
 import ListItem from '../components/ListItem'
 
@@ -10,19 +19,28 @@ const Playground = () => {
     setCode,
     output,
     feedback,
+    chatbotOn,
     snippets,
+    saveStatus,
+    runStatus,
+    feedbackStatus,
     containerRef,
     split1,
     split2,
     splitV,
     onMouseDown,
     selectedIndex,
+    isSideMenuOpen,
     runHandle,
     menuHandle,
     minmizeMenuHandle,
     navigateHomeHandle,
     snippetSelectHandle,
-    isSideMenuOpen,
+    ChangeNameHandle,
+    saveHandle,
+    createSnippetHandle,
+    deleteSnippetHandle,
+    toggleChatbotHandle,
   } = usePlayground()
 
   return (
@@ -38,8 +56,18 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={runHandle}>
               <Play />
             </IconButton>
+            <IconButton className="text-gray-500" onClick={saveHandle}>
+              <Save />
+            </IconButton>
             <IconButton className="text-gray-500" onClick={navigateHomeHandle}>
               <House />
+            </IconButton>
+            <IconButton className="text-gray-500">
+              {chatbotOn ? (
+                <Bot onClick={toggleChatbotHandle} />
+              ) : (
+                <BotOff onClick={toggleChatbotHandle} />
+              )}
             </IconButton>
           </aside>
           <div className="w-6" />
@@ -54,20 +82,33 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
               <ArrowLeft />
             </IconButton>
-            <ul className="flex flex-col gap-3">
-              {snippets.map((snippet: any, index: number) => {
+
+            <div
+              className="bg-selected flex items-center text-gray-500 hover:brightness-140 active:brightness-90"
+              onClick={createSnippetHandle}>
+              <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
+                <Plus />
+              </IconButton>
+              <span className="font-bold">create new</span>
+            </div>
+
+            <ul className="flex flex-1 flex-col gap-3 overflow-y-auto">
+              {snippets.map((snippet, index: number) => {
                 const isSelected = selectedIndex === index
                 return (
                   <ListItem
                     key={index}
                     isSelected={isSelected}
-                    onClick={() => snippetSelectHandle(index)}>
+                    onClick={() => snippetSelectHandle(index)}
+                    onValueChange={ChangeNameHandle}
+                    onDelete={() => deleteSnippetHandle(snippet.id)}>
                     {snippet.title}
                   </ListItem>
                 )
               })}
             </ul>
           </aside>
+
           <div
             onMouseDown={onMouseDown('splitV')}
             className="w-6 cursor-col-resize"
@@ -86,8 +127,20 @@ const Playground = () => {
           <div className="flex-1 overflow-auto">
             <CodeEditor code={code} setCode={setCode} />
           </div>
-          <div className="sticky bottom-0 left-0 flex h-6 w-full items-center bg-[#1f2f34] px-8">
-            footer
+          <div className="sticky bottom-0 left-0 flex h-6 w-full flex-row-reverse items-center bg-[#1f2f34] px-8">
+            <span className="min-w-[80px] text-right text-gray-500">
+              {saveStatus}
+            </span>
+
+            <div className="mx-2 h-4 w-0.5 bg-gray-600" />
+            <span className="min-w-[80px] text-right text-gray-500">
+              {feedbackStatus}
+            </span>
+
+            <div className="mx-2 h-4 w-0.5 bg-gray-600" />
+            <span className="min-w-[80px] text-right text-gray-500">
+              {runStatus}
+            </span>
           </div>
         </section>
 

@@ -11,3 +11,7 @@ export interface CodeOutput {
   status: string
   output: string
 }
+
+export interface ChatResponse {
+  response: string
+}

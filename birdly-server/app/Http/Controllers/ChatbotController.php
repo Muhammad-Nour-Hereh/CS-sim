@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Snippet;
 use App\Services\OpenAIService;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,20 @@ class ChatbotController extends Controller {
             'prompt' => 'string',
         ]);
 
-        $response = $this->openai->generateText($request->prompt);
-        return response()->json(['response' => $response]);
+        $res = $this->openai->generateText($request->prompt);
+        return $this->successResponse(['response' => $res]);
+    }
+
+    public function snippet(int $id) {
+        $snippet = Snippet::find($id);
+        $code = $snippet->code;
+        $history = $snippet->history;
+
+        [$res, $newHistory] = $this->openai->historyPrompt($code, $history);
+
+        $snippet->update(['history' => $newHistory]);
+        return $this->successResponse(['response' => $res]);
+        
+
     }
 }
