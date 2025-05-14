@@ -132,10 +132,10 @@ const Playground = () => {
               {saveStatus}
             </span>
             <span className="min-w-[80px] text-right text-gray-500">
-              {runStatus}
+              {feedbackStatus}
             </span>
             <span className="min-w-[80px] text-right text-gray-500">
-              {feedbackStatus}
+              {runStatus}
             </span>
           </div>
         </section>
