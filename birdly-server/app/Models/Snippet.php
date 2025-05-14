@@ -17,6 +17,14 @@ class Snippet extends Model {
         'code',
     ];
 
+    protected $attributes = [
+        'history' => '[]'
+    ];
+
+    protected $casts = [
+        'history' => 'array',
+    ];
+
     public function course() {
         return $this->belongsTo(Course::class);
     }

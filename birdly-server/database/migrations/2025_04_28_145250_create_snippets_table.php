@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('language');
             $table->text('code');
-            $table->json('history')->default(json_encode([]));
+            $table->json('history');
             $table->timestamps();
             $table->softDeletes();
         });

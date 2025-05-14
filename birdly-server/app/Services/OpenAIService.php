@@ -34,17 +34,17 @@ class OpenAIService {
         $context = $this->buildContext();
         $newHistory = array_merge(
             $history,
-            ['role' => 'user', 'content' => $prompt]
+            [['role' => 'user', 'content' => $prompt]]
         );
 
         $response = $this->client->chat()->create([
             'model' => 'gpt-4o',
             // 'model' => 'gpt-3.5-turbo',
-            'messages' =>[
+            'messages' =>
             array_merge(
                 [['role' => 'system', 'content' => $context]],
                 $newHistory
-            ),]
+            ),
         ]);
 
         $res = $response->choices[0]->message->content;

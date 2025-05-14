@@ -23,11 +23,11 @@ class ChatbotController extends Controller {
     public function snippet(int $id) {
         $snippet = Snippet::find($id);
         $code = $snippet->code;
-        $history = json_decode($snippet->history);
+        $history = $snippet->history;
 
         [$res, $newHistory] = $this->openai->historyPrompt($code, $history);
 
-        $snippet->update(['history' => json_encode($newHistory)]);
+        $snippet->update(['history' => $newHistory]);
         return response()->json(['response' => $res]);
     }
 }
