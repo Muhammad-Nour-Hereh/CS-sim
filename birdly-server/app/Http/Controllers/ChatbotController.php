@@ -16,8 +16,8 @@ class ChatbotController extends Controller {
             'prompt' => 'string',
         ]);
 
-        $response = $this->openai->generateText($request->prompt);
-        return response()->json(['response' => $response]);
+        $res = $this->openai->generateText($request->prompt);
+        return $this->successResponse(['response' => $res]);
     }
 
     public function snippet(int $id) {
@@ -28,6 +28,8 @@ class ChatbotController extends Controller {
         [$res, $newHistory] = $this->openai->historyPrompt($code, $history);
 
         $snippet->update(['history' => $newHistory]);
-        return response()->json(['response' => $res]);
+        return $this->successResponse(['response' => $res]);
+        
+
     }
 }
