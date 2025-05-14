@@ -20,7 +20,6 @@ const Playground = () => {
     output,
     feedback,
     chatbotOn,
-    setChatbotOn,
     snippets,
     containerRef,
     split1,
@@ -38,6 +37,7 @@ const Playground = () => {
     saveHandle,
     createSnippetHandle,
     deleteSnippetHandle,
+    toggleChatbotHandle,
   } = usePlayground()
 
   return (
@@ -60,7 +60,11 @@ const Playground = () => {
               <House />
             </IconButton>
             <IconButton className="text-gray-500">
-              {chatbotOn ? <Bot /> : <BotOff />}
+              {chatbotOn ? (
+                <Bot onClick={toggleChatbotHandle} />
+              ) : (
+                <BotOff onClick={toggleChatbotHandle} />
+              )}
             </IconButton>
           </aside>
           <div className="w-6" />

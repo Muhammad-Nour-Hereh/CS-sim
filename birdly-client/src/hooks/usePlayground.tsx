@@ -133,6 +133,9 @@ const usePlayground = () => {
     deleteSnippet(id)
   }
 
+  const toggleChatbotHandle = () => {
+    setChatbotOn((prev) => !prev)
+  }
   // useEffect
   useEffect(() => {
     if (snippets.length === 0) return
@@ -159,7 +162,6 @@ const usePlayground = () => {
     output,
     feedback,
     chatbotOn,
-    setChatbotOn,
     snippets,
     containerRef,
     split1,
@@ -177,6 +179,7 @@ const usePlayground = () => {
     saveHandle,
     createSnippetHandle,
     deleteSnippetHandle,
+    toggleChatbotHandle,
   }
 }
 
