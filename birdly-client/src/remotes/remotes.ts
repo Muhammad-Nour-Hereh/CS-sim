@@ -1,4 +1,4 @@
-import { CodeOutput, Snippet } from '@/interfaces/Snippet'
+import { ChatResponse, CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
 
 export const remote = {
@@ -86,11 +86,11 @@ export const remote = {
         auth: true,
       }),
 
-    chat: (id: number): any =>
-      request<CodeOutput>({
+    chat: (id: number) =>
+      request<ChatResponse>({
         method: 'POST',
         route: `/api/v1/snippets/chat/${id}`,
-        auth: true
+        auth: true,
       }),
   },
   chat: (prompt: string): any =>
