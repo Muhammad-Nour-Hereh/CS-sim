@@ -22,7 +22,7 @@ const usePlayground = () => {
   const [feedback, setFeedback] = useState('')
   const [chatbotOn, setChatbotOn] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
-
+  const [saveStatus, setSaveStatus] = useState('')
   // resizing states
   const containerRef: any = useRef(null)
 
