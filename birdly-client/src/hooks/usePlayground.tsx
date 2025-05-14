@@ -22,8 +22,9 @@ const usePlayground = () => {
   const [feedback, setFeedback] = useState('')
   const [chatbotOn, setChatbotOn] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
-  const [saveStatus, setSaveStatus] = useState<'' | 'saved' | 'saving'>('')
-
+  const [saveStatus, setSaveStatus] = useState<'' | 'saving ...' | 'saved'>('')
+  const [runStatus, setRunStatus] = useState<'' | 'running ...' | 'done'>('')
+  
   // resizing states
   const containerRef: any = useRef(null)
 
@@ -116,7 +117,7 @@ const usePlayground = () => {
   }
 
   const saveHandle = async () => {
-    setSaveStatus('saving')
+    setSaveStatus('saving ...')
     await updateSnippet(title, code)
     setSaveStatus('saved')
   }
@@ -154,7 +155,7 @@ const usePlayground = () => {
   useEffect(() => {
     // stop debouncing
     const timeout = setTimeout(async () => {
-      setSaveStatus('saving')
+      setSaveStatus('saving ...')
       await updateSnippet(title, code)
       setSaveStatus('saved')
       if (chatbotOn) feedbackUpdate()
