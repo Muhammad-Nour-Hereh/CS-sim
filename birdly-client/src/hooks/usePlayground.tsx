@@ -24,7 +24,7 @@ const usePlayground = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [saveStatus, setSaveStatus] = useState<'' | 'saving ...' | 'saved'>('')
   const [runStatus, setRunStatus] = useState<'' | 'running ...' | 'done'>('')
-  
+
   // resizing states
   const containerRef: any = useRef(null)
 
@@ -85,7 +85,9 @@ const usePlayground = () => {
 
   // handles
   const runHandle = async () => {
+    setRunStatus('running ...')
     const _output = await runSnippet()
+    setRunStatus('done')
     if (_output) setOutput(_output)
   }
 
@@ -171,6 +173,7 @@ const usePlayground = () => {
     feedback,
     chatbotOn,
     saveStatus,
+    runStatus,
     snippets,
     containerRef,
     split1,

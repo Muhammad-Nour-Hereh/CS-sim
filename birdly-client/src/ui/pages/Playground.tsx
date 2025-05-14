@@ -22,6 +22,7 @@ const Playground = () => {
     chatbotOn,
     snippets,
     saveStatus,
+    runStatus,
     containerRef,
     split1,
     split2,
@@ -126,7 +127,7 @@ const Playground = () => {
             <CodeEditor code={code} setCode={setCode} />
           </div>
           <div className="sticky bottom-0 left-0 flex h-6 w-full items-center bg-[#1f2f34] px-8">
-            footer {saveStatus}
+            {saveStatus} {runStatus}
           </div>
         </section>
 
