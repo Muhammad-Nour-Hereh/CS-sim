@@ -51,7 +51,7 @@ const SnippetProvider = ({ children }: any) => {
   }
 
   const sendChat = async () => {
-    return await remote.snippet.chat(curSnippetId)
+    return (await remote.snippet.chat(curSnippetId)).data?.response
   }
 
   useEffect(() => {

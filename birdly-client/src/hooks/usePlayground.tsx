@@ -139,8 +139,8 @@ const usePlayground = () => {
   // useEffect methods
   const feedbackUpdate = async () => {
     const res = await sendChat()
-    if (res.response) {
-      setFeedback(res.response)
+    if (res) {
+      setFeedback(res)
     }
   }
 
