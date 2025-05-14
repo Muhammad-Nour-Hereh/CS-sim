@@ -161,8 +161,15 @@ const usePlayground = () => {
       setSaveStatus('saving ...')
       await updateSnippet(title, code)
       setSaveStatus('saved')
-      if (chatbotOn) feedbackUpdate()
     }, 1000)
+
+    return () => clearTimeout(timeout)
+  }, [code])
+
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      if (chatbotOn) feedbackUpdate()
+    }, 3000)
 
     return () => clearTimeout(timeout)
   }, [code])
