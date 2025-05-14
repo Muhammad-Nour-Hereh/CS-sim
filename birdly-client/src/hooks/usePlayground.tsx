@@ -1,6 +1,5 @@
 import { SnippetContext, useSnippet } from '@/contexts/SnippetContext'
 import { ROUTES } from '@/objects/routes'
-import { remote } from '@/remotes/remotes'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,6 +8,7 @@ const usePlayground = () => {
     snippets,
     setCurSnippetId,
     runSnippet,
+    sendChat,
     createSnippet,
     updateSnippet,
     deleteSnippet,
@@ -138,7 +138,7 @@ const usePlayground = () => {
 
   // useEffect methods
   const feedbackUpdate = async () => {
-    const res: any = await remote.chat(code)
+    const res = await sendChat()
     if (res.response) {
       setFeedback(res.response)
     }

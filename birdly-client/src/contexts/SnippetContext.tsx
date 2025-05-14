@@ -6,6 +6,7 @@ export type SnippetContext = {
   snippets: Snippet[]
   setCurSnippetId: Function
   runSnippet: Function
+  sendChat: Function
   updateSnippet: Function
   createSnippet: Function
   deleteSnippet: Function
@@ -49,6 +50,10 @@ const SnippetProvider = ({ children }: any) => {
     }
   }
 
+  const sendChat = async () => {
+    return await remote.snippet.chat(curSnippetId)
+  }
+
   useEffect(() => {
     fetchSnippets()
   }, [])
@@ -59,6 +64,7 @@ const SnippetProvider = ({ children }: any) => {
         snippets,
         setCurSnippetId,
         runSnippet,
+        sendChat,
         createSnippet,
         updateSnippet,
         deleteSnippet,
