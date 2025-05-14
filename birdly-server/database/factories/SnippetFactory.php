@@ -14,6 +14,7 @@ class SnippetFactory extends Factory {
      * @return array<string, mixed>
      */
     public function definition(): array {
+        
         return [
             'user_id' => 1,
             'title' => "Example Snippet",
