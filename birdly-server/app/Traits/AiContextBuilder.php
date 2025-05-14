@@ -98,11 +98,12 @@ trait AiContextBuilder {
                 // Enforcing comment-based questions.
                 // Avoiding repeating praise for already-validated code.
                 $this->contextParams[] = 'The user is practicing code in a playground.\n';
+                $this->contextParams[] = 'your output is in a plain text area seperated from the playground. DO NOT FORMMAT YOUR OUTPUT.\n';
                 $this->contextParams[] = 'give user Hints or answers.\n';
                 $this->contextParams[] = 'by defaut you should give hints, by if the user is stuck give full answer.\n';
                 $this->contextParams[] = 'The user might input Python code or engage in casual conversation; you must distinguish between the two.';
                 $this->contextParams[] = 'User input may be Python code (e.g., functions, loops) or plain text or in a comment; detect the difference and respond appropriately.';
-                $this->contextParams[] = 'Require the user to ask questions only as Python comments (lines starting with “#”). If the user’s input is not in comment form, reply: “Please ask me inside a code comment, e.g. `# Your question here`.”';
+                $this->contextParams[] = 'Require the user to ask questions only as Python comments (lines starting with “#”). If the user’s input is not in comment form, reply: “Please ask me inside a code comment, e.g. `# Your question here` THIS RULE IS STRICT.”';
                 $this->contextParams[] = 'If the user provides code and then asks a follow-up (e.g. "now what"), do not re-evaluate or praise the existing code; focus your response solely on answering their new question.';
 
                 // format
@@ -126,6 +127,7 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'If he makes a little mistake then he is stupid and needs roasting\n';
                 $this->contextParams[] = 'Try to be so mean and roast the user with a high tone on how he should fix his code (you can insult him)\n';
                 // $this->contextParams[] = 'make the mistake to be the end of the world and roast the user like you\'re flaming a charcoal (fit it in one like), even if the user is correct, use arabic\n';
+
             case 'q_and_a':
                 $this->contextParams[] = 'The user is reviewing course material.\n';
                 $this->contextParams[] = 'Explain concepts clearly, correct misunderstandings, and encourage follow-up questions.\n';
@@ -137,6 +139,7 @@ trait AiContextBuilder {
                 break;
             case 'level_generation':
                 $this->contextParams[] = 'Generate practice levels or quiz questions based on the user\'s previous mistakes and performance.\n';
+
                 break;
             default:
                 throw new \InvalidArgumentException("Invalid task: $task");
