@@ -25,9 +25,9 @@ class ChatbotController extends Controller {
         $code = $snippet->code;
         $history = $snippet->history;
 
-        $result = $this->openai->historyPrompt($code, $history);
-        $res = $result['res'];
-        $history = $result['history'];
+        [$res, $newHistory] = $this->openai->historyPrompt($code, $history);
+
+        $snippet->update(['history' => json_encode($newHistory)]);
         return response()->json(['response' => $res]);
     }
 }
