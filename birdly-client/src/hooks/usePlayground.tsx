@@ -165,6 +165,7 @@ const usePlayground = () => {
     output,
     feedback,
     chatbotOn,
+    saveStatus,
     snippets,
     containerRef,
     split1,
