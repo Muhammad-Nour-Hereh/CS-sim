@@ -1,11 +1,20 @@
 import { MDXProvider } from '@mdx-js/react'
 import MyMdxFile from '../../assets/hello_world.mdx'
+import Sidebar from '../components/Sidebar'
 
 const GuildbookPage = () => {
   return (
-    <MDXProvider>
-      <MyMdxFile />
-    </MDXProvider>
+    <div className="flex h-screen w-screen">
+      <aside className="w-56 bg-gray-900 text-white">
+        <Sidebar />
+      </aside>
+
+      <main className="bg flex flex-1 flex-col p-4">
+        <MDXProvider>
+          <MyMdxFile />
+        </MDXProvider>
+      </main>
+    </div>
   )
 }
 
