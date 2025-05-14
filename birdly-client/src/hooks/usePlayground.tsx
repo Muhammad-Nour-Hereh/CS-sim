@@ -24,6 +24,7 @@ const usePlayground = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [saveStatus, setSaveStatus] = useState<'' | 'saving ...' | 'saved'>('')
   const [runStatus, setRunStatus] = useState<'' | 'running ...' | 'done'>('')
+  const [feedbackStatus, setFeedbackStatus] = useState<'listening' | 'thinking ...' | ''>('')
 
   // resizing states
   const containerRef: any = useRef(null)
