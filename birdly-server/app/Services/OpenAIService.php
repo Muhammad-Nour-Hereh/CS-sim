@@ -36,8 +36,11 @@ class OpenAIService {
             // 'model' => 'gpt-4o',
             'model' => 'gpt-3.5-turbo',
             'messages' => [
-                ['role' => 'system', 'content' => $context],
-                ['role' => 'user', 'content' => $prompt]
+                array_merge(
+                    [['role' => 'system', 'content' => $context]],
+                    $history,
+                    ['role' => 'user', 'content' => $prompt]
+                ),
             ],
         ]);
 
