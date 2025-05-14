@@ -156,6 +156,7 @@ const usePlayground = () => {
 
   useEffect(() => {
     // stop debouncing
+    setSaveStatus('')
     const timeout = setTimeout(async () => {
       setSaveStatus('saving ...')
       await updateSnippet(title, code)
