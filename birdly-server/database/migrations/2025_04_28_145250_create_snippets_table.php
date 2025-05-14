@@ -10,7 +10,6 @@ return new class extends Migration {
         Schema::create('snippets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('chat_history_id')->constrained('chat_histories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
             $table->string('language');
             $table->text('code');

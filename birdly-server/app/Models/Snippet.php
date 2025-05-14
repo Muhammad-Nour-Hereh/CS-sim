@@ -11,7 +11,7 @@ class Snippet extends Model {
 
     protected $fillable = [
         'user_id',
-        'chat_history_id',
+        'history',
         'title',
         'language',
         'code',
@@ -23,9 +23,5 @@ class Snippet extends Model {
 
     public function user() {
         return $this->belongsTo(User::class);
-    }
-
-    public function chatHistory() {
-        return $this->hasOne(ChatHistory::class);
     }
 }
