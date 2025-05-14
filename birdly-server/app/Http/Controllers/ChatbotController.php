@@ -21,9 +21,9 @@ class ChatbotController extends Controller {
     }
 
     public function snippet(int $id) {
-        $snippet = Snippet::get($id);
+        $snippet = Snippet::find($id);
         $code = $snippet->code;
-        $history = $snippet->history;
+        $history = json_decode($snippet->history);
 
         [$res, $newHistory] = $this->openai->historyPrompt($code, $history);
 
