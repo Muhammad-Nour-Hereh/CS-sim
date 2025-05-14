@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SnippetRequest;
+use App\Models\ChatHistory;
 use App\Models\Snippet;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,10 @@ class SnippetController extends Controller {
     }
 
     public function store(SnippetRequest $request) {
-        $snippet = Snippet::create([
+
+        Snippet::create([
             'user_id' => $request->user()->id,
+            'chat_history_id' => ChatHistory::create(),
             'title' => $request->input('title'),
             'language' => $request->input('language'),
             'code' => $request->input('code'),
@@ -56,7 +59,7 @@ class SnippetController extends Controller {
 
         if (!$snippet)
             return $this->failResponse('Snippet not found', 404);
-        
+
 
         $snippet->delete();
 
