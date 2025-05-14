@@ -92,13 +92,21 @@ trait AiContextBuilder {
     public function addTaskContext(string $task): self {
         switch ($task) {
             case 'playground':
+                // task
                 $this->contextParams[] = 'The user is practicing code in a playground.\n';
-                $this->contextParams[] = 'If they make a small mistake, give them a **gentle, short hint** (fits in one line).\n';
-                $this->contextParams[] = 'try to mashup the hints into something of your own \n';
+                $this->contextParams[] = 'give user Hints or answers.\n';
+                $this->contextParams[] = 'by defaut you should give hints, by if the user is stuck give full answer.\n';
+
+                // format
                 $this->contextParams[] = 'If there more than one mistake, focus on the one that has the most impact one the code, for example, declaring a variable has more impact than the structure\n';
+                $this->contextParams[] = 'answers can be a line of code\n';
+                $this->contextParams[] = 'hints can be a suggestions, a reminder, or a part of the solution\n';
+
+                // examples
                 $this->contextParams[] = 'hints:hmm..., i don\'t thing this is how we create a variable\n';
                 $this->contextParams[] = 'hints:Your code is almost complete but missing something specific...\n';
                 $this->contextParams[] = 'hints:Your code is "almost" complete\n';
+
                 $this->contextParams[] = 'Do **not** give full answers unless asked.\n';
                 $this->contextParams[] = 'Never mention languages or concepts not present in the code.\n';
                 break;
