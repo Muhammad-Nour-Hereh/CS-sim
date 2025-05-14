@@ -109,13 +109,6 @@ const usePlayground = () => {
     setTitle(snippets[index].title)
   }
 
-  const handleUpdateAndChat = async () => {
-    const res: any = await remote.chat(code)
-    if (res.response) {
-      setFeedback(res.response)
-    }
-  }
-
   const ChangeNameHandle = (value: string) => {
     setTitle(value)
     updateSnippet(value, code)
@@ -136,6 +129,15 @@ const usePlayground = () => {
   const toggleChatbotHandle = () => {
     setChatbotOn((prev) => !prev)
   }
+
+  // useEffect methods
+  const feedbackUpdate = async () => {
+    const res: any = await remote.chat(code)
+    if (res.response) {
+      setFeedback(res.response)
+    }
+  }
+
   // useEffect
   useEffect(() => {
     if (snippets.length === 0) return
@@ -150,7 +152,7 @@ const usePlayground = () => {
     // stop debouncing
     const timeout = setTimeout(() => {
       updateSnippet(title, code)
-      handleUpdateAndChat()
+      feedbackUpdate()
     }, 2000)
 
     return () => clearTimeout(timeout)
