@@ -17,9 +17,11 @@ class SnippetController extends Controller {
 
     public function store(SnippetRequest $request) {
 
+        $chatHistory = ChatHistory::create();
+        echo $chatHistory->id;
         Snippet::create([
             'user_id' => $request->user()->id,
-            'chat_history_id' => ChatHistory::create(),
+            'chat_history_id' => $chatHistory->id,
             'title' => $request->input('title'),
             'language' => $request->input('language'),
             'code' => $request->input('code'),

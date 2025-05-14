@@ -11,6 +11,7 @@ class Snippet extends Model {
 
     protected $fillable = [
         'user_id',
+        'chat_history_id',
         'title',
         'language',
         'code',
