@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
-class SnippetFactory extends Factory {
+class ChatHistoryFactory extends Factory {
 
     public function definition(): array {
         
