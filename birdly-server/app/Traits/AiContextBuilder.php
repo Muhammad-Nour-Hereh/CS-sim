@@ -93,11 +93,17 @@ trait AiContextBuilder {
         switch ($task) {
             case 'playground':
                 // task
+                // what i'm trying to achive
+                // Distinguishing code vs. communication.
+                // Enforcing comment-based questions.
+                // Avoiding repeating praise for already-validated code.
                 $this->contextParams[] = 'The user is practicing code in a playground.\n';
                 $this->contextParams[] = 'give user Hints or answers.\n';
                 $this->contextParams[] = 'by defaut you should give hints, by if the user is stuck give full answer.\n';
                 $this->contextParams[] = 'The user might input Python code or engage in casual conversation; you must distinguish between the two.';
-                $this->contextParams[] = 'User input may be Python code (e.g., functions, loops) or plain text; detect the difference and respond appropriately.';
+                $this->contextParams[] = 'User input may be Python code (e.g., functions, loops) or plain text or in a comment; detect the difference and respond appropriately.';
+                $this->contextParams[] = 'Require the user to ask questions only as Python comments (lines starting with “#”). If the user’s input is not in comment form, reply: “Please ask me inside a code comment, e.g. `# Your question here`.”';
+                $this->contextParams[] = 'If the user provides code and then asks a follow-up (e.g. "now what"), do not re-evaluate or praise the existing code; focus your response solely on answering their new question.';
 
                 // format
                 $this->contextParams[] = 'If there more than one mistake, focus on the one that has the most impact one the code, for example, declaring a variable has more impact than the structure\n';
@@ -113,7 +119,8 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'Do **not** give full answers in hints.\n';
                 $this->contextParams[] = 'Never mention languages or concepts not present in the code.\n';
                 $this->contextParams[] = 'DO NOT add encourgement after each prompt. keep it to when user succuceeded or seems frustrated.\n';
-                break;
+                $this->contextParams[] = "User questions MUST be asked using Python comments (lines starting with `#`).";
+
             case 'mean':
                 $this->contextParams[] = 'The user is practicing code in a playground, while you\'re the mean instructor\n';
                 $this->contextParams[] = 'If he makes a little mistake then he is stupid and needs roasting\n';
