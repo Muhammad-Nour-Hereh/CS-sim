@@ -19,6 +19,8 @@ const Playground = () => {
     setCode,
     output,
     feedback,
+    chatbotOn,
+    setChatbotOn,
     snippets,
     containerRef,
     split1,
@@ -58,10 +60,7 @@ const Playground = () => {
               <House />
             </IconButton>
             <IconButton className="text-gray-500">
-              <Bot />
-            </IconButton>
-            <IconButton className="text-gray-500">
-              <BotOff />
+              {chatbotOn ? <Bot /> : <BotOff />}
             </IconButton>
           </aside>
           <div className="w-6" />

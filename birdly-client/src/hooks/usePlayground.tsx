@@ -15,12 +15,12 @@ const usePlayground = () => {
   }: SnippetContext = useSnippet()
 
   const navigate = useNavigate()
-  // temp states
+  //  states
   const [title, setTitle] = useState('')
   const [code, setCode] = useState('')
   const [output, setOutput] = useState('')
   const [feedback, setFeedback] = useState('')
-
+  const [chatbotOn, setChatbotOn] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   // resizing states
@@ -158,6 +158,8 @@ const usePlayground = () => {
     setCode,
     output,
     feedback,
+    chatbotOn,
+    setChatbotOn,
     snippets,
     containerRef,
     split1,
