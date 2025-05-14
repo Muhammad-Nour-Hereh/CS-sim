@@ -85,6 +85,14 @@ export const remote = {
         route: `/api/v1/snippets/run/${id}`,
         auth: true,
       }),
+
+    chat: (id: number): any =>
+      request<CodeOutput>({
+        method: 'POST',
+        route: `/api/v1/snippets/chat/${id}`,
+        auth: true,
+        body: { prompt: prompt },
+      }),
   },
   chat: (prompt: string): any =>
     request<CodeOutput>({
