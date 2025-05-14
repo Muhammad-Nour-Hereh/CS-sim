@@ -20,7 +20,7 @@ class OpenAIService {
         $context = $this->buildContext();
         $response = $this->client->chat()->create([
             // 'model' => 'gpt-4o',
-            'model' => 'GPT-3.5-turbo',
+            'model' => 'gpt-3.5-turbo',
             'messages' => [
                 ['role' => 'system', 'content' => $context],
                 ['role' => 'user', 'content' => $prompt]
