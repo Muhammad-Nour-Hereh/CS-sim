@@ -19,7 +19,8 @@ class OpenAIService {
     public function generateText(string $prompt): string {
         $context = $this->buildContext();
         $response = $this->client->chat()->create([
-            'model' => 'gpt-4o',
+            // 'model' => 'gpt-4o',
+            'model' => 'GPT-3.5-turbo',
             'messages' => [
                 ['role' => 'system', 'content' => $context],
                 ['role' => 'user', 'content' => $prompt]
