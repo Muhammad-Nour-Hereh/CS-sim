@@ -126,9 +126,13 @@ const Playground = () => {
           <div className="flex-1 overflow-auto">
             <CodeEditor code={code} setCode={setCode} />
           </div>
-          <div className="sticky bottom-0 left-0 flex h-6 w-full flex-row-reverse items-center gap-4 bg-[#1f2f34] px-8">
-            <span className="text-gray-500">{saveStatus} </span>
-            <span className="text-gray-500">{runStatus}</span>
+          <div className="sticky bottom-0 left-0 flex h-6 w-full flex-row-reverse items-center bg-[#1f2f34] px-8">
+            <span className="min-w-[80px] text-right text-gray-500">
+              {saveStatus}
+            </span>
+            <span className="min-w-[80px] text-right text-gray-500">
+              {runStatus}
+            </span>
           </div>
         </section>
 
