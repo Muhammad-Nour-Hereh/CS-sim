@@ -1,5 +1,9 @@
 
 services:
+  client:
+    image: muhammadnourhereh/birdly-client:staging
+    ports:
+      - 80:80
   server:
     image: muhammadnourhereh/birdly:staging
     environment:

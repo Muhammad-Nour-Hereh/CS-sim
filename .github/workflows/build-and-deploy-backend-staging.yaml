@@ -27,7 +27,7 @@ jobs:
       - name: Prepare Laravel Application
         working-directory: birdly-server
         run: |
-          cp .env.example .env
+          cp .env.staging .env
           php artisan key:generate
 
   Build-Laravel-And-Push-Dockerhub:
@@ -44,7 +44,8 @@ jobs:
           password: ${{ secrets.DOCKER_KEY }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly:staging ./birdly-server
+        working-directory: birdly-server
+        run: docker build -f dockerfile.release -t ${{ secrets.DOCKER_USERNAME }}/birdly:staging .
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly:staging
@@ -68,5 +69,6 @@ jobs:
             # docker rmi ${{ secrets.DOCKER_USERNAME }}/birdly:staging
             # docker-compose up -d
 
-            docker pull ${{ secrets.DOCKER_USERNAME }}/birdly:staging
-            docker-compose up -d --no-deps --build server
+            docker-compose pull server
+            docker-compose rm -f server
+            docker-compose up -d server

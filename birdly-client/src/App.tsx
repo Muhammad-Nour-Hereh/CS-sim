@@ -1,34 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { ROUTES } from './objects/routes'
+import { HomePage } from './ui/pages/HomePage'
+import UserRoutes from './protected-routes/UserRoutes'
+import DevRoutes from './protected-routes/DevRoutes'
+import GuestRoutes from './protected-routes/GuestRoutes'
+import ComponentsPage from './ui/pages/ComponentsPage'
+import QuizPage from './ui/pages/QuizPage'
+import Playground from './ui/pages/Playground'
+import LoginPage from './ui/pages/LoginPage'
+import RegisterPage from './ui/pages/RegisterPage'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Routes>
+      <Route element={<GuestRoutes />}>
+        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+        <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+        <Route path={ROUTES.FORGETPASSWORD} element={<h1 className='flex items-center justify-center font-extrabold p-50 text-3xl'>don't forget it next time 🙃</h1>} />
+      </Route>
+
+      <Route element={<UserRoutes />}>
+        <Route
+          path={ROUTES.ROOT}
+          element={<Navigate to={ROUTES.HOME} replace />}
+        />
+        <Route path={ROUTES.HOME} element={<HomePage />} />
+        <Route path={ROUTES.QUIZ} element={<QuizPage />} />
+        <Route path={ROUTES.PRACTICE} element={<h1>practice</h1>} />
+        <Route path={ROUTES.GUIDEBOOKS} element={<h1>guidebooks</h1>} />
+        <Route path={ROUTES.CHEATS} element={<h1>cheats</h1>} />
+        <Route path={ROUTES.PLAYGROUND} element={<Playground />} />
+        <Route path={ROUTES.SETTINGS} element={<h1>settings</h1>} />
+        <Route path={ROUTES.PROFILE} element={<h1>profile</h1>} />
+      </Route>
+
+      <Route element={<DevRoutes />}>
+        <Route path={ROUTES.COMPONENTS} element={<ComponentsPage />} />
+      </Route>
+    </Routes>
   )
 }
 

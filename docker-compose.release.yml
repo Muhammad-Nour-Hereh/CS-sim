@@ -1,5 +1,9 @@
 
 services:
+  client:
+    image: muhammadnourhereh/birdly-client:release
+    ports:
+      - 80:80
   server:
     image: muhammadnourhereh/birdly:release
     environment:

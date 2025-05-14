@@ -6,7 +6,6 @@ use App\Http\Requests\BulkAttackQuestionRequest;
 use App\Http\Requests\LevelRequest;
 use App\Models\Level;
 use App\Models\Question;
-use Illuminate\Http\Request;
 
 class LevelController extends Controller {
 
@@ -71,7 +70,7 @@ class LevelController extends Controller {
         if ($level->questions()->where('question_id', $questionId)->exists()) {
             return $this->conflictResponse(['Question already attached to this level']);
         }
-
+        
         $level->questions()->attach($questionId);
         return $this->createdResponse('Question attached successfully');
     }
