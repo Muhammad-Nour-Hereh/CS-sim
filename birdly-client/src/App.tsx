@@ -9,6 +9,7 @@ import QuizPage from './ui/pages/QuizPage'
 import Playground from './ui/pages/Playground'
 import LoginPage from './ui/pages/LoginPage'
 import RegisterPage from './ui/pages/RegisterPage'
+import GuildbookPage from './ui/pages/GuildbookPage'
 
 const App = () => {
   return (
@@ -16,7 +17,14 @@ const App = () => {
       <Route element={<GuestRoutes />}>
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-        <Route path={ROUTES.FORGETPASSWORD} element={<h1 className='flex items-center justify-center font-extrabold p-50 text-3xl'>don't forget it next time 🙃</h1>} />
+        <Route
+          path={ROUTES.FORGETPASSWORD}
+          element={
+            <h1 className="flex items-center justify-center p-50 text-3xl font-extrabold">
+              don't forget it next time 🙃
+            </h1>
+          }
+        />
       </Route>
 
       <Route element={<UserRoutes />}>
@@ -27,7 +35,7 @@ const App = () => {
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route path={ROUTES.QUIZ} element={<QuizPage />} />
         <Route path={ROUTES.PRACTICE} element={<h1>practice</h1>} />
-        <Route path={ROUTES.GUIDEBOOKS} element={<h1>guidebooks</h1>} />
+        <Route path={ROUTES.GUIDEBOOKS} element={<GuildbookPage />} />
         <Route path={ROUTES.CHEATS} element={<h1>cheats</h1>} />
         <Route path={ROUTES.PLAYGROUND} element={<Playground />} />
         <Route path={ROUTES.SETTINGS} element={<h1>settings</h1>} />
