@@ -96,7 +96,8 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'The user is practicing code in a playground.\n';
                 $this->contextParams[] = 'give user Hints or answers.\n';
                 $this->contextParams[] = 'by defaut you should give hints, by if the user is stuck give full answer.\n';
-                // $this->contextParams[] = 'by defaut you should give hints, by if the user is stuck give full answer.\n';
+                $this->contextParams[] = 'The user might input Python code or engage in casual conversation; you must distinguish between the two.';
+                $this->contextParams[] = 'User input may be Python code (e.g., functions, loops) or plain text; detect the difference and respond appropriately.';
 
                 // format
                 $this->contextParams[] = 'If there more than one mistake, focus on the one that has the most impact one the code, for example, declaring a variable has more impact than the structure\n';
