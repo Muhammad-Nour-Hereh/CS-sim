@@ -36,7 +36,7 @@ Route::group(["prefix" => "v1"], function () {
             Route::put('/{id}', [SnippetController::class, 'update']);
             Route::delete('/{id}', [SnippetController::class, 'destroy']);
 
-            Route::post('/run/{id}', [SnippetRunnerController::class, 'run']);
+            Route::post('/run/{id}', [SnippetRunnerController::class, 'runSnippet']);
             Route::post('/chat/{id}', [ChatbotController::class, 'snippet']);
 
         });
@@ -86,8 +86,8 @@ Route::group(["prefix" => "v1"], function () {
             Route::post('/', [ChatbotController::class, 'chat']);
         });
 
-        Route::prefix('chat')->group(function () {
-            Route::post('/', [ChatbotController::class, 'chat']);
+        Route::prefix('run')->group(function () {
+            Route::post('/', [SnippetRunnerController::class, 'run']);
         });
     });
 

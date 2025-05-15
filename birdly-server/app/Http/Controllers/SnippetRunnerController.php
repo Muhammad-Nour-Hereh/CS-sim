@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\SnippetRunnerService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class SnippetRunnerController extends Controller {
     use ResponseTrait;
@@ -15,7 +16,19 @@ class SnippetRunnerController extends Controller {
         $this->runner = $runner;
     }
 
-    public function run(Request $request, $id) {
+    public function run(Request $request) {
+        $code = $request->code;
+
+        $request->validate(
+            ['code' => 'required|string']
+        );
+
+        $result = $this->runner->run($code);
+
+        return $this->successResponse($result);
+    }
+
+    public function runSnippet(Request $request, $id) {
         $snippet = $request->user()->snippets()->find($id);
 
         if (!$snippet) {

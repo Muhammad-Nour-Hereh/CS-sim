@@ -1,7 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import Sidebar from '../components/Sidebar'
 import Snippet from '../components/Snippet'
-import { Separator } from '@radix-ui/react-separator'
 import ChatArea from '../components/ChatArea'
 import { remote } from '@/remotes/remotes'
 import { useEffect, useState } from 'react'
