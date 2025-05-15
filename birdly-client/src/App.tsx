@@ -10,6 +10,7 @@ import Playground from './ui/pages/Playground'
 import LoginPage from './ui/pages/LoginPage'
 import RegisterPage from './ui/pages/RegisterPage'
 import GuildbookPage from './ui/pages/GuildbookPage'
+import CheatsPage from './ui/pages/CheatsPage'
 
 const App = () => {
   return (
@@ -36,7 +37,7 @@ const App = () => {
         <Route path={ROUTES.QUIZ} element={<QuizPage />} />
         <Route path={ROUTES.PRACTICE} element={<h1>practice</h1>} />
         <Route path={ROUTES.GUIDEBOOKS} element={<GuildbookPage />} />
-        <Route path={ROUTES.CHEATS} element={<h1>cheats</h1>} />
+        <Route path={ROUTES.CHEATS} element={<CheatsPage />} />
         <Route path={ROUTES.PLAYGROUND} element={<Playground />} />
         <Route path={ROUTES.SETTINGS} element={<h1>settings</h1>} />
         <Route path={ROUTES.PROFILE} element={<h1>profile</h1>} />
