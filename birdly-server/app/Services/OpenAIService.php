@@ -51,6 +51,9 @@ class OpenAIService {
         $newHistory[] = ['role' => 'assistant', 'content' => $res];
         $newHistory = array_slice($newHistory, -10);
         return [$res, $newHistory];
+    }
 
+    public function guildbookPrompt(string $content, string $prompt, array $history): array {
+        return ['no ai yet', []];
     }
 }
