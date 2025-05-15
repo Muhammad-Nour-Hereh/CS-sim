@@ -10,13 +10,13 @@ class OpenAIService {
 
     protected $client;
 
-    public function __construct(string $apiKey, string $language = 'python', string $task = 'q_and_a') {
+    public function __construct(string $apiKey) {
         $this->client = OpenAI::client($apiKey);
-        $this->setLanguage($language);
-        $this->addTaskContext($task)->addLanguageContext();
     }
 
     public function generateText(string $prompt): string {
+        $this->setLanguage('python');
+        $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
         $response = $this->client->chat()->create([
             // 'model' => 'gpt-4o',
@@ -31,6 +31,8 @@ class OpenAIService {
     }
 
     public function historyPrompt(string $prompt, array $history): array {
+        $this->setLanguage('python');
+        $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
         $newHistory = array_merge(
             $history,
@@ -54,12 +56,13 @@ class OpenAIService {
     }
 
     public function guildbookPrompt(string $content, string $prompt, array $history): array {
+        $this->setLanguage('python');
         $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
-        
+
         $newHistory = array_merge(
             $history,
-            [['role' => 'user', 'content' => $prompt]]
+            [['role' => 'user', 'content' => 'content: \n' . $prompt]]
         );
 
         $response = $this->client->chat()->create([
