@@ -97,7 +97,7 @@ class GuildbookSeeder extends Seeder {
         global $content;
         Guildbook::factory()->create([
             "title" => "variables",
-            "content" => $content[0],
+            "content" => $content,
         ]);
     }
 }
