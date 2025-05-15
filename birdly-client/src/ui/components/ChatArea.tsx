@@ -21,14 +21,27 @@ const ChatArea = () => {
     const userMessage = input.trim()
     setInput('')
 
-    const res = await remote.guildbook.chat(userMessage, 1)
-
-    console.log(res.data?.response)
-    
-
     // Add user message to the chat
     setMessages((prev) => [...prev, { role: 'user', content: userMessage }])
     setIsLoading(true)
+
+    try {
+      const res = await remote.guildbook.chat(userMessage, 1)
+      const text: string = res.data?.response || ''
+      console.log(text)
+      setMessages((prev) => [...prev, { role: 'assistant', content: text }])
+    } catch (error) {
+      console.error('Error generating response:', error)
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: 'Sorry, I encountered an error. Please try again.',
+        },
+      ])
+    } finally {
+      setIsLoading(false)
+    }
   }
   return (
     <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-lg border border-gray-800 bg-gray-950 text-gray-100">
