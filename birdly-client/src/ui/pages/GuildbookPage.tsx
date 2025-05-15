@@ -2,6 +2,8 @@ import { MDXProvider } from '@mdx-js/react'
 import MyMdxFile from '../../assets/python_variables.mdx'
 import Sidebar from '../components/Sidebar'
 import Snippet from '../components/Snippet'
+import { Separator } from '@radix-ui/react-separator'
+import { ChatArea } from '../components/ChatArea'
 
 const GuildbookPage = () => {
   return (
@@ -22,6 +24,8 @@ const GuildbookPage = () => {
             />
           </MDXProvider>
         </div>
+        <Separator />
+        <ChatArea />
       </main>
     </div>
   )
