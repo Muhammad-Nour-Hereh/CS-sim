@@ -5,6 +5,7 @@ import { Send } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from './Button'
 import { Textarea } from '@/components/ui/textarea'
+import { remote } from '@/remotes/remotes'
 
 const ChatArea = () => {
   const [input, setInput] = useState('')
@@ -19,6 +20,11 @@ const ChatArea = () => {
 
     const userMessage = input.trim()
     setInput('')
+
+    const res = await remote.guildbook.chat(userMessage, 1)
+
+    console.log(res.data?.response)
+    
 
     // Add user message to the chat
     setMessages((prev) => [...prev, { role: 'user', content: userMessage }])

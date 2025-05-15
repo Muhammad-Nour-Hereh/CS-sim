@@ -52,11 +52,8 @@ const GuildbookPage = () => {
             )} */}
           </MDXProvider>
         </div>
-        <Separator />
+
         <div className="mt-16">
-          <h2 className="mb-6 text-2xl font-bold">
-            Chat with our AI Assistant
-          </h2>
           <ChatArea />
         </div>
       </main>
