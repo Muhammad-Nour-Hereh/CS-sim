@@ -1,5 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
-import MyMdxFile from '../../assets/hello_world.mdx'
+import PythonCheats from '../../assets/python_cheats.mdx'
 import Sidebar from '../components/Sidebar'
 
 const CheatsPage = () => {
@@ -9,10 +9,12 @@ const CheatsPage = () => {
         <Sidebar />
       </aside>
 
-      <main className="bg flex flex-1 flex-col p-4">
-        <MDXProvider>
-
-        </MDXProvider>
+      <main className="flex max-w-none flex-1 flex-col p-4">
+        <div className="mdx-reset">
+          <MDXProvider>
+            <PythonCheats />
+          </MDXProvider>
+        </div>
       </main>
     </div>
   )

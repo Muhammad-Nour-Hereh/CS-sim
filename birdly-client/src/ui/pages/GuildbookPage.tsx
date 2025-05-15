@@ -10,19 +10,21 @@ const GuildbookPage = () => {
         <Sidebar />
       </aside>
 
-      <main className="bg flex flex-1 flex-col p-4">
-        <MDXProvider
-          components={{
-            Button,
-          }}>
-          <MyMdxFile
+      <main className="flex max-w-none flex-1 flex-col p-4">
+        <div className="mdx-reset">
+          <MDXProvider
             components={{
-              Planet() {
-                return <span style={{ color: 'tomato' }}>Pluto</span>
-              },
-            }}
-          />
-        </MDXProvider>
+              Button,
+            }}>
+            <MyMdxFile
+              components={{
+                Planet() {
+                  return <span style={{ color: 'tomato' }}>Pluto</span>
+                },
+              }}
+            />
+          </MDXProvider>
+        </div>
       </main>
     </div>
   )

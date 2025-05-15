@@ -58,3 +58,9 @@ input:-webkit-autofill {
 .animate-slide-down {
   animation: slide-down 0.3s ease-out;
 }
+
+.mdx-reset * {
+  all: revert;
+  font-family: revert;
+  color: revert;
+}
