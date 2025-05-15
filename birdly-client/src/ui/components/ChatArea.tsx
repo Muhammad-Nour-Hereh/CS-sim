@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Send } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from './Button'
+import { Textarea } from '@/components/ui/textarea'
 
 const ChatArea = () => {
   const [input, setInput] = useState('')
@@ -87,7 +88,7 @@ const ChatArea = () => {
         onSubmit={handleSubmit}
         className="border-t border-gray-800 bg-gray-900 p-3">
         <div className="flex space-x-2">
-          <textarea
+          <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message here..."
@@ -100,6 +101,7 @@ const ChatArea = () => {
             }}
           />
           <Button
+            variant="muted"
             type="submit"
             disabled={isLoading || !input.trim()}
             className="bg-green-600 text-white hover:bg-green-700">
