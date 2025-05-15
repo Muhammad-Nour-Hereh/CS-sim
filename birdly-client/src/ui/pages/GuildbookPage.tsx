@@ -3,6 +3,7 @@ import MyMdxFile from '../../assets/python_variables.mdx'
 import Sidebar from '../components/Sidebar'
 import { CodeEditor } from '../components/CodeEditor'
 import { useEffect, useState } from 'react'
+import Snippet from '../components/Snippet'
 
 const GuildbookPage = () => {
   return (
@@ -17,16 +18,7 @@ const GuildbookPage = () => {
             <MyMdxFile
               components={{
                 CodeEditor({ initCode }) {
-                  const [code, setCode] = useState(initCode || '')
-                  useEffect(() => {
-                    console.log(code)
-                  }, [code])
-                  return (
-                    <CodeEditor
-                      code={code}
-                      setCode={setCode}
-                    />
-                  )
+                  return <Snippet initCode={initCode} />
                 },
               }}
             />
