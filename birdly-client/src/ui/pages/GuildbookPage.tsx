@@ -5,15 +5,14 @@ import Snippet from '../components/Snippet'
 import { Separator } from '@radix-ui/react-separator'
 import ChatArea from '../components/ChatArea'
 
-
 const GuildbookPage = () => {
   return (
-    <div className="flex h-screen w-screen ">
-      <aside className="w-56 bg-gray-900 text-white">
+    <div className="flex w-screen">
+      <aside className="min-h-screen w-56 bg-gray-900 text-white">
         <Sidebar />
       </aside>
 
-      <main className="flex max-w-none flex-1 flex-col p-4 ">
+      <main className="flex min-h-screen max-w-none flex-1 flex-col p-4 pb-40">
         <div className="mdx-reset">
           <MDXProvider>
             <MyMdxFile
@@ -26,11 +25,12 @@ const GuildbookPage = () => {
           </MDXProvider>
         </div>
         <Separator />
-        <div className="mt-16 mb-25">
-          <h2 className="text-2xl font-bold mb-6">Chat with our AI Assistant</h2>
+        <div className="mt-16">
+          <h2 className="mb-6 text-2xl font-bold">
+            Chat with our AI Assistant
+          </h2>
           <ChatArea />
-        </div> 
-        <p> . </p>
+        </div>
       </main>
     </div>
   )
