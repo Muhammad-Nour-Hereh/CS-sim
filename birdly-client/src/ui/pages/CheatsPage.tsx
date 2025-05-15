@@ -11,7 +11,7 @@ const CheatsPage = () => {
 
       <main className="bg flex flex-1 flex-col p-4">
         <MDXProvider>
-          <MyMdxFile />
+
         </MDXProvider>
       </main>
     </div>
