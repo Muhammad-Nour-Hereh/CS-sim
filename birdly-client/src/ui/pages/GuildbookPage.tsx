@@ -8,15 +8,15 @@ import { useEffect, useState } from 'react'
 import MDXContent from '../../assets/python_variables.mdx'
 
 const GuildbookPage = () => {
-  const [content, setContent] = useState('')
+  const [path, setPath] = useState('')
 
   useEffect(() => {
-    const updateContent = async () => {
+    const updatePath = async () => {
       const res = await remote.guildbook.getById(1)
-      const _content = res.data?.content
-      if (_content) setContent(_content)
+      const _path = res.data?.path
+      if (_path) setPath(_path)
     }
-    updateContent()
+    updatePath()
   }, [])
 
   const components = {
@@ -26,8 +26,8 @@ const GuildbookPage = () => {
   }
 
   useEffect(() => {
-    console.log(content)
-  }, [content])
+    console.log(path)
+  }, [path])
 
   return (
     <div className="flex w-screen">
@@ -37,8 +37,8 @@ const GuildbookPage = () => {
 
       <main className="flex min-h-screen max-w-none flex-1 flex-col p-4 pb-15">
         <div className="mdx-reset">
-          <MDXProvider components={components}>
-            <MDXContent />
+          <MDXProvider >
+            <MDXContent components={components}/>
           </MDXProvider>
         </div>
         <Separator />
