@@ -118,14 +118,7 @@ export const remote = {
         body: { prompt: prompt },
       }),
   },
-  fetchFile: (url: string): any => {
-    request<any>({
-      method: 'GET',
-      route: url,
-      auth: false,
-    })
-  },
-  
+
   run: (code: string) =>
     request<CodeOutput>({
       method: 'POST',
