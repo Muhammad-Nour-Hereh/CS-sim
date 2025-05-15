@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PromptRequest;
 use App\Models\Guildbook;
 use App\Models\Snippet;
 use App\Services\OpenAIService;
@@ -12,10 +13,7 @@ class ChatbotController extends Controller {
     public function __construct(protected OpenAIService $openai) {
     }
 
-    public function chat(Request $request) {
-        $request->validate([
-            'prompt' => 'string',
-        ]);
+    public function chat(PromptRequest $request) {
 
         $res = $this->openai->generateText($request->prompt);
         return $this->successResponse(['response' => $res]);
@@ -32,10 +30,8 @@ class ChatbotController extends Controller {
         return $this->successResponse(['response' => $res]);
     }
 
-    public function guildbook(Request $request, int $id) {
-        $request->validate([
-            'prompt' => 'string',
-        ]);
+    public function guildbook(PromptRequest $request, int $id) {
+
         $prompt = $request->prompt;
         $guildbook = Guildbook::find($id);
         $content = $guildbook->content;
