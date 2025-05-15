@@ -42,19 +42,16 @@ class GuildbookController extends Controller {
             return $this->notFoundResponse();
         }
 
-        // Check if file exists
-        if (!Storage::disk('public')->exists($guildbook->path)) {
+        if (!Storage::exists($guildbook->path)) {
             return $this->notFoundResponse();
         }
 
-        // Generate URL path (excluding base URL)
-        $relativePath = 'storage/' . $guildbook->path;
-
+        $content = $this->fileService->read($guildbook->path);
         return $this->successResponse([
             'id'        => $guildbook->id,
             'title'     => $guildbook->title,
             'course_id' => $guildbook->course_id,
-            'path'      => $relativePath,
+            'content'   => $content,
         ]);
     }
 
