@@ -3,7 +3,8 @@ import MyMdxFile from '../../assets/python_variables.mdx'
 import Sidebar from '../components/Sidebar'
 import Snippet from '../components/Snippet'
 import { Separator } from '@radix-ui/react-separator'
-import { ChatArea } from '../components/ChatArea'
+import ChatArea from '../components/ChatArea'
+
 
 const GuildbookPage = () => {
   return (
@@ -25,7 +26,10 @@ const GuildbookPage = () => {
           </MDXProvider>
         </div>
         <Separator />
-        <ChatArea />
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold mb-6">Chat with our AI Assistant</h2>
+          <ChatArea />
+        </div>
       </main>
     </div>
   )
