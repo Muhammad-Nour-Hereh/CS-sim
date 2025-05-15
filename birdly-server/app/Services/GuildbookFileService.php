@@ -20,19 +20,19 @@ class GuildbookFileService {
         }
 
         $path = $this->buildPath($course->title, $pageTitle);
-        Storage::put($path, $content);
+        Storage::disk('public')->put($path, $content);
         return $path;
     }
 
     public function read(string $path) {
-        return Storage::get($path);
+        return Storage::disk('public')->get($path);
     }
 
     public function update(string $path, string $content) {
-        Storage::put($path, $content);
+        Storage::disk('public')->put($path, $content);
     }
 
     public function delete(string $path) {
-        Storage::delete($path);
+        Storage::disk('public')->delete($path);
     }
 }
