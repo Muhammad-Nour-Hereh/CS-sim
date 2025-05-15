@@ -109,6 +109,7 @@ export const remote = {
         route: `/api/v1/guildbooks/${id}`,
         auth: true,
       }),
+
     chat: (prompt: string, id: number) =>
       request<ChatResponse>({
         method: 'POST',
@@ -124,4 +125,12 @@ export const remote = {
       auth: false,
     })
   },
+  
+  run: (code: string) =>
+    request<CodeOutput>({
+      method: 'POST',
+      route: `/api/v1/run/`,
+      auth: true,
+      body: { code: code },
+    }),
 }
