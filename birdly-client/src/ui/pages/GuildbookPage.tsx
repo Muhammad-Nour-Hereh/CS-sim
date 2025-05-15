@@ -1,8 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import MyMdxFile from '../../assets/python_variables.mdx'
 import Sidebar from '../components/Sidebar'
-import { CodeEditor } from '../components/CodeEditor'
-import { useEffect, useState } from 'react'
 import Snippet from '../components/Snippet'
 
 const GuildbookPage = () => {
