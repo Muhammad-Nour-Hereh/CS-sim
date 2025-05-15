@@ -47,6 +47,7 @@ Route::group(["prefix" => "v1"], function () {
 
         Route::prefix('guildbooks')->group(function () {
             Route::get('/{id}', [GuildbookController::class, 'show']);
+            Route::post('/chat/{id}', [ChatbotController::class, 'snippet']);
         });
 
         Route::prefix('cheats')->group(function () {
