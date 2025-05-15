@@ -16,12 +16,17 @@ const GuildbookPage = () => {
           <MDXProvider>
             <MyMdxFile
               components={{
-                CodeEditor() {
-                  const [code, setCode] = useState('')
+                CodeEditor({ initCode }) {
+                  const [code, setCode] = useState(initCode || '')
                   useEffect(() => {
                     console.log(code)
                   }, [code])
-                  return <CodeEditor code={code} setCode={setCode} />
+                  return (
+                    <CodeEditor
+                      code={code}
+                      setCode={setCode}
+                    />
+                  )
                 },
               }}
             />
