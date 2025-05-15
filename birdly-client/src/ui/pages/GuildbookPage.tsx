@@ -5,8 +5,8 @@ import { CodeEditor } from '../components/CodeEditor'
 import { useEffect, useState } from 'react'
 
 const GuildbookPage = () => {
-  const [code, setCode] = useState('')
-  useEffect(()=>{console.log(code)}, [code])
+  //const [code, setCode] = useState('')
+  //useEffect(()=>{console.log(code)}, [code])
   return (
     <div className="flex h-screen w-screen">
       <aside className="w-56 bg-gray-900 text-white">
