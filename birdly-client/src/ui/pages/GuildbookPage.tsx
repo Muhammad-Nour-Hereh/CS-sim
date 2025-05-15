@@ -4,8 +4,15 @@ import Sidebar from '../components/Sidebar'
 import Snippet from '../components/Snippet'
 import { Separator } from '@radix-ui/react-separator'
 import ChatArea from '../components/ChatArea'
+import { remote } from '@/remotes/remotes'
+import { useEffect } from 'react'
+
 
 const GuildbookPage = () => {
+  // useEffect(() => {
+  //     const content = await remote.guildbook.getById(1)
+  // }, [])
+
   return (
     <div className="flex w-screen">
       <aside className="min-h-screen w-56 bg-gray-900 text-white">
@@ -15,13 +22,14 @@ const GuildbookPage = () => {
       <main className="flex min-h-screen max-w-none flex-1 flex-col p-4 pb-15">
         <div className="mdx-reset">
           <MDXProvider>
-            <MyMdxFile
+            {/* <MyMdxFile
               components={{
                 CodeEditor({ initCode }) {
                   return <Snippet initCode={initCode} />
                 },
               }}
-            />
+            /> */}
+
           </MDXProvider>
         </div>
         <Separator />
