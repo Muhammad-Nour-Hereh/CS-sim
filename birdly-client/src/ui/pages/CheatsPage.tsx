@@ -16,12 +16,12 @@ const CheatsPage = () => {
       <main className="flex max-w-none flex-1 flex-col p-4">
         <div className="mdx-reset">
           <MDXProvider>
-            {/* <PythonCheats /> */}
-            <MDXRenderer
+            <PythonCheats />
+            {/* <MDXRenderer
                 url={
                   'http://127.0.0.1:8000/storage/intro-to-birdly/guildbooks/accusantium-et-sit.mdx'
                 }
-              />
+              /> */}
           </MDXProvider>
         </div>
       </main>

@@ -42,14 +42,14 @@ const GuildbookPage = () => {
       <main className="flex min-h-screen max-w-none flex-1 flex-col p-4 pb-15">
         <div className="mdx-reset">
           <MDXProvider>
-            {/* <MDXContent components={components}/> */}
-            {path && (
+            <MDXContent components={components}/>
+            {/* {path && (
               <MDXRenderer
                 url={
                   'http://127.0.0.1:8000/storage/intro-to-birdly/guildbooks/accusantium-et-sit.mdx'
                 }
               />
-            )}
+            )} */}
           </MDXProvider>
         </div>
         <Separator />
