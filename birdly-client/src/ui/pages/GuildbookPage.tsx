@@ -1,23 +1,11 @@
 import { MDXProvider } from '@mdx-js/react'
-import MyMdxFile from '../../assets/python_variables.mdx'
 import Sidebar from '../components/Sidebar'
 import Snippet from '../components/Snippet'
 import { Separator } from '@radix-ui/react-separator'
 import ChatArea from '../components/ChatArea'
 import { remote } from '@/remotes/remotes'
 import { useEffect, useState } from 'react'
-import { useMDXComponents } from '@mdx-js/react'
-
-const MdxRenderer = ({ mdxSource }: { mdxSource: string }) => {
-  const Component: any = useMDXComponents()
-  return (
-    <MDXProvider>
-      <div className="prose dark:prose-invert">
-        <Component />
-      </div>
-    </MDXProvider>
-  )
-}
+import MDXContent from '../../assets/python_variables.mdx'
 
 const GuildbookPage = () => {
   const [content, setContent] = useState('')
@@ -31,6 +19,12 @@ const GuildbookPage = () => {
     updateContent()
   }, [])
 
+  const components = {
+    CodeEditor({ initCode }: any) {
+      return <Snippet initCode={initCode} />
+    },
+  }
+
   useEffect(() => {
     console.log(content)
   }, [content])
@@ -43,14 +37,8 @@ const GuildbookPage = () => {
 
       <main className="flex min-h-screen max-w-none flex-1 flex-col p-4 pb-15">
         <div className="mdx-reset">
-          <MDXProvider>
-            {/* <MyMdxFile
-              components={{
-                CodeEditor({ initCode }) {
-                  return <Snippet initCode={initCode} />
-                },
-              }}
-            /> */}
+          <MDXProvider components={components}>
+            <MDXContent />
           </MDXProvider>
         </div>
         <Separator />
