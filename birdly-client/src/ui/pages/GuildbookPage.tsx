@@ -1,7 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
-import MyMdxFile from '../../assets/hello_world.mdx'
+import MyMdxFile from '../../assets/python_variables.mdx'
 import Sidebar from '../components/Sidebar'
-import { Button } from '../components/Button'
 import { CodeEditor } from '../components/CodeEditor'
 
 const GuildbookPage = () => {
@@ -13,17 +12,15 @@ const GuildbookPage = () => {
 
       <main className="flex max-w-none flex-1 flex-col p-4">
         <div className="mdx-reset">
-          <MDXProvider
+          <MDXProvider>
+
+            <MyMdxFile      
             components={{
-              Button,
-            }}>
-            <MyMdxFile
-              components={{
-                CodeEditor(code: string, setCode: Function) {
-                  return <CodeEditor code={code} setCode={setCode} />
-                },
-              }}
-            />
+              CodeEditor() {
+                return <CodeEditor code={''} setCode={() => {console.log('edit')}}/>
+              }
+            }}/>
+              
           </MDXProvider>
         </div>
       </main>
