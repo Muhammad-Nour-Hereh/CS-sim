@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 class PromptRequest extends BaseFormRequest {
 
     public function authorize(): bool {
-        return false;
+        return true;
     }
 
     public function rules(): array {
