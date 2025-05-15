@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guildbook;
 use App\Models\Snippet;
 use App\Services\OpenAIService;
 use Illuminate\Http\Request;
@@ -31,5 +32,16 @@ class ChatbotController extends Controller {
         return $this->successResponse(['response' => $res]);
         
 
+    }
+
+    public function guildbook (int $id) {
+        $guildbook = Guildbook::find($id);
+        $content = $guildbook->content;
+        $history = $guildbook->history;
+
+        [$res, $newHistory] = $this->openai->historyPrompt($content, $history);
+
+        $guildbook->update(['history' => $newHistory]);
+        return $this->successResponse(['response' => $res]);
     }
 }
