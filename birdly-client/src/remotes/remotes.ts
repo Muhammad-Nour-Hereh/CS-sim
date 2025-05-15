@@ -100,4 +100,13 @@ export const remote = {
       auth: true,
       body: { prompt: prompt },
     }),
+
+  guildbook: {
+    getById: (id: number) =>
+      request<any>({
+        method: 'GET',
+        route: `/api/v1//guildbooks/${id}`,
+        auth: true,
+      }),
+  },
 }
