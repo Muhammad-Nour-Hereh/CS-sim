@@ -43,7 +43,13 @@ const GuildbookPage = () => {
         <div className="mdx-reset">
           <MDXProvider>
             {/* <MDXContent components={components}/> */}
-            {path && <MDXRenderer url={'http://127.0.0.1:8000/storage/intro-to-birdly/guildbooks/accusantium-et-sit.mdx'} />}
+            {path && (
+              <MDXRenderer
+                url={
+                  'http://127.0.0.1:8000/storage/intro-to-birdly/guildbooks/accusantium-et-sit.mdx'
+                }
+              />
+            )}
           </MDXProvider>
         </div>
         <Separator />
@@ -70,12 +76,14 @@ function MDXRenderer({ url }: any) {
     async function fetchAndRenderMDX() {
       try {
         // 1. Fetch the MDX file
-        const response = await fetch(url)
-        if (!response.ok) {
-          throw new Error(`Failed to fetch MDX: ${response.statusText}`)
-        }
+        // const response = await remote.fetchFile(url)
+        // console.log(response)
+        // if (!response.ok) {
+        //   throw new Error(`Failed to fetch MDX: ${response.statusText}`)
+        // }
 
-        const mdxContent = await response.text()
+        // const mdxContent = await response.text()
+        const mdxContent = '# hello'
 
         // 2. Compile the MDX to JSX
         const compiled: any = await compile(mdxContent, {

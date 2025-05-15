@@ -110,10 +110,10 @@ export const remote = {
         auth: true,
       }),
   },
-  fetchFile: (url: string) => {
+  fetchFile: (url: string): any => {
     request<any>({
       method: 'GET',
-      route: url,
+      route: '/storage/intro-to-birdly/guildbooks/accusantium-et-sit.mdx',
       auth: false,
     })
   },
