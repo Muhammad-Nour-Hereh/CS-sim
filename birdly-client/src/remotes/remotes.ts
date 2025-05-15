@@ -109,17 +109,18 @@ export const remote = {
         route: `/api/v1/guildbooks/${id}`,
         auth: true,
       }),
-    chat: (id: number) =>
+    chat: (prompt: string, id: number) =>
       request<ChatResponse>({
         method: 'POST',
         route: `/api/v1/guildbooks/chat/${id}`,
         auth: true,
+        body: { prompt: prompt },
       }),
   },
   fetchFile: (url: string): any => {
     request<any>({
       method: 'GET',
-      route: '/storage/intro-to-birdly/guildbooks/accusantium-et-sit.mdx',
+      route: url,
       auth: false,
     })
   },
