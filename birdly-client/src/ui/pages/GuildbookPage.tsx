@@ -2,6 +2,7 @@ import { MDXProvider } from '@mdx-js/react'
 import MyMdxFile from '../../assets/hello_world.mdx'
 import Sidebar from '../components/Sidebar'
 import { Button } from '../components/Button'
+import { CodeEditor } from '../components/CodeEditor'
 
 const GuildbookPage = () => {
   return (
@@ -18,8 +19,8 @@ const GuildbookPage = () => {
             }}>
             <MyMdxFile
               components={{
-                Planet() {
-                  return <span style={{ color: 'tomato' }}>Pluto</span>
+                CodeEditor(code: string, setCode: Function) {
+                  return <CodeEditor code={code} setCode={setCode} />
                 },
               }}
             />
