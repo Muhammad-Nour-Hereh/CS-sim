@@ -106,7 +106,7 @@ export const remote = {
     getById: (id: number) =>
       request<Guildbook>({
         method: 'GET',
-        route: `/api/v1//guildbooks/${id}`,
+        route: `/api/v1/guildbooks/${id}`,
         auth: true,
       }),
   },

@@ -5,13 +5,35 @@ import Snippet from '../components/Snippet'
 import { Separator } from '@radix-ui/react-separator'
 import ChatArea from '../components/ChatArea'
 import { remote } from '@/remotes/remotes'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useMDXComponents } from '@mdx-js/react'
 
+const MdxRenderer = ({ mdxSource }: { mdxSource: string }) => {
+  const Component: any = useMDXComponents()
+  return (
+    <MDXProvider>
+      <div className="prose dark:prose-invert">
+        <Component />
+      </div>
+    </MDXProvider>
+  )
+}
 
 const GuildbookPage = () => {
-  // useEffect(() => {
-  //     const content = await remote.guildbook.getById(1)
-  // }, [])
+  const [content, setContent] = useState('')
+
+  useEffect(() => {
+    const updateContent = async () => {
+      const res = await remote.guildbook.getById(1)
+      const _content = res.data?.content
+      if (_content) setContent(_content)
+    }
+    updateContent()
+  }, [])
+
+  useEffect(() => {
+    console.log(content)
+  }, [content])
 
   return (
     <div className="flex w-screen">
@@ -29,7 +51,6 @@ const GuildbookPage = () => {
                 },
               }}
             /> */}
-
           </MDXProvider>
         </div>
         <Separator />
