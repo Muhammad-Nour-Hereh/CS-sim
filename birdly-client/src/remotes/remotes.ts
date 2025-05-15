@@ -1,5 +1,6 @@
 import { ChatResponse, CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
+import { Guildbook } from '@/interfaces/Guildbook'
 
 export const remote = {
   // Auth APIs:
@@ -103,7 +104,7 @@ export const remote = {
 
   guildbook: {
     getById: (id: number) =>
-      request<any>({
+      request<Guildbook>({
         method: 'GET',
         route: `/api/v1//guildbooks/${id}`,
         auth: true,
