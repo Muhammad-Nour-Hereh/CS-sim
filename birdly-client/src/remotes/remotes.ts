@@ -109,6 +109,12 @@ export const remote = {
         route: `/api/v1/guildbooks/${id}`,
         auth: true,
       }),
+    chat: (id: number) =>
+      request<ChatResponse>({
+        method: 'POST',
+        route: `/api/v1/guildbooks/chat/${id}`,
+        auth: true,
+      }),
   },
   fetchFile: (url: string): any => {
     request<any>({
