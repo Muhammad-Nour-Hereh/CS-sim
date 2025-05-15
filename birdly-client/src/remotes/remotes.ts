@@ -110,4 +110,11 @@ export const remote = {
         auth: true,
       }),
   },
+  fetchFile: (url: string) => {
+    request<any>({
+      method: 'GET',
+      route: url,
+      auth: false,
+    })
+  },
 }
