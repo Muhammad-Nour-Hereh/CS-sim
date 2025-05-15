@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PromptRequest;
 use App\Models\Guildbook;
 use App\Models\Snippet;
+use App\Services\GuildbookFileService;
 use App\Services\OpenAIService;
 use Illuminate\Http\Request;
 
 class ChatbotController extends Controller {
 
-    public function __construct(protected OpenAIService $openai) {
+    public function __construct(protected OpenAIService $openai, protected GuildbookFileService $fileService) {
     }
 
     public function chat(PromptRequest $request) {
@@ -34,7 +35,7 @@ class ChatbotController extends Controller {
 
         $prompt = $request->prompt;
         $guildbook = Guildbook::find($id);
-        $content = $guildbook->content;
+        $content = $this->fileService->read($guildbook->path);
         $history = $guildbook->history;
 
         [$res, $newHistory] = $this->openai->guildbookPrompt($content, $prompt, $history);
