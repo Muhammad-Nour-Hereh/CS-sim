@@ -30,16 +30,18 @@ class ChatbotController extends Controller {
 
         $snippet->update(['history' => $newHistory]);
         return $this->successResponse(['response' => $res]);
-        
-
     }
 
-    public function guildbook (int $id) {
+    public function guildbook(Request $request, int $id) {
+        $request->validate([
+            'prompt' => 'string',
+        ]);
+        $prompt = $request->prompt;
         $guildbook = Guildbook::find($id);
         $content = $guildbook->content;
         $history = $guildbook->history;
 
-        [$res, $newHistory] = $this->openai->historyPrompt($content, $history);
+        [$res, $newHistory] = $this->openai->guildbookPrompt($content, $prompt, $history);
 
         $guildbook->update(['history' => $newHistory]);
         return $this->successResponse(['response' => $res]);
