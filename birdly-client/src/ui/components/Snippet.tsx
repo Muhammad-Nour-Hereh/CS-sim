@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { CodeEditor } from './CodeEditor'
 
 interface SnippetProps {
   title?: string
-  defaultCode?: string
+  initCode?: string
   onRun?: (code: string) => void
   className?: string
   readOnly?: boolean
@@ -13,19 +14,17 @@ interface SnippetProps {
 
 const Snippet = ({
   title = 'Example',
-  defaultCode = 'x = 5\ny = "John"\nprint(x)\nprint(y)',
+  initCode = 'x = 5\ny = "John"\nprint(x)\nprint(y)',
   onRun,
   className,
-  readOnly = false,
 }: SnippetProps) => {
-  const [code, setCode] = useState(defaultCode)
+  const [code, setCode] = useState(initCode)
 
   const handleRunCode = () => {
     if (onRun) {
       onRun(code)
     } else {
-      console.log('Code executed:', code)
-      alert('Code execution is simulated. Check the console for details.')
+      console.log('Code executed:\n', code)
     }
   }
 
@@ -42,13 +41,7 @@ const Snippet = ({
 
       {/* Code area */}
       <div className="bg-[#1e2a31] p-4 text-gray-200">
-        <textarea
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          className="min-h-[100px] w-full resize-none border-none bg-transparent font-mono text-sm outline-none"
-          spellCheck="false"
-          readOnly={readOnly}
-        />
+        <CodeEditor code={code} setCode={setCode} />
       </div>
 
       {/* Button area */}
