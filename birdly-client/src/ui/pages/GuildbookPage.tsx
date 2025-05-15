@@ -2,8 +2,11 @@ import { MDXProvider } from '@mdx-js/react'
 import MyMdxFile from '../../assets/python_variables.mdx'
 import Sidebar from '../components/Sidebar'
 import { CodeEditor } from '../components/CodeEditor'
+import { useEffect, useState } from 'react'
 
 const GuildbookPage = () => {
+  const [code, setCode] = useState('')
+  useEffect(()=>{console.log(code)}, [code])
   return (
     <div className="flex h-screen w-screen">
       <aside className="w-56 bg-gray-900 text-white">
@@ -17,7 +20,7 @@ const GuildbookPage = () => {
             <MyMdxFile      
             components={{
               CodeEditor() {
-                return <CodeEditor code={''} setCode={() => {console.log('edit')}}/>
+                return <CodeEditor code={code} setCode={setCode}/>
               }
             }}/>
               
