@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import MyMdxFile from '../../assets/hello_world.mdx'
 import Sidebar from '../components/Sidebar'
+import { Button } from '../components/Button'
 
 const GuildbookPage = () => {
   return (
@@ -10,8 +11,17 @@ const GuildbookPage = () => {
       </aside>
 
       <main className="bg flex flex-1 flex-col p-4">
-        <MDXProvider>
-          <MyMdxFile />
+        <MDXProvider
+          components={{
+            Button,
+          }}>
+          <MyMdxFile
+            components={{
+              Planet() {
+                return <span style={{ color: 'tomato' }}>Pluto</span>
+              },
+            }}
+          />
         </MDXProvider>
       </main>
     </div>
