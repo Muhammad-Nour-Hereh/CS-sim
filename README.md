@@ -76,9 +76,9 @@
 - github action for ci/cd
 - build in testing in laravel
 
-| Services                            | Validation                       | Testing                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) |
+| Backend Testing (Pest)                  | Frontend Testing (Vitest)               |
+| --------------------------------------- | -------------------------------------   |
+| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/test_fe.png) |
 
 
 <br><br>
@@ -93,8 +93,12 @@
 - Live demo and staging environments available.
 
 
-| Postman API 1                            | Postman API 2                       | Postman API 3                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| Postman API 1                             | Postman API 2                           | Postman API 3                           |
+| ---------------------------------------   | -------------------------------------   | -------------------------------------   |
 | ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
 
+
+| CI/CD 1                                   | CI/CD 2                                 | CI/CD 3                                 |
+| ---------------------------------------   | -------------------------------------   | -------------------------------------   |
+| ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
 <br><br>
