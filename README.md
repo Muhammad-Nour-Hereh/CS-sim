@@ -7,7 +7,7 @@
 
 > A gamified learning platform designed to make studying more fun and interactive.
 >
-> The platform features a  they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
+> The platform features a they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
 
 <br><br>
 
@@ -16,9 +16,10 @@
 
 ### Stack, Diagrams, and Flow
 
-- **web**: React.
-- **Backend**: Laravel.
+- **web**: React, typescript, tailwind, shadcn/ui, framer-motion, react-mdx, vitest, axios, context api.
+- **Backend**: Laravel, flysystem, pest, elequent, openai-php.
 - **Database**: mysql.
+- **CI/CD**: docker, docker-compose, github action, ec2
 
 | ER Diagram                                |
 | ----------------------------------------- |
