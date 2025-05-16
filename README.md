@@ -50,8 +50,20 @@
 
 | Login screen                            | Register screen                       |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) |
+| ![Landing](./readme/assets/login_validation_msgs.png) | ![fsdaf](./readme/assets/register_validation_msgs.png) |
 
+
+| Snippets Menu screen                    | Playground screen                     |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/assets/snippet_menu.png) | ![fsdaf](./readme/assets/playground_ai.png) |
+
+| Select Quiz screen                      | Order Quiz screen                     |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/assets/snippet_menu.png) | ![fsdaf](./readme/assets/playground_ai.png) |
+
+| Guildbook screen                        | Birdly assistant screen               |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/assets/guildbook.png) | ![fsdaf](./readme/assets/guildbook_ai.png) |
 
 <br><br>
 
