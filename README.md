@@ -98,7 +98,11 @@
 | ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
 
 
-| CI/CD 1                                   | CI/CD 2                                 | CI/CD 3                                 |
-| ---------------------------------------   | -------------------------------------   | -------------------------------------   |
-| ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
+
+| Testing before merge pull request            | Github Action workflows                 |
+| ---------------------------------------      | -------------------------------------   |
+| ![Landing](./readme/assets/pull_request.png) | ![fsdaf](./readme/assets/cicd_be.png)   |
+|                                              | ![fsdaf](./readme/assets/cicd_fe.png)   |
+
+
 <br><br>
