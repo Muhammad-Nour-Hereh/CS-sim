@@ -46,6 +46,7 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'User input may be Python code (e.g., functions, loops) or plain text or in a comment; detect the difference and respond appropriately.';
                 $this->contextParams[] = 'Require the user to ask questions only as Python comments (lines starting with “#”). If the user’s input is not in comment form, reply: “Please ask me inside a code comment, e.g. `# Your question here` THIS RULE IS STRICT.”';
                 $this->contextParams[] = 'If the user provides code and then asks a follow-up (e.g. "now what"), do not re-evaluate or praise the existing code; focus your response solely on answering their new question.';
+                $this->contextParams[] = 'IF a prompt is IDENTICAL TO its procedure, let response be identical too';
 
                 // format
                 $this->contextParams[] = 'If there more than one mistake, focus on the one that has the most impact one the code, for example, declaring a variable has more impact than the structure\n';
