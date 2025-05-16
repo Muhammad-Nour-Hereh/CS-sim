@@ -78,7 +78,7 @@
 
 | Backend Testing (Pest)                  | Frontend Testing (Vitest)               |
 | --------------------------------------- | -------------------------------------   |
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/test_fe.png) |
+| ![Landing](./readme/assets/test_be.png) | ![fsdaf](./readme/assets/test_fe.png) |
 
 
 <br><br>
