@@ -6,9 +6,8 @@
 <img src="./readme/title2.svg"/>
 
 > A gamified learning platform designed to make studying more fun and interactive.
-> 
+>
 > The platform features a beautiful pixel-art inspired map where users "travel" as they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
-
 
 <br><br>
 
@@ -22,9 +21,10 @@
 - **Backend**: Laravel.
 - **Database**: mysql, monogdb.
 
-| ER Diagram                            |
-| --------------------------------------- |
+| ER Diagram                                |
+| ----------------------------------------- |
 | <img src="./readme/assets/ERdiagram.png"> |
+
 <br><br>
 
 <!-- Project Highlights -->
@@ -45,24 +45,22 @@
 <!-- Demo -->
 <img src="./readme/title5.svg"/>
 
-
 ### screenshots
 
-| Login screen                            | Register screen                       |
-| --------------------------------------- | ------------------------------------- |
+| Login screen                                          | Register screen                                        |
+| ----------------------------------------------------- | ------------------------------------------------------ |
 | ![Landing](./readme/assets/login_validation_msgs.png) | ![fsdaf](./readme/assets/register_validation_msgs.png) |
 
-
-| Snippets Menu screen                    | Playground screen                     |
-| --------------------------------------- | ------------------------------------- |
+| Snippets Menu screen                         | Playground screen                           |
+| -------------------------------------------- | ------------------------------------------- |
 | ![Landing](./readme/assets/snippet_menu.png) | ![fsdaf](./readme/assets/playground_ai.png) |
 
-| Select Quiz screen                      | Order Quiz screen                     |
-| --------------------------------------- | ------------------------------------- |
+| Select Quiz screen                          | Order Quiz screen                        |
+| ------------------------------------------- | ---------------------------------------- |
 | ![Landing](./readme/assets/select_quiz.png) | ![fsdaf](./readme/assets/order_quiz.png) |
 
-| Guildbook screen                        | Birdly assistant screen               |
-| --------------------------------------- | ------------------------------------- |
+| Guildbook screen                          | Birdly assistant screen                    |
+| ----------------------------------------- | ------------------------------------------ |
 | ![Landing](./readme/assets/guildbook.png) | ![fsdaf](./readme/assets/guildbook_ai.png) |
 
 <br><br>
@@ -76,10 +74,9 @@
 - github action for ci/cd
 - build in testing in laravel
 
-| Backend Testing (Pest)                  | Frontend Testing (Vitest)               |
-| --------------------------------------- | -------------------------------------   |
+| Backend Testing (Pest)                  | Frontend Testing (Vitest)             |
+| --------------------------------------- | ------------------------------------- |
 | ![Landing](./readme/assets/test_be.png) | ![fsdaf](./readme/assets/test_fe.png) |
-
 
 <br><br>
 
@@ -92,17 +89,18 @@
 - APIs are documented with Postman collections.
 - Live demo and staging environments available.
 
-
 | Postman API 1                             | Postman API 2                           | Postman API 3                           |
-| ---------------------------------------   | -------------------------------------   | -------------------------------------   |
+| ----------------------------------------- | --------------------------------------- | --------------------------------------- |
 | ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
 
-
-
-| Testing before merge pull request            | Github Action workflows                 |
-| ---------------------------------------      | -------------------------------------   |
-| ![Landing](./readme/assets/pull_request.png) | ![fsdaf](./readme/assets/cicd_be.png)   |
-|                                              | ![fsdaf](./readme/assets/cicd_fe.png)   |
-
+<table>
+  <tr>
+    <td rowspan="2"><img src="./readme/assets/pull_request.png" alt="Landing"></td>
+    <td><img src="./readme/assets/cicd_be.png" alt="fsdaf"></td>
+  </tr>
+  <tr>
+    <td><img src="./readme/assets/cicd_fe.png" alt="fsdaf"></td>
+  </tr>
+</table>
 
 <br><br>
