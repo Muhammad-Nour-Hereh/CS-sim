@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: birdly-client
-        run: npm install
+        run: npm install --mode staging
 
       - name: Run frontend tests
         working-directory: birdly-client
