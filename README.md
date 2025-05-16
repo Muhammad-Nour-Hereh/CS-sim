@@ -86,7 +86,7 @@
 <!-- Deployment -->
 <img src="./readme/title7.svg"/>
 
-### Add Title Here
+### CI/CD, postman and live demo
 
 - Project is containerized using Docker for easy deployment.
 - APIs are documented with Postman collections.
@@ -95,6 +95,6 @@
 
 | Postman API 1                            | Postman API 2                       | Postman API 3                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) |
+| ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
 
 <br><br>
