@@ -94,13 +94,21 @@
 | ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
 
 <table>
-  <tr>
-    <td rowspan="2"><img src="./readme/assets/pull_request.png" alt="Landing"></td>
-    <td><img src="./readme/assets/cicd_be.png" alt="fsdaf"></td>
-  </tr>
-  <tr>
-    <td><img src="./readme/assets/cicd_fe.png" alt="fsdaf"></td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Testing before merge pull request</th>
+      <th>Github Action workflows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2"><img src="./readme/assets/pull_request.png" alt="Landing"></td>
+      <td><img src="./readme/assets/cicd_be.png" alt="Backend CI/CD"></td>
+    </tr>
+    <tr>
+      <td><img src="./readme/assets/cicd_fe.png" alt="Frontend CI/CD"></td>
+    </tr>
+  </tbody>
 </table>
 
 <br><br>
