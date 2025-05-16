@@ -1,18 +1,3 @@
-<?php
-
-namespace Database\Factories;
-
-
-use App\Services\GuildbookFileService;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
-
-
-class guildbookFactory extends Factory {
-
-    public function definition(): array {
-        $content =
-            <<<MDX
 # Variables
 
 Variables are containers for storing data values.
@@ -94,16 +79,3 @@ This will create two variables:
 A = "Sally"
 # A will not overwrite a`}
 />
-MDX;
-        $title = "variables";
-
-        $fileService = app(GuildbookFileService::class);
-        $path = $fileService->store(1, $title, $content);
-
-        return [
-            'title' => $title,
-            'course_id' => 1,
-            'path' => $path,
-        ];
-    }
-}

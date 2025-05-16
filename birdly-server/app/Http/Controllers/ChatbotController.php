@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PromptRequest;
+use App\Models\Guildbook;
 use App\Models\Snippet;
+use App\Services\GuildbookFileService;
 use App\Services\OpenAIService;
 use Illuminate\Http\Request;
 
 class ChatbotController extends Controller {
 
-    public function __construct(protected OpenAIService $openai) {
+    public function __construct(protected OpenAIService $openai, protected GuildbookFileService $fileService) {
     }
 
-    public function chat(Request $request) {
-        $request->validate([
-            'prompt' => 'string',
-        ]);
+    public function chat(PromptRequest $request) {
 
         $res = $this->openai->generateText($request->prompt);
         return $this->successResponse(['response' => $res]);
@@ -29,7 +29,18 @@ class ChatbotController extends Controller {
 
         $snippet->update(['history' => $newHistory]);
         return $this->successResponse(['response' => $res]);
-        
+    }
 
+    public function guildbook(PromptRequest $request, int $id) {
+
+        $prompt = $request->prompt;
+        $guildbook = Guildbook::find($id);
+        $content = $this->fileService->read($guildbook->path);
+        $history = $guildbook->history;
+
+        [$res, $newHistory] = $this->openai->guildbookPrompt($content, $prompt, $history);
+
+        $guildbook->update(['history' => $newHistory]);
+        return $this->successResponse(['response' => $res]);
     }
 }

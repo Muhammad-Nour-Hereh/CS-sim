@@ -9,7 +9,6 @@ use Illuminate\Database\Seeder;
 class GuildbookSeeder extends Seeder {
 
     public function run(): void {
-
-        Guildbook::factory()->count(3)->create();
+        Guildbook::factory()->create();
     }
 }

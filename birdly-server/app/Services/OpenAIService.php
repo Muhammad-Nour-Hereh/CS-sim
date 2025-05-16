@@ -10,13 +10,13 @@ class OpenAIService {
 
     protected $client;
 
-    public function __construct(string $apiKey, string $language = 'python', string $task = 'playground') {
+    public function __construct(string $apiKey) {
         $this->client = OpenAI::client($apiKey);
-        $this->setLanguage($language);
-        $this->addTaskContext($task)->addLanguageContext();
     }
 
     public function generateText(string $prompt): string {
+        $this->setLanguage('python');
+        $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
         $response = $this->client->chat()->create([
             // 'model' => 'gpt-4o',
@@ -31,7 +31,30 @@ class OpenAIService {
     }
 
     public function historyPrompt(string $prompt, array $history): array {
+        $this->setLanguage('python');
+        $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
+
+        $lastUserMessage = null;
+        $lastAssistantResponse = null;
+
+        // look back for the last response and prompt
+        for ($i = count($history) - 1; $i >= 1; $i--) {
+            if (
+                $history[$i]['role'] === 'assistant' &&
+                $history[$i - 1]['role'] === 'user'
+            ) {
+                $lastUserMessage = $history[$i - 1]['content'];
+                $lastAssistantResponse = $history[$i]['content'];
+                break;
+            }
+        }
+
+        // if it is the same return them
+        if ($lastUserMessage !== null && trim($prompt) === trim($lastUserMessage))
+            return [$lastAssistantResponse, $history];
+
+
         $newHistory = array_merge(
             $history,
             [['role' => 'user', 'content' => $prompt]]
@@ -51,6 +74,34 @@ class OpenAIService {
         $newHistory[] = ['role' => 'assistant', 'content' => $res];
         $newHistory = array_slice($newHistory, -10);
         return [$res, $newHistory];
+    }
 
+    public function guildbookPrompt(string $content, string $prompt, array $history): array {
+        $this->setLanguage('python');
+        $this->addTaskContext('q_and_a')->addLanguageContext();
+        $context = $this->buildContext();
+
+        $newHistory = array_merge(
+            $history,
+            [['role' => 'user', 'content' => 'content: \n' . $prompt]]
+        );
+
+        $response = $this->client->chat()->create([
+            // 'model' => 'gpt-4o',
+            'model' => 'gpt-3.5-turbo',
+            'messages' =>
+            array_merge(
+                [
+                    ['role' => 'system', 'content' => $context],
+                    ['role' => 'system', 'content' => $content]
+                ],
+                $newHistory
+            ),
+        ]);
+
+        $res = $response->choices[0]->message->content;
+        $newHistory[] = ['role' => 'assistant', 'content' => $res];
+        $newHistory = array_slice($newHistory, -10);
+        return [$res, $newHistory];
     }
 }

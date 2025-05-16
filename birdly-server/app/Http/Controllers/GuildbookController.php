@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GuildbookRequest;
 use App\Models\Guildbook;
 use App\Services\GuildbookFileService;
+use Illuminate\Support\Facades\Storage;
 
 class GuildbookController extends Controller {
     public function __construct(protected GuildbookFileService $fileService) {
@@ -41,12 +42,11 @@ class GuildbookController extends Controller {
             return $this->notFoundResponse();
         }
 
-        $content = $this->fileService->read($guildbook->path);
-
-        if (!$content) {
+        if (!Storage::exists($guildbook->path)) {
             return $this->notFoundResponse();
         }
 
+        $content = $this->fileService->read($guildbook->path);
         return $this->successResponse([
             'id'        => $guildbook->id,
             'title'     => $guildbook->title,

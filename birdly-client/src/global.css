@@ -58,3 +58,25 @@ input:-webkit-autofill {
 .animate-slide-down {
   animation: slide-down 0.3s ease-out;
 }
+
+.mdx-reset h1,
+.mdx-reset h2,
+.mdx-reset h3,
+.mdx-reset h4,
+.mdx-reset h5,
+.mdx-reset h6,
+.mdx-reset p,
+.mdx-reset ul,
+.mdx-reset ol,
+.mdx-reset li,
+.mdx-reset a,
+.mdx-reset blockquote,
+.mdx-reset pre,
+.mdx-reset code,
+.mdx-reset table,
+.mdx-reset th,
+.mdx-reset td {
+  all: revert;
+  font-family: revert;
+  color: revert;
+}

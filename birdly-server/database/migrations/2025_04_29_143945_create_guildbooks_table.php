@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->string('title');
             $table->string('path');
+            $table->json('history');
             $table->timestamps();
             $table->softDeletes();
         });

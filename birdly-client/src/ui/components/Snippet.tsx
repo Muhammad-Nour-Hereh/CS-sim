@@ -2,10 +2,12 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { CodeEditor } from './CodeEditor'
+import { remote } from '@/remotes/remotes'
 
 interface SnippetProps {
   title?: string
-  defaultCode?: string
+  initCode?: string
   onRun?: (code: string) => void
   className?: string
   readOnly?: boolean
@@ -13,19 +15,24 @@ interface SnippetProps {
 
 const Snippet = ({
   title = 'Example',
-  defaultCode = 'x = 5\ny = "John"\nprint(x)\nprint(y)',
+  initCode = 'x = 5\ny = "John"\nprint(x)\nprint(y)',
   onRun,
   className,
-  readOnly = false,
 }: SnippetProps) => {
-  const [code, setCode] = useState(defaultCode)
+  const [code, setCode] = useState(initCode)
+  const [output, setOutput] = useState('')
 
+  const run = async () => {
+    const res = await remote.run(code)
+    setOutput(res.data?.output || '')
+  }
+  
   const handleRunCode = () => {
     if (onRun) {
       onRun(code)
     } else {
-      console.log('Code executed:', code)
-      alert('Code execution is simulated. Check the console for details.')
+      run()
+      console.log('Code executed:\n', code)
     }
   }
 
@@ -42,13 +49,7 @@ const Snippet = ({
 
       {/* Code area */}
       <div className="bg-[#1e2a31] p-4 text-gray-200">
-        <textarea
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          className="min-h-[100px] w-full resize-none border-none bg-transparent font-mono text-sm outline-none"
-          spellCheck="false"
-          readOnly={readOnly}
-        />
+        <CodeEditor code={code} setCode={setCode} />
       </div>
 
       {/* Button area */}
@@ -58,6 +59,9 @@ const Snippet = ({
           className="rounded-md bg-[#8bc34a] px-3 py-1 text-sm font-medium text-black transition-colors hover:bg-[#7cb342]">
           Try it your self &gt;
         </button>
+      </div>
+      <div className="border-t border-gray-700/30 bg-[#1e2a31] p-2">
+        {output}
       </div>
     </div>
   )

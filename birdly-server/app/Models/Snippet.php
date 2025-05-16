@@ -25,6 +25,10 @@ class Snippet extends Model {
         'history' => 'array',
     ];
 
+    protected $hidden = [
+        'history',
+    ];
+
     public function course() {
         return $this->belongsTo(Course::class);
     }
