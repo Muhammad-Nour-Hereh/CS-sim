@@ -21,7 +21,7 @@
 - **mobile**: React native.
 - **Backend**: Laravel.
 - **Database**: mysql, monogdb.
-
+<img src="./readme/demo/ERdiagram.png">
 <br><br>
 
 <!-- Project Highlights -->
