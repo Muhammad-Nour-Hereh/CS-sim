@@ -68,7 +68,7 @@ jobs:
             # docker-compose down
             # docker rmi ${{ secrets.DOCKER_USERNAME }}/birdly:staging
             # docker-compose up -d
-
+            docker stop ubuntu_database_1
             docker-compose pull server
             docker-compose rm -f server
             docker-compose up -d server
