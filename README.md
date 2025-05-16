@@ -45,14 +45,8 @@
 <!-- Demo -->
 <img src="./readme/title5.svg"/>
 
-### User Screens (Mobile)
 
-| Login screen                            | Register screen                       | Register screen                       |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) | ![fsdaf](./readme/assets/1440x1024.png) |
-
-
-### Admin Screens (Web)
+### screenshots
 
 | Login screen                            | Register screen                       |
 | --------------------------------------- | ------------------------------------- |
