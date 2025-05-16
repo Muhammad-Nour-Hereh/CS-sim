@@ -1,16 +1,28 @@
-<?php
+# 🐍 Python Basics Cheat Sheet
 
-namespace Database\Factories;
+---
 
-use App\Services\CheatFileService;
-use Illuminate\Database\Eloquent\Factories\Factory;
+## 📦 Variables
 
+```python
+x = 5
+name = "Alice"
+pi = 3.14
+is_active = True
+```
 
-class CheatFactory extends Factory {
-    public function definition(): array {
-        $content =
-            <<<MDX
-": 1}      # Dictionary
+---
+
+## 🔢 Data Types
+
+- `int`, `float`, `str`, `bool`
+- `list`, `tuple`, `set`, `dict`
+
+```python
+a = [1, 2, 3]     # List
+b = (1, 2, 3)     # Tuple
+c = {1, 2, 3}     # Set
+d = {"a": 1}      # Dictionary
 ```
 
 ---
@@ -42,32 +54,7 @@ else:
 
 for i in range(5):
     print(i)
-    <<<MDX
-# 🐍 Python Basics Cheat Sheet
 
----
-
-## 📦 Variables
-
-```python
-x = 5
-name = "Alice"
-pi = 3.14
-is_active = True
-```
-
----
-
-## 🔢 Data Types
-
-- `int`, `float`, `str`, `bool`
-- `list`, `tuple`, `set`, `dict`
-
-```python
-a = [1, 2, 3]     # List
-b = (1, 2, 3)     # Tuple
-c = {1, 2, 3}     # Set
-d = {"
 while x > 0:
     x -= 1
 ```
@@ -172,15 +159,3 @@ with open("file.txt", "r") as f:
 ---
 
 Happy coding! 🐍
-MDX;
-        $title = "python_cheat";
-        $fileService = app(CheatFileService::class);
-        $path = $fileService->store(1, $title, $content);
-
-        return [
-            'title' => $title,
-            'course_id' => 1,
-            'path' => $path,
-        ];
-    }
-}

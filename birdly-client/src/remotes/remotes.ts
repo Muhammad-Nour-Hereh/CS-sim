@@ -1,5 +1,6 @@
 import { ChatResponse, CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
+import { Guildbook } from '@/interfaces/Guildbook'
 
 export const remote = {
   // Auth APIs:
@@ -99,5 +100,30 @@ export const remote = {
       route: `/api/v1/chat`,
       auth: true,
       body: { prompt: prompt },
+    }),
+
+  guildbook: {
+    getById: (id: number) =>
+      request<Guildbook>({
+        method: 'GET',
+        route: `/api/v1/guildbooks/${id}`,
+        auth: true,
+      }),
+
+    chat: (prompt: string, id: number) =>
+      request<ChatResponse>({
+        method: 'POST',
+        route: `/api/v1/guildbooks/chat/${id}`,
+        auth: true,
+        body: { prompt: prompt },
+      }),
+  },
+
+  run: (code: string) =>
+    request<CodeOutput>({
+      method: 'POST',
+      route: `/api/v1/run/`,
+      auth: true,
+      body: { code: code },
     }),
 }

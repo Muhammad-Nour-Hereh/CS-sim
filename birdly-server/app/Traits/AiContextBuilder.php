@@ -3,65 +3,6 @@
 namespace App\Traits;
 
 trait AiContextBuilder {
-    protected $content = <<<TEXT
-    ## Python Variables
-    
-    ### Variables
-    Variables are containers for storing data values.
-    
-    ### Creating Variables
-    Python has no command for declaring a variable.  
-    A variable is created the moment you first assign a value to it.
-    
-    Example:
-    x = 5  
-    y = "John"  
-    print(x)  
-    print(y)
-    
-    Variables do not need to be declared with any particular type, and can even change type after they have been set.
-    
-    Example:
-    x = 4       # x is of type int  
-    x = "Sally" # x is now of type str  
-    print(x)
-    
-    ### Casting
-    If you want to specify the data type of a variable, this can be done with casting.
-    
-    Example:
-    x = str(3)    # x will be '3'  
-    y = int(3)    # y will be 3  
-    z = float(3)  # z will be 3.0
-    
-    ### Get the Type
-    You can get the data type of a variable with the type() function.
-    
-    Example:
-    x = 5  
-    y = "John"  
-    print(type(x))  
-    print(type(y))
-    
-    You will learn more about data types and casting later in this tutorial.
-    
-    ### Single or Double Quotes?
-    String variables can be declared either by using single or double quotes.
-    
-    Example:
-    x = "John"  
-    # is the same as  
-    x = 'John'
-    
-    ### Case-Sensitive
-    Variable names are case-sensitive.
-    
-    Example:  
-    This will create two variables:
-    a = 4  
-    A = "Sally"  
-    # A will not overwrite a
-    TEXT;
 
     protected array $contextParams = [];
     protected string $language;
@@ -105,6 +46,7 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'User input may be Python code (e.g., functions, loops) or plain text or in a comment; detect the difference and respond appropriately.';
                 $this->contextParams[] = 'Require the user to ask questions only as Python comments (lines starting with “#”). If the user’s input is not in comment form, reply: “Please ask me inside a code comment, e.g. `# Your question here` THIS RULE IS STRICT.”';
                 $this->contextParams[] = 'If the user provides code and then asks a follow-up (e.g. "now what"), do not re-evaluate or praise the existing code; focus your response solely on answering their new question.';
+                $this->contextParams[] = 'IF a prompt is IDENTICAL TO its procedure, let response be identical too';
 
                 // format
                 $this->contextParams[] = 'If there more than one mistake, focus on the one that has the most impact one the code, for example, declaring a variable has more impact than the structure\n';
@@ -131,10 +73,8 @@ trait AiContextBuilder {
             case 'q_and_a':
                 $this->contextParams[] = 'The user is reviewing course material.\n';
                 $this->contextParams[] = 'Explain concepts clearly, correct misunderstandings, and encourage follow-up questions.\n';
-                $this->contextParams[] = 'this page is what user study\n';
-                $this->contextParams[] = $this->content;
                 $this->contextParams[] = 'Generate a small q and a quiz\n';
-
+                $this->contextParams[] = 'what user is studing will be provided in after "content: "\n';
 
                 break;
             case 'level_generation':

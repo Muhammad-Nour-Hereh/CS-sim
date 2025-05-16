@@ -27,10 +27,12 @@ export const myTheme = EditorView.theme({
 interface CodeEditorProps {
   code: string
   setCode: Function
+  initCode?: string
   language?: string
 }
 
-export function CodeEditor({ code, setCode }: CodeEditorProps) {
+export function CodeEditor({ code, setCode, initCode }: CodeEditorProps) {
+  if (initCode) setCode(initCode)
   return (
     <CodeMirror
       value={code}
