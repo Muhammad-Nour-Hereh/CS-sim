@@ -74,7 +74,8 @@
 - github action for ci/cd
 - build in testing in laravel
 
-| --------------------------------------- | ------------------------------------- |
+|                                        |                                      |
+| -------------------------------------- | ------------------------------------ |
 | ![Landing](./readme/assets/code_1.png) | ![fsdaf](./readme/assets/code_2.png) |
 | ![Landing](./readme/assets/code_3.png) | ![fsdaf](./readme/assets/code_4.png) |
 | ![Landing](./readme/assets/code_5.png) | ![fsdaf](./readme/assets/code_6.png) |
