@@ -59,7 +59,7 @@
 
 | Select Quiz screen                      | Order Quiz screen                     |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/assets/snippet_menu.png) | ![fsdaf](./readme/assets/playground_ai.png) |
+| ![Landing](./readme/assets/select_quiz.png) | ![fsdaf](./readme/assets/order_quiz.png) |
 
 | Guildbook screen                        | Birdly assistant screen               |
 | --------------------------------------- | ------------------------------------- |
