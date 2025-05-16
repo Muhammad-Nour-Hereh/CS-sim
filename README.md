@@ -80,6 +80,8 @@
 | ![Landing](./readme/assets/code_3.png) | ![fsdaf](./readme/assets/code_4.png) |
 | ![Landing](./readme/assets/code_5.png) | ![fsdaf](./readme/assets/code_6.png) |
 
+### Testing
+
 | Backend Testing (Pest)                  | Frontend Testing (Vitest)             |
 | --------------------------------------- | ------------------------------------- |
 | ![Landing](./readme/assets/test_be.png) | ![fsdaf](./readme/assets/test_fe.png) |
