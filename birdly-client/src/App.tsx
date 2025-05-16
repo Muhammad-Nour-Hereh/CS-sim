@@ -13,6 +13,7 @@ import GuildbookPage from './ui/pages/GuildbookPage'
 import CheatsPage from './ui/pages/CheatsPage'
 
 const App = () => {
+  console.log(import.meta.env.VITE_TEST)
   return (
     <Routes>
       <Route element={<GuestRoutes />}>
