@@ -75,6 +75,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            docker stop ubuntu_server_1
             docker-compose pull client
             docker-compose rm -f client
             docker-compose up -d client
