@@ -34,6 +34,27 @@ class OpenAIService {
         $this->setLanguage('python');
         $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
+
+        $lastUserMessage = null;
+        $lastAssistantResponse = null;
+
+        // look back for the last response and prompt
+        for ($i = count($history) - 1; $i >= 1; $i--) {
+            if (
+                $history[$i]['role'] === 'assistant' &&
+                $history[$i - 1]['role'] === 'user'
+            ) {
+                $lastUserMessage = $history[$i - 1]['content'];
+                $lastAssistantResponse = $history[$i]['content'];
+                break;
+            }
+        }
+
+        // if it is the same return them
+        if ($lastUserMessage !== null && trim($prompt) === trim($lastUserMessage))
+            return [$lastAssistantResponse, $history];
+
+
         $newHistory = array_merge(
             $history,
             [['role' => 'user', 'content' => $prompt]]
