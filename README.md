@@ -7,19 +7,18 @@
 
 > A gamified learning platform designed to make studying more fun and interactive.
 >
-> The platform features a beautiful pixel-art inspired map where users "travel" as they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
+> The platform features a  they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
 
 <br><br>
 
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-### Add Title Here
+### Stack, Diagrams, and Flow
 
 - **web**: React.
-- **mobile**: React native.
 - **Backend**: Laravel.
-- **Database**: mysql, monogdb.
+- **Database**: mysql.
 
 | ER Diagram                                |
 | ----------------------------------------- |
@@ -30,7 +29,7 @@
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
 
-### Add Title Here
+### Features
 
 - Pixel-art inspired game map navigation
 - Dynamic quizzes with various types (write, choose, match)
@@ -45,7 +44,7 @@
 <!-- Demo -->
 <img src="./readme/title5.svg"/>
 
-### screenshots
+### Screenshots, and GIFs
 
 | Login screen                                          | Register screen                                        |
 | ----------------------------------------------------- | ------------------------------------------------------ |
@@ -68,11 +67,16 @@
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
 
-### Add Title Here
+### Develpment and Testing
 
 - using docker for containers
 - github action for ci/cd
 - build in testing in laravel
+
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/assets/code_1.png) | ![fsdaf](./readme/assets/code_2.png) |
+| ![Landing](./readme/assets/code_3.png) | ![fsdaf](./readme/assets/code_4.png) |
+| ![Landing](./readme/assets/code_5.png) | ![fsdaf](./readme/assets/code_6.png) |
 
 | Backend Testing (Pest)                  | Frontend Testing (Vitest)             |
 | --------------------------------------- | ------------------------------------- |
