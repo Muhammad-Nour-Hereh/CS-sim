@@ -5,9 +5,8 @@
 <!-- project overview -->
 <img src="./readme/title2.svg"/>
 
-> A gamified learning platform designed to make studying more fun and interactive.
->
-> The platform features a they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
+> Birdly is an SPA web platform designed to help users learn various subjects, such as programming languages and computer science concepts.
+> It features learning through solving questions, gamification elements, an AI assistant, and a playground to write and test code with AI-powered hints.
 
 <br><br>
 
@@ -32,13 +31,12 @@
 
 ### Features
 
-- Pixel-art inspired game map navigation
-- Dynamic quizzes with various types (write, choose, match)
-- Embeddable media (images, audio, videos)
-- Cool animations and transitions
-- Track user learning progress like an RPG game
-- Responsive design for mobile and desktop
-- Admin panel for managing quizzes and tracking user data
+- Quizzes: Four types of questions - Select, Order, Write, and Match.
+- Practice: Dynamically generated quizzes based on the user’s past mistakes.
+- Playground: A coding space to write and run code snippets, with an AI assistant for help.
+- Guildbooks: Short, focused pages on topics like variables or functions, featuring runnable snippets and AI assistance.
+- Cheat Sheets: Downloadable PDF references.
+- Map: A world map where players progress by completing levels.
 
 <br><br>
 
