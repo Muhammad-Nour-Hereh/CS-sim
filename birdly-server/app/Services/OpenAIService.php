@@ -62,6 +62,7 @@ class OpenAIService {
 
         $response = $this->client->chat()->create([
             // 'model' => 'gpt-4o',
+            // 'model' => 'gpt-o3',
             'model' => 'gpt-3.5-turbo',
             'messages' =>
             array_merge(
