@@ -52,10 +52,14 @@ class QuestionController extends Controller {
     }
 
     public function check(PromptRequest $request, $id) {
-        $Question = Question::find($id);
-        if (!$Question) return $this->notFoundResponse();
+        $question = Question::find($id);
+        if (!$question) return $this->notFoundResponse();
 
-        // $this->openai->check($Question, $request->validated());
+        $userAnswer = $request->prompt;
+        $title = $question->title;
+        $correctAnswer = json_decode($question->content)->correctAnswer;
+
+        $this->openai->checkAnswer($userAnswer,  $title,  $correctAnswer);
 
         $correct = true;
         return $this->successResponse($correct);
