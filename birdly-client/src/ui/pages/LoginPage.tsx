@@ -22,14 +22,14 @@ const LoginPage = () => {
           value={email}
           setter={setEmail}
           errorMsg={errors.email}
-          placeholder="email"
+          placeholder="Email"
           className="h-13 border-2 text-2xl font-bold"
         />
         <Input
           value={password}
           setter={setPassword}
           errorMsg={errors.password}
-          placeholder="password"
+          placeholder="Password"
           variant="password"
           className="h-13 border-2 text-2xl font-bold"
         />
