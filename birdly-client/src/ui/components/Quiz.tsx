@@ -18,7 +18,7 @@ const Quiz = () => {
   }
   useEffect(()=>{  console.log('Quiz type:', JSON.stringify(type))},[])
 
-  return quizComponents['select'] || <p>Invalid quiz type: {type}</p>
+  return quizComponents[type] || <p>Invalid quiz type: {type}</p>
 }
 
 export default Quiz
