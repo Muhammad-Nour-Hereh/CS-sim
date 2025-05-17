@@ -12,6 +12,7 @@ const QuizPage = () => {
     progressPercent,
     showFeedback,
     result,
+    checkable,
     skipAnswer,
     naivgateHomeHandle,
     checkHandle,
@@ -46,7 +47,7 @@ const QuizPage = () => {
         <Button variant="ghost" onClick={skipAnswer}>
           Skip
         </Button>
-        <Button onClick={checkHandle}>Check</Button>
+        <Button onClick={checkHandle} variant={'muted'}>Check</Button>
       </footer>
 
       {showFeedback && (
