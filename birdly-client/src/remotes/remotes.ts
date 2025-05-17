@@ -170,7 +170,7 @@ export const remote = {
         auth: true,
       }),
   },
-  
+
   chat: (prompt: string): any =>
     request<CodeOutput>({
       method: 'POST',
@@ -178,6 +178,16 @@ export const remote = {
       auth: true,
       body: { prompt: prompt },
     }),
+
+  question: {
+    check: (prompt: string, id): any =>
+      request<boolean>({
+        method: 'POST',
+        route: `/api/v1/questions/check/${id}`,
+        auth: true,
+        body: { prompt: prompt },
+      }),
+  },
 
   guildbook: {
     getById: (id: number) =>
