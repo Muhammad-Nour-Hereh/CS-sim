@@ -4,7 +4,9 @@ import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const SelectQuiz = () => {
   const { curQuestion, setSelectAnswer }: QuizContext = useQuiz()
-
+  if (!curQuestion || !curQuestion.content) {
+    return <p>Loading...</p>
+  }
   const {
     title,
     content: { answers },

@@ -92,12 +92,12 @@ const QuizProvider = ({ children }: any) => {
     console.log('Questions useEffect fired', { questions, length: questions.length, first: questions[0] })
   }, [questions])
 
-  // useEffect(() => {
-  //   setCurQuestion(questions[index])
-  // }, [index, questions])
+  useEffect(() => {
+    setCurQuestion(questions[index])
+  }, [index, questions])
 
   useEffect(() => {
-    console.log({ question: curQuestion })
+    console.log({ curQuestion: curQuestion })
   }, [curQuestion])
 
 
@@ -111,8 +111,10 @@ const QuizProvider = ({ children }: any) => {
     const fetchQuestions = async () => {
       setLoading(true)
       const res = await remote.level.getQuestions(1)
-      setQuestions(res.data || _questions)
-      console.log( res)
+      if (res.success === 'true' && res.data) {
+        setQuestions(res.data)
+      }
+      
       setLoading(false)
     }
     fetchQuestions()

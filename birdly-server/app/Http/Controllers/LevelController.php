@@ -55,9 +55,7 @@ class LevelController extends Controller {
 
         $questions = $level->questions()->get();
 
-        return $this->successResponse([
-             $questions
-        ]);
+        return $this->successResponse($questions);
     }
 
     public function attachQuestions($levelId, $questionId) {
@@ -70,7 +68,7 @@ class LevelController extends Controller {
         if ($level->questions()->where('question_id', $questionId)->exists()) {
             return $this->conflictResponse(['Question already attached to this level']);
         }
-        
+
         $level->questions()->attach($questionId);
         return $this->createdResponse('Question attached successfully');
     }
