@@ -17,7 +17,7 @@ const useQuizPage = () => {
 
   const [subtitle, setSubtitle] = useState('subtitle')
   const [showFeedback, setShowFeedback] = useState(false)
-  const [result, setResult] = useState<'correct' | 'wrong'>('correct')
+  const [result, setResult] = useState<'correct' | 'wrong' | 'almost'>('correct')
   
   const naivgateHomeHandle = () => {
     navigate(ROUTES.HOME)
