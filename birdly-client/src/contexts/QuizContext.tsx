@@ -70,6 +70,7 @@ const QuizProvider = ({ children }: any) => {
   // ]
 
   const [questions, setQuestions] = useState<Question[]>([])
+  const [loading, setLoading] = useState(true)
 
   const questionCount = questions.length
   const [index, setIndex] = useState(0)
@@ -88,9 +89,11 @@ const QuizProvider = ({ children }: any) => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
+      setLoading(false)
       const res = await remote.level.getQuestions(1)
       setQuestions(res.data || [])
       console.log(res.data)
+      setLoading(true)
     }
     fetchQuestions()
   }, [])
