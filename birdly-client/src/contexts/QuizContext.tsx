@@ -18,6 +18,7 @@ export type QuizContext = {
   setOrderAnswer: Function
   setMatchAnswer: Function
   checkAnswer: Function
+  correctAnswer: string
 }
 
 const quizContext = createContext<QuizContext | undefined>(undefined)
@@ -30,6 +31,7 @@ const QuizProvider = ({ children }: any) => {
   const [index, setIndex] = useState(0)
   const [questionCount, setQuestionCount] = useState(0)
   const [curQuestion, setCurQuestion] = useState<Question | null>(null)
+  const [correctAnswer, setCorrectAnswer] = useState('')
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
@@ -53,10 +55,11 @@ const QuizProvider = ({ children }: any) => {
       }
       setLoading(false)
     }
-    
+
     fetchQuestions()
   }, [])
 
+  // when questions are returned
   useEffect(() => {
     setIndex(0)
     setQuestionCount(questions.length)
@@ -69,8 +72,19 @@ const QuizProvider = ({ children }: any) => {
   }, [questions])
 
   useEffect(() => {
-    setCurQuestion(questions[index])
-    console.log({ curQuestion: questions[index] })
+    const _curQuestion = questions[index]
+    setCurQuestion(_curQuestion)
+
+    switch (_curQuestion.type) {
+      case 'select':
+      case 'write':
+        setCorrectAnswer(_curQuestion.content.correctAnswer)
+        break
+      case 'order':
+        setCorrectAnswer(JSON.stringify(_curQuestion.content.correctOrder))
+        break
+    }
+    console.log({ curQuestion: _curQuestion })
   }, [index, questions])
 
   useEffect(() => {
@@ -126,6 +140,7 @@ const QuizProvider = ({ children }: any) => {
         loading,
         curQuestion,
         progressPercent,
+        correctAnswer,
         nextQuestion,
         setWriteAnswer,
         setSelectAnswer,
