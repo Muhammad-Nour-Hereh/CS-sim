@@ -59,9 +59,8 @@ class QuestionController extends Controller {
         $title = $question->title;
         $correctAnswer = json_decode($question->content)->correctAnswer;
 
-        $this->openai->checkAnswer($userAnswer,  $title,  $correctAnswer);
-
-        $correct = true;
+        $correct = $this->openai->checkAnswer($userAnswer,  $title,  $correctAnswer);
+        
         return $this->successResponse($correct);
     }
 }
