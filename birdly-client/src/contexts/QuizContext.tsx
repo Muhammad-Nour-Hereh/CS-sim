@@ -5,10 +5,12 @@ import {
   SelectQuestion,
   WriteQuestion,
 } from '@/interfaces/Question'
+import { remote } from '@/remotes/remotes'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 export type QuizContext = {
-  curQuestion: Question
+  loading: boolean
+  curQuestion: Question | null
   progressPercent: number
   nextQuestion: () => void
   setWriteAnswer: Function
@@ -16,66 +18,22 @@ export type QuizContext = {
   setOrderAnswer: Function
   setMatchAnswer: Function
   checkAnswer: Function
+  correctAnswer: string
+  checkable: boolean
 }
 
 const quizContext = createContext<QuizContext | undefined>(undefined)
 
 const QuizProvider = ({ children }: any) => {
-  const questions: Question[] = [
-    // Select Question
-    {
-      title: 'Which of the following is a valid Python variable name?',
-      content: {
-        answers: ['2myVar', '_myVar', 'my-var', 'class'],
-        correctAnswer: '_myVar',
-      },
-      type: 'select',
-    },
+  // const [curLevel, setCurLevel] = useState(1)
+  const [questions, setQuestions] = useState<Question[]>([])
+  const [loading, setLoading] = useState(true)
 
-    // Write Question
-    {
-      title: 'What Python keyword is used to delete a variable?',
-      content: {
-        correctAnswer: 'del',
-      },
-      type: 'write',
-    },
-
-    // Order Question
-    {
-      title:
-        'Arrange these steps in the correct order to swap two variables in Python without using a temporary variable.',
-      content: {
-        correctOrder: ['x = 10, y = 20', 'x = x + y', 'y = x - y', 'x = x - y'],
-        pieces: ['y = x - y', 'x = 10, y = 20', 'x = x - y', 'x = x + y'],
-      },
-      type: 'order',
-    },
-
-    // Match Question
-    {
-      title: 'Match each Python variable type with its corresponding example.',
-      content: {
-        pairs: [
-          { left: 'int', right: '42', selected: false },
-          { left: 'float', right: '3.14', selected: false },
-          { left: 'str', right: "'hello'", selected: false },
-          { left: 'list', right: '[1, 2, 3]', selected: false },
-          { left: 'dict', right: "{'key': 'value'}", selected: false },
-        ],
-      },
-      type: 'match',
-    },
-  ]
-
-  const questionCount = questions.length
   const [index, setIndex] = useState(0)
-  const curQuestion = questions[index]
-  const progressPercent = (index / questionCount) * 100
-
-  const nextQuestion = () => {
-    setIndex(() => (index + 1) % questionCount)
-  }
+  const [questionCount, setQuestionCount] = useState(0)
+  const [curQuestion, setCurQuestion] = useState<Question | null>(null)
+  const [correctAnswer, setCorrectAnswer] = useState('')
+  const [checkable, setCheckable] = useState(false)
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
@@ -83,27 +41,95 @@ const QuizProvider = ({ children }: any) => {
   const [orderAnswer, setOrderAnswer] = useState<string[]>([])
   const [matchAnswer, setMatchAnswer] = useState({ left: '', right: '' })
 
+  const progressPercent = (index / questionCount) * 100
+
+  const nextQuestion = () => {
+    if (questionCount === 0) return
+    setIndex((prev) => (prev + 1) % questionCount)
+  }
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      setLoading(true)
+      const res = await remote.level.getQuestions(1)
+      if (res.success === 'true' && res.data) {
+        setQuestions(res.data)
+      }
+      setLoading(false)
+    }
+
+    fetchQuestions()
+  }, [])
+
+  // when questions are returned
+  useEffect(() => {
+    setIndex(0)
+    setQuestionCount(questions.length)
+    setCurQuestion(questions[0])
+    console.log('Questions useEffect fired', {
+      questions,
+      length: questions.length,
+      first: questions[0],
+    })
+  }, [questions])
+
+  useEffect(() => {
+    const _curQuestion = questions[index]
+    if (!_curQuestion) return
+
+    setCurQuestion(_curQuestion)
+
+    switch (_curQuestion.type) {
+      case 'select':
+      case 'write':
+        setCorrectAnswer(_curQuestion.content.correctAnswer)
+        break
+      case 'order':
+        setCorrectAnswer(JSON.stringify(_curQuestion.content.correctOrder))
+        break
+      default:
+        setCorrectAnswer('')
+    }
+
+    setCheckable(false)
+    console.log({ curQuestion: _curQuestion })
+  }, [index, questions])
+
   useEffect(() => {
     console.log(matchAnswer)
     if (matchAnswer.left !== '' && matchAnswer.right !== '')
       console.log(checkAnswer())
   }, [matchAnswer])
-  
-  const checkAnswer = () => {
+
+  const checkAnswer = async (): Promise<
+    'correct' | 'wrong' | 'almost' | undefined
+  > => {
+    if (!curQuestion) return
     switch (curQuestion.type) {
       case 'write': {
         const { correctAnswer } = (curQuestion as WriteQuestion).content
-        return writeAnswer.trim() === correctAnswer
+
+        if (writeAnswer.trim() === correctAnswer) return 'correct'
+        setCorrectAnswer(correctAnswer)
+
+        const res = await remote.question.check(
+          writeAnswer.trim(),
+          curQuestion.id,
+        )
+        // ai check
+        return res.data ? 'almost' : 'wrong'
       }
 
       case 'select': {
         const { correctAnswer } = (curQuestion as SelectQuestion).content
-        return selectAnswer === correctAnswer
+        return selectAnswer === correctAnswer ? 'correct' : 'wrong'
       }
 
       case 'order': {
         const { correctOrder } = (curQuestion as OrderQuestion).content
         return orderAnswer.join('') === correctOrder.join('')
+          ? 'correct'
+          : 'wrong'
       }
 
       case 'match': {
@@ -121,25 +147,42 @@ const QuizProvider = ({ children }: any) => {
 
         const match = matchIndex !== -1
         setMatchAnswer({ left: '', right: '' }) // Reset selection
-        return match
+        return match ? 'correct' : 'wrong'
       }
 
       default:
-        return false
+        return 'wrong'
     }
   }
+
+  // set checkable when select an answer
+  useEffect(() => {
+    setCheckable(writeAnswer !== '')
+  }, [writeAnswer])
+  useEffect(() => {
+    setCheckable(selectAnswer !== '')
+  }, [selectAnswer])
+  useEffect(() => {
+    setCheckable(orderAnswer.length > 0)
+  }, [orderAnswer])
+  useEffect(() => {
+    setCheckable(true)
+  }, [matchAnswer])
 
   return (
     <quizContext.Provider
       value={{
+        loading,
         curQuestion,
         progressPercent,
+        correctAnswer,
         nextQuestion,
         setWriteAnswer,
         setSelectAnswer,
         setOrderAnswer,
         setMatchAnswer,
         checkAnswer,
+        checkable,
       }}>
       {children}
     </quizContext.Provider>

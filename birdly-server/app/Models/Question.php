@@ -10,7 +10,7 @@ class Question extends Model {
 
     protected $fillable = [
         'title',
-        'question_type',
+        'type',
         'content',
         'course_id',
     ];

@@ -16,7 +16,7 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
   }
 
   return (
-    <ol className={cn('flex flex-col gap-2 w-full', className)}>
+    <ol className={cn('flex flex-col gap-2 w-full h-fit', className)}>
       {items.map((item, index) => {
         const isSelected = selectedIndex === index
 
@@ -24,7 +24,7 @@ const AnswerList = ({ items, onItemClick, className }: AnswerListProps) => {
           <li
             key={index}
             className={cn(
-              'flex h-full w-full items-center gap-4 rounded-lg border-2 border-b-4 px-4',
+              'flex h-16 w-full items-center gap-4 rounded-lg border-2 border-b-4 px-4 select-none',
               'transition-all duration-100',
               'cursor-pointer',
               'hover:brightness-120',

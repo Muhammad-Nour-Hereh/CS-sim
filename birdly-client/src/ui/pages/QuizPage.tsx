@@ -8,24 +8,29 @@ import AnswerFeedback from '../components/AnswerFeedback'
 
 const QuizPage = () => {
   const {
+    loading,
     progressPercent,
     showFeedback,
     result,
+    checkable,
     skipAnswer,
     naivgateHomeHandle,
     checkHandle,
     FeedbackHandle,
+    subtitle,
   } = useQuizPage()
 
-  return (
+  return loading ? (
+    'Loading...'
+  ) : (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
       {/* Top */}
       <header className="flex h-18 items-end justify-center gap-6">
         <div className="flex items-center justify-center gap-6">
-          <IconButton onClick={naivgateHomeHandle}>
+          <IconButton onClick={naivgateHomeHandle} className="text-gray-500">
             <X />
           </IconButton>
-          <IconButton>
+          <IconButton className="text-gray-500">
             <Settings />
           </IconButton>
           <Progress value={progressPercent} />
@@ -39,14 +44,21 @@ const QuizPage = () => {
 
       {/* Bottom */}
       <footer className="flex h-33 w-full items-center justify-evenly border-t-2">
-        <Button variant="ghost" onClick={skipAnswer}>Skip</Button>
-        <Button onClick={checkHandle}>Check</Button>
+        <Button variant="ghost" onClick={skipAnswer}>
+          Skip
+        </Button>
+        <Button onClick={checkHandle} variant={checkable ? 'default' : 'muted'}>
+          Check
+        </Button>
       </footer>
 
       {showFeedback && (
-        <AnswerFeedback variant={result} onContinue={FeedbackHandle} />
+        <AnswerFeedback
+          variant={result}
+          onContinue={FeedbackHandle}
+          subtitle={subtitle}
+        />
       )}
-
     </div>
   )
 }

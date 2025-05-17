@@ -105,4 +105,32 @@ class OpenAIService {
         $newHistory = array_slice($newHistory, -10);
         return [$res, $newHistory];
     }
+
+    public function checkAnswer(string $userAnswer, string $question, string $correctAnswer): bool {
+        $this->setLanguage('python');
+        $this->addTaskContext('check')->addLanguageContext();
+        $this->addQuestion($question, $correctAnswer);
+
+        $context = $this->buildContext();
+        $response = $this->client->chat()->create([
+            // 'model' => 'gpt-4o',
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'system', 'content' => $context],
+                ['role' => 'user', 'content' => $userAnswer]
+            ],
+        ]);
+
+        $content = trim($response['choices'][0]['message']['content'] ?? '');
+
+        if ($content === 'true') {
+            return true;
+        } elseif ($content === 'false') {
+            return false;
+        } else {
+            throw new \RuntimeException("Invalid response from AI: '$content'");
+        }
+
+        return $content;
+    }
 }

@@ -54,10 +54,11 @@ class LevelController extends Controller {
             return $this->notFoundResponse();
 
         $questions = $level->questions()->get();
-
-        return $this->successResponse([
-            'questions' => $questions
-        ]);
+        $questions = $level->questions()->get()->map(function ($question) {
+            $question->content = json_decode($question->content, true);
+            return $question;
+        });
+        return $this->successResponse($questions);
     }
 
     public function attachQuestions($levelId, $questionId) {
@@ -70,7 +71,7 @@ class LevelController extends Controller {
         if ($level->questions()->where('question_id', $questionId)->exists()) {
             return $this->conflictResponse(['Question already attached to this level']);
         }
-        
+
         $level->questions()->attach($questionId);
         return $this->createdResponse('Question attached successfully');
     }

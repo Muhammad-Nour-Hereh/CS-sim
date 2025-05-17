@@ -4,18 +4,20 @@ import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const SelectQuiz = () => {
   const { curQuestion, setSelectAnswer }: QuizContext = useQuiz()
-
+  if (!curQuestion || !curQuestion.content) {
+    return <p>Loading...</p>
+  }
   const {
     title,
-    content: { answers },
+    content: { options },
   } = curQuestion as SelectQuestion
-
+  console.log(options)
   return (
     <>
       <p className="text-2xl font-extrabold">{title}</p>
 
       <AnswerList
-        items={answers}
+        items={options}
         onItemClick={(_, item) => {
           setSelectAnswer(item)
         }}

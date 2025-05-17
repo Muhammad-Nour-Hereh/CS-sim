@@ -5,10 +5,11 @@ import WriteQuiz from './quiz-components/WriteQuiz'
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const Quiz = () => {
-  const {
-    curQuestion: { type },
-  }: QuizContext = useQuiz()
-  
+  const { curQuestion }: QuizContext = useQuiz()
+  if (!curQuestion) return 'Loading ...'
+
+  const type = curQuestion.type
+
   const quizComponents = {
     select: <SelectQuiz />,
     match: <MatchQuiz />,
