@@ -28,7 +28,7 @@ const QuizProvider = ({ children }: any) => {
     {
       title: 'Which of the following is a valid Python variable name?',
       content: {
-        answers: ['2myVar', '_myVar', 'my-var', 'class'],
+        options: ['2myVar', '_myVar', 'my-var', 'class'],
         correctAnswer: '_myVar',
       },
       type: 'select',
