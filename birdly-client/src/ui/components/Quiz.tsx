@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import MatchQuiz from './quiz-components/MatchQuiz'
 import OrderQuiz from './quiz-components/OrderQuiz'
 import SelectQuiz from './quiz-components/SelectQuiz'
@@ -5,9 +6,6 @@ import WriteQuiz from './quiz-components/WriteQuiz'
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 
 const Quiz = () => {
-  const { curQuestion } = useQuiz()
-  if (!curQuestion) return null
-
   const {
     curQuestion: { type },
   }: QuizContext = useQuiz()
@@ -18,8 +16,9 @@ const Quiz = () => {
     order: <OrderQuiz />,
     write: <WriteQuiz />,
   }
+  useEffect(()=>{  console.log('Quiz type:', JSON.stringify(type))},[])
 
-  return quizComponents[type] || <p>Invalid quiz type: {type}</p>
+  return quizComponents['select'] || <p>Invalid quiz type: {type}</p>
 }
 
 export default Quiz
