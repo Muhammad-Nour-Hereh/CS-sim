@@ -110,7 +110,7 @@ const QuizProvider = ({ children }: any) => {
         if (writeAnswer.trim() === correctAnswer) return true
         // ai check
 
-        return remote.question(writeAnswer.trim(), curQuestion.id)
+        return remote.question.check(writeAnswer.trim(), curQuestion.id)
       }
 
       case 'select': {
