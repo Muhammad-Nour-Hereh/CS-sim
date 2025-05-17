@@ -70,25 +70,36 @@ const QuizProvider = ({ children }: any) => {
     },
   ]
 
-  const [curLevel, setCurLevel] = useState(1)
+  // const [curLevel, setCurLevel] = useState(1)
   const [questions, setQuestions] = useState<Question[]>(_questions)
   const [loading, setLoading] = useState(true)
 
   const [index, setIndex] = useState(0)
   const [questionCount, setQuestionCount] = useState(0)
-  const [curQuestion, setCurQuestion] = useState(_questions[0])
+  const [curQuestion, setCurQuestion] = useState<Question>(_questions[0])
 
   const progressPercent = (index / questionCount) * 100
 
   const nextQuestion = () => {
-    setIndex(() => (index + 1) % questionCount)
+    if (questionCount === 0) return
+    setIndex((prev) => (prev + 1) % questionCount)
   }
 
+  useEffect(() => {
+    setIndex(0)
+    setQuestionCount(questions.length)
+    setCurQuestion(questions[0])
+    console.log('Questions useEffect fired', { questions, length: questions.length, first: questions[0] })
+  }, [questions])
+
   // useEffect(() => {
-  //   setIndex(0)
-  //   setQuestionCount(questions.length)
   //   setCurQuestion(questions[index])
-  // }, [questions])
+  // }, [index, questions])
+
+  useEffect(() => {
+    console.log({ question: curQuestion })
+  }, [curQuestion])
+
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
@@ -100,8 +111,8 @@ const QuizProvider = ({ children }: any) => {
     const fetchQuestions = async () => {
       setLoading(true)
       const res = await remote.level.getQuestions(1)
-      setQuestions(res.data || [])
-      console.log(res.data)
+      setQuestions(res.data || _questions)
+      console.log( res)
       setLoading(false)
     }
     fetchQuestions()
