@@ -63,6 +63,8 @@ Route::group(["prefix" => "v1"], function () {
 
         Route::prefix('questions')->group(function () {
             Route::get('/{id}', [QuestionController::class, 'show']);
+            Route::get('/check/{id}', [QuestionController::class, 'check']);
+
         });
 
         Route::prefix('users')->group(function () {

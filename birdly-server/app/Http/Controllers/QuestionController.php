@@ -44,4 +44,8 @@ class QuestionController extends Controller {
         $Question->delete($id);
         return $this->noContentResponse();
     }
+
+    public function check($id) {
+
+    }
 }
