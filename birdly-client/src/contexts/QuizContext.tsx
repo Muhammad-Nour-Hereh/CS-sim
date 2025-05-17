@@ -117,7 +117,7 @@ const QuizProvider = ({ children }: any) => {
           curQuestion.id,
         )
         // ai check
-        return res.data || 'wrong' ? 'correct' : 'almost'
+        return res.data ? 'almost' : 'wrong'
       }
 
       case 'select': {

@@ -17,15 +17,21 @@ const useQuizPage = () => {
 
   const [subtitle, setSubtitle] = useState('subtitle')
   const [showFeedback, setShowFeedback] = useState(false)
-  const [result, setResult] = useState<'correct' | 'wrong' | 'almost'>('correct')
-  
+  const [result, setResult] = useState<'correct' | 'wrong' | 'almost'>(
+    'correct',
+  )
+
   const naivgateHomeHandle = () => {
     navigate(ROUTES.HOME)
   }
 
   const checkHandle = async () => {
     const isCorrect = await checkAnswer()
-    setResult(isCorrect ? 'correct' : 'wrong')
+    if (isCorrect === 'correct' || isCorrect === 'almost') {
+      setResult(isCorrect)
+    } else {
+      setResult('wrong')
+    }
     setShowFeedback(true)
   }
 
@@ -41,6 +47,7 @@ const useQuizPage = () => {
 
   useEffect(() => {
     result === 'correct' ? setSubtitle('') : setSubtitle(correctAnswer)
+    console.log(result)
   }, [correctAnswer, result])
 
   return {
