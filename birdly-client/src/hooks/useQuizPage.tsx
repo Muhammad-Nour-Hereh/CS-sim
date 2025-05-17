@@ -6,10 +6,9 @@ import { useNavigate } from 'react-router-dom'
 const useQuizPage = () => {
   const navigate = useNavigate()
 
-  const { progressPercent, nextQuestion, checkAnswer }: QuizContext = useQuiz()
-
+  const { progressPercent, nextQuestion, checkAnswer, loading }: QuizContext =
+    useQuiz()
   const [showFeedback, setShowFeedback] = useState(false)
-
   const [result, setResult] = useState<'correct' | 'wrong'>('correct')
 
   const naivgateHomeHandle = () => {
@@ -33,6 +32,7 @@ const useQuizPage = () => {
   }
 
   return {
+    loading,
     progressPercent,
     showFeedback,
     result,

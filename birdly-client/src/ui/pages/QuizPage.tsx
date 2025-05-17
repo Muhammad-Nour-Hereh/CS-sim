@@ -8,6 +8,7 @@ import AnswerFeedback from '../components/AnswerFeedback'
 
 const QuizPage = () => {
   const {
+    loading,
     progressPercent,
     showFeedback,
     result,
@@ -17,7 +18,9 @@ const QuizPage = () => {
     FeedbackHandle,
   } = useQuizPage()
 
-  return (
+  return loading ? (
+    'loading ...'
+  ) : (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
       {/* Top */}
       <header className="flex h-18 items-end justify-center gap-6">
@@ -39,14 +42,15 @@ const QuizPage = () => {
 
       {/* Bottom */}
       <footer className="flex h-33 w-full items-center justify-evenly border-t-2">
-        <Button variant="ghost" onClick={skipAnswer}>Skip</Button>
+        <Button variant="ghost" onClick={skipAnswer}>
+          Skip
+        </Button>
         <Button onClick={checkHandle}>Check</Button>
       </footer>
 
       {showFeedback && (
         <AnswerFeedback variant={result} onContinue={FeedbackHandle} />
       )}
-
     </div>
   )
 }

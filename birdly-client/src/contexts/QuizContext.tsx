@@ -9,6 +9,7 @@ import { remote } from '@/remotes/remotes'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 export type QuizContext = {
+  loading: boolean
   curQuestion: Question
   progressPercent: number
   nextQuestion: () => void
@@ -147,6 +148,7 @@ const QuizProvider = ({ children }: any) => {
   return (
     <quizContext.Provider
       value={{
+        loading,
         curQuestion,
         progressPercent,
         nextQuestion,
