@@ -19,6 +19,7 @@ export type QuizContext = {
   setMatchAnswer: Function
   checkAnswer: Function
   correctAnswer: string
+  checkable: boolean
 }
 
 const quizContext = createContext<QuizContext | undefined>(undefined)
@@ -32,6 +33,7 @@ const QuizProvider = ({ children }: any) => {
   const [questionCount, setQuestionCount] = useState(0)
   const [curQuestion, setCurQuestion] = useState<Question | null>(null)
   const [correctAnswer, setCorrectAnswer] = useState('')
+  const [checkable, setCheckable] = useState(true)
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
@@ -74,7 +76,7 @@ const QuizProvider = ({ children }: any) => {
   useEffect(() => {
     const _curQuestion = questions[index]
     if (!_curQuestion) return
-    
+
     setCurQuestion(_curQuestion)
 
     switch (_curQuestion.type) {
@@ -149,6 +151,7 @@ const QuizProvider = ({ children }: any) => {
         setOrderAnswer,
         setMatchAnswer,
         checkAnswer,
+        checkable,
       }}>
       {children}
     </quizContext.Provider>
