@@ -25,21 +25,21 @@ const RegisterPage = () => {
           value={name}
           setter={setName}
           errorMsg={errors.name}
-          placeholder="name"
+          placeholder="Name"
           className="h-13 border-2 text-2xl font-bold"
         />
         <Input
           value={email}
           setter={setEmail}
           errorMsg={errors.email}
-          placeholder="email"
+          placeholder="Email"
           className="h-13 border-2 text-2xl font-bold"
         />
         <Input
           value={password}
           setter={setPassword}
           errorMsg={errors.password}
-          placeholder="password"
+          placeholder="Password"
           variant="password"
           className="h-13 border-2 text-2xl font-bold"
         />
@@ -47,7 +47,7 @@ const RegisterPage = () => {
           value={repassword}
           setter={setRepassword}
           errorMsg={errors.repassword}
-          placeholder="confirm the password"
+          placeholder="Confirm the password"
           variant="password"
           className="h-13 border-2 text-2xl font-bold"
         />
