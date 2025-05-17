@@ -25,10 +25,10 @@ const QuizPage = () => {
       {/* Top */}
       <header className="flex h-18 items-end justify-center gap-6">
         <div className="flex items-center justify-center gap-6">
-          <IconButton onClick={naivgateHomeHandle}>
+          <IconButton onClick={naivgateHomeHandle} className='text-gray-500'>
             <X />
           </IconButton>
-          <IconButton>
+          <IconButton className='text-gray-500'>
             <Settings />
           </IconButton>
           <Progress value={progressPercent} />
