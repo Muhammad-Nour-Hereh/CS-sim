@@ -101,16 +101,21 @@ const QuizProvider = ({ children }: any) => {
       console.log(checkAnswer())
   }, [matchAnswer])
 
-  const checkAnswer = () => {
+  const checkAnswer = async (): Promise<boolean | undefined> => {
     if (!curQuestion) return
     switch (curQuestion.type) {
       case 'write': {
         const { correctAnswer } = (curQuestion as WriteQuestion).content
 
         if (writeAnswer.trim() === correctAnswer) return true
-        // ai check
+        setCorrectAnswer(correctAnswer)
 
-        return remote.question.check(writeAnswer.trim(), curQuestion.id)
+        const res = await remote.question.check(
+          writeAnswer.trim(),
+          curQuestion.id,
+        )
+        // ai check
+        return res.data || false
       }
 
       case 'select': {
