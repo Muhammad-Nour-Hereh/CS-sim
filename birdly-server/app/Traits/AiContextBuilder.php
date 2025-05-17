@@ -88,7 +88,11 @@ trait AiContextBuilder {
 
                 break;
             case 'check':
-                $this->contextParams[] = '';
+                // task
+                $this->contextParams[] = 'your task is to check if the user entered a correct answer\n';
+                // format
+                $this->contextParams[] = 'response STRICTLY with true or false\n';
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid task: $task");
         }
