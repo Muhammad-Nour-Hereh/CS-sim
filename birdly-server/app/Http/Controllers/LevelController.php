@@ -54,7 +54,10 @@ class LevelController extends Controller {
             return $this->notFoundResponse();
 
         $questions = $level->questions()->get();
-
+        $questions = $level->questions()->get()->map(function ($question) {
+            $question->content = json_decode($question->content, true);
+            return $question;
+        });
         return $this->successResponse($questions);
     }
 
