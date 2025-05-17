@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PromptRequest;
 use App\Http\Requests\QuestionRequest;
 use App\Models\Question;
+use App\Services\OpenAIService;
 
 class QuestionController extends Controller {
+
+    public function __construct(protected OpenAIService $openai) {
+    }
+
 
     public function index() {
         return $this->successResponse(Question::All());
@@ -45,7 +51,13 @@ class QuestionController extends Controller {
         return $this->noContentResponse();
     }
 
-    public function check($id) {
+    public function check(PromptRequest $request, $id) {
+        $Question = Question::find($id);
+        if (!$Question) return $this->notFoundResponse();
 
+        // $this->openai->check($Question, $request->validated());
+
+        $correct = true;
+        return $this->successResponse($correct);
     }
 }
