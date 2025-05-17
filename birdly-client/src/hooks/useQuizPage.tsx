@@ -23,8 +23,8 @@ const useQuizPage = () => {
     navigate(ROUTES.HOME)
   }
 
-  const checkHandle = () => {
-    const isCorrect = checkAnswer()
+  const checkHandle = async () => {
+    const isCorrect = await checkAnswer()
     setResult(isCorrect ? 'correct' : 'wrong')
     setShowFeedback(true)
   }
