@@ -5,6 +5,7 @@ import {
   SelectQuestion,
   WriteQuestion,
 } from '@/interfaces/Question'
+import { remote } from '@/remotes/remotes'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 export type QuizContext = {
@@ -68,11 +69,11 @@ const QuizProvider = ({ children }: any) => {
   //   },
   // ]
 
-  const [questions, setQuestions] = useState<Question[]> ([])
+  const [questions, setQuestions] = useState<Question[]>([])
 
   const questionCount = questions.length
   const [index, setIndex] = useState(0)
-  const curQuestion = questions[index]
+  const curQuestion = questions[index] || null
   const progressPercent = (index / questionCount) * 100
 
   const nextQuestion = () => {
@@ -86,11 +87,20 @@ const QuizProvider = ({ children }: any) => {
   const [matchAnswer, setMatchAnswer] = useState({ left: '', right: '' })
 
   useEffect(() => {
+    const fetchQuestions = async () => {
+      const res = await remote.level.getQuestions(1)
+      setQuestions(res.data || [])
+      console.log(res.data)
+    }
+    fetchQuestions()
+  }, [])
+
+  useEffect(() => {
     console.log(matchAnswer)
     if (matchAnswer.left !== '' && matchAnswer.right !== '')
       console.log(checkAnswer())
   }, [matchAnswer])
-  
+
   const checkAnswer = () => {
     switch (curQuestion.type) {
       case 'write': {
