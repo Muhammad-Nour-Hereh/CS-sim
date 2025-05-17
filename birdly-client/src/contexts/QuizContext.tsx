@@ -10,7 +10,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 export type QuizContext = {
   loading: boolean
-  curQuestion: Question
+  curQuestion: Question | null
   progressPercent: number
   nextQuestion: () => void
   setWriteAnswer: Function
@@ -23,60 +23,13 @@ export type QuizContext = {
 const quizContext = createContext<QuizContext | undefined>(undefined)
 
 const QuizProvider = ({ children }: any) => {
-  const _questions: Question[] = [
-    // Select Question
-    {
-      title: 'Which of the following is a valid Python variable name?',
-      content: {
-        options: ['2myVar', '_myVar', 'my-var', 'class'],
-        correctAnswer: '_myVar',
-      },
-      type: 'select',
-    },
-
-    // Write Question
-    {
-      title: 'What Python keyword is used to delete a variable?',
-      content: {
-        correctAnswer: 'del',
-      },
-      type: 'write',
-    },
-
-    // Order Question
-    {
-      title:
-        'Arrange these steps in the correct order to swap two variables in Python without using a temporary variable.',
-      content: {
-        correctOrder: ['x = 10, y = 20', 'x = x + y', 'y = x - y', 'x = x - y'],
-        pieces: ['y = x - y', 'x = 10, y = 20', 'x = x - y', 'x = x + y'],
-      },
-      type: 'order',
-    },
-
-    // Match Question
-    {
-      title: 'Match each Python variable type with its corresponding example.',
-      content: {
-        pairs: [
-          { left: 'int', right: '42', selected: false },
-          { left: 'float', right: '3.14', selected: false },
-          { left: 'str', right: "'hello'", selected: false },
-          { left: 'list', right: '[1, 2, 3]', selected: false },
-          { left: 'dict', right: "{'key': 'value'}", selected: false },
-        ],
-      },
-      type: 'match',
-    },
-  ]
-
   // const [curLevel, setCurLevel] = useState(1)
-  const [questions, setQuestions] = useState<Question[]>(_questions)
+  const [questions, setQuestions] = useState<Question[]>([])
   const [loading, setLoading] = useState(true)
 
   const [index, setIndex] = useState(0)
   const [questionCount, setQuestionCount] = useState(0)
-  const [curQuestion, setCurQuestion] = useState<Question>(_questions[0])
+  const [curQuestion, setCurQuestion] = useState<Question | null>(null)
 
   const progressPercent = (index / questionCount) * 100
 
@@ -89,7 +42,11 @@ const QuizProvider = ({ children }: any) => {
     setIndex(0)
     setQuestionCount(questions.length)
     setCurQuestion(questions[0])
-    console.log('Questions useEffect fired', { questions, length: questions.length, first: questions[0] })
+    console.log('Questions useEffect fired', {
+      questions,
+      length: questions.length,
+      first: questions[0],
+    })
   }, [questions])
 
   useEffect(() => {
@@ -99,7 +56,6 @@ const QuizProvider = ({ children }: any) => {
   useEffect(() => {
     console.log({ curQuestion: curQuestion })
   }, [curQuestion])
-
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
@@ -114,7 +70,7 @@ const QuizProvider = ({ children }: any) => {
       if (res.success === 'true' && res.data) {
         setQuestions(res.data)
       }
-      
+
       setLoading(false)
     }
     fetchQuestions()
