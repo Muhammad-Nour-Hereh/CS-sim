@@ -1,5 +1,7 @@
 const LoadingPage = () => {
-  return <div className="p-10 font-bold text-4xl">Loading ...</div>
+  return (
+    <span className="flex items-center gap-2 p-10 text-4xl font-bold loading-dots"/>
+  )
 }
 
 export default LoadingPage
