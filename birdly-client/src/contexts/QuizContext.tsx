@@ -101,13 +101,15 @@ const QuizProvider = ({ children }: any) => {
       console.log(checkAnswer())
   }, [matchAnswer])
 
-  const checkAnswer = async (): Promise<boolean | undefined> => {
+  const checkAnswer = async (): Promise<
+    'correct' | 'wrong' | 'almost' | undefined
+  > => {
     if (!curQuestion) return
     switch (curQuestion.type) {
       case 'write': {
         const { correctAnswer } = (curQuestion as WriteQuestion).content
 
-        if (writeAnswer.trim() === correctAnswer) return true
+        if (writeAnswer.trim() === correctAnswer) return 'correct'
         setCorrectAnswer(correctAnswer)
 
         const res = await remote.question.check(
@@ -115,17 +117,19 @@ const QuizProvider = ({ children }: any) => {
           curQuestion.id,
         )
         // ai check
-        return res.data || false
+        return res.data || 'wrong' ? 'correct' : 'almost'
       }
 
       case 'select': {
         const { correctAnswer } = (curQuestion as SelectQuestion).content
-        return selectAnswer === correctAnswer
+        return selectAnswer === correctAnswer ? 'correct' : 'wrong'
       }
 
       case 'order': {
         const { correctOrder } = (curQuestion as OrderQuestion).content
         return orderAnswer.join('') === correctOrder.join('')
+          ? 'correct'
+          : 'wrong'
       }
 
       case 'match': {
@@ -143,11 +147,11 @@ const QuizProvider = ({ children }: any) => {
 
         const match = matchIndex !== -1
         setMatchAnswer({ left: '', right: '' }) // Reset selection
-        return match
+        return match ? 'correct' : 'wrong'
       }
 
       default:
-        return false
+        return 'wrong'
     }
   }
 
