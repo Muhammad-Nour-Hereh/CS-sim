@@ -44,7 +44,7 @@ const ChatArea = () => {
     }
   }
   return (
-    <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-lg border border-gray-800 bg-gray-950 text-gray-100">
+    <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-lg border  border-gray-700 bg-gray-950 text-gray-100">
       <div className="border-b border-gray-800 bg-gray-900 p-3">
         <h2 className="text-lg font-medium text-amber-50">AI Assistant</h2>
       </div>
@@ -67,7 +67,7 @@ const ChatArea = () => {
               <div className="flex items-start">
                 <div className="text-sm">
                   {message.role === 'user' ? (
-                    <span className="font-semibold text-green-400">You</span>
+                    <span className="font-semibold text-primary">You</span>
                   ) : (
                     <span className="font-semibold text-blue-400">AI</span>
                   )}
@@ -129,13 +129,13 @@ const ChatArea = () => {
           </Button>
         </div>
         <div className="mt-2 text-right">
-          <Button
+          {/* <Button
             type="button"
             variant="link"
             className="p-0 text-xs text-green-500 hover:text-green-400"
             onClick={() => setMessages([])}>
             Clear conversation
-          </Button>
+          </Button> */}
         </div>
       </form>
     </div>
