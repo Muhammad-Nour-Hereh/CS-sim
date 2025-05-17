@@ -31,12 +31,31 @@ const QuizProvider = ({ children }: any) => {
   const [questionCount, setQuestionCount] = useState(0)
   const [curQuestion, setCurQuestion] = useState<Question | null>(null)
 
+  // answers states
+  const [writeAnswer, setWriteAnswer] = useState('')
+  const [selectAnswer, setSelectAnswer] = useState('')
+  const [orderAnswer, setOrderAnswer] = useState<string[]>([])
+  const [matchAnswer, setMatchAnswer] = useState({ left: '', right: '' })
+
   const progressPercent = (index / questionCount) * 100
 
   const nextQuestion = () => {
     if (questionCount === 0) return
     setIndex((prev) => (prev + 1) % questionCount)
   }
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      setLoading(true)
+      const res = await remote.level.getQuestions(1)
+      if (res.success === 'true' && res.data) {
+        setQuestions(res.data)
+      }
+      setLoading(false)
+    }
+    
+    fetchQuestions()
+  }, [])
 
   useEffect(() => {
     setIndex(0)
@@ -51,30 +70,8 @@ const QuizProvider = ({ children }: any) => {
 
   useEffect(() => {
     setCurQuestion(questions[index])
+    console.log({ curQuestion: questions[index] })
   }, [index, questions])
-
-  useEffect(() => {
-    console.log({ curQuestion: curQuestion })
-  }, [curQuestion])
-
-  // answers states
-  const [writeAnswer, setWriteAnswer] = useState('')
-  const [selectAnswer, setSelectAnswer] = useState('')
-  const [orderAnswer, setOrderAnswer] = useState<string[]>([])
-  const [matchAnswer, setMatchAnswer] = useState({ left: '', right: '' })
-
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      setLoading(true)
-      const res = await remote.level.getQuestions(1)
-      if (res.success === 'true' && res.data) {
-        setQuestions(res.data)
-      }
-
-      setLoading(false)
-    }
-    fetchQuestions()
-  }, [])
 
   useEffect(() => {
     console.log(matchAnswer)
