@@ -56,7 +56,7 @@ class LevelController extends Controller {
         $questions = $level->questions()->get();
 
         return $this->successResponse([
-            'questions' => $questions
+             $questions
         ]);
     }
 
