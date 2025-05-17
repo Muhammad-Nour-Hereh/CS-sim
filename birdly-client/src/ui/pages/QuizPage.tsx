@@ -19,7 +19,7 @@ const QuizPage = () => {
   } = useQuizPage()
 
   return loading ? (
-    'loading ...'
+    'Loading...'
   ) : (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
       {/* Top */}

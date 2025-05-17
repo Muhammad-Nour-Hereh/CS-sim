@@ -23,64 +23,72 @@ export type QuizContext = {
 const quizContext = createContext<QuizContext | undefined>(undefined)
 
 const QuizProvider = ({ children }: any) => {
-  // const questions: Question[] = [
-  //   // Select Question
-  //   {
-  //     title: 'Which of the following is a valid Python variable name?',
-  //     content: {
-  //       answers: ['2myVar', '_myVar', 'my-var', 'class'],
-  //       correctAnswer: '_myVar',
-  //     },
-  //     type: 'select',
-  //   },
+  const _questions: Question[] = [
+    // Select Question
+    {
+      title: 'Which of the following is a valid Python variable name?',
+      content: {
+        answers: ['2myVar', '_myVar', 'my-var', 'class'],
+        correctAnswer: '_myVar',
+      },
+      type: 'select',
+    },
 
-  //   // Write Question
-  //   {
-  //     title: 'What Python keyword is used to delete a variable?',
-  //     content: {
-  //       correctAnswer: 'del',
-  //     },
-  //     type: 'write',
-  //   },
+    // Write Question
+    {
+      title: 'What Python keyword is used to delete a variable?',
+      content: {
+        correctAnswer: 'del',
+      },
+      type: 'write',
+    },
 
-  //   // Order Question
-  //   {
-  //     title:
-  //       'Arrange these steps in the correct order to swap two variables in Python without using a temporary variable.',
-  //     content: {
-  //       correctOrder: ['x = 10, y = 20', 'x = x + y', 'y = x - y', 'x = x - y'],
-  //       pieces: ['y = x - y', 'x = 10, y = 20', 'x = x - y', 'x = x + y'],
-  //     },
-  //     type: 'order',
-  //   },
+    // Order Question
+    {
+      title:
+        'Arrange these steps in the correct order to swap two variables in Python without using a temporary variable.',
+      content: {
+        correctOrder: ['x = 10, y = 20', 'x = x + y', 'y = x - y', 'x = x - y'],
+        pieces: ['y = x - y', 'x = 10, y = 20', 'x = x - y', 'x = x + y'],
+      },
+      type: 'order',
+    },
 
-  //   // Match Question
-  //   {
-  //     title: 'Match each Python variable type with its corresponding example.',
-  //     content: {
-  //       pairs: [
-  //         { left: 'int', right: '42', selected: false },
-  //         { left: 'float', right: '3.14', selected: false },
-  //         { left: 'str', right: "'hello'", selected: false },
-  //         { left: 'list', right: '[1, 2, 3]', selected: false },
-  //         { left: 'dict', right: "{'key': 'value'}", selected: false },
-  //       ],
-  //     },
-  //     type: 'match',
-  //   },
-  // ]
+    // Match Question
+    {
+      title: 'Match each Python variable type with its corresponding example.',
+      content: {
+        pairs: [
+          { left: 'int', right: '42', selected: false },
+          { left: 'float', right: '3.14', selected: false },
+          { left: 'str', right: "'hello'", selected: false },
+          { left: 'list', right: '[1, 2, 3]', selected: false },
+          { left: 'dict', right: "{'key': 'value'}", selected: false },
+        ],
+      },
+      type: 'match',
+    },
+  ]
 
-  const [questions, setQuestions] = useState<Question[]>([])
+  const [curLevel, setCurLevel] = useState(1)
+  const [questions, setQuestions] = useState<Question[]>(_questions)
   const [loading, setLoading] = useState(true)
 
-  const questionCount = questions.length
   const [index, setIndex] = useState(0)
-  const curQuestion = questions[index] || null
+  const [questionCount, setQuestionCount] = useState(0)
+  const [curQuestion, setCurQuestion] = useState(_questions[0])
+
   const progressPercent = (index / questionCount) * 100
 
   const nextQuestion = () => {
     setIndex(() => (index + 1) % questionCount)
   }
+
+  // useEffect(() => {
+  //   setIndex(0)
+  //   setQuestionCount(questions.length)
+  //   setCurQuestion(questions[index])
+  // }, [questions])
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
@@ -90,11 +98,11 @@ const QuizProvider = ({ children }: any) => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      setLoading(false)
+      setLoading(true)
       const res = await remote.level.getQuestions(1)
       setQuestions(res.data || [])
       console.log(res.data)
-      setLoading(true)
+      setLoading(false)
     }
     fetchQuestions()
   }, [])
@@ -106,6 +114,7 @@ const QuizProvider = ({ children }: any) => {
   }, [matchAnswer])
 
   const checkAnswer = () => {
+    if (!curQuestion) return
     switch (curQuestion.type) {
       case 'write': {
         const { correctAnswer } = (curQuestion as WriteQuestion).content
