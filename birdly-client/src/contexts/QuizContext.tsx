@@ -73,6 +73,8 @@ const QuizProvider = ({ children }: any) => {
 
   useEffect(() => {
     const _curQuestion = questions[index]
+    if (!_curQuestion) return
+    
     setCurQuestion(_curQuestion)
 
     switch (_curQuestion.type) {
