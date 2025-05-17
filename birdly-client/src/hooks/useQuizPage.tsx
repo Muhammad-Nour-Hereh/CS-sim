@@ -8,6 +8,8 @@ const useQuizPage = () => {
 
   const { progressPercent, nextQuestion, checkAnswer, loading }: QuizContext =
     useQuiz()
+
+  const [subtitle, setSubtitle] = useState('subtitle')
   const [showFeedback, setShowFeedback] = useState(false)
   const [result, setResult] = useState<'correct' | 'wrong'>('correct')
 
@@ -35,6 +37,8 @@ const useQuizPage = () => {
     loading,
     progressPercent,
     showFeedback,
+    subtitle,
+    setSubtitle,
     result,
     skipAnswer,
     naivgateHomeHandle,
