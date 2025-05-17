@@ -9,6 +9,7 @@ const feedbackVariants = cva(
     variants: {
       variant: {
         correct: 'text-primary',
+        almost: 'text-primary',
         wrong: 'text-destructive',
       },
     },
@@ -30,9 +31,9 @@ function AnswerFeedback({
   onContinue,
   className,
 }: AnswerFeedbackProps) {
-  const Icon = variant === 'correct' ? CheckCircle : XCircle
-  const title = variant === 'correct' ? 'Correct Answer' : 'Wrong Answer'
-  const buttonVariant = variant === 'correct' ? 'default' : 'destructive'
+  const Icon = variant === 'wrong' ? XCircle : CheckCircle
+  const title = variant === 'wrong' ? 'Wrong Answer' : 'Correct Answer'
+  const buttonVariant = variant === 'wrong' ? 'destructive' : 'default'
 
   return (
     <div className={cn(feedbackVariants({ variant }), className)}>
