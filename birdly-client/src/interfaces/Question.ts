@@ -1,4 +1,5 @@
 export interface AbstractQuestion<TContent> {
+  id: number
   title: string
   type: 'select' | 'write' | 'order' | 'match'
   content: TContent
