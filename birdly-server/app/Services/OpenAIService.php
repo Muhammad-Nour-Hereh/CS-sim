@@ -105,4 +105,9 @@ class OpenAIService {
         $newHistory = array_slice($newHistory, -10);
         return [$res, $newHistory];
     }
+
+    public function checkAnswer(string $userAnswer, string $question, string $correctAnswer): bool {
+
+        return true;
+    }
 }
