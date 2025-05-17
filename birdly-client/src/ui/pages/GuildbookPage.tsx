@@ -38,10 +38,10 @@ const GuildbookPage = () => {
         <Sidebar />
       </aside>
 
-      <main className="flex min-h-screen max-w-none flex-1 flex-col p-4 pb-15">
+      <main className="flex min-h-screen max-w-none flex-1 flex-col p-4 pb-15 pl-10">
         <div className="mdx-reset">
           <MDXProvider>
-            <MDXContent components={components}/>
+            <MDXContent components={components} />
             {/* {path && (
               <MDXRenderer
                 url={

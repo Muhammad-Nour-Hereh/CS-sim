@@ -39,7 +39,7 @@ const Snippet = ({
   return (
     <div
       className={cn(
-        'w-full max-w-lg overflow-hidden rounded-lg border border-gray-700',
+        'w-full max-w-2xl overflow-hidden rounded-lg border border-gray-700 ',
         className,
       )}>
       {/* Header */}

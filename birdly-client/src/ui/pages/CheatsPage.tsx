@@ -13,7 +13,7 @@ const CheatsPage = () => {
         <Sidebar />
       </aside>
 
-      <main className="flex max-w-none flex-1 flex-col p-4">
+      <main className="flex max-w-none flex-1 flex-col p-4 pl-10">
         <div className="mdx-reset">
           <MDXProvider>
             <PythonCheats />
@@ -30,7 +30,6 @@ const CheatsPage = () => {
 }
 
 export default CheatsPage
-
 
 // function MDXRenderer({ url }: any) {
 //   const [Content, setContent] = useState(() => () => (
