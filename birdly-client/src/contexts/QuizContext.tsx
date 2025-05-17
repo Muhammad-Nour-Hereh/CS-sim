@@ -106,7 +106,11 @@ const QuizProvider = ({ children }: any) => {
     switch (curQuestion.type) {
       case 'write': {
         const { correctAnswer } = (curQuestion as WriteQuestion).content
-        return writeAnswer.trim() === correctAnswer
+
+        if (writeAnswer.trim() === correctAnswer) return true
+        // ai check
+
+        return remote.question(writeAnswer.trim(), curQuestion.id)
       }
 
       case 'select': {
