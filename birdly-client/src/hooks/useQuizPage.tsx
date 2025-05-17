@@ -1,13 +1,18 @@
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
 import { ROUTES } from '@/objects/routes'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const useQuizPage = () => {
   const navigate = useNavigate()
 
-  const { progressPercent, nextQuestion, checkAnswer, loading }: QuizContext =
-    useQuiz()
+  const {
+    progressPercent,
+    nextQuestion,
+    checkAnswer,
+    loading,
+    correctAnswer,
+  }: QuizContext = useQuiz()
 
   const [subtitle, setSubtitle] = useState('subtitle')
   const [showFeedback, setShowFeedback] = useState(false)
@@ -32,6 +37,10 @@ const useQuizPage = () => {
     setResult('wrong')
     setShowFeedback(true)
   }
+
+  useEffect(() => {
+    result === 'correct' ? setSubtitle('') : setSubtitle(correctAnswer)
+  }, [correctAnswer, result])
 
   return {
     loading,
