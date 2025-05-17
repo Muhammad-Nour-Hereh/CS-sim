@@ -47,7 +47,9 @@ const QuizPage = () => {
         <Button variant="ghost" onClick={skipAnswer}>
           Skip
         </Button>
-        <Button onClick={checkHandle} variant={'muted'}>Check</Button>
+        <Button onClick={checkHandle} variant={checkable ? 'default' : 'muted'}>
+          Check
+        </Button>
       </footer>
 
       {showFeedback && (
