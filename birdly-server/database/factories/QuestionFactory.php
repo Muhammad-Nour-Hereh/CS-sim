@@ -55,10 +55,10 @@ class QuestionFactory extends Factory {
     }
 
     private function orderContent(): array {
-        $items = $this->faker->shuffle(['Step 1', 'Step 2', 'Step 3', 'Step 4']);
+        $pieces = $this->faker->shuffle(['Step 1', 'Step 2', 'Step 3', 'Step 4']);
         return [
             'question' => 'Arrange in correct order',
-            'items' => $items,
+            'pieces' => $pieces,
         ];
     }
 }
