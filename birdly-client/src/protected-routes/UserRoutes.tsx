@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { remote } from '@/remotes/remotes'
+import LoadingPage from '@/ui/pages/LoadingPage'
 
 const UserRoutes = () => {
   const [loading, setLoading] = useState(true)
@@ -22,7 +23,7 @@ const UserRoutes = () => {
     checkAuth()
   }, [])
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <LoadingPage />
 
   return isAuthorized ? <Outlet /> : <Navigate to="/login" />
 }
