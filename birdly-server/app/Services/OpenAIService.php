@@ -107,7 +107,19 @@ class OpenAIService {
     }
 
     public function checkAnswer(string $userAnswer, string $question, string $correctAnswer): bool {
-
+        $this->setLanguage('python');
+        $this->addTaskContext('check')->addLanguageContext();
+        $this->addQuestion($question, $correctAnswer);
+        
+        $context = $this->buildContext();
+        $response = $this->client->chat()->create([
+            // 'model' => 'gpt-4o',
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'system', 'content' => $context],
+                ['role' => 'user', 'content' => $userAnswer]
+            ],
+        ]);
         return true;
     }
 }
