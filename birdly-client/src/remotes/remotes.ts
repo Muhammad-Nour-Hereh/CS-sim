@@ -1,6 +1,7 @@
 import { ChatResponse, CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
 import { Guildbook } from '@/interfaces/Guildbook'
+import { Question } from '@/interfaces/Question'
 
 export const remote = {
   // Auth APIs:
@@ -94,6 +95,82 @@ export const remote = {
         auth: true,
       }),
   },
+
+  level: {
+    getAll: () =>
+      request<Snippet[]>({
+        method: 'GET',
+        route: '/api/v1/levels',
+        auth: true,
+      }),
+
+    getById: (id: number) =>
+      request<Snippet>({
+        method: 'GET',
+        route: `/api/v1/levels/${id}`,
+        auth: true,
+      }),
+
+    create: (title: string, course_id: number, questions: number[]) =>
+      request<null>({
+        method: 'POST',
+        route: '/api/v1/levels',
+        body: { title, course_id, questions },
+        auth: true,
+      }),
+
+    update: (
+      id: number,
+      data: {
+        title?: string
+        course_id?: number
+        questions?: number[]
+      },
+    ) =>
+      request<undefined>({
+        method: 'PUT',
+        route: `/api/v1/levels/${id}`,
+        body: data,
+        auth: true,
+      }),
+
+    delete: (id: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/levels/${id}`,
+        auth: true,
+      }),
+
+    getQuestions: (id: number) =>
+      request<Question[]>({
+        method: 'GET',
+        route: `/api/v1/levels/${id}/questions`,
+        auth: true,
+      }),
+
+    attachQuestion: (levelId: number, questionId: number) =>
+      request<undefined>({
+        method: 'POST',
+        route: `/api/v1/levels/${levelId}/questions/${questionId}`,
+        auth: true,
+      }),
+
+    bulkAttachQuestions: (levelId: number, questions: number[]) =>
+      request<undefined>({
+        method: 'POST',
+        route: `/api/v1/levels/${levelId}/questions/bulk`,
+        body: { questions },
+        auth: true,
+      }),
+
+    detachQuestion: (levelId: number, questionId: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/levels/${levelId}/questions/${questionId}`,
+        auth: true,
+      }),
+  },
+  
   chat: (prompt: string): any =>
     request<CodeOutput>({
       method: 'POST',
