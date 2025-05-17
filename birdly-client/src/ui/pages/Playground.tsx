@@ -15,6 +15,7 @@ import ListItem from '../components/ListItem'
 
 const Playground = () => {
   const {
+    loading,
     code,
     setCode,
     output,

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 const usePlayground = () => {
   const {
+    loading,
     snippets,
     setCurSnippetId,
     runSnippet,
@@ -181,6 +182,7 @@ const usePlayground = () => {
   }, [code])
 
   return {
+    loading,
     code,
     setCode,
     output,
