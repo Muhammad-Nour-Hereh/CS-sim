@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import IconButton from '../components/IconButton'
 import ListItem from '../components/ListItem'
+import LoadingPage from './LoadingPage'
 
 const Playground = () => {
   const {
@@ -45,7 +46,7 @@ const Playground = () => {
   } = usePlayground()
 
   return loading ? (
-    <span>loading...</span>
+    <LoadingPage />
   ) : (
     <div
       ref={containerRef}
