@@ -6,7 +6,7 @@ export interface AbstractQuestion<TContent> {
 
 export interface SelectQuestion
   extends AbstractQuestion<{
-    answers: string[]
+    options: string[]
     correctAnswer: string
   }> {
   type: 'select'

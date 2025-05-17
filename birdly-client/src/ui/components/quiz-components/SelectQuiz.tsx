@@ -9,15 +9,15 @@ const SelectQuiz = () => {
   }
   const {
     title,
-    content: { answers },
+    content: { options },
   } = curQuestion as SelectQuestion
-
+  console.log(options)
   return (
     <>
       <p className="text-2xl font-extrabold">{title}</p>
 
       <AnswerList
-        items={answers}
+        items={options}
         onItemClick={(_, item) => {
           setSelectAnswer(item)
         }}
