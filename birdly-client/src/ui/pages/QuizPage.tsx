@@ -5,6 +5,7 @@ import Quiz from '../components/Quiz'
 import IconButton from '../components/IconButton'
 import useQuizPage from '@/hooks/useQuizPage'
 import AnswerFeedback from '../components/AnswerFeedback'
+import LoadingPage from './LoadingPage'
 
 const QuizPage = () => {
   const {
@@ -21,7 +22,7 @@ const QuizPage = () => {
   } = useQuizPage()
 
   return loading ? (
-    'Loading...'
+    <LoadingPage />
   ) : (
     <div className="flex h-screen w-screen flex-col items-center bg-[#0d1117]">
       {/* Top */}
