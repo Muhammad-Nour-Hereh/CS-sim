@@ -46,10 +46,12 @@ const SnippetProvider = ({ children }: any) => {
   }
 
   const fetchSnippets = async () => {
+    setLoading(true)
     const res = await remote.snippet.getAll()
     if (res.success === 'true' && res.data) {
       setSnippets(res.data)
     }
+    setLoading(true)
   }
 
   const sendChat = async () => {
