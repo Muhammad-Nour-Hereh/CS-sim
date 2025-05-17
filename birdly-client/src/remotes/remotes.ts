@@ -180,7 +180,7 @@ export const remote = {
     }),
 
   question: {
-    check: (prompt: string, id): any =>
+    check: (prompt: string, id: number) =>
       request<boolean>({
         method: 'POST',
         route: `/api/v1/questions/check/${id}`,
