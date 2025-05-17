@@ -19,7 +19,7 @@ class QuestionFactory extends Factory {
         return [
             'course_id' => 1,
             'title' => $question,
-            'question_type' => $questionType,
+            'type' => $questionType,
             'content' => json_encode($content),
         ];
     }
