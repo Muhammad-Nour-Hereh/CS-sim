@@ -33,7 +33,7 @@ const QuizProvider = ({ children }: any) => {
   const [questionCount, setQuestionCount] = useState(0)
   const [curQuestion, setCurQuestion] = useState<Question | null>(null)
   const [correctAnswer, setCorrectAnswer] = useState('')
-  const [checkable, setCheckable] = useState(true)
+  const [checkable, setCheckable] = useState(false)
 
   // answers states
   const [writeAnswer, setWriteAnswer] = useState('')
@@ -87,7 +87,11 @@ const QuizProvider = ({ children }: any) => {
       case 'order':
         setCorrectAnswer(JSON.stringify(_curQuestion.content.correctOrder))
         break
+      default:
+        setCorrectAnswer('')
     }
+
+    setCheckable(false)
     console.log({ curQuestion: _curQuestion })
   }, [index, questions])
 
@@ -137,6 +141,20 @@ const QuizProvider = ({ children }: any) => {
         return false
     }
   }
+
+  // set checkable when select an answer
+  useEffect(() => {
+    setCheckable(writeAnswer !== '')
+  }, [writeAnswer])
+  useEffect(() => {
+    setCheckable(selectAnswer !== '')
+  }, [selectAnswer])
+  useEffect(() => {
+    setCheckable(orderAnswer.length > 0)
+  }, [orderAnswer])
+  useEffect(() => {
+    setCheckable(true)
+  }, [matchAnswer])
 
   return (
     <quizContext.Provider
