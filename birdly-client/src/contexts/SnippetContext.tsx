@@ -51,7 +51,7 @@ const SnippetProvider = ({ children }: any) => {
     if (res.success === 'true' && res.data) {
       setSnippets(res.data)
     }
-    setLoading(true)
+    setLoading(false)
   }
 
   const sendChat = async () => {

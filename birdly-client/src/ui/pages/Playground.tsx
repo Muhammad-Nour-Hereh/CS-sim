@@ -44,7 +44,9 @@ const Playground = () => {
     toggleChatbotHandle,
   } = usePlayground()
 
-  return (
+  return loading ? (
+    <span>loading...</span>
+  ) : (
     <div
       ref={containerRef}
       className="flex h-screen w-screen flex-row bg-[#1a2b30] py-6">
