@@ -58,6 +58,7 @@ class QuestionFactory extends Factory {
         $pieces = $this->faker->shuffle(['Step 1', 'Step 2', 'Step 3', 'Step 4']);
         return [
             'question' => 'Arrange in correct order',
+            'correctOrder' => ['Step 1', 'Step 2', 'Step 3', 'Step 4'],
             'pieces' => $pieces,
         ];
     }
