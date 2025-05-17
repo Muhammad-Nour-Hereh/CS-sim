@@ -29,6 +29,12 @@ trait AiContextBuilder {
         return $this;
     }
 
+    public function addQuestion($question, $correctAnswer) {
+        $this->contextParams[] = "THE QUESTION IS:'" . $question . "'\n";
+        $this->contextParams[] = "THE CORRECT ANSWER IS:'" . $correctAnswer . "'\n";
+        return $this;
+    }
+
     // Add task-specific context (e.g., playground, Q&A, level generation)
     public function addTaskContext(string $task): self {
         switch ($task) {
@@ -81,6 +87,8 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'Generate practice levels or quiz questions based on the user\'s previous mistakes and performance.\n';
 
                 break;
+            case 'check':
+                $this->contextParams[] = '';
             default:
                 throw new \InvalidArgumentException("Invalid task: $task");
         }
