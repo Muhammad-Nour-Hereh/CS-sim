@@ -3,6 +3,7 @@ import { remote } from '@/remotes/remotes'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 export type SnippetContext = {
+  loading: boolean
   snippets: Snippet[]
   setCurSnippetId: Function
   runSnippet: Function
@@ -17,6 +18,7 @@ const snippetContext = createContext<SnippetContext | undefined>(undefined)
 const SnippetProvider = ({ children }: any) => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
   const [curSnippetId, setCurSnippetId] = useState<number>(-1)
+  const [loading, setLoading] = useState(true)
 
   const runSnippet = async (): Promise<string> => {
     const res = await remote.snippet.run(curSnippetId)
@@ -61,6 +63,7 @@ const SnippetProvider = ({ children }: any) => {
   return (
     <snippetContext.Provider
       value={{
+        loading,
         snippets,
         setCurSnippetId,
         runSnippet,
