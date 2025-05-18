@@ -51,6 +51,7 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
 
   const deleteSnippet = (id: number) => {
     remote.snippet.delete(id)
+    if (curSnippetId === id) setCurSnippetId(null)
     fetchSnippets()
   }
 
