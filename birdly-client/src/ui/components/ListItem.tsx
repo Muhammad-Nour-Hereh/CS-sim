@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { useState, useRef, useEffect } from 'react'
 import IconButton from './IconButton'
-import { Trash2 } from 'lucide-react'
+import { Trash2, Undo } from 'lucide-react'
 
 interface Props extends React.HTMLAttributes<HTMLLIElement> {
   children: string
@@ -70,14 +70,18 @@ const ListItem = ({
           <IconButton
             className="text-destructive"
             onClick={(e: any) => {
-              e.stopPropagation()
-              setUndoStatus(true)
-              setTimeout(async () => {
-                setUndoStatus(false)
-                if (onDelete) onDelete()
-              }, 3000)
+              if (!undoStatus) {
+                e.stopPropagation()
+                setUndoStatus(true)
+                setTimeout(async () => {
+                  setUndoStatus(false)
+                  if (onDelete) onDelete()
+                }, 3000)
+                return
+              }
+              
             }}>
-            <Trash2 />
+            {undoStatus ? <Undo /> : <Trash2 />}
           </IconButton>
         </>
       )}
