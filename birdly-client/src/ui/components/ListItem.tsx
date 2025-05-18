@@ -48,6 +48,7 @@ const ListItem = ({
         'bg-selected flex h-14 items-center justify-between rounded-2xl border-2 p-4',
         'cursor-pointer text-xl font-semibold',
         'hover:brightness-110 active:brightness-90',
+        undoStatus ? 'transition-opacity duration-[5000ms] opacity-0' : 'opacity-100',
         isSelected ? 'border-slate-500' : '',
       )}
       {...props}>
