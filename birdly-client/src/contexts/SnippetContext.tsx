@@ -12,6 +12,7 @@ export type SnippetContext = {
   loading: boolean
   initialLoading: boolean
   snippets: Snippet[]
+  curSnippetId: number | null
   setCurSnippetId: Function
   runSnippet: Function
   sendChat: Function
@@ -83,6 +84,7 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
         initialLoading,
         loading,
         snippets,
+        curSnippetId,
         setCurSnippetId,
         runSnippet,
         sendChat,
