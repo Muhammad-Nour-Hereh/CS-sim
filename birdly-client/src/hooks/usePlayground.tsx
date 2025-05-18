@@ -150,6 +150,12 @@ const usePlayground = () => {
   // useEffect
   useEffect(() => {
     if (snippets.length === 0) return
+
+    // If current snippet still exists, do nothing
+    const stillExists = snippets.find((s) => s.id === curSnippetId)
+    if (stillExists) return
+
+    // Else, default to the first one
     const index = 0
     setSelectedIndex(index)
     setCurSnippetId(snippets[index].id)
