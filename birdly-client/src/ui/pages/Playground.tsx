@@ -93,19 +93,23 @@ const Playground = () => {
             </div>
 
             <ul className="flex flex-1 flex-col gap-3 overflow-y-auto">
-              {snippets.map((snippet) => {
-                const isSelected = selectedIndex === snippet.id
-                return (
-                  <ListItem
-                    key={snippet.id}
-                    isSelected={isSelected}
-                    onClick={() => snippetSelectHandle(snippet.id)}
-                    onValueChange={ChangeNameHandle}
-                    onDelete={() => deleteSnippetHandle(snippet.id)}>
-                    {snippet.title}
-                  </ListItem>
-                )
-              })}
+              {snippets.length === 0 ? (
+                <span className="text-gray-400">No snippets yet</span>
+              ) : (
+                snippets.map((snippet) => {
+                  const isSelected = selectedIndex === snippet.id
+                  return (
+                    <ListItem
+                      key={snippet.id}
+                      isSelected={isSelected}
+                      onClick={() => snippetSelectHandle(snippet.id)}
+                      onValueChange={ChangeNameHandle}
+                      onDelete={() => deleteSnippetHandle(snippet.id)}>
+                      {snippet.title}
+                    </ListItem>
+                  )
+                })
+              )}
             </ul>
           </aside>
 
