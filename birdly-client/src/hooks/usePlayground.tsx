@@ -99,7 +99,7 @@ const usePlayground = () => {
     setIsSideMenuOpen(true)
   }
 
-  const minmizeMenuHandle = () => {
+  const minimizeMenuHandle = () => {
     console.log('minmize menu clicked')
     setIsSideMenuOpen(false)
   }
@@ -200,7 +200,7 @@ const usePlayground = () => {
     selectedIndex,
     runHandle,
     menuHandle,
-    minmizeMenuHandle,
+    minimizeMenuHandle,
     navigateHomeHandle,
     snippetSelectHandle,
     ChangeNameHandle,

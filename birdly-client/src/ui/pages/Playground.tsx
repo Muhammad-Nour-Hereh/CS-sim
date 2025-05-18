@@ -35,7 +35,7 @@ const Playground = () => {
     isSideMenuOpen,
     runHandle,
     menuHandle,
-    minmizeMenuHandle,
+    minimizeMenuHandle,
     navigateHomeHandle,
     snippetSelectHandle,
     ChangeNameHandle,
@@ -79,14 +79,14 @@ const Playground = () => {
           <aside
             style={{ width: `${splitV}%` }}
             className="flex h-full flex-col gap-2 rounded-r-2xl bg-[#273B42] p-2">
-            <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
+            <IconButton className="text-gray-500" onClick={minimizeMenuHandle}>
               <ArrowLeft />
             </IconButton>
 
             <div
               className="bg-selected flex items-center text-gray-500 hover:brightness-140 active:brightness-90"
               onClick={createSnippetHandle}>
-              <IconButton className="text-gray-500" onClick={minmizeMenuHandle}>
+              <IconButton className="text-gray-500" onClick={minimizeMenuHandle}>
                 <Plus />
               </IconButton>
               <span className="font-bold">create new</span>
