@@ -3,17 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PromptRequest;
-use App\Models\Guildbook;
-use App\Models\Snippet;
-use App\Services\GuildbookFileService;
 use App\Services\OpenAIService;
 
 class ChatbotController extends Controller {
 
-    public function __construct(
-        protected OpenAIService $openai,
-        protected GuildbookFileService $fileService
-    ) {
+    public function __construct(protected OpenAIService $openai) {
     }
 
     public function chat(PromptRequest $request) {

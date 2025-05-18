@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Guildbook;
 use App\Models\Snippet;
 use App\Traits\AiContextBuilder;
 use OpenAI;
@@ -11,7 +12,7 @@ class OpenAIService {
 
     protected $client;
 
-    public function __construct(string $apiKey) {
+    public function __construct(protected GuildbookFileService $fileService, string $apiKey) {
         $this->client = OpenAI::client($apiKey);
     }
 
@@ -20,7 +21,6 @@ class OpenAIService {
         $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
         $response = $this->client->chat()->create([
-            // 'model' => 'gpt-4o',
             'model' => 'gpt-3.5-turbo',
             'messages' => [
                 ['role' => 'system', 'content' => $context],
@@ -86,14 +86,13 @@ class OpenAIService {
     }
 
     public function guildbookPrompt(int $id, string $prompt) {
-        // $guildbook = Guildbook::find($id);
-        // if (!$guildbook) return $this->notFoundResponse();
-        // $prompt = $request->prompt;
-        // $content = $this->fileService->read($guildbook->path);
-        // $history = $guildbook->history;
+        $guildbook = Guildbook::find($id);
+        if (!$guildbook) return;
 
-        // [$res, $newHistory] = $this->openai->guildbookPrompt($content, $prompt, $history);
-        // $guildbook->update(['history' => $newHistory]);
+        $content = $this->fileService->read($guildbook->path);
+        $history = $guildbook->history;
+
+
         $this->setLanguage('python');
         $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
@@ -104,7 +103,6 @@ class OpenAIService {
         );
 
         $response = $this->client->chat()->create([
-            // 'model' => 'gpt-4o',
             'model' => 'gpt-3.5-turbo',
             'messages' =>
             array_merge(
@@ -119,7 +117,8 @@ class OpenAIService {
         $res = $response->choices[0]->message->content;
         $newHistory[] = ['role' => 'assistant', 'content' => $res];
         $newHistory = array_slice($newHistory, -10);
-        return [$res, $newHistory];
+        $guildbook->update(['history' => $newHistory]);
+        return $res;
     }
 
     public function checkAnswer(string $userAnswer, string $question, string $correctAnswer): bool {
