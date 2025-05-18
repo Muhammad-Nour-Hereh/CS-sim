@@ -66,12 +66,8 @@ const Playground = () => {
             <IconButton className="text-gray-500" onClick={navigateHomeHandle}>
               <House />
             </IconButton>
-            <IconButton className="text-gray-500">
-              {chatbotOn ? (
-                <Bot onClick={toggleChatbotHandle} />
-              ) : (
-                <BotOff onClick={toggleChatbotHandle} />
-              )}
+            <IconButton className="text-gray-500" onClick={toggleChatbotHandle}>
+              {chatbotOn ? <Bot /> : <BotOff />}
             </IconButton>
           </aside>
           <div className="w-6" />
