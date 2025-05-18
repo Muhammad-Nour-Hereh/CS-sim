@@ -6,6 +6,9 @@ use App\Models\Cheat;
 
 class CheatRepo {
 
+    public function all() {
+        return Cheat::all();
+    }
 
     public function find(int $id) {
         $cheat = cheat::find($id);

@@ -14,7 +14,7 @@ class CheatController extends Controller {
     }
 
     public function index() {
-        return $this->successResponse(Cheat::all());
+        return $this->successResponse($this->cheat->all());
     }
 
     public function store(CheatRequest $request) {
