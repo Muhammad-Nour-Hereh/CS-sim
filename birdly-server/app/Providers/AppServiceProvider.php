@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\AuthService;
 use App\Services\CheatFileService;
 use App\Services\GuildbookFileService;
 use App\Services\OpenAIService;
@@ -25,6 +26,10 @@ class AppServiceProvider extends ServiceProvider {
 
         $this->app->singleton(OpenAIService::class, function () {
             return new OpenAIService(config('services.openai.api_key'));
+        });
+
+        $this->app->singleton(AuthService::class, function () {
+            return new AuthService();
         });
     }
 }
