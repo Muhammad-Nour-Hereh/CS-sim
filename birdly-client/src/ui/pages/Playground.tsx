@@ -44,7 +44,7 @@ const Playground = () => {
     toggleChatbotHandle,
   } = usePlayground()
 
-  const { initialLoading, snippets, curSnippetId } = useSnippet()
+  const { initialLoading, snippets } = useSnippet()
 
   return initialLoading ? (
     <LoadingPage />

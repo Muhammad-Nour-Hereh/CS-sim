@@ -38,6 +38,16 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
 
   const updateSnippet = async (title: string, code: string) => {
     if (!curSnippetId) return
+    // Find snippet index
+    const index = snippets.findIndex((s) => s.id === curSnippetId)
+    if (index === -1) return // not found
+
+    // Update snippet in memory
+    const updated = [...snippets]
+    updated[index] = { ...updated[index], title, code }
+    setSnippets(updated)
+    
+    // update snippet in backend
     await remote.snippet.update(curSnippetId, {
       title: title,
       language: 'python',
