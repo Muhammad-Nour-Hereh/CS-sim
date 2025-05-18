@@ -16,7 +16,7 @@ class AuthController extends Controller {
 
     public function me() {
         $user = $this->auth->user();
-        
+
         return $this->successResponse($user);
     }
 
@@ -36,8 +36,7 @@ class AuthController extends Controller {
         return $this->successResponse($token);
     }
     public function logout() {
-        $token = JWTAuth::getToken();
-        JWTAuth::invalidate($token);
+        $this->auth->logout();
 
         return $this->noContentResponse();
     }
