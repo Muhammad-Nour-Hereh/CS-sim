@@ -70,12 +70,13 @@ trait AiContextBuilder {
                 $this->contextParams[] = 'DO NOT add encourgement after each prompt. keep it to when user succuceeded or seems frustrated.\n';
                 $this->contextParams[] = "User questions MUST be asked using Python comments (lines starting with `#`).";
 
+                break;
             case 'mean':
                 $this->contextParams[] = 'The user is practicing code in a playground, while you\'re the mean instructor\n';
                 $this->contextParams[] = 'If he makes a little mistake then he is stupid and needs roasting\n';
                 $this->contextParams[] = 'Try to be so mean and roast the user with a high tone on how he should fix his code (you can insult him)\n';
                 // $this->contextParams[] = 'make the mistake to be the end of the world and roast the user like you\'re flaming a charcoal (fit it in one like), even if the user is correct, use arabic\n';
-
+                break;
             case 'q_and_a':
                 $this->contextParams[] = 'The user is reviewing course material.\n';
                 $this->contextParams[] = 'Explain concepts clearly, correct misunderstandings, and encourage follow-up questions.\n';
