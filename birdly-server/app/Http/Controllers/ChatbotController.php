@@ -7,40 +7,44 @@ use App\Models\Guildbook;
 use App\Models\Snippet;
 use App\Services\GuildbookFileService;
 use App\Services\OpenAIService;
-use Illuminate\Http\Request;
 
 class ChatbotController extends Controller {
 
-    public function __construct(protected OpenAIService $openai, protected GuildbookFileService $fileService) {
+    public function __construct(
+        protected OpenAIService $openai,
+        protected GuildbookFileService $fileService
+    ) {
     }
 
     public function chat(PromptRequest $request) {
-
         $res = $this->openai->generateText($request->prompt);
+
         return $this->successResponse(['response' => $res]);
     }
 
     public function snippet(int $id) {
         $snippet = Snippet::find($id);
+        if (!$snippet) return $this->notFoundResponse();
+
         $code = $snippet->code;
         $history = $snippet->history;
 
         [$res, $newHistory] = $this->openai->historyPrompt($code, $history);
-
         $snippet->update(['history' => $newHistory]);
+
         return $this->successResponse(['response' => $res]);
     }
 
     public function guildbook(PromptRequest $request, int $id) {
-
-        $prompt = $request->prompt;
         $guildbook = Guildbook::find($id);
+        if (!$guildbook) return $this->notFoundResponse();
+        $prompt = $request->prompt;
         $content = $this->fileService->read($guildbook->path);
         $history = $guildbook->history;
 
         [$res, $newHistory] = $this->openai->guildbookPrompt($content, $prompt, $history);
-
         $guildbook->update(['history' => $newHistory]);
+
         return $this->successResponse(['response' => $res]);
     }
 }
