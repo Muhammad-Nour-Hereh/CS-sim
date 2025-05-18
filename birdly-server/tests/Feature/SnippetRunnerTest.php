@@ -46,7 +46,7 @@ class SnippetRunnerTest extends TestCase {
     public function testRunSnippetNotFound() {
         $nonExistingId = 999;
 
-        $expected = $this->failResponse("Snippet not found", 404);
+        $expected = $this->notFoundResponse();
 
         $actual = $this->withHeaders([
             "Authorization" => "Bearer $this->token"

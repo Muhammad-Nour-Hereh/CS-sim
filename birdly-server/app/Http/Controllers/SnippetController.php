@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SnippetRequest;
-use App\Models\ChatHistory;
 use App\Models\Snippet;
 use Illuminate\Http\Request;
 
