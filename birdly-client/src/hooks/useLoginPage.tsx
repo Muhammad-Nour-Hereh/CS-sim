@@ -1,6 +1,6 @@
 import { ROUTES } from '@/objects/routes'
 import { remote } from '@/remotes/remotes'
-import { validateEmail, validatePassword } from '@/utils/validators'
+import { validateEmail, validatePassword } from '@/lib/utils/validators'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

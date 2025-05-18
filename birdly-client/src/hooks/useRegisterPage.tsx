@@ -5,7 +5,7 @@ import {
   validateEmail,
   validateName,
   validatePassword,
-} from '@/utils/validators'
+} from '@/lib/utils/validators'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
