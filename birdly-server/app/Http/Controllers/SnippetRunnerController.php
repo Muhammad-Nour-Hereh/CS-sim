@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CodeRequest;
 use App\Services\SnippetRunnerService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
@@ -13,13 +14,8 @@ class SnippetRunnerController extends Controller {
         $this->runner = $runner;
     }
 
-    public function run(Request $request) {
+    public function run(CodeRequest $request) {
         $code = $request->code;
-
-        $request->validate(
-            ['code' => 'required|string']
-        );
-
         $result = $this->runner->run($code);
 
         return $this->successResponse($result);
