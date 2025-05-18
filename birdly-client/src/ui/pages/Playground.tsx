@@ -93,13 +93,13 @@ const Playground = () => {
             </div>
 
             <ul className="flex flex-1 flex-col gap-3 overflow-y-auto">
-              {snippets.map((snippet, index: number) => {
-                const isSelected = selectedIndex === index
+              {snippets.map((snippet) => {
+                const isSelected = selectedIndex === snippet.id
                 return (
                   <ListItem
-                    key={index}
+                    key={snippet.id}
                     isSelected={isSelected}
-                    onClick={() => snippetSelectHandle(index)}
+                    onClick={() => snippetSelectHandle(snippet.id)}
                     onValueChange={ChangeNameHandle}
                     onDelete={() => deleteSnippetHandle(snippet.id)}>
                     {snippet.title}
