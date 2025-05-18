@@ -24,6 +24,7 @@ const snippetContext = createContext<SnippetContext | undefined>(undefined)
 const SnippetProvider = ({ children }: { children: ReactNode }) => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
   const [curSnippetId, setCurSnippetId] = useState<number>(-1)
+  const [initialLoading, setInitialLoading] = useState(true)
   const [loading, setLoading] = useState(true)
 
   const runSnippet = async (): Promise<string> => {
