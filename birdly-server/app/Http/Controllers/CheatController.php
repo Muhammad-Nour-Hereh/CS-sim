@@ -32,22 +32,22 @@ class CheatController extends Controller {
     }
 
     public function show($id) {
-        $Cheat = Cheat::find($id);
+        $cheat = $this->cheat->find($id);
 
-        if (!$Cheat) {
+        if (!$cheat) {
             return $this->notFoundResponse();
         }
 
-        $content = $this->fileService->read($Cheat->path);
+        $content = $this->fileService->read($cheat->path);
 
         if (!$content) {
             return $this->notFoundResponse();
         }
 
         return $this->successResponse([
-            'id'        => $Cheat->id,
-            'title'     => $Cheat->title,
-            'course_id' => $Cheat->course_id,
+            'id'        => $cheat->id,
+            'title'     => $cheat->title,
+            'course_id' => $cheat->course_id,
             'content'   => $content,
         ]);
     }
