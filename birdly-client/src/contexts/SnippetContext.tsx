@@ -24,18 +24,19 @@ const snippetContext = createContext<SnippetContext | undefined>(undefined)
 
 const SnippetProvider = ({ children }: { children: ReactNode }) => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
-  const [curSnippetId, setCurSnippetId] = useState<number>(-1)
+  const [curSnippetId, setCurSnippetId] = useState<number | null>(null)
   const [initialLoading, setInitialLoading] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const runSnippet = async (): Promise<string> => {
+    if (!curSnippetId) return ''
     const res = await remote.snippet.run(curSnippetId)
     const _output = res.data?.output
     return _output ?? ''
   }
 
   const updateSnippet = async (title: string, code: string) => {
-    if (curSnippetId == -1) return
+    if (!curSnippetId) return
     await remote.snippet.update(curSnippetId, {
       title: title,
       language: 'python',
@@ -67,6 +68,7 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const sendChat = async () => {
+    if (!curSnippetId) return
     return (await remote.snippet.chat(curSnippetId)).data?.response
   }
 
