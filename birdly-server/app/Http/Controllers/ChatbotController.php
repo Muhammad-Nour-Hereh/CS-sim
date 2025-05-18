@@ -30,14 +30,9 @@ class ChatbotController extends Controller {
     }
 
     public function guildbook(PromptRequest $request, int $id) {
-        $guildbook = Guildbook::find($id);
-        if (!$guildbook) return $this->notFoundResponse();
         $prompt = $request->prompt;
-        $content = $this->fileService->read($guildbook->path);
-        $history = $guildbook->history;
-
-        [$res, $newHistory] = $this->openai->guildbookPrompt($content, $prompt, $history);
-        $guildbook->update(['history' => $newHistory]);
+        $res = $this->openai->guildbookPrompt($id, $prompt);
+        if (!$res) return $this->notFoundResponse();
 
         return $this->successResponse(['response' => $res]);
     }

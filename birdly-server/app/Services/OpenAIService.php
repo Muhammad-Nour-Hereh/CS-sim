@@ -85,7 +85,15 @@ class OpenAIService {
         return $res;
     }
 
-    public function guildbookPrompt(string $content, string $prompt, array $history): array {
+    public function guildbookPrompt(int $id, string $prompt) {
+        // $guildbook = Guildbook::find($id);
+        // if (!$guildbook) return $this->notFoundResponse();
+        // $prompt = $request->prompt;
+        // $content = $this->fileService->read($guildbook->path);
+        // $history = $guildbook->history;
+
+        // [$res, $newHistory] = $this->openai->guildbookPrompt($content, $prompt, $history);
+        // $guildbook->update(['history' => $newHistory]);
         $this->setLanguage('python');
         $this->addTaskContext('q_and_a')->addLanguageContext();
         $context = $this->buildContext();
