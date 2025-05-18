@@ -1,6 +1,12 @@
 import { Snippet } from '@/interfaces/Snippet'
 import { remote } from '@/remotes/remotes'
-import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 export type SnippetContext = {
   loading: boolean
@@ -15,7 +21,7 @@ export type SnippetContext = {
 
 const snippetContext = createContext<SnippetContext | undefined>(undefined)
 
-const SnippetProvider = ({ children }: any) => {
+const SnippetProvider = ({ children }: { children: ReactNode }) => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
   const [curSnippetId, setCurSnippetId] = useState<number>(-1)
   const [loading, setLoading] = useState(true)
