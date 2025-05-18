@@ -58,8 +58,10 @@ const ListItem = ({
           onBlur={handleBlur}
           onKeyDown={e => {
             setUndoStatus('running')
-            handleKeyDown(e)
-            setUndoStatus('')
+            setTimeout(async () => {
+              handleKeyDown(e)
+              setUndoStatus('')
+            }, 3000)
           }}
           className="w-full bg-transparent outline-none"
         />
