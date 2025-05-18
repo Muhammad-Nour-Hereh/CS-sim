@@ -53,20 +53,20 @@ class CheatController extends Controller {
     }
 
     public function update(CheatRequest $request, $id) {
-        $Cheat = Cheat::find($id);
+        $cheat = $this->cheat->find($id);
 
-        if (!$Cheat) {
+        if (!$cheat) {
             return $this->notFoundResponse();
         }
 
-        $this->fileService->update($Cheat->path, $request->input('content'));
+        $this->fileService->update($cheat->path, $request->input('content'));
 
-        $Cheat->update([
+        $cheat->update([
             'course_id' => $request->input('course_id'),
             'title'     => $request->input('title'),
         ]);
 
-        return $this->noContentResponse();
+        return $this->successResponse($cheat->id);
     }
 
     public function destroy($id) {
