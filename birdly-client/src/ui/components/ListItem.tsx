@@ -77,7 +77,7 @@ const ListItem = ({
                 timeoutRef.current = setTimeout(async () => {
                   setUndoStatus(false)
                   if (onDelete) onDelete()
-                }, 3000)
+                }, 5000)
                 return
               }
               if (timeoutRef.current) {
