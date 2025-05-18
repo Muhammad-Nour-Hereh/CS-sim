@@ -133,7 +133,11 @@ const usePlayground = () => {
   }
 
   const deleteSnippetHandle = (id: number) => {
-    deleteSnippet(id)
+    const timeout = setTimeout(async () => {
+      deleteSnippet(id)
+    }, 3000)
+
+    // clearTimeout(timeout)
   }
 
   const toggleChatbotHandle = () => {
