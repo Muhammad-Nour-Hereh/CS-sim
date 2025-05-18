@@ -20,7 +20,7 @@ const ListItem = ({
   const [isEditing, setIsEditing] = useState(false)
   const [value, setValue] = useState(children)
   const inputRef = useRef<HTMLInputElement>(null)
-
+  const [undoStatus, setUndoStatus] = useState<'running' | ''>('')
   useEffect(() => {
     if (isEditing && inputRef.current) {
       inputRef.current.focus()
@@ -56,7 +56,11 @@ const ListItem = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
+          onKeyDown={e => {
+            setUndoStatus('running')
+            handleKeyDown(e)
+            setUndoStatus('')
+          }}
           className="w-full bg-transparent outline-none"
         />
       ) : (

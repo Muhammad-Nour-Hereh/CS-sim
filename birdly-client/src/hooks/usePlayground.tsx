@@ -28,7 +28,7 @@ const usePlayground = () => {
   const [feedbackStatus, setFeedbackStatus] = useState<
     'listening...' | 'thinking ...' | ''
   >('')
-
+  
   // resizing states
   const containerRef: any = useRef(null)
 
@@ -133,11 +133,7 @@ const usePlayground = () => {
   }
 
   const deleteSnippetHandle = (id: number) => {
-    const timeout = setTimeout(async () => {
       deleteSnippet(id)
-    }, 3000)
-
-    // clearTimeout(timeout)
   }
 
   const toggleChatbotHandle = () => {
