@@ -23,14 +23,8 @@ class ChatbotController extends Controller {
     }
 
     public function snippet(int $id) {
-        $snippet = Snippet::find($id);
-        if (!$snippet) return $this->notFoundResponse();
-
-        $code = $snippet->code;
-        $history = $snippet->history;
-
-        [$res, $newHistory] = $this->openai->historyPrompt($code, $history);
-        $snippet->update(['history' => $newHistory]);
+        $res = $this->openai->historyPrompt($id);
+        if (!$res) return $this->notFoundResponse();
 
         return $this->successResponse(['response' => $res]);
     }
