@@ -17,6 +17,12 @@ class AuthService {
         return $token;
     }
 
+    public function login($credentials) {
+        $token = JWTAuth::attempt($credentials);
+
+        return $token;
+    }
+
     public function logout() {
         $token = JWTAuth::getToken();
         JWTAuth::invalidate($token);

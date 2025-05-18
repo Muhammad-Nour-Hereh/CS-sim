@@ -28,8 +28,8 @@ class AuthController extends Controller {
 
     public function login(LoginRequest $request) {
         $credentials = $request->validated();
-
-        if (!$token = JWTAuth::attempt($credentials)) {
+        $token = $this->auth->login($credentials);
+        if (! $token) {
             return $this->unauthorizedResponse();
         }
 
