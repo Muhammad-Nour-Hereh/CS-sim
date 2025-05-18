@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CheatRequest;
 use App\Models\Cheat;
+use App\Repositories\CheatRepo;
 use App\Services\CheatFileService;
 
 class CheatController extends Controller {
-    public function __construct(protected CheatFileService $fileService) {
+    public function __construct(
+        protected CheatFileService $fileService,
+        protected CheatRepo $cheat
+    ) {
     }
 
     public function index() {
@@ -16,20 +20,13 @@ class CheatController extends Controller {
 
     public function store(CheatRequest $request) {
         $path = $this->fileService->store(
-            $request->input('course_id'),
-            $request->input('title'),
+            $courseId = $request->input('course_id'),
+            $title = $request->input('title'),
             $request->input('content')
         );
 
-        if (!$path) {
-            return $this->notFoundResponse();
-        }
-
-        Cheat::create([
-            'course_id' => $request->input('course_id'),
-            'title'     => $request->input('title'),
-            'path'      => $path,
-        ]);
+        if (!$path) return $this->notFoundResponse();
+        $this->cheat->create($courseId, $title, $path);
 
         return $this->createdResponse();
     }
@@ -46,7 +43,7 @@ class CheatController extends Controller {
         if (!$content) {
             return $this->notFoundResponse();
         }
-        
+
         return $this->successResponse([
             'id'        => $Cheat->id,
             'title'     => $Cheat->title,
