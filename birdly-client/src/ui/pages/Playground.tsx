@@ -44,7 +44,7 @@ const Playground = () => {
     toggleChatbotHandle,
   } = usePlayground()
 
-  const { initialLoading, snippets } = useSnippet()
+  const { initialLoading, snippets, curSnippetId } = useSnippet()
 
   return initialLoading ? (
     <LoadingPage />
@@ -99,13 +99,13 @@ const Playground = () => {
               {snippets.length === 0 ? (
                 <span className="text-gray-400">No snippets yet</span>
               ) : (
-                snippets.map((snippet) => {
-                  const isSelected = selectedIndex === snippet.id
+                snippets.map((snippet, index: number) => {
+                  const isSelected = selectedIndex === index
                   return (
                     <ListItem
-                      key={snippet.id}
+                      key={index}
                       isSelected={isSelected}
-                      onClick={() => snippetSelectHandle(snippet.id)}
+                      onClick={() => snippetSelectHandle(index)}
                       onValueChange={ChangeNameHandle}
                       onDelete={() => deleteSnippetHandle(snippet.id)}>
                       {snippet.title}
