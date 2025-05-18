@@ -20,7 +20,7 @@ const ListItem = ({
   const [isEditing, setIsEditing] = useState(false)
   const [value, setValue] = useState(children)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [undoStatus, setUndoStatus] = useState<'running' | ''>('')
+  const [undoStatus, setUndoStatus] = useState(Boolean)
   useEffect(() => {
     if (isEditing && inputRef.current) {
       inputRef.current.focus()
@@ -56,24 +56,26 @@ const ListItem = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onBlur={handleBlur}
-          onKeyDown={e => {
-            setUndoStatus('running')
-            setTimeout(async () => {
-              handleKeyDown(e)
-              setUndoStatus('')
-            }, 3000)
-          }}
+          onKeyDown={handleKeyDown}
           className="w-full bg-transparent outline-none"
         />
       ) : (
         <>
-          {value}
+          {undoStatus ? (
+            <span className="text-destructive">deleted</span>
+          ) : (
+            value
+          )}
 
           <IconButton
             className="text-destructive"
             onClick={(e: any) => {
               e.stopPropagation()
-              if (onDelete) onDelete()
+              setUndoStatus(true)
+              setTimeout(async () => {
+                setUndoStatus(false)
+                if (onDelete) onDelete()
+              }, 3000)
             }}>
             <Trash2 />
           </IconButton>
