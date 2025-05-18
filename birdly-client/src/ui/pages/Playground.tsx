@@ -13,16 +13,15 @@ import {
 import IconButton from '../components/IconButton'
 import ListItem from '../components/ListItem'
 import LoadingPage from './LoadingPage'
+import { useSnippet } from '@/contexts/SnippetContext'
 
 const Playground = () => {
   const {
-    loading,
     code,
     setCode,
     output,
     feedback,
     chatbotOn,
-    snippets,
     saveStatus,
     runStatus,
     feedbackStatus,
@@ -45,7 +44,9 @@ const Playground = () => {
     toggleChatbotHandle,
   } = usePlayground()
 
-  return loading ? (
+  const { initialLoading, snippets } = useSnippet()
+
+  return initialLoading ? (
     <LoadingPage />
   ) : (
     <div
@@ -86,7 +87,9 @@ const Playground = () => {
             <div
               className="bg-selected flex items-center text-gray-500 hover:brightness-140 active:brightness-90"
               onClick={createSnippetHandle}>
-              <IconButton className="text-gray-500" onClick={minimizeMenuHandle}>
+              <IconButton
+                className="text-gray-500"
+                onClick={minimizeMenuHandle}>
                 <Plus />
               </IconButton>
               <span className="font-bold">create new</span>

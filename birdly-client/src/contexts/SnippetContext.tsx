@@ -10,6 +10,7 @@ import {
 
 export type SnippetContext = {
   loading: boolean
+  initialLoading: boolean
   snippets: Snippet[]
   setCurSnippetId: Function
   runSnippet: Function
@@ -24,7 +25,7 @@ const snippetContext = createContext<SnippetContext | undefined>(undefined)
 const SnippetProvider = ({ children }: { children: ReactNode }) => {
   const [snippets, setSnippets] = useState<Snippet[]>([])
   const [curSnippetId, setCurSnippetId] = useState<number>(-1)
-  const [initialLoading, setInitialLoading] = useState(true)
+  const [initialLoading, setInitialLoading] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const runSnippet = async (): Promise<string> => {
@@ -52,12 +53,16 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
     fetchSnippets()
   }
 
-  const fetchSnippets = async () => {
+  const fetchSnippets = async (isInitial = false) => {
+    if (isInitial) setInitialLoading(true)
     setLoading(true)
+
     const res = await remote.snippet.getAll()
     if (res.success === 'true' && res.data) {
       setSnippets(res.data)
     }
+
+    if (isInitial) setInitialLoading(false)
     setLoading(false)
   }
 
@@ -66,12 +71,13 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
   }
 
   useEffect(() => {
-    fetchSnippets()
+    fetchSnippets(true)
   }, [])
 
   return (
     <snippetContext.Provider
       value={{
+        initialLoading,
         loading,
         snippets,
         setCurSnippetId,
