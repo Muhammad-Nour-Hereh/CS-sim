@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Services\SnippetRunnerService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class SnippetRunnerController extends Controller {
     use ResponseTrait;
 
-    protected $runner;
-
-    public function __construct(SnippetRunnerService $runner) {
+    public function __construct(protected SnippetRunnerService $runner) {
         $this->runner = $runner;
     }
 

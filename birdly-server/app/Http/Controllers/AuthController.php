@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Models\User;
 use App\Services\AuthService;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 
 class AuthController extends Controller {

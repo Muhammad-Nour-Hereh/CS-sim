@@ -7,8 +7,6 @@ use App\Models\Progress;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isNumeric;
-
 class ProgressController extends Controller {
 
     public function getMistakes($progressId) {
