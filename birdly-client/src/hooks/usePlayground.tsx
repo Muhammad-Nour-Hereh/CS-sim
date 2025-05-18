@@ -28,16 +28,15 @@ const usePlayground = () => {
   const [feedbackStatus, setFeedbackStatus] = useState<
     'listening...' | 'thinking ...' | ''
   >('')
-  
+
   // resizing states
-  const containerRef: any = useRef(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const isDragging = useRef<boolean>(false)
+  const draggingTarget = useRef<'split1' | 'split2' | 'splitV' | null>(null)
 
   const [split1, setSplit1] = useState(50)
   const [split2, setSplit2] = useState(75)
   const [splitV, setSplitV] = useState(20)
-
-  const isDragging: any = useRef(false)
-  const draggingTarget: any = useRef(null)
 
   // resizing logic
   const onMouseDown = (target: any) => () => {
@@ -133,7 +132,7 @@ const usePlayground = () => {
   }
 
   const deleteSnippetHandle = (id: number) => {
-      deleteSnippet(id)
+    deleteSnippet(id)
   }
 
   const toggleChatbotHandle = () => {
