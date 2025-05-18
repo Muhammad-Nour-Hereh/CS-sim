@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import GuestRoutes from './protected-routes/GuestRoutes'
-import { ROUTES } from '@/objects/routes'
+import { ROUTES } from '@/routes/routes'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 import UserRoutes from './protected-routes/UserRoutes'

@@ -1,4 +1,4 @@
-import { ROUTES } from '@/objects/routes'
+import { ROUTES } from '@/routes/routes'
 import { remote } from '@/remotes/remotes'
 import { validateEmail, validatePassword } from '@/lib/utils/validators'
 import { useEffect, useState } from 'react'

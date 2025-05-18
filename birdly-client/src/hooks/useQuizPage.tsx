@@ -1,5 +1,5 @@
 import { QuizContext, useQuiz } from '@/contexts/QuizContext'
-import { ROUTES } from '@/objects/routes'
+import { ROUTES } from '@/routes/routes'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

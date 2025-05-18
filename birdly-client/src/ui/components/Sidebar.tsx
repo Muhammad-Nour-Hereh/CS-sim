@@ -12,7 +12,7 @@ import {
   ChevronUp,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '@/objects/routes'
+import { ROUTES } from '@/routes/routes'
 import { remote } from '@/remotes/remotes'
 
 interface SidebarItemProps {

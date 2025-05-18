@@ -1,4 +1,4 @@
-import { ROUTES } from '@/objects/routes'
+import { ROUTES } from '@/routes/routes'
 import { remote } from '@/remotes/remotes'
 import {
   validateConfirmPassword,
