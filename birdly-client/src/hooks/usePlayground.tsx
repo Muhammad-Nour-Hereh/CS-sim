@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const usePlayground = () => {
   const {
     snippets,
+    curSnippetId,
     setCurSnippetId,
     runSnippet,
     sendChat,
@@ -87,6 +88,7 @@ const usePlayground = () => {
 
   // handles
   const runHandle = async () => {
+    if (curSnippetId === null) return
     setRunStatus('running ...')
     const _output = await runSnippet()
     setRunStatus('done')
@@ -94,12 +96,10 @@ const usePlayground = () => {
   }
 
   const menuHandle = () => {
-    console.log('menu clicked')
     setIsSideMenuOpen(true)
   }
 
   const minimizeMenuHandle = () => {
-    console.log('minmize menu clicked')
     setIsSideMenuOpen(false)
   }
 
@@ -121,6 +121,7 @@ const usePlayground = () => {
   }
 
   const saveHandle = async () => {
+    if (curSnippetId === null) return
     setSaveStatus('saving ...')
     await updateSnippet(title, code)
     setSaveStatus('saved')
@@ -158,6 +159,7 @@ const usePlayground = () => {
 
   useEffect(() => {
     // stop debouncing
+    if (curSnippetId === null) return
     setSaveStatus('')
     setFeedbackStatus('listening...')
     const timeout = setTimeout(async () => {
