@@ -39,7 +39,7 @@ const usePlayground = () => {
   const [splitV, setSplitV] = useState(20)
 
   // resizing logic
-  const onMouseDown = (target: any) => () => {
+  const onMouseDown = (target: 'split1' | 'split2' | 'splitV' | null) => () => {
     isDragging.current = true
     draggingTarget.current = target
     document.addEventListener('mousemove', onMouseMove)
@@ -49,7 +49,7 @@ const usePlayground = () => {
     document.body.classList.add('no-select')
   }
 
-  const onMouseMove = (e: any) => {
+  const onMouseMove = (e: { clientY: number; clientX: number }) => {
     if (!isDragging.current || !containerRef.current) return
     const containerTop = containerRef.current.getBoundingClientRect().top
     const containerHeight = containerRef.current.offsetHeight
