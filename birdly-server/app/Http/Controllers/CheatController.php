@@ -26,9 +26,9 @@ class CheatController extends Controller {
         );
 
         if (!$path) return $this->notFoundResponse();
-        $this->cheat->create($courseId, $title, $path);
+        $id = $this->cheat->create($courseId, $title, $path);
 
-        return $this->createdResponse();
+        return $this->createdResponse($id);
     }
 
     public function show($id) {

@@ -11,11 +11,11 @@ trait ResponseTrait {
         ], $code);
     }
 
-    public function createdResponse($message = "the has been created successfully") {
+    public function createdResponse($data = "", $message = "the has been created successfully") {
         return response()->json([
             "success" => "true",
             "message" => $message,
-            "data" => null
+            "data" => $data
         ], 201);
     }
 

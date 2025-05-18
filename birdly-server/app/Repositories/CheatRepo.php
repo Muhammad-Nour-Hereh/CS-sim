@@ -14,10 +14,12 @@ class CheatRepo {
     }
 
     public function create(int $courseId, string $title, string $path) {
-        Cheat::create([
+        $new = Cheat::create([
             'course_id' => $courseId,
             'title'     => $title,
             'path'      => $path,
         ]);
+
+        return $new->id;
     }
 }
