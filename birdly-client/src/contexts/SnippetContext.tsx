@@ -46,7 +46,7 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
     const updated = [...snippets]
     updated[index] = { ...updated[index], title, code }
     setSnippets(updated)
-    
+
     // update snippet in backend
     await remote.snippet.update(curSnippetId, {
       title: title,
@@ -71,9 +71,21 @@ const SnippetProvider = ({ children }: { children: ReactNode }) => {
     setLoading(true)
 
     const res = await remote.snippet.getAll()
-    if (res.success === 'true' && res.data) {
-      setSnippets(res.data)
+    const updatedSnippets = res.data
+
+    if (res.success === 'false' || !updatedSnippets) {
+      setLoading(false)
+      if (isInitial) setInitialLoading(false)
+      return
     }
+
+    setSnippets(updatedSnippets)
+
+    setCurSnippetId((prev) => {
+      if (!prev) return null
+      const stillExists = updatedSnippets.some((s) => s.id === prev)
+      return stillExists ? prev : null
+    })
 
     if (isInitial) setInitialLoading(false)
     setLoading(false)
