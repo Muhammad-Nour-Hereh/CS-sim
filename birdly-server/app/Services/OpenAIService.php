@@ -32,7 +32,7 @@ class OpenAIService {
 
     public function historyPrompt(string $prompt, array $history): array {
         $this->setLanguage('python');
-        $this->addTaskContext('q_and_a')->addLanguageContext();
+        $this->addTaskContext('playground')->addLanguageContext();
         $context = $this->buildContext();
 
         $lastUserMessage = null;
@@ -62,8 +62,8 @@ class OpenAIService {
 
         $response = $this->client->chat()->create([
             // 'model' => 'gpt-4o',
-            // 'model' => 'gpt-o3',
-            'model' => 'gpt-3.5-turbo',
+            'model' => 'o3-mini',
+            // 'model' => 'gpt-3.5-turbo',
             'messages' =>
             array_merge(
                 [['role' => 'system', 'content' => $context]],
