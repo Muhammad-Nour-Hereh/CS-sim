@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheatRequest;
-use App\Models\Cheat;
 use App\Repositories\CheatRepo;
 use App\Services\CheatFileService;
 
@@ -70,14 +69,14 @@ class CheatController extends Controller {
     }
 
     public function destroy($id) {
-        $Cheat = Cheat::find($id);
+        $cheat = $this->cheat->find($id);
 
-        if (!$Cheat) {
+        if (!$cheat) {
             return $this->notFoundResponse();
         }
 
-        $this->fileService->delete($Cheat->path);
-        $Cheat->delete();
+        $this->fileService->delete($cheat->path);
+        $cheat->delete();
 
         return $this->noContentResponse();
     }
