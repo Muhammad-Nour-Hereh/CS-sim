@@ -23,10 +23,7 @@ class SnippetRunnerController extends Controller {
 
     public function runSnippet(Request $request, $id) {
         $snippet = $request->user()->snippets()->find($id);
-
-        if (!$snippet) {
-            return $this->failResponse('Snippet not found', 404);
-        }
+        if (!$snippet)  return $this->notFoundResponse();
 
         $result = $this->runner->run($snippet->code);
 
