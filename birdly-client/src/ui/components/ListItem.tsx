@@ -21,6 +21,7 @@ const ListItem = ({
   const [value, setValue] = useState(children)
   const inputRef = useRef<HTMLInputElement>(null)
   const [undoStatus, setUndoStatus] = useState(Boolean)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   useEffect(() => {
     if (isEditing && inputRef.current) {
       inputRef.current.focus()
@@ -70,16 +71,19 @@ const ListItem = ({
           <IconButton
             className="text-destructive"
             onClick={(e: any) => {
+              e.stopPropagation()
               if (!undoStatus) {
-                e.stopPropagation()
                 setUndoStatus(true)
-                setTimeout(async () => {
+                timeoutRef.current = setTimeout(async () => {
                   setUndoStatus(false)
                   if (onDelete) onDelete()
                 }, 3000)
                 return
               }
-              
+              if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current)
+              }
+              setUndoStatus(false)
             }}>
             {undoStatus ? <Undo /> : <Trash2 />}
           </IconButton>
