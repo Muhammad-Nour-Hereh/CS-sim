@@ -14,14 +14,8 @@ class ProgressController extends Controller {
     }
 
     public function getMistakes($progressId) {
-        $progress = Progress::find($progressId);
-
-        if (!$progress)
-            return $this->notFoundResponse();
-
-        $data = $progress->mistakes()->get();
-
-        return $this->successResponse($data);
+        $data = $this->progressRepo->getMistakes($progressId);
+        return $data ? $this->successResponse($data) : $this->notFoundResponse();
     }
 
     public function addMistake($progressId, $questionId) {
