@@ -32,16 +32,9 @@ class SnippetController extends Controller {
         return $this->noContentResponse();
     }
     
-
     public function destroy(Request $request, $id) {
-        $snippet = $request->user()->snippets()->whereKey($id)->first();
-
-        if (!$snippet)
-            return $this->failResponse('Snippet not found', 404);
-
-
-        $snippet->delete();
-
+        $deleted = $this->snippets->delete($request->user(), $id);
+        if (!$deleted) return $this->failResponse('Snippet not found', 404);
         return $this->noContentResponse();
     }
 }
