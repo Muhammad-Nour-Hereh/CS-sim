@@ -5,87 +5,112 @@
 <!-- project overview -->
 <img src="./readme/title2.svg"/>
 
-> A gamified learning platform designed to make studying more fun and interactive.
-> 
-> The platform features a beautiful pixel-art inspired map where users "travel" as they complete quizzes and lessons. It supports multiple types of questions (written, multiple-choice, matching) and can embed images, videos, and simulations into the quizzes.
-
+> Birdly is an SPA web platform designed to help users learn various subjects, such as programming languages and computer science concepts.
+> It features learning through solving questions, gamification elements, an AI assistant, and a playground to write and test code with AI-powered hints.
 
 <br><br>
 
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-### Add Title Here
+<!-- ### Stack, Diagrams, and Flow
 
-- **web**: React.
-- **mobile**: React native.
-- **Backend**: Laravel.
-- **Database**: mysql, monogdb.
+- **web**: React, typescript, tailwind, shadcn/ui, framer-motion, react-mdx, vitest, axios, context api.
+- **Backend**: Laravel, flysystem, pest, elequent, openai-php.
+- **Database**: mysql.
+- **CI/CD**: docker, docker-compose, github action, ec2 -->
+
+| ER Diagram                                |
+| ----------------------------------------- |
+| <img src="./readme/assets/ERdiagram.png"> |
 
 <br><br>
 
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
 
-### Add Title Here
+### Features
 
-- Pixel-art inspired game map navigation
-- Dynamic quizzes with various types (write, choose, match)
-- Embeddable media (images, audio, videos)
-- Cool animations and transitions
-- Track user learning progress like an RPG game
-- Responsive design for mobile and desktop
-- Admin panel for managing quizzes and tracking user data
+- Quizzes: Four types of questions - Select, Order, Write, and Match.
+- Practice: Dynamically generated quizzes based on the user’s past mistakes.
+- Playground: A coding space to write and run code snippets, with an AI assistant for help.
+- Guildbooks: Short, focused pages on topics like variables or functions, featuring runnable snippets and AI assistance.
+- Cheat Sheets: Downloadable PDF references.
+- Map: A world map where players progress by completing levels.
 
 <br><br>
 
 <!-- Demo -->
 <img src="./readme/title5.svg"/>
 
-### User Screens (Mobile)
+### Screenshots, and GIFs
 
-| Login screen                            | Register screen                       | Register screen                       |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Login screen                                          | Register screen                                        |
+| ----------------------------------------------------- | ------------------------------------------------------ |
+| ![Landing](./readme/assets/login_validation_msgs.png) | ![fsdaf](./readme/assets/register_validation_msgs.png) |
 
+| Snippets Menu screen                         | Playground screen                           |
+| -------------------------------------------- | ------------------------------------------- |
+| ![Landing](./readme/assets/snippet_menu.png) | ![fsdaf](./readme/assets/playground_ai.png) |
 
-### Admin Screens (Web)
+| Select Quiz screen                          | Order Quiz screen                        |
+| ------------------------------------------- | ---------------------------------------- |
+| ![Landing](./readme/assets/select_quiz.png) | ![fsdaf](./readme/assets/order_quiz.png) |
 
-| Login screen                            | Register screen                       |
-| --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-
+| Guildbook screen                          | Birdly assistant screen                    |
+| ----------------------------------------- | ------------------------------------------ |
+| ![Landing](./readme/assets/guildbook.png) | ![fsdaf](./readme/assets/guildbook_ai.png) |
 
 <br><br>
 
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
 
-### Add Title Here
+### Develpment and Testing
 
-- using docker for containers
-- github action for ci/cd
-- build in testing in laravel
+|                                        |                                      |
+| -------------------------------------- | ------------------------------------ |
+| ![Landing](./readme/assets/code_1.png) | ![fsdaf](./readme/assets/code_2.png) |
+| ![Landing](./readme/assets/code_3.png) | ![fsdaf](./readme/assets/code_4.png) |
+| ![Landing](./readme/assets/code_5.png) | ![fsdaf](./readme/assets/code_6.png) |
 
-| Services                            | Validation                       | Testing                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+### Testing
 
+| Backend Testing (Pest)                  | Frontend Testing (Vitest)             |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/assets/test_be.png) | ![fsdaf](./readme/assets/test_fe.png) |
 
 <br><br>
 
 <!-- Deployment -->
 <img src="./readme/title7.svg"/>
 
-### Add Title Here
+### CI/CD, postman and live demo
 
 - Project is containerized using Docker for easy deployment.
 - APIs are documented with Postman collections.
 - Live demo and staging environments available.
 
+| Postman API 1                             | Postman API 2                           | Postman API 3                           |
+| ----------------------------------------- | --------------------------------------- | --------------------------------------- |
+| ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
 
-| Postman API 1                            | Postman API 2                       | Postman API 3                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+<table>
+  <thead>
+    <tr>
+      <th>Testing before merge pull request</th>
+      <th>Github Action workflows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2"><img src="./readme/assets/pull_request.png" alt="Landing"></td>
+      <td><img src="./readme/assets/cicd_be.png" alt="Backend CI/CD"></td>
+    </tr>
+    <tr>
+      <td><img src="./readme/assets/cicd_fe.png" alt="Frontend CI/CD"></td>
+    </tr>
+  </tbody>
+</table>
 
 <br><br>

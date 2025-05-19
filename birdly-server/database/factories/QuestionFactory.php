@@ -19,7 +19,7 @@ class QuestionFactory extends Factory {
         return [
             'course_id' => 1,
             'title' => $question,
-            'question_type' => $questionType,
+            'type' => $questionType,
             'content' => json_encode($content),
         ];
     }
@@ -55,10 +55,11 @@ class QuestionFactory extends Factory {
     }
 
     private function orderContent(): array {
-        $items = $this->faker->shuffle(['Step 1', 'Step 2', 'Step 3', 'Step 4']);
+        $pieces = $this->faker->shuffle(['Step 1', 'Step 2', 'Step 3', 'Step 4']);
         return [
             'question' => 'Arrange in correct order',
-            'items' => $items,
+            'correctOrder' => ['Step 1', 'Step 2', 'Step 3', 'Step 4'],
+            'pieces' => $pieces,
         ];
     }
 }

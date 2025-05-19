@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CodeRequest;
 use App\Services\SnippetRunnerService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
@@ -9,18 +10,20 @@ use Illuminate\Http\Request;
 class SnippetRunnerController extends Controller {
     use ResponseTrait;
 
-    protected $runner;
-
-    public function __construct(SnippetRunnerService $runner) {
+    public function __construct(protected SnippetRunnerService $runner) {
         $this->runner = $runner;
     }
 
-    public function run(Request $request, $id) {
-        $snippet = $request->user()->snippets()->find($id);
+    public function run(CodeRequest $request) {
+        $code = $request->code;
+        $result = $this->runner->run($code);
 
-        if (!$snippet) {
-            return $this->failResponse('Snippet not found', 404);
-        }
+        return $this->successResponse($result);
+    }
+
+    public function runSnippet(Request $request, $id) {
+        $snippet = $request->user()->snippets()->find($id);
+        if (!$snippet)  return $this->notFoundResponse();
 
         $result = $this->runner->run($snippet->code);
 

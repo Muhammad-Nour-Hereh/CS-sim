@@ -3,50 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GuildbookRequest;
-use App\Models\Guildbook;
+use App\Repositories\GuildbookRepo;
 use App\Services\GuildbookFileService;
+use Illuminate\Support\Facades\Storage;
 
 class GuildbookController extends Controller {
-    public function __construct(protected GuildbookFileService $fileService) {
+
+    public function __construct(
+        protected GuildbookFileService $fileService,
+        protected GuildbookRepo $repo
+    ) {
     }
 
     public function index() {
-        return $this->successResponse(Guildbook::all());
+        return $this->successResponse($this->repo->all());
     }
 
     public function store(GuildbookRequest $request) {
-        $path = $this->fileService->store(
-            $request->input('course_id'),
-            $request->input('title'),
-            $request->input('content')
-        );
+        $courseId = $request->input('course_id');
+        $title = $request->input('title');
+        $content = $request->input('content');
 
-        if (!$path) {
-            return $this->notFoundResponse();
-        }
+        $path = $this->fileService->store($courseId, $title, $content);
+        if (!$path) return $this->notFoundResponse();
 
-        Guildbook::create([
-            'course_id' => $request->input('course_id'),
-            'title'     => $request->input('title'),
-            'path'      => $path,
-        ]);
-
+        $this->repo->create($courseId, $title, $path);
         return $this->createdResponse();
     }
 
     public function show($id) {
-        $guildbook = Guildbook::find($id);
-
-        if (!$guildbook) {
+        $guildbook = $this->repo->find($id);
+        if (!$guildbook || !Storage::exists($guildbook->path)) {
             return $this->notFoundResponse();
         }
 
         $content = $this->fileService->read($guildbook->path);
-
-        if (!$content) {
-            return $this->notFoundResponse();
-        }
-
         return $this->successResponse([
             'id'        => $guildbook->id,
             'title'     => $guildbook->title,
@@ -56,32 +47,20 @@ class GuildbookController extends Controller {
     }
 
     public function update(GuildbookRequest $request, $id) {
-        $guildbook = Guildbook::find($id);
-
-        if (!$guildbook) {
-            return $this->notFoundResponse();
-        }
+        $guildbook = $this->repo->find($id);
+        if (!$guildbook) return $this->notFoundResponse();
 
         $this->fileService->update($guildbook->path, $request->input('content'));
-
-        $guildbook->update([
-            'course_id' => $request->input('course_id'),
-            'title'     => $request->input('title'),
-        ]);
+        $this->repo->update($id, $request->input('course_id'), $request->input('title'));
 
         return $this->noContentResponse();
     }
 
     public function destroy($id) {
-        $guildbook = Guildbook::find($id);
+        $path = $this->repo->delete($id);
+        if (!$path) return $this->notFoundResponse();
 
-        if (!$guildbook) {
-            return $this->notFoundResponse();
-        }
-
-        $this->fileService->delete($guildbook->path);
-        $guildbook->delete();
-
+        $this->fileService->delete($path);
         return $this->noContentResponse();
     }
 }

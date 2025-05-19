@@ -13,6 +13,19 @@ class Guildbook extends Model {
         'course_id',
         'title',
         'path',
+        'history'
+    ];
+
+    protected $attributes = [
+        'history' => '[]'
+    ];
+
+    protected $casts = [
+        'history' => 'array',
+    ];
+
+    protected $hidden = [
+        'history',
     ];
 
     public function course() {

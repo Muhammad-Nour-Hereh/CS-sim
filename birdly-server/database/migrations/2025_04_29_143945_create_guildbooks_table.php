@@ -9,11 +9,10 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('guildbooks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')
-                ->constrained('courses')
-                ->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->string('title');
             $table->string('path');
+            $table->json('history');
             $table->timestamps();
             $table->softDeletes();
         });

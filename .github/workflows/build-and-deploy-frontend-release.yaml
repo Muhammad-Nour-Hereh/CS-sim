@@ -1,4 +1,4 @@
-name: Build and Deploy Frontend To Staging
+name: Build and Deploy Frontend To Release
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '23' 
+          node-version: "23"
 
       - name: Install dependencies
         working-directory: birdly-client
@@ -37,15 +37,17 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '23'
+          node-version: "23"
 
       - name: Install dependencies
         working-directory: birdly-client
         run: npm install
-        
+
       - name: Build react
         working-directory: birdly-client
-        run: npm run build
+        run: |
+          cp .env.release .env.local
+          npm run build
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -55,10 +57,10 @@ jobs:
 
       - name: Build Docker image
         working-directory: birdly-client
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/birdly-client:release .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly-client:staging
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/birdly-client:release
 
   Deploy-React-Docker:
     needs: Build-React-And-Push-Dockerhub
@@ -75,6 +77,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            docker-compose stop client
             docker-compose pull client
             docker-compose rm -f client
             docker-compose up -d client
