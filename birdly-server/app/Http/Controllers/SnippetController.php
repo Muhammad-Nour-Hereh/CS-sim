@@ -16,14 +16,7 @@ class SnippetController extends Controller {
     }
 
     public function store(SnippetRequest $request) {
-
-        Snippet::create([
-            'user_id' => $request->user()->id,
-            'title' => $request->input('title'),
-            'language' => $request->input('language'),
-            'code' => $request->input('code'),
-        ]);
-
+        $this->snippets->create($request->user(), $request->only('title', 'language', 'code'));
         return $this->createdResponse();
     }
 
