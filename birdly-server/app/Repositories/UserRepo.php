@@ -20,4 +20,15 @@ class UserRepo
 
         return ['status' => 'subscribed'];
     }
+
+    public function unsubscribe(User $user, int $courseId) {
+        $course = Course::find($courseId);
+        if (!$course) return ['status' => 'not_found'];
+
+        if (!$user->courses()->where('course_id', $courseId)->exists())
+            return ['status' => 'not_subscribed'];
+
+        $user->courses()->detach($courseId);
+        return ['status' => 'unsubscribed'];
+    }
 }
