@@ -9,6 +9,7 @@ use App\Repositories\LevelRepo;
 use App\Repositories\ProgressRepo;
 use App\Repositories\QuestionRepo;
 use App\Repositories\SnippetRepo;
+use App\Repositories\UserRepo;
 use Illuminate\Support\ServiceProvider;
 
 class RepoProvider extends ServiceProvider {
@@ -44,6 +45,10 @@ class RepoProvider extends ServiceProvider {
 
         $this->app->singleton(SnippetRepo::class, function () {
             return new SnippetRepo();
+        });
+
+        $this->app->singleton(UserRepo::class, function () {
+            return new UserRepo();
         });
     }
 }
