@@ -26,5 +26,10 @@ class RepoProvider extends ServiceProvider {
         $this->app->singleton(LevelRepo::class, function () {
             return new LevelRepo();
         });
+
+        $this->app->singleton(LevelRepo::class, function () {
+            return new LevelRepo();
+        });
+
     }
 }
