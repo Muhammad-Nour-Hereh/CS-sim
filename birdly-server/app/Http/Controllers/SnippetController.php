@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SnippetRequest;
 use App\Models\Snippet;
+use App\Repositories\SnippetRepo;
 use Illuminate\Http\Request;
 
 class SnippetController extends Controller {
+    public function __construct(protected SnippetRepo $snippets) {
+    }
+
 
     public function index(Request $request) {
         $snippets = $request->user()->snippets;
