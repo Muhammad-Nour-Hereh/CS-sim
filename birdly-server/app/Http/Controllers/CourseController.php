@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
+use App\Repositories\CourseRepo;
 
 class CourseController extends Controller {
+
+    public function __construct(protected CourseRepo $course) {
+    }
 
     public function index() {
         return $this->successResponse(Course::all());
