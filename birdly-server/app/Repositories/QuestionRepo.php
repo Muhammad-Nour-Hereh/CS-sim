@@ -25,4 +25,9 @@ class QuestionRepo {
         return $question;
     }
 
+    public function delete($id) {
+        $question = Question::find($id);
+        if (!$question) return false;
+        return $question->delete();
+    }
 }
