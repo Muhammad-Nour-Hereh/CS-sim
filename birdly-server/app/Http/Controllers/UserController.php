@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\Progress;
 use App\Repositories\UserRepo;
 use Illuminate\Http\Request;
 
