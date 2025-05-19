@@ -35,4 +35,16 @@ class ProgressRepo {
         return true;
     }
 
+    public function setMistakeCount(int $progressId, int $questionId, int $count): bool {
+        $progress = Progress::find($progressId);
+        $question = Question::find($questionId);
+
+        if (!$progress || !$question) return false;
+
+        $mistake = $progress->mistakes()->where('question_id', $questionId)->first();
+        if (!$mistake) return false;
+
+        $progress->mistakes()->updateExistingPivot($questionId, ['count' => $count]);
+        return true;
+    }
 }
