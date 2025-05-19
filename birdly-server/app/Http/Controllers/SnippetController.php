@@ -21,12 +21,8 @@ class SnippetController extends Controller {
     }
 
     public function show(Request $request, $id) {
-        $snippet = $request->user()->snippets()->find($id);
-
-        if (!$snippet)
-            return $this->failResponse('Snippet not found', 404);
-
-
+        $snippet = $this->snippets->find($request->user(), $id);
+        if (!$snippet) return $this->failResponse('Snippet not found', 404);
         return $this->successResponse($snippet);
     }
 
