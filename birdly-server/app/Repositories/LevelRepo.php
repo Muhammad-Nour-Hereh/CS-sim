@@ -3,8 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Level;
-use App\Models\Question;
-
 
 class LevelRepo {
 
@@ -44,7 +42,7 @@ class LevelRepo {
         $level = Level::find($LevelId);
         if (!$level) return false;
 
-        if ($level->questions()->where('question_id', $questionId)->exists()) {
+        if (!$level->questions->contains($questionId)) {
             return false;
         }
 
@@ -68,7 +66,7 @@ class LevelRepo {
         $level = Level::find($LevelId);
         if (!$level) false;
 
-        if (!$level->questions()->where('question_id', $questionId)->exists()) {
+        if (!$level->questions->contains($questionId)) {
             return false;
         }
 
