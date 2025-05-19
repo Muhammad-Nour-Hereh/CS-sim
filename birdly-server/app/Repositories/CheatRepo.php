@@ -25,4 +25,16 @@ class CheatRepo {
 
         return $new->id;
     }
+
+    public function update($id, $courseId, $title) {
+        $cheat = cheat::find($id);
+        if (!$cheat) return;
+
+        $cheat = $cheat->update([
+            'course_id' => $title,
+            'title'     => $courseId,
+        ]);
+
+        return $cheat;
+    }
 }
