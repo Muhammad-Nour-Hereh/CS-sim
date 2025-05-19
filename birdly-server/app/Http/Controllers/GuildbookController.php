@@ -33,13 +33,8 @@ class GuildbookController extends Controller {
     }
 
     public function show($id) {
-        $guildbook = Guildbook::find($id);
-
-        if (!$guildbook) {
-            return $this->notFoundResponse();
-        }
-
-        if (!Storage::exists($guildbook->path)) {
+        $guildbook = $this->repo->find($id);
+        if (!$guildbook || !Storage::exists($guildbook->path)) {
             return $this->notFoundResponse();
         }
 
