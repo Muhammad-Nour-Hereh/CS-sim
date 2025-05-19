@@ -24,5 +24,13 @@ class GuildbookRepo {
         return $guildbook->id;
     }
 
-
+    public function update(int $id, int $courseId, string $title): void {
+        $guildbook = $this->find($id);
+        if ($guildbook) {
+            $guildbook->update([
+                'course_id' => $courseId,
+                'title'     => $title,
+            ]);
+        }
+    }
 }
