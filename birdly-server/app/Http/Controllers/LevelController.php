@@ -66,24 +66,10 @@ class LevelController extends Controller {
     }
 
     public function bulkAttachQuestions(BulkAttackQuestionRequest $request, $levelId) {
+        $new = $this->levelRepo->bulkAttach($levelId, $request->validated()['questions_ids']);
+        if (!$new)
+            return $this->conflictResponse('All questions are already attached or level not found');
 
-        $validated = $request->validated();
-
-        $level = Level::find($levelId);
-
-        if (!$level)
-            return $this->notFoundResponse();
-
-        $newQuestionIds = array_diff(
-            $validated['questions_ids'],
-            $level->questions()->pluck('questions.id')->toArray()
-        );
-
-        if (empty($newQuestionIds)) {
-            return $this->conflictResponse('All questions are already attached to this level');
-        }
-
-        $level->questions()->attach($newQuestionIds);
         return $this->createdResponse('Questions attached successfully');
     }
 
