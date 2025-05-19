@@ -17,4 +17,8 @@ class SnippetRepo {
             ...$data,
         ]);
     }
+
+    public function find(User $user, $id) {
+        return $user->snippets()->find($id);
+    }
 }
