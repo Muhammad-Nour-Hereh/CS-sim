@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GuildbookRequest;
 use App\Models\Guildbook;
+use App\Repositories\GuildbookRepo;
 use App\Services\GuildbookFileService;
 use Illuminate\Support\Facades\Storage;
 
 class GuildbookController extends Controller {
-    public function __construct(protected GuildbookFileService $fileService) {
-    }
+
+    public function __construct(
+        protected GuildbookFileService $fileService,
+        protected GuildbookRepo $repo
+    ) {}
 
     public function index() {
         return $this->successResponse(Guildbook::all());
