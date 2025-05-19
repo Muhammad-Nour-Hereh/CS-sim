@@ -19,25 +19,8 @@ class ProgressController extends Controller {
     }
 
     public function addMistake($progressId, $questionId) {
-        $progress = Progress::find($progressId);
-        $question = Question::find($questionId);
-
-        if (!$progress || !$question)
-            return $this->notFoundResponse();
-
-        $mistake = $progress->mistakes()->where('question_id', $questionId)->first();
-
-        if ($mistake) {
-            $progress->mistakes()->updateExistingPivot($questionId, [
-                'count' => $mistake->pivot->count + 1
-            ]);
-
-            return $this->noContentResponse();
-        }
-
-        $progress->mistakes()->attach($question);
-
-        return $this->createdResponse();
+        $ok = $this->progressRepo->addMistake($progressId, $questionId);
+        return $ok ? $this->createdResponse() : $this->notFoundResponse();
     }
 
     public function setMistakeCount(Request $request, $progressId, $questionId) {
