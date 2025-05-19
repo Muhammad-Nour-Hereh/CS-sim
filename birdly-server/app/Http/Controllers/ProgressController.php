@@ -45,21 +45,13 @@ class ProgressController extends Controller {
     }
 
     public function completeLevel($progressId, $levelId) {
-        $progress = Progress::find($progressId);
-        $level = Level::find($levelId);
+        $res = $this->progressRepo->completeLevel($progressId, $levelId);
 
-        if (!$progress || !$level)
-            return $this->notFoundResponse();
-
-        $completed = $progress->completedLevels()->where('level_id', $levelId)->first();
-
-        if ($completed) {
-            return $this->conflictResponse('this level already completed');
-        }
-
-        $progress->completedLevels()->attach($levelId);
-
-        return $this->createdResponse();
+        return match ($res) {
+            true => $this->createdResponse(),
+            'already' => $this->conflictResponse('this level already completed'),
+            default => $this->notFoundResponse()
+        };
     }
 
     public function uncompleteLevel($progressId, $levelId) {
