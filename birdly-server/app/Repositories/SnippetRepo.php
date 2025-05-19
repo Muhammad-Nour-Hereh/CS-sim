@@ -28,4 +28,10 @@ class SnippetRepo {
         $snippet->update($data);
         return $snippet;
     }
+
+    public function delete(User $user, $id) {
+        $snippet = $user->snippets()->whereKey($id)->first();
+        if (!$snippet) return false;
+        return $snippet->delete();
+    }
 }
