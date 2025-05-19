@@ -12,4 +12,8 @@ class CourseRepo {
     public function find(int $id) {
         return Course::find($id);
     }
+
+    public function create(string $title) {
+        return Course::create(['title' => $title])->id;
+    }
 }
