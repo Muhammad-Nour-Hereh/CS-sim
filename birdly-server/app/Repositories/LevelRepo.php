@@ -51,4 +51,16 @@ class LevelRepo {
         $level->questions()->attach($questionId);
         return true;
     }
+
+    public function bulkAttach(int $LevelId, array $questionIds) {
+        $level = Level::find($LevelId);
+        if (!$level) return;
+        $existing = $level->questions()->pluck('questions.id')->toArray();
+        $new = array_diff($questionIds, $existing);
+
+        if (empty($new)) return;
+        $level->questions()->attach($new);
+
+        return $new;
+    }
 }
