@@ -14,5 +14,15 @@ class GuildbookRepo {
         return Guildbook::find($id);
     }
 
+    public function create(int $courseId, string $title, string $path): int {
+        $guildbook = Guildbook::create([
+            'course_id' => $courseId,
+            'title'     => $title,
+            'path'      => $path,
+        ]);
+
+        return $guildbook->id;
+    }
+
 
 }
