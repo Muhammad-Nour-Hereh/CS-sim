@@ -14,4 +14,8 @@ class QuestionRepo {
         return Question::create($data);
     }
 
+    public function find($id) {
+        return Question::find($id);
+    }
+
 }
