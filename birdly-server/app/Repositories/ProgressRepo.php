@@ -10,5 +10,9 @@ class ProgressRepo {
         return Progress::find($id);
     }
 
+    public function getMistakes(int $progressId) {
+        $progress = $this->find($progressId);
+        return $progress?->mistakes()->get();
+    }
 
 }
