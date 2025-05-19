@@ -8,4 +8,8 @@ class CourseRepo {
     public function all() {
         return Course::all();
     }
+
+    public function find(int $id) {
+        return Course::find($id);
+    }
 }
