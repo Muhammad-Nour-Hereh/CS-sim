@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Progress;
+use App\Repositories\UserRepo;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
+
+    public function __construct(protected UserRepo $users) {
+    }
 
     public function getSubscribtions(Request $request) {
         $data = $request->user()->courses()->get();
