@@ -12,4 +12,7 @@ class LevelRepo {
         return Level::all();
     }
 
+    public function find(int $id): ?Level {
+        return Level::find($id);
+    }
 }
