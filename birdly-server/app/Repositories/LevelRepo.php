@@ -63,4 +63,16 @@ class LevelRepo {
 
         return $new;
     }
+
+    public function detachQuestion(int $LevelId, int $questionId): bool {
+        $level = Level::find($LevelId);
+        if (!$level) false;
+
+        if (!$level->questions()->where('question_id', $questionId)->exists()) {
+            return false;
+        }
+
+        $level->questions()->detach($questionId);
+        return true;
+    }
 }
