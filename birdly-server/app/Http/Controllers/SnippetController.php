@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SnippetRequest;
-use App\Models\Snippet;
 use App\Repositories\SnippetRepo;
 use Illuminate\Http\Request;
 
