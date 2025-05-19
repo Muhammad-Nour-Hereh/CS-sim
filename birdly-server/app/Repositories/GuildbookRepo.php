@@ -33,4 +33,14 @@ class GuildbookRepo {
             ]);
         }
     }
+
+    public function delete(int $id): ?string {
+        $guildbook = $this->find($id);
+        if (!$guildbook) return null;
+
+        $path = $guildbook->path;
+        $guildbook->delete();
+
+        return $path;
+    }
 }
