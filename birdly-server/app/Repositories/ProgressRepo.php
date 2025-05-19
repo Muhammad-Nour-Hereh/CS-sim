@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Level;
 use App\Models\Progress;
 use App\Models\Question;
 
@@ -64,6 +65,20 @@ class ProgressRepo {
     public function getCompletedLevels(int $progressId) {
         $progress = $this->find($progressId);
         return $progress?->completedLevels()->get();
+    }
+
+    public function completeLevel(int $progressId, int $levelId): bool|string {
+        $progress = Progress::find($progressId);
+        $level = Level::find($levelId);
+
+        if (!$progress || !$level) return false;
+
+        if ($progress->completedLevels()->where('level_id', $levelId)->exists()) {
+            return 'already';
+        }
+
+        $progress->completedLevels()->attach($levelId);
+        return true;
     }
 
 }
