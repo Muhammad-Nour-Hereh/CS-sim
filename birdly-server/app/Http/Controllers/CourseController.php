@@ -29,17 +29,13 @@ class CourseController extends Controller {
     }
 
     public function update(CourseRequest $request, $id) {
-        $course = Course::find($id);
-
+        $course = $this->course->update($id, $request->input('title'));
         if (!$course)
             return $this->notFoundResponse();
 
-        $course->update([
-            'title' => $request->input('title'),
-        ]);
-
         return $this->successResponse($course);
     }
+
 
     public function destroy($id) {
         $course = Course::find($id);
