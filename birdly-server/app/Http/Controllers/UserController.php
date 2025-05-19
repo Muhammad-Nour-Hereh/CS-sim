@@ -13,9 +13,7 @@ class UserController extends Controller {
     }
 
     public function getSubscribtions(Request $request) {
-        $data = $request->user()->courses()->get();
-
-        return $this->successResponse($data);
+        return $this->successResponse($this->users->getSubscriptions($request->user()));
     }
 
     public function subscribe(Request $request, $courseId) {
