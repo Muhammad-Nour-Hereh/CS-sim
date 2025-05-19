@@ -19,19 +19,19 @@ class LevelController extends Controller {
 
     public function store(LevelRequest $request) {
         $this->levelRepo->create($request->validated());
-        
+
         return $this->createdResponse();
     }
 
 
     public function show($id) {
-        $level = Level::find($id);
-
+        $level = $this->levelRepo->find($id);
         if (!$level)
             return $this->notFoundResponse();
 
         return $this->successResponse($level);
     }
+    
     public function update(LevelRequest $request, $id) {
         $level = Level::find($id);
 
