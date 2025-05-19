@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PromptRequest;
 use App\Http\Requests\QuestionRequest;
-use App\Models\Question;
 use App\Repositories\QuestionRepo;
 use App\Services\OpenAIService;
 
@@ -30,22 +29,22 @@ class QuestionController extends Controller {
         if (!$question) return $this->notFoundResponse();
         return $this->successResponse($question);
     }
-    
+
     public function update(QuestionRequest $request, $id) {
         $question = $this->questions->update($id, $request->validated());
         if (!$question) return $this->notFoundResponse();
         return $this->noContentResponse();
     }
 
-public function destroy($id) {
-    $deleted = $this->questions->delete($id);
-    if (!$deleted) return $this->notFoundResponse();
-    return $this->noContentResponse();
-}
+    public function destroy($id) {
+        $deleted = $this->questions->delete($id);
+        if (!$deleted) return $this->notFoundResponse();
+        return $this->noContentResponse();
+    }
 
 
     public function check(PromptRequest $request, $id) {
-        $question = Question::find($id);
+        $question = $this->questions->find($id);
         if (!$question) return $this->notFoundResponse();
 
         $userAnswer = $request->prompt;
