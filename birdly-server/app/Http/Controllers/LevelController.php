@@ -58,17 +58,10 @@ class LevelController extends Controller {
 
 
     public function attachQuestions($levelId, $questionId) {
-        $level = Level::find($levelId);
-        $question = Question::find($questionId);
+        $attached = $this->levelRepo->attachQuestion($levelId, $questionId);
+        if (!$attached)
+            return $this->conflictResponse(['Question already attached or Level/Question not found']);
 
-        if (!$level || !$question)
-            return $this->notFoundResponse();
-
-        if ($level->questions()->where('question_id', $questionId)->exists()) {
-            return $this->conflictResponse(['Question already attached to this level']);
-        }
-
-        $level->questions()->attach($questionId);
         return $this->createdResponse('Question attached successfully');
     }
 
