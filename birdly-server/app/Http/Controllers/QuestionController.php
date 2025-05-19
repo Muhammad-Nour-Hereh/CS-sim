@@ -21,8 +21,7 @@ class QuestionController extends Controller {
     }
 
     public function store(QuestionRequest $request) {
-        Question::create($request->validated());
-
+        $this->questions->create($request->validated());
         return $this->createdResponse();
     }
 
