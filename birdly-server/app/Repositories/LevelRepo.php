@@ -20,4 +20,8 @@ class LevelRepo {
         return Level::create($data)->id;
     }
 
+    public function update(int $id, array $data): bool {
+        $level = $this->find($id);
+        return $level?->update($data);
+    }
 }
