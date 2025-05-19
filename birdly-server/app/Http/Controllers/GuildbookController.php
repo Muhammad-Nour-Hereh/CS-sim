@@ -48,18 +48,11 @@ class GuildbookController extends Controller {
     }
 
     public function update(GuildbookRequest $request, $id) {
-        $guildbook = Guildbook::find($id);
-
-        if (!$guildbook) {
-            return $this->notFoundResponse();
-        }
+        $guildbook = $this->repo->find($id);
+        if (!$guildbook) return $this->notFoundResponse();
 
         $this->fileService->update($guildbook->path, $request->input('content'));
-
-        $guildbook->update([
-            'course_id' => $request->input('course_id'),
-            'title'     => $request->input('title'),
-        ]);
+        $this->repo->update($id, $request->input('course_id'), $request->input('title'));
 
         return $this->noContentResponse();
     }
