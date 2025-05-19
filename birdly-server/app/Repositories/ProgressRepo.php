@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-class ProgressRepo
-{
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
+use App\Models\Progress;
+
+class ProgressRepo {
+
+    public function find(int $id): ?Progress {
+        return Progress::find($id);
     }
+
+
 }
