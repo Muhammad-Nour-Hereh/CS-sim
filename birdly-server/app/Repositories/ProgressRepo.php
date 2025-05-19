@@ -81,4 +81,18 @@ class ProgressRepo {
         return true;
     }
 
+    public function uncompleteLevel(int $progressId, int $levelId): bool {
+        $progress = Progress::find($progressId);
+        $level = Level::find($levelId);
+
+        if (!$progress || !$level) return false;
+
+        if (!$progress->completedLevels()->where('level_id', $levelId)->exists()) {
+            return false;
+        }
+
+        $progress->completedLevels()->detach($levelId);
+        return true;
+    }
+
 }
