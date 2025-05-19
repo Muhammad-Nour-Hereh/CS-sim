@@ -29,7 +29,9 @@
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
 <br>
-<img src="./readme/assets/highlights.png"/>
+<p align="center">
+  <img src="./readme/assets/highlights.png" />
+</p>
 
 ### Features
 
