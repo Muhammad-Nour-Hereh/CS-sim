@@ -59,11 +59,7 @@ class CheatController extends Controller {
         }
 
         $this->fileService->update($cheat->path, $request->input('content'));
-
-        $cheat->update([
-            'course_id' => $request->input('course_id'),
-            'title'     => $request->input('title'),
-        ]);
+        $this->cheat->update($id, $request->input('course_id'), $request->input('title'));
 
         return $this->successResponse($cheat->id);
     }
