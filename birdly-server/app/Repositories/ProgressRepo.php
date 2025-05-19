@@ -60,4 +60,10 @@ class ProgressRepo {
         $progress->mistakes()->detach($questionId);
         return true;
     }
+
+    public function getCompletedLevels(int $progressId) {
+        $progress = $this->find($progressId);
+        return $progress?->completedLevels()->get();
+    }
+
 }
