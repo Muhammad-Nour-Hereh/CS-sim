@@ -32,15 +32,11 @@ class QuestionController extends Controller {
     }
     
     public function update(QuestionRequest $request, $id) {
-        $Question = Question::find($id);
-
-        if (!$Question)
-            return $this->notFoundResponse();
-
-        $Question->update($request->validated());
-
+        $question = $this->questions->update($id, $request->validated());
+        if (!$question) return $this->notFoundResponse();
         return $this->noContentResponse();
     }
+    
     public function destroy($id) {
         $Question = Question::find($id);
 
