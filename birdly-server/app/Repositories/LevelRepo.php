@@ -29,4 +29,14 @@ class LevelRepo {
         $level = $this->find($id);
         return $level?->delete();
     }
+
+    public function questions(int $id) {
+        $level = Level::find($id);
+        if (!$level) return;
+        
+        return $level->questions()->get()->map(function ($q) {
+            $q->content = json_decode($q->content, true);
+            return $q;
+        });
+    }
 }
