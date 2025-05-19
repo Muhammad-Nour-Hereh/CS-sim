@@ -2,13 +2,9 @@
 
 namespace App\Repositories;
 
-class SnippetRepo
-{
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
+class SnippetRepo {
+    
+    public function all(User $user) {
+        return $user->snippets;
     }
 }
