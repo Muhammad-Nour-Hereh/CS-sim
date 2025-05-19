@@ -82,8 +82,13 @@
 
 <br><br>
 
-<!-- Deployment -->
+
+<!-- Ai integration -->
 <img src="./readme/title7.svg"/>
+
+
+<!-- Deployment -->
+<img src="./readme/title8.svg"/>
 
 ### CI/CD, postman and live demo
 
