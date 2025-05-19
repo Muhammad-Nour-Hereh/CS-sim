@@ -37,4 +37,14 @@ class CheatRepo {
 
         return $cheat;
     }
+
+    public function delete($id) {
+        $cheat = $this->find($id);
+        if (!$cheat) return;
+        
+        if ($cheat) {
+            $cheat->delete();
+        }
+        return true;
+    }
 }
