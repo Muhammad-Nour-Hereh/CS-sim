@@ -86,6 +86,11 @@
 <!-- Ai integration -->
 <img src="./readme/title7.svg"/>
 
+<!-- 
+* AI Checks for user answer
+* AI interactive
+* Ai chat
+ -->
 
 <br><br>
 
