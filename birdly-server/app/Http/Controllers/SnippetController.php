@@ -27,20 +27,11 @@ class SnippetController extends Controller {
     }
 
     public function update(SnippetRequest $request, $id) {
-        $snippet = $request->user()->snippets()->find($id);
-
-        if (!$snippet)
-            return $this->failResponse('Snippet not found', 404);
-
-
-        $snippet->update([
-            'title' => $request->input('title'),
-            'language' => $request->input('language'),
-            'code' => $request->input('code'),
-        ]);
-
+        $snippet = $this->snippets->update($request->user(), $id, $request->only('title', 'language', 'code'));
+        if (!$snippet) return $this->failResponse('Snippet not found', 404);
         return $this->noContentResponse();
     }
+    
 
     public function destroy(Request $request, $id) {
         $snippet = $request->user()->snippets()->whereKey($id)->first();
