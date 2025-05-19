@@ -12,7 +12,7 @@ class CourseController extends Controller {
     }
 
     public function index() {
-        return $this->successResponse(Course::all());
+        return $this->successResponse($this->course->all());
     }
 
     public function store(CourseRequest $request) {
