@@ -47,4 +47,17 @@ class ProgressRepo {
         $progress->mistakes()->updateExistingPivot($questionId, ['count' => $count]);
         return true;
     }
+
+    public function removeMistake(int $progressId, int $questionId): bool {
+        $progress = Progress::find($progressId);
+        $question = Question::find($questionId);
+
+        if (!$progress || !$question) return false;
+
+        $mistake = $progress->mistakes()->where('question_id', $questionId)->first();
+        if (!$mistake) return false;
+
+        $progress->mistakes()->detach($questionId);
+        return true;
+    }
 }
