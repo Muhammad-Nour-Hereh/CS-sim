@@ -36,16 +36,13 @@ class QuestionController extends Controller {
         if (!$question) return $this->notFoundResponse();
         return $this->noContentResponse();
     }
-    
-    public function destroy($id) {
-        $Question = Question::find($id);
 
-        if (!$Question)
-            return $this->notFoundResponse();
+public function destroy($id) {
+    $deleted = $this->questions->delete($id);
+    if (!$deleted) return $this->notFoundResponse();
+    return $this->noContentResponse();
+}
 
-        $Question->delete($id);
-        return $this->noContentResponse();
-    }
 
     public function check(PromptRequest $request, $id) {
         $question = Question::find($id);
