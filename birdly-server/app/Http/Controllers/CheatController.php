@@ -3,84 +3,72 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheatRequest;
-use App\Models\Cheat;
+use App\Repositories\CheatRepo;
 use App\Services\CheatFileService;
 
 class CheatController extends Controller {
-    public function __construct(protected CheatFileService $fileService) {
+    public function __construct(
+        protected CheatFileService $fileService,
+        protected CheatRepo $cheat
+    ) {
     }
 
     public function index() {
-        return $this->successResponse(Cheat::all());
+        return $this->successResponse($this->cheat->all());
     }
 
     public function store(CheatRequest $request) {
-        $path = $this->fileService->store(
-            $request->input('course_id'),
-            $request->input('title'),
-            $request->input('content')
-        );
+        $courseId = $request->input('course_id');
+        $title = $request->input('title');
+        $content = $request->input('content');
 
-        if (!$path) {
-            return $this->notFoundResponse();
-        }
+        $path = $this->fileService->store($courseId, $title, $content);
 
-        Cheat::create([
-            'course_id' => $request->input('course_id'),
-            'title'     => $request->input('title'),
-            'path'      => $path,
-        ]);
+        if (!$path) return $this->notFoundResponse();
+        $id = $this->cheat->create($courseId, $title, $path);
 
-        return $this->createdResponse();
+        return $this->createdResponse($id);
     }
 
     public function show($id) {
-        $Cheat = Cheat::find($id);
+        $cheat = $this->cheat->find($id);
 
-        if (!$Cheat) {
+        if (!$cheat) {
             return $this->notFoundResponse();
         }
 
-        $content = $this->fileService->read($Cheat->path);
+        $content = $this->fileService->read($cheat->path);
 
         if (!$content) {
             return $this->notFoundResponse();
         }
-        
+
         return $this->successResponse([
-            'id'        => $Cheat->id,
-            'title'     => $Cheat->title,
-            'course_id' => $Cheat->course_id,
+            'id'        => $cheat->id,
+            'title'     => $cheat->title,
+            'course_id' => $cheat->course_id,
             'content'   => $content,
         ]);
     }
 
     public function update(CheatRequest $request, $id) {
-        $Cheat = Cheat::find($id);
+        $cheat = $this->cheat->find($id);
 
-        if (!$Cheat) {
+        if (!$cheat) {
             return $this->notFoundResponse();
         }
 
-        $this->fileService->update($Cheat->path, $request->input('content'));
+        $this->fileService->update($cheat->path, $request->input('content'));
+        $this->cheat->update($id, $request->input('course_id'), $request->input('title'));
 
-        $Cheat->update([
-            'course_id' => $request->input('course_id'),
-            'title'     => $request->input('title'),
-        ]);
-
-        return $this->noContentResponse();
+        return $this->successResponse($cheat->id);
     }
 
     public function destroy($id) {
-        $Cheat = Cheat::find($id);
+        $path = $this->cheat->delete($id);
+        if (!$path)  return $this->notFoundResponse();
 
-        if (!$Cheat) {
-            return $this->notFoundResponse();
-        }
-
-        $this->fileService->delete($Cheat->path);
-        $Cheat->delete();
+        $this->fileService->delete($path);
 
         return $this->noContentResponse();
     }
