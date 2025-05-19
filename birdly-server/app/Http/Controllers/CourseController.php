@@ -4,24 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
+use App\Repositories\CourseRepo;
 
 class CourseController extends Controller {
 
+    public function __construct(protected CourseRepo $course) {
+    }
+
     public function index() {
-        return $this->successResponse(Course::all());
+        return $this->successResponse($this->course->all());
     }
 
     public function store(CourseRequest $request) {
-        Course::create([
-            'title' => $request->input('title'),
-        ]);
-
-        return $this->createdResponse();
+        $id = $this->course->create($request->input('title'));
+        return $this->createdResponse($id);
     }
 
     public function show($id) {
-        $course = Course::find($id);
-
+        $course = $this->course->find($id);
         if (!$course)
             return $this->notFoundResponse();
 
@@ -29,25 +29,18 @@ class CourseController extends Controller {
     }
 
     public function update(CourseRequest $request, $id) {
-        $course = Course::find($id);
-
+        $course = $this->course->update($id, $request->input('title'));
         if (!$course)
             return $this->notFoundResponse();
-
-        $course->update([
-            'title' => $request->input('title'),
-        ]);
 
         return $this->successResponse($course);
     }
 
+
     public function destroy($id) {
-        $course = Course::find($id);
-
-        if (!$course)
+        $deleted = $this->course->delete($id);
+        if (!$deleted)
             return $this->notFoundResponse();
-
-        $course->delete();
 
         return $this->noContentResponse();
     }
