@@ -31,17 +31,15 @@ class LevelController extends Controller {
 
         return $this->successResponse($level);
     }
-    
+
     public function update(LevelRequest $request, $id) {
-        $level = Level::find($id);
-
-        if (!$level)
+        $updated = $this->levelRepo->update($id, $request->validated());
+        if (!$updated)
             return $this->notFoundResponse();
-
-        $level->update($request->validated());
 
         return $this->noContentResponse();
     }
+    
     public function destroy($id) {
         $level = Level::find($id);
 
