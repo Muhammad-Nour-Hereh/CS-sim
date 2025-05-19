@@ -11,7 +11,7 @@ class CheatRepo {
     }
 
     public function find(int $id) {
-        $cheat = cheat::find($id);
+        $cheat = Cheat::find($id);
 
         return $cheat;
     }
@@ -27,19 +27,19 @@ class CheatRepo {
     }
 
     public function update($id, $courseId, $title) {
-        $cheat = cheat::find($id);
+        $cheat = Cheat::find($id);
         if (!$cheat) return;
 
         $cheat = $cheat->update([
-            'course_id' => $title,
-            'title'     => $courseId,
+            'course_id' => $courseId,
+            'title'     => $title,
         ]);
 
         return $cheat;
     }
 
     public function delete($id) {
-        $cheat = $this->find($id);
+        $cheat = Cheat::find($id);
         if (!$cheat) return;
         $path = $cheat->path;
         if ($cheat) {
