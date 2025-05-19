@@ -24,29 +24,14 @@ class ProgressController extends Controller {
     }
 
     public function setMistakeCount(Request $request, $progressId, $questionId) {
-        $progress = Progress::find($progressId);
-        $question = Question::find($questionId);
         $count = $request->input('count');
 
-        if (!$progress || !$question) {
-            return $this->notFoundResponse();
-        }
-
         if (!is_numeric($count)) {
-            return $this->unprocessableContentResponse(["count" => 'Count must be numeric']);
+            return $this->unprocessableContentResponse(['count' => 'Count must be numeric']);
         }
 
-        $mistake = $progress->mistakes()->where('question_id', $questionId)->first();
-
-        if (!$mistake) {
-            return $this->notFoundResponse();
-        }
-
-        $progress->mistakes()->updateExistingPivot($questionId, [
-            'count' => $count
-        ]);
-
-        return $this->noContentResponse();
+        $ok = $this->progressRepo->setMistakeCount($progressId, $questionId, $count);
+        return $ok ? $this->noContentResponse() : $this->notFoundResponse();
     }
 
     public function removeMistake($progressId, $questionId) {
