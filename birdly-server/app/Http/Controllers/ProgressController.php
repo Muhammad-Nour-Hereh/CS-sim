@@ -40,14 +40,8 @@ class ProgressController extends Controller {
     }
 
     public function getCompletedLevels($progressId) {
-        $progress = Progress::find($progressId);
-
-        if (!$progress)
-            return $this->notFoundResponse();
-
-        $data = $progress->completedLevels()->get();
-
-        return $this->successResponse($data);
+        $data = $this->progressRepo->getCompletedLevels($progressId);
+        return $data ? $this->successResponse($data) : $this->notFoundResponse();
     }
 
     public function completeLevel($progressId, $levelId) {
