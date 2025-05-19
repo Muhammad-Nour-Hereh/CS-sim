@@ -13,12 +13,12 @@
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-### Stack, Diagrams, and Flow
+<!-- ### Stack, Diagrams, and Flow
 
 - **web**: React, typescript, tailwind, shadcn/ui, framer-motion, react-mdx, vitest, axios, context api.
 - **Backend**: Laravel, flysystem, pest, elequent, openai-php.
 - **Database**: mysql.
-- **CI/CD**: docker, docker-compose, github action, ec2
+- **CI/CD**: docker, docker-compose, github action, ec2 -->
 
 | ER Diagram                                |
 | ----------------------------------------- |
@@ -67,10 +67,6 @@
 <img src="./readme/title6.svg"/>
 
 ### Develpment and Testing
-
-- using docker for containers
-- github action for ci/cd
-- build in testing in laravel
 
 |                                        |                                      |
 | -------------------------------------- | ------------------------------------ |
