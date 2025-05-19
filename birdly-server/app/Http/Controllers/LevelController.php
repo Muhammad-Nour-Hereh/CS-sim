@@ -18,10 +18,11 @@ class LevelController extends Controller {
     }
 
     public function store(LevelRequest $request) {
-        Level::create($request->validated());
-
+        $this->levelRepo->create($request->validated());
+        
         return $this->createdResponse();
     }
+
 
     public function show($id) {
         $level = Level::find($id);
