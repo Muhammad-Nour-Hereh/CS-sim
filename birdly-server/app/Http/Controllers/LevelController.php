@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BulkAttackQuestionRequest;
 use App\Http\Requests\LevelRequest;
-use App\Models\Level;
-use App\Models\Question;
 use App\Repositories\LevelRepo;
 
 class LevelController extends Controller {
