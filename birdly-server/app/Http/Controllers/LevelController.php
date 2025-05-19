@@ -14,7 +14,7 @@ class LevelController extends Controller {
     }
 
     public function index() {
-        return $this->successResponse(Level::All());
+        return $this->successResponse($this->levelRepo->all());
     }
 
     public function store(LevelRequest $request) {
