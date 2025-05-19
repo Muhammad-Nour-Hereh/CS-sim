@@ -15,40 +15,13 @@ use Illuminate\Support\ServiceProvider;
 class RepoProvider extends ServiceProvider {
 
     public function register(): void {
-        $this->app->singleton(CheatRepo::class, function () {
-            return new CheatRepo();
-        });
-
-        $this->app->singleton(CourseRepo::class, function () {
-            return new CourseRepo();
-        });
-
-        $this->app->singleton(GuildbookRepo::class, function () {
-            return new GuildbookRepo();
-        });
-
-        $this->app->singleton(LevelRepo::class, function () {
-            return new LevelRepo();
-        });
-
-        $this->app->singleton(LevelRepo::class, function () {
-            return new LevelRepo();
-        });
-
-        $this->app->singleton(ProgressRepo::class, function () {
-            return new ProgressRepo();
-        });
-
-        $this->app->singleton(QuestionRepo::class, function () {
-            return new QuestionRepo();
-        });
-
-        $this->app->singleton(SnippetRepo::class, function () {
-            return new SnippetRepo();
-        });
-
-        $this->app->singleton(UserRepo::class, function () {
-            return new UserRepo();
-        });
+        $this->app->singleton(CheatRepo::class, fn() => new CheatRepo());
+        $this->app->singleton(CourseRepo::class, fn() => new CourseRepo());
+        $this->app->singleton(GuildbookRepo::class, fn() => new GuildbookRepo());
+        $this->app->singleton(LevelRepo::class, fn() => new LevelRepo());
+        $this->app->singleton(ProgressRepo::class, fn() => new ProgressRepo());
+        $this->app->singleton(QuestionRepo::class, fn() => new QuestionRepo());
+        $this->app->singleton(SnippetRepo::class, fn() => new SnippetRepo());
+        $this->app->singleton(UserRepo::class, fn() => new UserRepo());
     }
 }
