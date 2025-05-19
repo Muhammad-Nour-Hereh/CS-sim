@@ -39,14 +39,12 @@ class LevelController extends Controller {
 
         return $this->noContentResponse();
     }
-    
-    public function destroy($id) {
-        $level = Level::find($id);
 
-        if (!$level)
+    public function destroy($id) {
+        $deleted = $this->levelRepo->delete($id);
+        if (!$deleted)
             return $this->notFoundResponse();
 
-        $level->delete($id);
         return $this->noContentResponse();
     }
 
