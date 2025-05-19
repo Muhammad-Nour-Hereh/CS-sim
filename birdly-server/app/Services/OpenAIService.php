@@ -12,13 +12,18 @@ class OpenAIService {
 
     protected $client;
 
-    public function __construct(protected GuildbookFileService $fileService, string $apiKey) {
+    public function __construct(
+        protected GuildbookFileService $fileService,
+        string $apiKey
+    ) {
         $this->client = OpenAI::client($apiKey);
     }
 
     public function generateText(string $prompt): string {
-        $this->setLanguage('python');
-        $this->addTaskContext('q_and_a')->addLanguageContext();
+        $context = $this->addLanguage('python')
+            ->addTaskContext('q_and_a')
+            ->buildContext();
+
         $context = $this->buildContext();
         $response = $this->client->chat()->create([
             'model' => 'gpt-3.5-turbo',
@@ -39,9 +44,9 @@ class OpenAIService {
         $history = $snippet->history;
 
         // setup AiContext
-        $this->setLanguage('python');
-        $this->addTaskContext('playground')->addLanguageContext();
-        $context = $this->buildContext();
+        $context = $this->addLanguage('python')
+            ->addTaskContext('playground')
+            ->buildContext();
 
         $lastUserMessage = null;
         $lastAssistantResponse = null;
@@ -92,10 +97,9 @@ class OpenAIService {
         $content = $this->fileService->read($guildbook->path);
         $history = $guildbook->history;
 
-
-        $this->setLanguage('python');
-        $this->addTaskContext('q_and_a')->addLanguageContext();
-        $context = $this->buildContext();
+        $context = $this->addLanguage('python')
+            ->addTaskContext('q_and_a')
+            ->buildContext();
 
         $newHistory = array_merge(
             $history,
@@ -122,11 +126,11 @@ class OpenAIService {
     }
 
     public function checkAnswer(string $userAnswer, string $question, string $correctAnswer): bool {
-        $this->setLanguage('python');
-        $this->addTaskContext('check')->addLanguageContext();
-        $this->addQuestion($question, $correctAnswer);
+        $context = $this->addLanguage('python')
+            ->addTaskContext('check')
+            ->addQuestion($question, $correctAnswer)
+            ->buildContext();
 
-        $context = $this->buildContext();
         $response = $this->client->chat()->create([
             // 'model' => 'gpt-4o',
             'model' => 'gpt-3.5-turbo',

@@ -4,18 +4,11 @@ namespace App\Traits;
 
 trait AiContextBuilder {
 
-    protected array $contextParams = [];
-    protected string $language;
-    protected array $baseContext = [
+    private array $contextParams = [];
+    private array $baseContext = [
         'You are Birdly, a platform to teach code.',
         'your logo is green owl with graduation hat and glasses'
     ];
-
-
-    // Constructor accepts the language and default context
-    public function setLanguage(string $language): void {
-        $this->language = $language;
-    }
 
     // Add general context instructions
     public function addGeneralContext(string $context): self {
@@ -24,8 +17,8 @@ trait AiContextBuilder {
     }
 
     // Add language-specific context, like the programming language
-    public function addLanguageContext(): self {
-        $this->contextParams[] = "The code is written in {$this->language}.";
+    public function addLanguage(string $language): self {
+        $this->contextParams[] = "The code is written in {$language}.";
         return $this;
     }
 
