@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\CheatRepo;
 use App\Repositories\CourseRepo;
+use App\Repositories\GuildbookRepo;
 use Illuminate\Support\ServiceProvider;
 
 class RepoProvider extends ServiceProvider {
@@ -17,5 +18,8 @@ class RepoProvider extends ServiceProvider {
             return new CourseRepo();
         });
 
+        $this->app->singleton(GuildbookRepo::class, function () {
+            return new GuildbookRepo();
+        });
     }
 }
