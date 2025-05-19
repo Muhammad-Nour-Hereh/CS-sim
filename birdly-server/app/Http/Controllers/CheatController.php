@@ -18,11 +18,11 @@ class CheatController extends Controller {
     }
 
     public function store(CheatRequest $request) {
-        $path = $this->fileService->store(
-            $courseId = $request->input('course_id'),
-            $title = $request->input('title'),
-            $request->input('content')
-        );
+        $courseId = $request->input('course_id');
+        $title = $request->input('title');
+        $content = $request->input('content');
+
+        $path = $this->fileService->store($courseId, $title, $content);
 
         if (!$path) return $this->notFoundResponse();
         $id = $this->cheat->create($courseId, $title, $path);
