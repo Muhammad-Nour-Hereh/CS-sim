@@ -6,8 +6,11 @@ use App\Models\Course;
 use App\Models\Progress;
 use App\Models\User;
 
-class UserRepo
-{
+class UserRepo {
+    public function getSubscriptions(User $user) {
+        return $user->courses()->get();
+    }
+    
     public function subscribe(User $user, int $courseId) {
         $course = Course::find($courseId);
         if (!$course) return ['status' => 'not_found'];
