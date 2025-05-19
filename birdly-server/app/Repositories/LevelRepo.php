@@ -15,4 +15,9 @@ class LevelRepo {
     public function find(int $id): ?Level {
         return Level::find($id);
     }
+
+    public function create(array $data): int {
+        return Level::create($data)->id;
+    }
+
 }
