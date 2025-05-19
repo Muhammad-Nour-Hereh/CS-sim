@@ -65,14 +65,10 @@ class CheatController extends Controller {
     }
 
     public function destroy($id) {
-        $cheat = $this->cheat->delete($id);
+        $path = $this->cheat->delete($id);
+        if (!$path)  return $this->notFoundResponse();
 
-        if (!$cheat) {
-            return $this->notFoundResponse();
-        }
-
-        $this->fileService->delete($cheat->path);
-        $cheat->delete();
+        $this->fileService->delete($path);
 
         return $this->noContentResponse();
     }
