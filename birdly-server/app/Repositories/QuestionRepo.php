@@ -18,4 +18,11 @@ class QuestionRepo {
         return Question::find($id);
     }
 
+    public function update($id, array $data) {
+        $question = Question::find($id);
+        if (!$question) return null;
+        $question->update($data);
+        return $question;
+    }
+
 }
