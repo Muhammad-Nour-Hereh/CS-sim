@@ -49,18 +49,13 @@ class LevelController extends Controller {
     }
 
     public function questions($levelId) {
-        $level = Level::find($levelId);
-
-        if (!$level)
+        $questions = $this->levelRepo->questions($levelId);
+        if (!$questions)
             return $this->notFoundResponse();
 
-        $questions = $level->questions()->get();
-        $questions = $level->questions()->get()->map(function ($question) {
-            $question->content = json_decode($question->content, true);
-            return $question;
-        });
         return $this->successResponse($questions);
     }
+
 
     public function attachQuestions($levelId, $questionId) {
         $level = Level::find($levelId);
