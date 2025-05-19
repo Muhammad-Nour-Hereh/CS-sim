@@ -58,15 +58,10 @@ class GuildbookController extends Controller {
     }
 
     public function destroy($id) {
-        $guildbook = Guildbook::find($id);
+        $path = $this->repo->delete($id);
+        if (!$path) return $this->notFoundResponse();
 
-        if (!$guildbook) {
-            return $this->notFoundResponse();
-        }
-
-        $this->fileService->delete($guildbook->path);
-        $guildbook->delete();
-
+        $this->fileService->delete($path);
         return $this->noContentResponse();
     }
 }
