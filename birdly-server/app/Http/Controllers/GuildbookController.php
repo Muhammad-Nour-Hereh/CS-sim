@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GuildbookRequest;
-use App\Models\Guildbook;
 use App\Repositories\GuildbookRepo;
 use App\Services\GuildbookFileService;
 use Illuminate\Support\Facades\Storage;
