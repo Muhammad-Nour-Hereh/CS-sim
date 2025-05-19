@@ -21,8 +21,7 @@ class CourseController extends Controller {
     }
 
     public function show($id) {
-        $course = Course::find($id);
-
+        $course = $this->course->find($id);
         if (!$course)
             return $this->notFoundResponse();
 
