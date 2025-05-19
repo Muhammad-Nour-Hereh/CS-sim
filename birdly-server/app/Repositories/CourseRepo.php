@@ -24,4 +24,12 @@ class CourseRepo {
         $course->update(['title' => $title]);
         return $course;
     }
+
+    public function delete(int $id) {
+        $course = Course::find($id);
+        if (!$course) return false;
+
+        $course->delete();
+        return true;
+    }
 }
