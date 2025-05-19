@@ -7,6 +7,7 @@ use App\Repositories\CourseRepo;
 use App\Repositories\GuildbookRepo;
 use App\Repositories\LevelRepo;
 use App\Repositories\ProgressRepo;
+use App\Repositories\QuestionRepo;
 use Illuminate\Support\ServiceProvider;
 
 class RepoProvider extends ServiceProvider {
@@ -34,6 +35,10 @@ class RepoProvider extends ServiceProvider {
 
         $this->app->singleton(ProgressRepo::class, function () {
             return new ProgressRepo();
+        });
+
+        $this->app->singleton(QuestionRepo::class, function () {
+            return new QuestionRepo();
         });
     }
 }
