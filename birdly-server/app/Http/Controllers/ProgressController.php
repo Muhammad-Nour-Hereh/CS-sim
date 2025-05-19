@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Level;
-use App\Models\Progress;
-use App\Models\Question;
 use App\Repositories\ProgressRepo;
 use Illuminate\Http\Request;
 
