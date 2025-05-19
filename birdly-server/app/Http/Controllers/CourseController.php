@@ -38,12 +38,9 @@ class CourseController extends Controller {
 
 
     public function destroy($id) {
-        $course = Course::find($id);
-
-        if (!$course)
+        $deleted = $this->course->delete($id);
+        if (!$deleted)
             return $this->notFoundResponse();
-
-        $course->delete();
 
         return $this->noContentResponse();
     }
