@@ -28,6 +28,8 @@
 
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
+<br>
+<img src="./readme/assets/highlights.png"/>
 
 ### Features
 
@@ -82,11 +84,10 @@
 
 <br><br>
 
-
 <!-- Ai integration -->
 <img src="./readme/title7.svg"/>
 
-<!-- 
+<!--
 * AI Checks for user answer
 * AI interactive
 * Ai chat
