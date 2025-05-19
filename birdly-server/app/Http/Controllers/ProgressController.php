@@ -55,20 +55,7 @@ class ProgressController extends Controller {
     }
 
     public function uncompleteLevel($progressId, $levelId) {
-        $progress = Progress::find($progressId);
-        $level = Level::find($levelId);
-
-        if (!$progress || !$level)
-            return $this->notFoundResponse();
-
-        $completed = $progress->completedLevels()->where('level_id', $levelId)->first();
-
-        if (!$completed) {
-            return $this->notFoundResponse();
-        }
-
-        $progress->completedLevels()->detach($levelId);
-
-        return $this->noContentResponse();
+        $ok = $this->progressRepo->uncompleteLevel($progressId, $levelId);
+        return $ok ? $this->noContentResponse() : $this->notFoundResponse();
     }
 }
