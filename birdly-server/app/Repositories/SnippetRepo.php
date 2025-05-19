@@ -21,4 +21,11 @@ class SnippetRepo {
     public function find(User $user, $id) {
         return $user->snippets()->find($id);
     }
+
+    public function update(User $user, $id, array $data) {
+        $snippet = $user->snippets()->find($id);
+        if (!$snippet) return null;
+        $snippet->update($data);
+        return $snippet;
+    }
 }
