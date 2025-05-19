@@ -16,9 +16,8 @@ class QuestionController extends Controller {
     ) {
     }
 
-
     public function index() {
-        return $this->successResponse(Question::All());
+        return $this->successResponse($this->questions->all());
     }
 
     public function store(QuestionRequest $request) {
