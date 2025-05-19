@@ -74,18 +74,10 @@ class LevelController extends Controller {
     }
 
     public function detachQuestion($levelId, $questionId) {
-
-        $level = Level::find($levelId);
-        $question = Question::find($questionId);
-
-        if (!$level || !$question)
+        $detached = $this->levelRepo->detachQuestion($levelId, $questionId);
+        if (!$detached)
             return $this->notFoundResponse();
 
-        if (!$level->questions()->where('question_id', $questionId)->exists()) {
-            return $this->notFoundResponse();
-        }
-
-        $level->questions()->detach($questionId);
         return $this->noContentResponse();
     }
 }
