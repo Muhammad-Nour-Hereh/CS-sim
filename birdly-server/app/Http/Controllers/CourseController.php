@@ -16,11 +16,8 @@ class CourseController extends Controller {
     }
 
     public function store(CourseRequest $request) {
-        Course::create([
-            'title' => $request->input('title'),
-        ]);
-
-        return $this->createdResponse();
+        $id = $this->course->create($request->input('title'));
+        return $this->createdResponse($id);
     }
 
     public function show($id) {
