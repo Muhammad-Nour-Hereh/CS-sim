@@ -16,7 +16,7 @@ class GuildbookController extends Controller {
     ) {}
 
     public function index() {
-        return $this->successResponse(Guildbook::all());
+        return $this->successResponse($this->repo->all());
     }
 
     public function store(GuildbookRequest $request) {
