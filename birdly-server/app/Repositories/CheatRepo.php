@@ -41,10 +41,10 @@ class CheatRepo {
     public function delete($id) {
         $cheat = $this->find($id);
         if (!$cheat) return;
-        
+        $path = $cheat->path;
         if ($cheat) {
             $cheat->delete();
         }
-        return true;
+        return $path;
     }
 }

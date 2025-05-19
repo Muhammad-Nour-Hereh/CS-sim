@@ -65,7 +65,7 @@ class CheatController extends Controller {
     }
 
     public function destroy($id) {
-        $cheat = $this->cheat->find($id);
+        $cheat = $this->cheat->delete($id);
 
         if (!$cheat) {
             return $this->notFoundResponse();
