@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PromptRequest;
 use App\Http\Requests\QuestionRequest;
 use App\Models\Question;
+use App\Repositories\QuestionRepo;
 use App\Services\OpenAIService;
 
 class QuestionController extends Controller {
 
-    public function __construct(protected OpenAIService $openai) {
+    public function __construct(
+        protected QuestionRepo $questions,
+        protected OpenAIService $openai
+    ) {
     }
 
 
@@ -60,7 +64,7 @@ class QuestionController extends Controller {
         $correctAnswer = json_decode($question->content)->correctAnswer;
 
         $correct = $this->openai->checkAnswer($userAnswer,  $title,  $correctAnswer);
-        
+
         return $this->successResponse($correct);
     }
 }
