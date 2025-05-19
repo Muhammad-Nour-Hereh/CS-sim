@@ -26,13 +26,11 @@ class QuestionController extends Controller {
     }
 
     public function show($id) {
-        $Question = Question::find($id);
-
-        if (!$Question)
-            return $this->notFoundResponse();
-
-        return $this->successResponse($Question);
+        $question = $this->questions->find($id);
+        if (!$question) return $this->notFoundResponse();
+        return $this->successResponse($question);
     }
+    
     public function update(QuestionRequest $request, $id) {
         $Question = Question::find($id);
 
