@@ -24,4 +24,9 @@ class LevelRepo {
         $level = $this->find($id);
         return $level?->update($data);
     }
+
+    public function delete(int $id): bool {
+        $level = $this->find($id);
+        return $level?->delete();
+    }
 }
