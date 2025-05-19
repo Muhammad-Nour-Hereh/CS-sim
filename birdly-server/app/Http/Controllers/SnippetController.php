@@ -11,11 +11,8 @@ class SnippetController extends Controller {
     public function __construct(protected SnippetRepo $snippets) {
     }
 
-
     public function index(Request $request) {
-        $snippets = $request->user()->snippets;
-
-        return $this->successResponse($snippets);
+        return $this->successResponse($this->snippets->all($request->user()));
     }
 
     public function store(SnippetRequest $request) {
