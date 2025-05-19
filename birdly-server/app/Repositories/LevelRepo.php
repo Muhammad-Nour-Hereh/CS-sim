@@ -33,10 +33,22 @@ class LevelRepo {
     public function questions(int $id) {
         $level = Level::find($id);
         if (!$level) return;
-        
+
         return $level->questions()->get()->map(function ($q) {
             $q->content = json_decode($q->content, true);
             return $q;
         });
+    }
+
+    public function attachQuestion(int $LevelId, int $questionId): bool {
+        $level = Level::find($LevelId);
+        if (!$level) return false;
+
+        if ($level->questions()->where('question_id', $questionId)->exists()) {
+            return false;
+        }
+
+        $level->questions()->attach($questionId);
+        return true;
     }
 }
