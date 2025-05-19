@@ -6,6 +6,7 @@ use App\Repositories\CheatRepo;
 use App\Repositories\CourseRepo;
 use App\Repositories\GuildbookRepo;
 use App\Repositories\LevelRepo;
+use App\Repositories\ProgressRepo;
 use Illuminate\Support\ServiceProvider;
 
 class RepoProvider extends ServiceProvider {
@@ -31,5 +32,8 @@ class RepoProvider extends ServiceProvider {
             return new LevelRepo();
         });
 
+        $this->app->singleton(ProgressRepo::class, function () {
+            return new ProgressRepo();
+        });
     }
 }
