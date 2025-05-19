@@ -6,8 +6,12 @@ use App\Http\Requests\BulkAttackQuestionRequest;
 use App\Http\Requests\LevelRequest;
 use App\Models\Level;
 use App\Models\Question;
+use App\Repositories\LevelRepo;
 
 class LevelController extends Controller {
+
+    public function __construct(protected LevelRepo $levelRepo) {
+    }
 
     public function index() {
         return $this->successResponse(Level::All());
