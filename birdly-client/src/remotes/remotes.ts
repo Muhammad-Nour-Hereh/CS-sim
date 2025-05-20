@@ -190,6 +190,13 @@ export const remote = {
   },
 
   guildbook: {
+    getAll: () =>
+      request<Guildbook []>({
+        method: 'GET',
+        route: `/api/v1/guildbooks`,
+        auth: true,
+      }),
+
     getById: (id: number) =>
       request<Guildbook>({
         method: 'GET',
