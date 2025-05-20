@@ -97,11 +97,30 @@
 <!-- Ai integration -->
 <img src="./readme/title7.svg"/>
 
-<!--
-* AI Checks for user answer
-* AI interactive
-* Ai chat
- -->
+
+| OpenAI api call                            |
+| ------------------------------------------ |
+| <img src="./readme/assets/openai_api.png"> |
+
+| Prompt Engineering: Persona                    |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_persona.png"> |
+
+| Prompt Engineering: Context                    |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_context.png"> |
+
+| Prompt Engineering: Format                     |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_formmat.png"> |
+
+| Prompt Engineering: examples                   |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_example.png"> |
+
+| Prompt Engineering: Dont's                   |
+| -------------------------------------------- |
+| <img src="./readme/assets/prompt_donts.png"> |
 
 <br><br>
 
