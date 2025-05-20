@@ -26,7 +26,7 @@
 
 | Component Diagram                         |
 | ----------------------------------------- |
-| <img src="./readme/assets/comp_dia.png">  |
+| <img src="./readme/assets/comp_dia1.png">  |
 
 <br><br>
 
