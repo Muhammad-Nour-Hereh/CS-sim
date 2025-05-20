@@ -38,7 +38,7 @@
 <img src="./readme/title4.svg"/>
 <br>
 <p align="center">
-  <img src="./readme/assets/highlights.png" />
+  <img src="./readme/assets/highlights_.png" />
 </p>
 
 ### Features
