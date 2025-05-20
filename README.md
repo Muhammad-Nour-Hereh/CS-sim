@@ -24,10 +24,22 @@
 | ----------------------------------------- |
 | <img src="./readme/assets/ERdiagram.png"> |
 
+| Component Diagram                        |
+| ---------------------------------------- |
+| <img src="./readme/assets/comp_dia.png"> |
+
+| EC2 instance anatomy                    |
+| --------------------------------------- |
+| <img src="./readme/assets/ec2_dia.png"> |
+
 <br><br>
 
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
+<br>
+<p align="center">
+  <img src="./readme/assets/highlights_.png" />
+</p>
 
 ### Features
 
@@ -59,7 +71,7 @@
 
 | Guildbook screen                          | Birdly assistant screen                    |
 | ----------------------------------------- | ------------------------------------------ |
-| ![Landing](./readme/assets/guildbook.png) | ![fsdaf](./readme/assets/guildbook_ai.png) |
+| ![Landing](./readme/assets/guildbook.gif) | ![fsdaf](./readme/assets/guildbook_ai.png) |
 
 <br><br>
 
@@ -82,8 +94,38 @@
 
 <br><br>
 
-<!-- Deployment -->
+<!-- Ai integration -->
 <img src="./readme/title7.svg"/>
+
+
+| OpenAI api call                            |
+| ------------------------------------------ |
+| <img src="./readme/assets/openai_api.png"> |
+
+| Prompt Engineering: Persona                    |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_persona.png"> |
+
+| Prompt Engineering: Context                    |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_context.png"> |
+
+| Prompt Engineering: Format                     |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_formmat.png"> |
+
+| Prompt Engineering: examples                   |
+| ---------------------------------------------- |
+| <img src="./readme/assets/prompt_example.png"> |
+
+| Prompt Engineering: Dont's                   |
+| -------------------------------------------- |
+| <img src="./readme/assets/prompt_donts.png"> |
+
+<br><br>
+
+<!-- Deployment -->
+<img src="./readme/title8.svg"/>
 
 ### CI/CD, postman and live demo
 
@@ -91,9 +133,11 @@
 - APIs are documented with Postman collections.
 - Live demo and staging environments available.
 
-| Postman API 1                             | Postman API 2                           | Postman API 3                           |
-| ----------------------------------------- | --------------------------------------- | --------------------------------------- |
-| ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
+| Postman API 1                             |
+| ----------------------------------------- |
+| ![Landing](./readme/assets/postman_1.png) |
+| ![fsdaf](./readme/assets/postman_3.png)   |
+| ![fsdaf](./readme/assets/postman_3.png)   |
 
 <table>
   <thead>
