@@ -24,9 +24,9 @@
 | ----------------------------------------- |
 | <img src="./readme/assets/ERdiagram.png"> |
 
-| Component Diagram                         |
-| ----------------------------------------- |
-| <img src="./readme/assets/comp_dia.png">  |
+| Component Diagram                        |
+| ---------------------------------------- |
+| <img src="./readme/assets/comp_dia.png"> |
 
 <br><br>
 
@@ -110,9 +110,11 @@
 - APIs are documented with Postman collections.
 - Live demo and staging environments available.
 
-| Postman API 1                             | Postman API 2                           | Postman API 3                           |
-| ----------------------------------------- | --------------------------------------- | --------------------------------------- |
-| ![Landing](./readme/assets/postman_1.png) | ![fsdaf](./readme/assets/postman_3.png) | ![fsdaf](./readme/assets/postman_3.png) |
+| Postman API 1                             |
+| ----------------------------------------- |
+| ![Landing](./readme/assets/postman_1.png) |
+| ![fsdaf](./readme/assets/postman_3.png)   |
+| ![fsdaf](./readme/assets/postman_3.png)   |
 
 <table>
   <thead>
