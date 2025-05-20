@@ -23,6 +23,8 @@
 | ER Diagram                                |
 | ----------------------------------------- |
 | <img src="./readme/assets/ERdiagram.png"> |
+| ----------------------------------------- |
+| <img src="./readme/assets/comp_dia.png">  |
 
 <br><br>
 
