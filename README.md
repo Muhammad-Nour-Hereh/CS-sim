@@ -28,9 +28,9 @@
 | ---------------------------------------- |
 | <img src="./readme/assets/comp_dia.png"> |
 
-| EC2 instance anatomy                |
-| ----------------------------------- |
-| <img src="./readme/assets/ec2.png"> |
+| EC2 instance anatomy                    |
+| --------------------------------------- |
+| <img src="./readme/assets/ec2_dia.png"> |
 
 <br><br>
 
