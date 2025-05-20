@@ -30,7 +30,7 @@
 
 | EC2 instance anatomy                |
 | ----------------------------------- |
-| <img src="./readme/assets/EC2.png"> |
+| <img src="./readme/assets/ec2.png"> |
 
 <br><br>
 
