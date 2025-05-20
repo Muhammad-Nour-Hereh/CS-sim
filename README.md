@@ -97,7 +97,6 @@
 <!-- Ai integration -->
 <img src="./readme/title7.svg"/>
 
-
 | OpenAI api call                            |
 | ------------------------------------------ |
 | <img src="./readme/assets/openai_api.png"> |
@@ -132,6 +131,11 @@
 - Project is containerized using Docker for easy deployment.
 - APIs are documented with Postman collections.
 - Live demo and staging environments available.
+
+| EC2 instance and docker                    |
+| ------------------------------------------ |
+| <img src="./readme/assets/ec2_login.png"> |
+| <img src="./readme/assets/docker_ps.png"> |
 
 | Postman API 1                             |
 | ----------------------------------------- |
