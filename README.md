@@ -20,24 +20,13 @@
 - **Database**: mysql.
 - **CI/CD**: docker, docker-compose, github action, ec2 -->
 
-<table>
-  <tr>
-    <th >ER Diagram</th>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="./readme/assets/ERdiagram.png" />
-    </td>
-  </tr>
-  <tr>
-    <th >Component Diagram</th>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="./readme/assets/comp_dia.png" />
-    </td>
-  </tr>
-</table>
+| ER Diagram                                |
+| ----------------------------------------- |
+| <img src="./readme/assets/ERdiagram.png"> |
+
+| Component Diagram                         |
+| ----------------------------------------- |
+| <img src="./readme/assets/comp_dia.png">  |
 
 <br><br>
 
