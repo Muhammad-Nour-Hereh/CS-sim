@@ -28,6 +28,10 @@
 | ---------------------------------------- |
 | <img src="./readme/assets/comp_dia.png"> |
 
+| EC2 instance anatomy                |
+| ----------------------------------- |
+| <img src="./readme/assets/EC2.png"> |
+
 <br><br>
 
 <!-- Project Highlights -->
