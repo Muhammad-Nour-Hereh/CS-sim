@@ -71,7 +71,7 @@
 
 | Guildbook screen                          | Birdly assistant screen                    |
 | ----------------------------------------- | ------------------------------------------ |
-| ![Landing](./readme/assets/guildbook.png) | ![fsdaf](./readme/assets/guildbook_ai.png) |
+| ![Landing](./readme/assets/guildbook.gif) | ![fsdaf](./readme/assets/guildbook_ai.png) |
 
 <br><br>
 
