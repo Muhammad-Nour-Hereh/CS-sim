@@ -414,6 +414,14 @@ export const remote = {
         route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
         auth: true,
       }),
+
+    setMistakeCount: (progressId: number, questionId: number, count: number) =>
+      request<undefined>({
+        method: 'PATCH',
+        route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
+        body: { count },
+        auth: true,
+      }),
   },
   run: (code: string) =>
     request<CodeOutput>({
