@@ -2,6 +2,7 @@ import { ChatResponse, CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
 import { Guildbook } from '@/interfaces/Guildbook'
 import { Question } from '@/interfaces/Question'
+import { Course } from '@/interfaces/Course'
 
 export const remote = {
   // Auth APIs:
@@ -98,9 +99,9 @@ export const remote = {
 
   coruse: {
     getAll: () =>
-      request<Snippet[]>({
+      request<Course[]>({
         method: 'GET',
-        route: '/api/v1/levels',
+        route: '/api/v1/courses',
         auth: true,
       }),
 
