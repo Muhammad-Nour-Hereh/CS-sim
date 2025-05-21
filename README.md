@@ -62,6 +62,10 @@
 | ------------------------------------------- | ---------------------------------------- |
 | ![Landing](./readme/assets/select_quiz.png) | ![fsdaf](./readme/assets/order_quiz.png) |
 
+| Write Quiz screen                           |
+| ------------------------------------------- |
+| ![Landing](./readme/assets/write_quiz.gif) |
+
 <table>
   <tr>
     <td><img src="./readme/assets/guildbook.gif" width="600"/></td>
