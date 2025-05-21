@@ -65,7 +65,6 @@
 <table>
   <tr>
     <td><img src="./readme/assets/guildbook.gif" width="600"/></td>
-    <td><img src="./readme/assets/guildbook_ai.png" width="600"/></td>
   </tr>
 </table>
 
