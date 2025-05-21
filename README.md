@@ -136,7 +136,7 @@
 | <img src="./readme/assets/ec2_login.png"> |
 | <img src="./readme/assets/docker_ps.png"> |
 
-| Postman API 1                             |
+| Postman API                               |
 | ----------------------------------------- |
 | ![Landing](./readme/assets/postman_1.png) |
 | ![fsdaf](./readme/assets/postman_3.png)   |
@@ -159,5 +159,8 @@
     </tr>
   </tbody>
 </table>
+
+To Enter as Admin User 
+email: admin@admin.com - Password: 121212
 
 <br><br>
