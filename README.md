@@ -60,7 +60,7 @@
 
 | Select Quiz screen                          | Order Quiz screen                        |
 | ------------------------------------------- | ---------------------------------------- |
-| ![Landing](./readme/assets/select_quiz.png) | ![fsdaf](./readme/assets/order_quiz.gif) |
+| ![Landing](./readme/assets/select_quiz.gif) | ![fsdaf](./readme/assets/order_quiz.gif) |
 
 | Write Quiz screen                          | Match Quiz screen                          |
 | ------------------------------------------ | ------------------------------------------ |
