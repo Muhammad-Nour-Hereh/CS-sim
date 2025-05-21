@@ -422,6 +422,13 @@ export const remote = {
         body: { count },
         auth: true,
       }),
+
+    removeMistake: (progressId: number, questionId: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
+        auth: true,
+      }),
   },
   run: (code: string) =>
     request<CodeOutput>({
