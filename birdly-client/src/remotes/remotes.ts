@@ -124,11 +124,9 @@ export const remote = {
       id: number,
       data: {
         title?: string
-        course_id?: number
-        questions?: number[]
       },
     ) =>
-      request<undefined>({
+      request<null>({
         method: 'PUT',
         route: `/api/v1/levels/${id}`,
         body: data,
