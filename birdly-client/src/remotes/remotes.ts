@@ -226,6 +226,13 @@ export const remote = {
     }),
 
   question: {
+    getAll: () =>
+      request<Question[]>({
+        method: 'GET',
+        route: `/api/v1/questions`,
+        auth: true,
+      }),
+
     check: (prompt: string, id: number) =>
       request<boolean>({
         method: 'POST',
