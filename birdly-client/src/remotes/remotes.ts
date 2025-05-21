@@ -287,7 +287,7 @@ export const remote = {
         body: { prompt: prompt },
       }),
   },
-
+  course: {},
   run: (code: string) =>
     request<CodeOutput>({
       method: 'POST',
