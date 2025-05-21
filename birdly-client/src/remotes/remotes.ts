@@ -240,6 +240,14 @@ export const remote = {
         auth: true,
       }),
 
+    create: (title: string, content: string, type: string) =>
+      request<null>({
+        method: 'POST',
+        route: '/api/v1/guildbooks',
+        body: { title, content, type },
+        auth: true,
+      }),
+
     check: (prompt: string, id: number) =>
       request<boolean>({
         method: 'POST',
