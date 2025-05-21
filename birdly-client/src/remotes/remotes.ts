@@ -115,7 +115,7 @@ export const remote = {
     create: (title: string, course_id: number, questions: number[]) =>
       request<null>({
         method: 'POST',
-        route: '/api/v1/levels',
+        route: '/api/v1/courses',
         body: { title, course_id, questions },
         auth: true,
       }),
