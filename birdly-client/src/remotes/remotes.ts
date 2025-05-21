@@ -263,6 +263,13 @@ export const remote = {
         auth: true,
       }),
 
+    delete: (id: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/questions/${id}`,
+        auth: true,
+      }),
+
     check: (prompt: string, id: number) =>
       request<boolean>({
         method: 'POST',
