@@ -392,6 +392,13 @@ export const remote = {
         route: `/api/v1/users/courses/${courseId}/subscribe`,
         auth: true,
       }),
+
+    unsubscribeFromCourse: (courseId: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/users/courses/${courseId}/subscribe`,
+        auth: true,
+      }),
   },
 
   run: (code: string) =>
