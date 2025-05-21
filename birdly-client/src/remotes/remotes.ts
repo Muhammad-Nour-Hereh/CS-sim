@@ -443,6 +443,13 @@ export const remote = {
         route: `/api/v1/progress/${progressId}/levels/${levelId}/complete`,
         auth: true,
       }),
+
+    uncompleteLevel: (progressId: number, levelId: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/progress/${progressId}/levels/${levelId}/complete`,
+        auth: true,
+      }),
   },
   run: (code: string) =>
     request<CodeOutput>({
