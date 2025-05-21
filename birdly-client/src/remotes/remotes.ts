@@ -296,6 +296,13 @@ export const remote = {
         route: `/api/v1/cheats`,
         auth: true,
       }),
+
+    getById: (id: number) =>
+      request<Cheats>({
+        method: 'GET',
+        route: `/api/v1/cheats/${id}`,
+        auth: true,
+      }),
   },
 
   run: (code: string) =>
