@@ -378,7 +378,14 @@ export const remote = {
         auth: true,
       }),
   },
-  user: {},
+  user: {
+    getSubscriptions: () =>
+      request<Course[]>({
+        method: 'GET',
+        route: '/api/v1/users/courses',
+        auth: true,
+      }),
+  },
 
   run: (code: string) =>
     request<CodeOutput>({
