@@ -303,6 +303,14 @@ export const remote = {
         route: `/api/v1/cheats/${id}`,
         auth: true,
       }),
+
+    create: (course_id: number, title: string, content: string) =>
+      request<null>({
+        method: 'POST',
+        route: '/api/v1/cheats',
+        body: { course_id, title, content },
+        auth: true,
+      }),
   },
 
   run: (code: string) =>
