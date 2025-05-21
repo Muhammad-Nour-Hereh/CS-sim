@@ -286,6 +286,13 @@ export const remote = {
         auth: true,
       }),
 
+    delete: (id: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/guildbooks/${id}`,
+        auth: true,
+      }),
+
     chat: (prompt: string, id: number) =>
       request<ChatResponse>({
         method: 'POST',
