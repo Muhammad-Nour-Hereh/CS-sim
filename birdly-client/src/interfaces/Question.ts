@@ -1,9 +1,11 @@
 export interface AbstractQuestion<TContent> {
   id: number
   title: string
-  type: 'select' | 'write' | 'order' | 'match'
+  type: QuestionType
   content: TContent
 }
+
+export type QuestionType = 'select' | 'write' | 'order' | 'match'
 
 export interface SelectQuestion
   extends AbstractQuestion<{
