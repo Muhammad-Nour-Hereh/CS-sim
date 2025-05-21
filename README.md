@@ -13,13 +13,6 @@
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-<!-- ### Stack, Diagrams, and Flow
-
-- **web**: React, typescript, tailwind, shadcn/ui, framer-motion, react-mdx, vitest, axios, context api.
-- **Backend**: Laravel, flysystem, pest, elequent, openai-php.
-- **Database**: mysql.
-- **CI/CD**: docker, docker-compose, github action, ec2 -->
-
 | ER Diagram                                |
 | ----------------------------------------- |
 | <img src="./readme/assets/ERdiagram.png"> |
@@ -78,7 +71,7 @@
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
 
-### Develpment and Testing
+### Development and Testing
 
 |                                        |                                      |
 | -------------------------------------- | ------------------------------------ |
@@ -109,15 +102,15 @@
 | ---------------------------------------------- |
 | <img src="./readme/assets/prompt_context.png"> |
 
-| Prompt Engineering: Format                     |
-| ---------------------------------------------- |
-| <img src="./readme/assets/prompt_formmat.png"> |
+| Prompt Engineering: Format                    |
+| --------------------------------------------- |
+| <img src="./readme/assets/prompt_format.png"> |
 
-| Prompt Engineering: examples                   |
+| Prompt Engineering: Examples                   |
 | ---------------------------------------------- |
 | <img src="./readme/assets/prompt_example.png"> |
 
-| Prompt Engineering: Dont's                   |
+| Prompt Engineering: Don'ts                   |
 | -------------------------------------------- |
 | <img src="./readme/assets/prompt_donts.png"> |
 
@@ -132,8 +125,8 @@
 - APIs are documented with Postman collections.
 - Live demo and staging environments available.
 
-| EC2 instance and docker                    |
-| ------------------------------------------ |
+| EC2 instance and docker                   |
+| ----------------------------------------- |
 | <img src="./readme/assets/ec2_login.png"> |
 | <img src="./readme/assets/docker_ps.png"> |
 
