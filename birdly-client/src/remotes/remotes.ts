@@ -400,7 +400,14 @@ export const remote = {
         auth: true,
       }),
   },
-  progress: {},
+  progress: {
+    getMistakes: (progressId: number) =>
+      request<Question[]>({
+        method: 'GET',
+        route: `/api/v1/progress/${progressId}/mistakes`,
+        auth: true,
+      }),
+  },
   run: (code: string) =>
     request<CodeOutput>({
       method: 'POST',
