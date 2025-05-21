@@ -311,6 +311,21 @@ export const remote = {
         body: { course_id, title, content },
         auth: true,
       }),
+      
+      update: (
+        id: number,
+        data: {
+          course_id: number
+          title: string
+          content: string
+        },
+      ) =>
+        request<undefined>({
+          method: 'PUT',
+          route: `/api/v1/guildbooks/${id}`,
+          body: data,
+          auth: true,
+        }),
   },
 
   run: (code: string) =>
