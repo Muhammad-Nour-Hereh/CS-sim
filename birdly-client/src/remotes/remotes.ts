@@ -223,6 +223,20 @@ export const remote = {
       auth: true,
       body: { prompt: prompt },
     }),
+  update: (
+    id: number,
+    data: {
+      title?: string
+      course_id?: number
+      questions?: number[]
+    },
+  ) =>
+    request<undefined>({
+      method: 'PUT',
+      route: `/api/v1/levels/${id}`,
+      body: data,
+      auth: true,
+    }),
 
   question: {
     check: (prompt: string, id: number) =>
@@ -254,6 +268,21 @@ export const remote = {
         method: 'POST',
         route: '/api/v1/guildbooks',
         body: { course_id, title, content },
+        auth: true,
+      }),
+
+    update: (
+      id: number,
+      data: {
+        course_id: number
+        title: string
+        content: string
+      },
+    ) =>
+      request<undefined>({
+        method: 'PUT',
+        route: `/api/v1/guildbooks/${id}`,
+        body: data,
         auth: true,
       }),
 
