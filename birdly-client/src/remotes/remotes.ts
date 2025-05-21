@@ -1,8 +1,10 @@
 import { ChatResponse, CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
 import { Guildbook } from '@/interfaces/Guildbook'
-import { Question } from '@/interfaces/Question'
+import { Question, QuestionType } from '@/interfaces/Question'
 import { Course } from '@/interfaces/Course'
+import { Cheats } from '@/interfaces/Cheats'
+import { Level } from '@/interfaces/Level'
 
 export const remote = {
   // Auth APIs:
@@ -97,7 +99,7 @@ export const remote = {
       }),
   },
 
-  coruse: {
+  course: {
     getAll: () =>
       request<Course[]>({
         method: 'GET',
@@ -143,14 +145,14 @@ export const remote = {
 
   level: {
     getAll: () =>
-      request<Snippet[]>({
+      request<Level[]>({
         method: 'GET',
         route: '/api/v1/levels',
         auth: true,
       }),
 
     getById: (id: number) =>
-      request<Snippet>({
+      request<Level>({
         method: 'GET',
         route: `/api/v1/levels/${id}`,
         auth: true,
@@ -223,22 +225,52 @@ export const remote = {
       auth: true,
       body: { prompt: prompt },
     }),
-  update: (
-    id: number,
-    data: {
-      title?: string
-      course_id?: number
-      questions?: number[]
-    },
-  ) =>
-    request<undefined>({
-      method: 'PUT',
-      route: `/api/v1/levels/${id}`,
-      body: data,
-      auth: true,
-    }),
 
   question: {
+    getAll: () =>
+      request<Question[]>({
+        method: 'GET',
+        route: `/api/v1/questions`,
+        auth: true,
+      }),
+
+    getById: (id: number) =>
+      request<Guildbook>({
+        method: 'GET',
+        route: `/api/v1/questions/${id}`,
+        auth: true,
+      }),
+
+    create: (title: string, content: string, type: QuestionType) =>
+      request<null>({
+        method: 'POST',
+        route: '/api/v1/questions',
+        body: { title, content, type },
+        auth: true,
+      }),
+
+    update: (
+      id: number,
+      data: {
+        title: string
+        content: string
+        type: QuestionType
+      },
+    ) =>
+      request<undefined>({
+        method: 'PUT',
+        route: `/api/v1/questions/${id}`,
+        body: data,
+        auth: true,
+      }),
+
+    delete: (id: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/questions/${id}`,
+        auth: true,
+      }),
+
     check: (prompt: string, id: number) =>
       request<boolean>({
         method: 'POST',
@@ -302,6 +334,124 @@ export const remote = {
       }),
   },
 
+  cheat: {
+    getAll: () =>
+      request<Cheats[]>({
+        method: 'GET',
+        route: `/api/v1/cheats`,
+        auth: true,
+      }),
+
+    getById: (id: number) =>
+      request<Cheats>({
+        method: 'GET',
+        route: `/api/v1/cheats/${id}`,
+        auth: true,
+      }),
+
+    create: (course_id: number, title: string, content: string) =>
+      request<null>({
+        method: 'POST',
+        route: '/api/v1/cheats',
+        body: { course_id, title, content },
+        auth: true,
+      }),
+
+    update: (
+      id: number,
+      data: {
+        course_id: number
+        title: string
+        content: string
+      },
+    ) =>
+      request<undefined>({
+        method: 'PUT',
+        route: `/api/v1/cheats/${id}`,
+        body: data,
+        auth: true,
+      }),
+
+    delete: (id: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/cheats/${id}`,
+        auth: true,
+      }),
+  },
+  user: {
+    getSubscriptions: () =>
+      request<Course[]>({
+        method: 'GET',
+        route: '/api/v1/users/courses',
+        auth: true,
+      }),
+
+    subscribeToCourse: (courseId: number) =>
+      request<undefined>({
+        method: 'POST',
+        route: `/api/v1/users/courses/${courseId}/subscribe`,
+        auth: true,
+      }),
+
+    unsubscribeFromCourse: (courseId: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/users/courses/${courseId}/subscribe`,
+        auth: true,
+      }),
+  },
+  progress: {
+    getMistakes: (progressId: number) =>
+      request<Question[]>({
+        method: 'GET',
+        route: `/api/v1/progress/${progressId}/mistakes`,
+        auth: true,
+      }),
+
+    addMistake: (progressId: number, questionId: number) =>
+      request<undefined>({
+        method: 'POST',
+        route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
+        auth: true,
+      }),
+
+    setMistakeCount: (progressId: number, questionId: number, count: number) =>
+      request<undefined>({
+        method: 'PATCH',
+        route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
+        body: { count },
+        auth: true,
+      }),
+
+    removeMistake: (progressId: number, questionId: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
+        auth: true,
+      }),
+
+    getCompletedLevels: (progressId: number) =>
+      request<Level[]>({
+        method: 'GET',
+        route: `/api/v1/progress/${progressId}/completed`,
+        auth: true,
+      }),
+
+    completeLevel: (progressId: number, levelId: number) =>
+      request<undefined>({
+        method: 'POST',
+        route: `/api/v1/progress/${progressId}/levels/${levelId}/complete`,
+        auth: true,
+      }),
+
+    uncompleteLevel: (progressId: number, levelId: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/progress/${progressId}/levels/${levelId}/complete`,
+        auth: true,
+      }),
+  },
   run: (code: string) =>
     request<CodeOutput>({
       method: 'POST',
