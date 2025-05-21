@@ -429,6 +429,13 @@ export const remote = {
         route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
         auth: true,
       }),
+
+    getCompletedLevels: (progressId: number) =>
+      request<any[]>({
+        method: 'GET',
+        route: `/api/v1/progress/${progressId}/completed`,
+        auth: true,
+      }),
   },
   run: (code: string) =>
     request<CodeOutput>({
