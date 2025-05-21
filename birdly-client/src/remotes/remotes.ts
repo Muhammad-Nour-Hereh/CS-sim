@@ -128,7 +128,7 @@ export const remote = {
     ) =>
       request<null>({
         method: 'PUT',
-        route: `/api/v1/levels/${id}`,
+        route: `/api/v1/courses/${id}`,
         body: data,
         auth: true,
       }),
@@ -136,7 +136,7 @@ export const remote = {
     delete: (id: number) =>
       request<undefined>({
         method: 'DELETE',
-        route: `/api/v1/levels/${id}`,
+        route: `/api/v1/courses/${id}`,
         auth: true,
       }),
   },
