@@ -106,9 +106,9 @@ export const remote = {
       }),
 
     getById: (id: number) =>
-      request<Snippet>({
+      request<Course>({
         method: 'GET',
-        route: `/api/v1/levels/${id}`,
+        route: `/api/v1/courses/${id}`,
         auth: true,
       }),
 
