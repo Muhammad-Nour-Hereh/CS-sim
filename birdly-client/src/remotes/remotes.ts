@@ -4,6 +4,7 @@ import { Guildbook } from '@/interfaces/Guildbook'
 import { Question, QuestionType } from '@/interfaces/Question'
 import { Course } from '@/interfaces/Course'
 import { Cheats } from '@/interfaces/Cheats'
+import { Level } from '@/interfaces/Level'
 
 export const remote = {
   // Auth APIs:
@@ -144,14 +145,14 @@ export const remote = {
 
   level: {
     getAll: () =>
-      request<Snippet[]>({
+      request<Level[]>({
         method: 'GET',
         route: '/api/v1/levels',
         auth: true,
       }),
 
     getById: (id: number) =>
-      request<Snippet>({
+      request<Level>({
         method: 'GET',
         route: `/api/v1/levels/${id}`,
         auth: true,
@@ -431,7 +432,7 @@ export const remote = {
       }),
 
     getCompletedLevels: (progressId: number) =>
-      request<any[]>({
+      request<Level[]>({
         method: 'GET',
         route: `/api/v1/progress/${progressId}/completed`,
         auth: true,
