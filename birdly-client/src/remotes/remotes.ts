@@ -223,20 +223,6 @@ export const remote = {
       auth: true,
       body: { prompt: prompt },
     }),
-  update: (
-    id: number,
-    data: {
-      title?: string
-      course_id?: number
-      questions?: number[]
-    },
-  ) =>
-    request<undefined>({
-      method: 'PUT',
-      route: `/api/v1/levels/${id}`,
-      body: data,
-      auth: true,
-    }),
 
   question: {
     check: (prompt: string, id: number) =>
