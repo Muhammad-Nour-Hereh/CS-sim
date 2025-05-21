@@ -62,9 +62,12 @@
 | ------------------------------------------- | ---------------------------------------- |
 | ![Landing](./readme/assets/select_quiz.png) | ![fsdaf](./readme/assets/order_quiz.png) |
 
-| Guildbook screen                          | Birdly assistant screen                    |
-| ----------------------------------------- | ------------------------------------------ |
-| ![Landing](./readme/assets/guildbook.gif) | ![fsdaf](./readme/assets/guildbook_ai.png) |
+<table>
+  <tr>
+    <td><img src="./readme/assets/guildbook.gif" width="600"/></td>
+    <td><img src="./readme/assets/guildbook_ai.png" width="600"/></td>
+  </tr>
+</table>
 
 <br><br>
 
