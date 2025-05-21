@@ -1,7 +1,7 @@
 import { ChatResponse, CodeOutput, Snippet } from '@/interfaces/Snippet'
 import { request } from './request'
 import { Guildbook } from '@/interfaces/Guildbook'
-import { Question } from '@/interfaces/Question'
+import { Question, QuestionType } from '@/interfaces/Question'
 import { Course } from '@/interfaces/Course'
 import { Cheats } from '@/interfaces/Cheats'
 
@@ -240,7 +240,7 @@ export const remote = {
         auth: true,
       }),
 
-    create: (title: string, content: string, type: string) =>
+    create: (title: string, content: string, type: QuestionType) =>
       request<null>({
         method: 'POST',
         route: '/api/v1/guildbooks',
