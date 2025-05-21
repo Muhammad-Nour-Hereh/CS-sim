@@ -311,21 +311,28 @@ export const remote = {
         body: { course_id, title, content },
         auth: true,
       }),
-      
-      update: (
-        id: number,
-        data: {
-          course_id: number
-          title: string
-          content: string
-        },
-      ) =>
-        request<undefined>({
-          method: 'PUT',
-          route: `/api/v1/guildbooks/${id}`,
-          body: data,
-          auth: true,
-        }),
+
+    update: (
+      id: number,
+      data: {
+        course_id: number
+        title: string
+        content: string
+      },
+    ) =>
+      request<undefined>({
+        method: 'PUT',
+        route: `/api/v1/cheats/${id}`,
+        body: data,
+        auth: true,
+      }),
+
+    delete: (id: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/cheats/${id}`,
+        auth: true,
+      }),
   },
 
   run: (code: string) =>
