@@ -98,7 +98,7 @@ export const remote = {
       }),
   },
 
-  coruse: {
+  course: {
     getAll: () =>
       request<Course[]>({
         method: 'GET',
