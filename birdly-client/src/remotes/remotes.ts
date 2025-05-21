@@ -3,6 +3,7 @@ import { request } from './request'
 import { Guildbook } from '@/interfaces/Guildbook'
 import { Question } from '@/interfaces/Question'
 import { Course } from '@/interfaces/Course'
+import { Cheats } from '@/interfaces/Cheats'
 
 export const remote = {
   // Auth APIs:
@@ -287,7 +288,16 @@ export const remote = {
         body: { prompt: prompt },
       }),
   },
-  course: {},
+
+  cheat: {
+    getAll: () =>
+      request<Cheats[]>({
+        method: 'GET',
+        route: `/api/v1/cheats`,
+        auth: true,
+      }),
+  },
+
   run: (code: string) =>
     request<CodeOutput>({
       method: 'POST',
