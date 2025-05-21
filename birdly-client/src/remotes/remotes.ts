@@ -400,7 +400,7 @@ export const remote = {
         auth: true,
       }),
   },
-
+  progress: {},
   run: (code: string) =>
     request<CodeOutput>({
       method: 'POST',
