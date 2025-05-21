@@ -233,6 +233,13 @@ export const remote = {
         auth: true,
       }),
 
+    getById: (id: number) =>
+      request<Guildbook>({
+        method: 'GET',
+        route: `/api/v1/questions/${id}`,
+        auth: true,
+      }),
+
     check: (prompt: string, id: number) =>
       request<boolean>({
         method: 'POST',
