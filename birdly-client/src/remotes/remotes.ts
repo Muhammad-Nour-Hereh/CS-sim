@@ -249,6 +249,14 @@ export const remote = {
         auth: true,
       }),
 
+    create: (course_id: number, title: string, content: string) =>
+      request<null>({
+        method: 'POST',
+        route: '/api/v1/guildbooks',
+        body: { course_id, title, content },
+        auth: true,
+      }),
+
     chat: (prompt: string, id: number) =>
       request<ChatResponse>({
         method: 'POST',
