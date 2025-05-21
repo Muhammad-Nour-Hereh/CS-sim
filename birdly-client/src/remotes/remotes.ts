@@ -407,6 +407,13 @@ export const remote = {
         route: `/api/v1/progress/${progressId}/mistakes`,
         auth: true,
       }),
+
+    addMistake: (progressId: number, questionId: number) =>
+      request<undefined>({
+        method: 'POST',
+        route: `/api/v1/progress/${progressId}/questions/${questionId}/mistakes`,
+        auth: true,
+      }),
   },
   run: (code: string) =>
     request<CodeOutput>({
