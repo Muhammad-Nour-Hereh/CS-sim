@@ -243,8 +243,23 @@ export const remote = {
     create: (title: string, content: string, type: QuestionType) =>
       request<null>({
         method: 'POST',
-        route: '/api/v1/guildbooks',
+        route: '/api/v1/questions',
         body: { title, content, type },
+        auth: true,
+      }),
+
+    update: (
+      id: number,
+      data: {
+        title: string
+        content: string
+        type: QuestionType
+      },
+    ) =>
+      request<undefined>({
+        method: 'PUT',
+        route: `/api/v1/questions/${id}`,
+        body: data,
         auth: true,
       }),
 
