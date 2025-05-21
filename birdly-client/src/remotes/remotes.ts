@@ -96,6 +96,52 @@ export const remote = {
       }),
   },
 
+  coruse: {
+    getAll: () =>
+      request<Snippet[]>({
+        method: 'GET',
+        route: '/api/v1/levels',
+        auth: true,
+      }),
+
+    getById: (id: number) =>
+      request<Snippet>({
+        method: 'GET',
+        route: `/api/v1/levels/${id}`,
+        auth: true,
+      }),
+
+    create: (title: string, course_id: number, questions: number[]) =>
+      request<null>({
+        method: 'POST',
+        route: '/api/v1/levels',
+        body: { title, course_id, questions },
+        auth: true,
+      }),
+
+    update: (
+      id: number,
+      data: {
+        title?: string
+        course_id?: number
+        questions?: number[]
+      },
+    ) =>
+      request<undefined>({
+        method: 'PUT',
+        route: `/api/v1/levels/${id}`,
+        body: data,
+        auth: true,
+      }),
+
+    delete: (id: number) =>
+      request<undefined>({
+        method: 'DELETE',
+        route: `/api/v1/levels/${id}`,
+        auth: true,
+      }),
+  },
+
   level: {
     getAll: () =>
       request<Snippet[]>({
@@ -191,7 +237,7 @@ export const remote = {
 
   guildbook: {
     getAll: () =>
-      request<Guildbook []>({
+      request<Guildbook[]>({
         method: 'GET',
         route: `/api/v1/guildbooks`,
         auth: true,
