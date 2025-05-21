@@ -378,6 +378,7 @@ export const remote = {
         auth: true,
       }),
   },
+  user: {},
 
   run: (code: string) =>
     request<CodeOutput>({
